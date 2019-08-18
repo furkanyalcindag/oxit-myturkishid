@@ -1,0 +1,351 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+
+
+
+
+    <!-- success modal -->
+    <div class="modal modal-success modal-success-food fade in" id="modal-success" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">İşlem Başarılı</h4>
+                </div>
+                <div class="modal-body successModal">
+                    ...
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-outline btn-ok">Tamam</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal modal-danger fade in deneme22" tabindex="-1" role="dialog" id="modal-danger"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Uyarı</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Silmek istediğinizden emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf"
+                            data-dismiss="modal">Evet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-close">Hayır</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+    {% if messages %}
+        {% for message in messages %}
+
+
+            {% if message.tags is 'warning' %}
+
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+
+            {% endif %}
+
+
+            {% if message.tags == 'success' %}
+
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+
+    {% endif %}
+
+
+
+
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+
+
+            <div class="modal-content" style="height:fit-content">
+
+                <div class="modal-header" style="background-color:#3c8dbc ">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body bodys">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <section class="content">
+
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+
+
+            <section class="col-lg-12 ">
+
+
+                <div class="box-body">
+
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"> Siparişlerim</h3>
+                        </div>
+
+
+                        <table id="siparisler" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Sipariş Numarası</th>
+                                <th>Üye</th>
+                                <th>Sponsor</th>
+                                <th>Ödeme Şekli</th>
+
+
+                                <th>Sipariş Durumu</th>
+                                <th>Sipariş Tarihi</th>
+                                <th>Tutar</th>
+                                <th>Detay/Güncelle/Sil</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% if orders.all %}
+                                {% for order in orders %}
+
+
+                                    <tr>
+                                        <td>{{ forloop.counter }} </td>
+                                        <td><a href="#">{{ order.id }}</a></td>
+                                        <td>{{ order.profile }}</td>
+                                        <td>{{ order.sponsor }}</td>
+                                        <td>{{ order.payment_type }}</td>
+
+
+                                        {% for order_situations in order.order_situations.all %}
+                                            {% if order_situations.name == "Ödeme Bekliyor" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-info"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+
+
+                                            {% elif order_situations.name == "Kargoda" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-warning"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+
+                                            {% elif order_situations.name == "Hazırlanıyor" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-success"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+                                            {% elif order_situations.name == "İptal Edildi" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-danger"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+                                            {% elif order_situations.name == "Tamamlandı" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-primary"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+
+
+                                            {% elif order_situations.name == "İade Edildi" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-default"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+                                            {% else %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-default"> Deneme</span>
+                                                </td>
+                                            {% endif %}
+
+
+                                        {% endfor %}
+
+
+                                        <td>{{ order.creationDate }}</td>
+
+
+                                        <td>Tutar TL</td>
+
+                                        <td>
+                                            <div class="btn-group">
+                                                <a class="btn btn-info" onclick="getMyOrder({{ order.id }})"><i
+                                                        class="fa fa-align-left"></i>Detay</a>
+
+
+                                            </div>
+                                        </td>
+
+
+                                    </tr>
+
+                                {% endfor %}
+                            {% endif %}
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <!-- /.box -->
+
+
+                </div>
+            </section>
+
+
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+
+
+    <script>
+        $(function () {
+            $('#siparisler').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true
+            })
+
+        })
+    </script>
+
+
+
+
+    <script>
+
+
+        function getMyOrder(id) {
+
+            var html = '';
+            $.get(" {% url "inoks:getMyOrder" pk=12121   %}".replace(/12121/, id.toString()))
+                .done(function (response) {
+
+                    var order = response.order[0];
+                    html += ' <div class="box-body box-profile">';
+                    html += ' <img class="profile-user-img img-responsive img-circle" src="' + order.product.productImage + '" alt="User profile picture">';
+                    html += '<h3 class="profile-username text-center">' + order.quantity + '</h3>';
+                    html += '<p class="text-muted text-center">' + order.quantity + '</p>';
+                    html += ' <ul class="list-group list-group-unbordered">';
+                    html += '<div class="row">';
+                    html += '<div class="col-md-6">';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Ürün Adı</b> <a class="pull-right">' + order.product.name + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Ürün Fiyatı</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Stok Adeti</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>İndirimli Fiyatı</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>İndirim Başlangıç</b> <a class="pull-right">' + order.quantity + '</a></li></div>';
+
+                    html += '<div class="col-md-6" style="border-left: thin solid #000000">';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>İndirim Bitiş</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Ürün Bilgileri</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Etkin</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Kayıt Tarihi</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>En Son Login</b> <a class="pull-right">' + order.quantity + '</a></li></div>' +
+                        '</div></ul>';
+
+
+                    $(".bodys").html(html);
+
+                });
+
+            $('.bd-example-modal-lg').modal('show');
+
+
+            $(".bd-example-modal-lg").on("hidden.bs.modal", function () {
+                // put your default event here
+                $(".bodys").html("");
+            });
+
+
+        }
+
+
+    </script>
+
+
+{% endblock %}

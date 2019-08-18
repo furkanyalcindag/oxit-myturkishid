@@ -1,0 +1,97 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+
+
+
+    <section class="content">
+
+        <script src="https:///balkangraph.com/js/latest/OrgChart.js"></script>
+
+
+        <div id="tree"></div>
+        <script>
+
+            window.onload = function () {
+                var nodes = [
+
+
+
+
+                    {% if trees.all %}
+                        {% for tree in trees %}
+                            {% if  tree.id == profile_id %}
+                                {
+                                    id: {{ tree.id }},
+
+                                    AdSoyad: "{{ tree.user.first_name }}  {{ tree.user.last_name }} ",
+                                    DurumMeslek: "A-Mühendis",
+                                    Email: "{{ tree.user.email }}",
+
+                                    DogumTarihi: "{{ tree.birthDate }}",
+                                    img: "/media/{{tree.profileImage}}"
+                                },
+                            {% else %}
+                                {
+                                    id: {{ tree.id }},
+                                    pid: {{ tree.sponsor_id }},
+                                    AdSoyad: "{{ tree.user.first_name }}  {{ tree.user.last_name }} ",
+                                    DurumMeslek: "A-Mühendis",
+                                    Email: "{{ tree.user.email }}",
+
+                                    DogumTarihi: "{{ tree.birthDate }}",
+                                    img: "/media/{{tree.profileImage}}"
+                                },
+                            {% endif %}
+
+
+
+
+
+                        {% endfor %}
+                    {% endif %}
+
+
+                ];
+
+
+                for (var i = 0; i < nodes.length; i++) {
+                    nodes[i].field_number_children = childCount(nodes[i].id);
+                }
+
+                function childCount(id) {
+                    let count = 0;
+                    for (var i = 0; i < nodes.length; i++) {
+                        if (nodes[i].pid == id) {
+                            count++;
+                            count += childCount(nodes[i].id);
+                        }
+                    }
+
+                    return count;
+                }
+
+                OrgChart.templates.rony.field_number_children = '<circle cx="60" cy="110" r="15" fill="#F57C00"></circle><text fill="#ffffff" x="60" y="115" text-anchor="middle">{val}</text>';
+
+                var chart = new OrgChart(document.getElementById("tree"), {
+                    template: "rony",
+                    collapse: {
+                        level: 3
+                    },
+                    nodeBinding: {
+                        field_0: "AdSoyad",
+                        field_1: "DurumMeslek",
+                        img_0: "img",
+                        field_number_children: "field_number_children"
+                    },
+                    nodes: nodes
+                });
+                chart.fit();
+            };
+        </script>
+
+    </section>
+
+
+
+
+{% endblock %}

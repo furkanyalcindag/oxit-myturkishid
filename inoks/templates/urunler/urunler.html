@@ -1,0 +1,255 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bower_components/product/product.css' %} ">
+
+
+
+
+    <section class="content">
+
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+
+
+            <section class="col-lg-12 ">
+
+
+                <div class="box-body">
+
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Ürünler</h3>
+                        </div>
+
+
+                        <div class="container">
+
+
+
+
+                            <div class="row">
+
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+
+                                        <h3 class="box-title">Araç Temizlik Ürünleri </h3>
+                                    </div>
+
+                                    {% if arac.all %}
+                                        {% for araclar in arac %}
+
+                                            <div class="col-md-3 col-sm-6">
+                                                <div class="product-grid4">
+                                                    <div class="product-image4">
+                                                        <a href="#">
+                                                            <img class="pic-1"
+                                                                 src="/media/{{ araclar.productImage }}">
+                                                            <img class="pic-2"
+                                                                  src="/media/{{ araclar.productImage }}">
+                                                        </a>
+                                                        <ul class="social">
+                                                            <li><a href="#" data-tip="Detayları Görüntüle"><i
+                                                                    class="fa fa-eye"></i></a></li>
+                                                            <li><a href="#" data-tip="Sepete Ekle"><i
+                                                                    class="fa fa-shopping-cart"></i></a></li>
+                                                        </ul>
+
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <h3 class="title"><a href="#"> <td>{{ araclar.name }}</td></a></h3>
+                                                        <div class="price">
+                                                            {{ araclar.discountPrice }} TL
+                                                            <span>{{ araclar.price }} TL</span>
+                                                        </div>
+
+                                                        <form action="#" method="post">
+                                                            <div class="form-group">
+                                                                <input type="number" style="margin-bottom:10px"
+                                                                       class="form-control" placeholder="Adet">
+
+                                                            </div>
+
+                                                            <button type="button"
+                                                                    class="btn btn-block btn-default  add-to-cart">
+                                                                Sepete Ekle
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        {% endfor %}
+                                    {% endif %}
+
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+     <div class="row">
+
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+
+                                        <h3 class="box-title">Organik Temizlik Ürünleri </h3>
+                                    </div>
+
+                                    {% if organik.all %}
+                                        {% for organikler in organik %}
+
+                                            <div class="col-md-3 col-sm-6">
+                                                <div class="product-grid4">
+                                                    <div class="product-image4">
+                                                        <a href="#">
+                                                            <img class="pic-1"
+                                                                 src="/media/{{ organikler.productImage }}">
+                                                            <img class="pic-2"
+                                                                  src="/media/{{ organikler.productImage }}">
+                                                        </a>
+                                                        <ul class="social">
+                                                            <li><a href="#" data-tip="Detayları Görüntüle"><i
+                                                                    class="fa fa-eye"></i></a></li>
+                                                            <li><a href="#" data-tip="Sepete Ekle"><i
+                                                                    class="fa fa-shopping-cart"></i></a></li>
+                                                        </ul>
+
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <h3 class="title"><a href="#"> <td>{{ organikler.name }}</td></a></h3>
+                                                        <div class="price">
+                                                            {{ organikler.discountPrice }} TL
+                                                            <span>{{ organikler.price }} TL</span>
+                                                        </div>
+
+                                                        <form action="#" method="post">
+                                                            <div class="form-group">
+                                                                <input type="number" style="margin-bottom:10px"
+                                                                       class="form-control" placeholder="Adet">
+
+                                                            </div>
+
+                                                            <button type="button"
+                                                                    class="btn btn-block btn-default  add-to-cart">
+                                                                Sepete Ekle
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        {% endfor %}
+                                    {% endif %}
+
+
+                                </div>
+                            </div>
+
+
+
+
+                         <div class="row">
+
+                                <div class="box box-primary">
+                                    <div class="box-header with-border">
+
+                                        <h3 class="box-title">Genel Temizlik Ürünleri </h3>
+                                    </div>
+
+                                    {% if genel.all %}
+                                        {% for geneller in genel %}
+
+                                            <div class="col-md-3 col-sm-6">
+                                                <div class="product-grid4">
+                                                    <div class="product-image4">
+                                                        <a href="#">
+                                                            <img class="pic-1"
+                                                                 src="/media/{{ geneller.productImage }}">
+                                                            <img class="pic-2"
+                                                                  src="/media/{{ geneller.productImage }}">
+                                                        </a>
+                                                        <ul class="social">
+                                                            <li><a href="#" data-tip="Detayları Görüntüle"><i
+                                                                    class="fa fa-eye"></i></a></li>
+                                                            <li><a href="#" data-tip="Sepete Ekle"><i
+                                                                    class="fa fa-shopping-cart"></i></a></li>
+                                                        </ul>
+
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <h3 class="title"><a href="#"> <td>{{ geneller.name }}</td></a></h3>
+                                                        <div class="price">
+                                                            {{ geneller.discountPrice }} TL
+                                                            <span>{{ geneller.price }} TL</span>
+                                                        </div>
+
+                                                        <form action="#" method="post">
+                                                            <div class="form-group">
+                                                                <input type="number" style="margin-bottom:10px"
+                                                                       class="form-control" placeholder="Adet">
+
+                                                            </div>
+
+                                                            <button type="button"
+                                                                    class="btn btn-block btn-default  add-to-cart">
+                                                                Sepete Ekle
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        {% endfor %}
+                                    {% endif %}
+
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- /.box -->
+
+
+            </section>
+
+
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+
+
+
+
+
+{% endblock %}

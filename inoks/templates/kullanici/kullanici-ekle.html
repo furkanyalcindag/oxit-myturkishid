@@ -1,0 +1,193 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+
+       {% if messages %}
+            {% for message in messages %}
+
+
+                {% if message.tags is 'warning' %}
+
+                    <div class="alert alert-danger alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+
+
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li class="{{ message.tags }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+
+
+                    </div>
+
+                {% endif %}
+
+
+                {% if message.tags == 'success' %}
+
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <h4><i class="icon fa fa-check"></i> Başarılı!</h4>
+
+
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li class="{{ message.tags }}">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+
+
+                    </div>
+
+                {% endif %}
+            {% endfor %}
+
+
+        {% endif %}
+
+
+
+
+    <section class="content">
+
+
+
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+            <section class="col-lg-3 ">
+
+            </section>
+
+
+            <section class="col-lg-6 ">
+
+
+                <div class="box-body">
+
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Kullanıcı Ekle</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form method="post" enctype="multipart/form-data" role="form">
+                            <div class="box-body">
+                                {% csrf_token %}
+
+                                <div class="form-group">
+                                    <label>{{ profile_form.profileImage.label }}</label>
+
+                                    {{ profile_form.profileImage }}
+                                    <!-- /.input group -->
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ user_form.first_name.label }}</label>
+                                    {{ user_form.first_name }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ user_form.last_name.label }}</label>
+                                    {{ user_form.last_name }}
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label> {{ user_form.email.label }}</label>
+                                    {{ user_form.email }}
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label> {{ profile_form.tc.label }}</label>
+                                    {{ profile_form.tc }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ profile_form.mobilePhone.label }}</label>
+                                    {{ profile_form.mobilePhone }}
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                    <label> {{ profile_form.city.label }}</label>
+                                    {{ profile_form.city}}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ profile_form.district.label }}</label>
+                                    {{ profile_form.district }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ profile_form.address.label }}</label>
+                                    {{ profile_form.address }}
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label> {{ profile_form.gender.label }}</label>
+                                    {{ profile_form.gender }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ profile_form.job.label }}</label>
+                                    {{ profile_form.job }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ profile_form.educationLevel.label }}</label>
+                                    {{ profile_form.educationLevel }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ profile_form.birthDate.label }}</label>
+                                    {{ profile_form.birthDate }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ profile_form.sponsor.label }}</label>
+                                    {{ profile_form.sponsor }}
+                                </div>
+
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"> <a href="#">Sözleşmeyi</a> okudum,anladım,onaylıyorum
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+
+
+                </div>
+            </section>
+
+            <section class="col-lg-3 ">
+            </section>
+
+
+        </div>
+        <!-- /.row (main row) -->
+
+
+    </section>
+
+
+
+
+{% endblock %}

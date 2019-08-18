@@ -1,0 +1,111 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+
+
+
+    <section class="content">
+
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+            <section class="col-lg-3 ">
+
+            </section>
+
+
+            <section class="col-lg-6 ">
+
+
+                <div class="box-body">
+
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Ürün Ekle</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form method="post" enctype="multipart/form-data" role="form">
+                            <div class="box-body">
+                                {% csrf_token %}
+
+
+                                <div class="form-group">
+
+                                    <img src="/media/{{ product_form.productImage.value|default_if_none:"" }}"  width="100" height="100">
+                                    <label>{{ product_form.productImage.label }}</label>
+                                    {{ product_form.productImage }}
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ product_form.name.label }}</label>
+                                    {{ product_form.name }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ product_form.price.label }}</label>
+                                    {{ product_form.price }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ product_form.discountPrice.label }}</label>
+                                    {{ product_form.discountPrice }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ product_form.stock.label }}</label>
+                                    {{ product_form.stock }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ product_form.category.label }}</label>
+                                    {{ product_form.category }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ product_form.discountStartDate.label }}</label>
+                                    {{ product_form.discountStartDate }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ product_form.discountFinishDate.label }}</label>
+                                    {{ product_form.discountFinishDate }}
+                                </div>
+
+                                <div class="form-group">
+                                    <label> {{ product_form.info.label }}</label>
+                                    {{ product_form.info }}
+                                </div>
+
+
+                            </div>
+                            <!-- /.box-body -->
+
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.box -->
+
+
+                </div>
+            </section>
+
+            <section class="col-lg-3 ">
+            </section>
+
+
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+
+
+
+
+{% endblock %}
+

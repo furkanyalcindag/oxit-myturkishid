@@ -1,0 +1,107 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+
+
+
+
+
+
+
+    <section class="content">
+
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+
+
+            <section class="col-lg-12 ">
+
+
+                <div class="box-body">
+
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Tüm İadeler</h3>
+                        </div>
+                        <table id="iade" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Sipariş Numarası</th>
+                                <th>Ürün Adı</th>
+                                <th>Üye Adı</th>
+                                <th>İade Miktarı</th>
+                                <th>İade Nedeni</th>
+                                <th>Ürün Açıldı Mı ?</th>
+                                <th>İade Tarihi</th>
+
+
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            {% if refund_list.all %}
+                                {% for refund_lists in refund_list %}
+                                    <tr>
+                                        <td>{{ forloop.counter }} </td>
+
+                                        <td>{{ refund_lists.order.id }}</td>
+                                        <td>{{ refund_lists.product.id }}</td>
+                                        <td>{{ refund_lists.id }}</td>
+                                        <td>{{ refund_lists.orderQuantity }} Adet</td>
+                                        <td>
+                                            {% for refundSituations in refund_lists.refundSituations.all %}
+
+                                                {{ refundSituations.name }}
+
+                                            {% endfor %}
+
+                                        </td>
+
+                                        <td>{{ refund_lists.isOpen }}</td>
+                                        <td>{{ refund_lists.refundDate }}</td>
+
+
+                                    </tr>
+
+                                {% endfor %}
+                            {% endif %}
+
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <!-- /.box -->
+
+
+                </div>
+            </section>
+
+
+        </div>
+        <!-- /.row (main row) -->
+
+    </section>
+
+    <script>
+        $(function () {
+            $('#iade').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true
+            })
+
+        })
+    </script>
+
+
+{% endblock %}
+
