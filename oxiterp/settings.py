@@ -99,8 +99,8 @@ WSGI_APPLICATION = 'oxiterp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'oxiterp3',
-        'USER': 'postgres',
+        'NAME': 'oxiterp',
+        'USER': 'oxitowner',
         'PASSWORD': 'oxit2016',
         'HOST': 'localhost',
         'PORT': '5432',
