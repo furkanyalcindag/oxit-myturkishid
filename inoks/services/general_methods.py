@@ -14,22 +14,25 @@ def getAdminMenu(request):
 def activeUser(request, pk):
     user = Profile.objects.get(pk=pk)
     user.isApprove = True
-    user.isActive = True
+    user.user.is_active = True
     user.save()
+    user.user.save()
     return user
 
 
 def passiveUser(request, pk):
     user = Profile.objects.get(pk=pk)
-    user.isActive = False
+    user.user.is_active = False
     user.save()
+    user.user.save()
     return user
 
 
 def reactiveUser(request, pk):
     user = Profile.objects.get(pk=pk)
-    user.isActive = True
+    user.user.is_active = True
     user.save()
+    user.user.save()
     return user
 
 

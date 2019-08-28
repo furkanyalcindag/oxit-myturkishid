@@ -1,6 +1,8 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
+from django.core.mail import EmailMultiAlternatives
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
@@ -30,7 +32,8 @@ def return_add_users(request):
             user = user_form.save(commit=False)
             group = Group.objects.get(name='Üye')
             user2 = user_form.save()
-            user.set_password("oxit2016")
+            password = User.objects.make_random_password()
+            user.set_password(password)
             user2.groups.add(group)
             user.save()
 
@@ -53,6 +56,16 @@ def return_add_users(request):
                 return redirect('inoks:kullanici-ekle')
             else:
                 profil.save()
+
+                subject, from_email, to = 'Sigortahavuzum.net Kullanıcı Giriş Bilgileri', 'kayit@oxityazilim.com', user2.email
+                text_content = 'Aşağıda ki bilgileri kullanarak sisteme giriş yapabilirsiniz.'
+                html_content = '<p> <strong>Site adresi:</strong> <a href="http://www.sigortahavuzum.net"></a>www.sigortahavuzum.net</p>'
+                html_content = html_content + '<p><strong>Kullanıcı Adı:</strong>' + user2.username + '</p>'
+                html_content = html_content + '<p><strong>Şifre:</strong>' + password + '</p>'
+                msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+                msg.attach_alternative(html_content, "text/html")
+                msg.send()
+
                 messages.success(request, 'Üye Başarıyla Kayıt Edilmiştir.')
 
                 return redirect('inoks:kullanici-ekle')
@@ -90,7 +103,7 @@ def users_update(request, pk):
 
 @login_required
 def return_users(request):
-    users = Profile.objects.filter(isActive=True)
+    users = Profile.objects.filter(user__is_active=True)
 
     return render(request, 'kullanici/kullanicilar.html', {'users': users})
 
@@ -100,13 +113,16 @@ def return_my_users(request):
     current_user = request.user
     userprofile = Profile.objects.get(user=current_user)
 
-    users = Profile.objects.filter(isActive=True, sponsor_id=userprofile.id)
+    users = Profile.objects.filter(user__is_active=True, sponsor_id=userprofile.id)
 
     return render(request, 'kullanici/kullanicilar.html', {'users': users})
 
 
 @login_required
 def return_pending_users(request):
+    if request.user.groups.all()[0] != Group.objects.get(name="Admin"):
+        logout(request)
+        return redirect('accounts:login')
     users = Profile.objects.filter(isApprove=False)
 
     return render(request, 'kullanici/bekleyen-kullanicilar.html', {'users': users})
@@ -212,6 +228,6 @@ def pending_profile_delete(request, pk):
 
 @login_required
 def return_deactive_users(request):
-    users = Profile.objects.filter(isActive=False, isApprove=True)
+    users = Profile.objects.filter(user__is_active=False, isApprove=True)
 
     return render(request, 'kullanici/iptal-edilen-kullanicilar.html', {'users': users})
