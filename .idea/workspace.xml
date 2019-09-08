@@ -3,21 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e7f3fd45-0ec7-48c5-879b-204c263758eb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/Forms/OrderForm.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/Forms/OrderForm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/Forms/ProfileForm.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/Forms/ProfileForm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/Forms/UserForm.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/Forms/UserForm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/Views/DashboardViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/Views/DashboardViews.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/Views/OrderViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/Views/OrderViews.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/Views/UserViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/Views/UserViews.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/models/Profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/models/Profile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/templates/dashboard/user-dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/templates/dashboard/user-dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/templates/kullanici/bekleyen-kullanicilar.html" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/templates/kullanici/bekleyen-kullanicilar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/templates/kullanici/kullanici-ekle.html" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/templates/kullanici/kullanici-ekle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/templates/kullanici/kullanicilar.html" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/templates/kullanici/kullanicilar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/templates/siparisler/siparis-ekle.html" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/templates/siparisler/siparis-ekle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/templates/siparisler/siparislerim.html" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/templates/siparisler/siparislerim.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oxiterp/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/oxiterp/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -249,7 +234,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -309,6 +293,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -482,6 +467,7 @@
       <workItem from="1567526137607" duration="5713000" />
       <workItem from="1567669069574" duration="14953000" />
       <workItem from="1567802926735" duration="2408000" />
+      <workItem from="1567952408416" duration="488000" />
     </task>
     <task id="LOCAL-00001" summary="aasasasa">
       <created>1566145297658</created>
@@ -504,7 +490,14 @@
       <option name="project" value="LOCAL" />
       <updated>1566997751541</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="son güncelleme-hakki">
+      <created>1567952800260</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1567952800260</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -525,7 +518,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="416239000" />
+    <option name="totallyTimeSpent" value="416727000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -538,8 +531,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992928" visible="true" weight="0.24463807" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992928" visible="true" weight="0.24798928" />
       <window_info id="Structure" order="1" sideWeight="0.5007072" side_tool="true" weight="0.21380697" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -594,7 +588,8 @@
     <MESSAGE value="aasasasa" />
     <MESSAGE value="111" />
     <MESSAGE value="veritabanı" />
-    <option name="LAST_COMMIT_MESSAGE" value="veritabanı" />
+    <MESSAGE value="son güncelleme-hakki" />
+    <option name="LAST_COMMIT_MESSAGE" value="son güncelleme-hakki" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
