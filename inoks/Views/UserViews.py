@@ -83,22 +83,30 @@ def users_update(request, pk):
     user = User.objects.get(id=current_user.id)
 
     user_form = UserForm(request.POST or None, instance=user)
-    profile = Profile.objects.get(user=current_user)
-    profile_form = ProfileForm(request.POST or None, instance=profile)
+    profile = Profile.objects.get(pk=user.profile.pk)
+    profile_form = ProfileForm(request.POST or None, request.FILES or None, instance=profile)
 
-    if user_form.is_valid() and profile_form.is_valid():
+    if request.method == 'POST':
 
-        profile.save()
+        if user_form.is_valid() or profile_form.is_valid():
 
-        messages.warning(request, 'Başarıyla Güncellendi')
+            user.username = user_form.cleaned_data['email']
+            user.first_name = user_form.cleaned_data['first_name']
+            user.last_name = user_form.cleaned_data['last_name']
+            user.email = user_form.cleaned_data['email']
+            user.is_active = True
+            user.save()
+            profile_form.save()
 
-        return redirect('inoks:kullanicilar')
+            messages.success(request, 'Profil Bilgileriniz Başarıyla Güncellenmiştir.')
+            return redirect('inoks:user-dashboard')
 
-    else:
+        else:
 
-        messages.warning(request, 'Alanları Kontrol Ediniz')
+            messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'kullanici/kullanici-ekle.html', {'profile_form': profile_form, 'user_form': user_form})
+    return render(request, 'kullanici/kullanici-ekle.html',
+                  {'user_form': user_form, 'profile_form': profile_form})
 
 
 @login_required

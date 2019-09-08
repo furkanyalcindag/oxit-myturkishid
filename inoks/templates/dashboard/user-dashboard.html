@@ -3,308 +3,191 @@
 
 
 
-
-
-
-
-
- <section class="content" >
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>154</h3>
-
-              <p>Soyağacı Sayısı</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-
-            </div>
-            <a href="#" class="small-box-footer">Tüm Soyağacı <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>53</h3>
-
-              <p>Toplam Sipariş Sayısı</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-
-            </div>
-            <a href="#" class="small-box-footer">Tüm Siparişler <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>4440 TL</h3>
-
-              <p>Toplam Kazanç Miktarı</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-
-            </div>
-            <a href="#" class="small-box-footer">Tüm Kazançlar <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>9</h3>
-
-              <p>Satın Alınan Ürün Sayısı</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">Tüm Ürünler <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-
-
-    </section>
-
-
-
-
-
-
-    <section class="content ">
-
-
-      <div class="box">
-
-              <div class="box-body">
-                <div class="box-header">
-                  <h3 class="box-title">Önerilen Ürünler</h3>
+    <!-- success modal -->
+    <div class="modal modal-success modal-success-food fade in" id="modal-success" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">İşlem Başarılı</h4>
                 </div>
+                <div class="modal-body successModal">
+                    ...
+                </div>
+                <div class="modal-footer">
 
-              <div class="col-md-2 col-sm-12">
-                <div class="product-grid4">
-                  <div class="product-image4">
-                    <a href="#">
-                      <img class="pic-1" src="img/img-1.jpg">
-                      <img class="pic-2" src="img/img-2.jpg">
-                    </a>
-                    <ul class="social">
-                      <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                      <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
+                    <button type="button" class="btn btn-outline btn-ok">Tamam</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal modal-danger fade in deneme22" tabindex="-1" role="dialog" id="modal-danger"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Uyarı</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Silmek istediğinizden emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf"
+                            data-dismiss="modal">Evet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-close">Hayır</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+    {% if messages %}
+        {% for message in messages %}
+
+
+            {% if message.tags is 'warning' %}
+
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
                     </ul>
-                    <span class="product-new-label">YENİ</span>
-                    <span class="product-discount-label">-10%</span>
-                  </div>
-                  <div class="product-content">
-                    <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                    <div class="price">
-                      14.40 TL
-                      <span>16.00 TL</span>
-                    </div>
-
-                    <form action="#" method="post">
-                      <div class="form-group">
-                        <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                      </div>
-
-                      <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
 
 
-                <div class="col-md-2 col-sm-12">
-                  <div class="product-grid4">
-                    <div class="product-image4">
-                      <a href="#">
-                        <img class="pic-1" src="img/img-1.jpg">
-                        <img class="pic-2" src="img/img-2.jpg">
-                      </a>
-                      <ul class="social">
-                        <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                        <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                      </ul>
-                      <span class="product-new-label">YENİ</span>
-                      <span class="product-discount-label">-10%</span>
-                    </div>
-                    <div class="product-content">
-                      <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                      <div class="price">
-                        14.40 TL
-                        <span>16.00 TL</span>
-                      </div>
-
-                      <form action="#" method="post">
-                        <div class="form-group">
-                          <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                        </div>
-
-                        <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                      </form>
-                    </div>
-                  </div>
                 </div>
 
+            {% endif %}
 
 
-                <div class="col-md-2 col-sm-12">
-                  <div class="product-grid4">
-                    <div class="product-image4">
-                      <a href="#">
-                        <img class="pic-1" src="img/img-1.jpg">
-                        <img class="pic-2" src="img/img-2.jpg">
-                      </a>
-                      <ul class="social">
-                        <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                        <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                      </ul>
-                      <span class="product-new-label">YENİ</span>
-                      <span class="product-discount-label">-10%</span>
-                    </div>
-                    <div class="product-content">
-                      <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                      <div class="price">
-                        14.40 TL
-                        <span>16.00 TL</span>
-                      </div>
+            {% if message.tags == 'success' %}
 
-                      <form action="#" method="post">
-                        <div class="form-group">
-                          <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
 
-                        </div>
 
-                        <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                      </form>
-                    </div>
-                  </div>
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
                 </div>
 
+            {% endif %}
+        {% endfor %}
 
 
-                <div class="col-md-2 col-sm-12">
-                  <div class="product-grid4">
-                    <div class="product-image4">
-                      <a href="#">
-                        <img class="pic-1" src="img/img-1.jpg">
-                        <img class="pic-2" src="img/img-2.jpg">
-                      </a>
-                      <ul class="social">
-                        <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                        <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                      </ul>
-                      <span class="product-new-label">YENİ</span>
-                      <span class="product-discount-label">-10%</span>
-                    </div>
-                    <div class="product-content">
-                      <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                      <div class="price">
-                        14.40 TL
-                        <span>16.00 TL</span>
-                      </div>
+    {% endif %}
 
-                      <form action="#" method="post">
-                        <div class="form-group">
-                          <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
 
-                        </div>
 
-                        <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                      </form>
-                    </div>
-                  </div>
+  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+
+
+            <div class="modal-content" style="height:fit-content">
+
+                <div class="modal-header" style="background-color:#3c8dbc ">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
                 </div>
-
-
-                <div class="col-md-2 col-sm-12">
-                  <div class="product-grid4">
-                    <div class="product-image4">
-                      <a href="#">
-                        <img class="pic-1" src="img/img-1.jpg">
-                        <img class="pic-2" src="img/img-2.jpg">
-                      </a>
-                      <ul class="social">
-                        <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                        <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                      </ul>
-                      <span class="product-new-label">YENİ</span>
-                      <span class="product-discount-label">-10%</span>
-                    </div>
-                    <div class="product-content">
-                      <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                      <div class="price">
-                        14.40 TL
-                        <span>16.00 TL</span>
-                      </div>
-
-                      <form action="#" method="post">
-                        <div class="form-group">
-                          <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                        </div>
-
-                        <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                      </form>
-                    </div>
-                  </div>
+                <div class="modal-body bodys">
+                    ...
                 </div>
-
-
-
-                <div class="col-md-2 col-sm-12">
-                  <div class="product-grid4">
-                    <div class="product-image4">
-                      <a href="#">
-                        <img class="pic-1" src="img/img-1.jpg">
-                        <img class="pic-2" src="img/img-2.jpg">
-                      </a>
-                      <ul class="social">
-                        <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                        <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                      </ul>
-                      <span class="product-new-label">YENİ</span>
-                      <span class="product-discount-label">-10%</span>
-                    </div>
-                    <div class="product-content">
-                      <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                      <div class="price">
-                        14.40 TL
-                        <span>16.00 TL</span>
-                      </div>
-
-                      <form action="#" method="post">
-                        <div class="form-group">
-                          <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                        </div>
-
-                        <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-
-
-
-              </div>
             </div>
+        </div>
+    </div>
 
+
+
+
+    <section class="content">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3>154</h3>
+
+                        <p>Soyağacı Sayısı</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+
+                    </div>
+                    <a href="#" class="small-box-footer">Tüm Soyağacı <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{ my_orders }}</h3>
+
+                        <p>Toplam Sipariş Sayım</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+
+                    </div>
+                    <a href="#" class="small-box-footer">Tüm Siparişler <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>4440 TL</h3>
+
+                        <p>Toplam Kazanç Miktarı</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+
+                    </div>
+                    <a href="#" class="small-box-footer">Tüm Kazançlar <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>9</h3>
+
+                        <p>Satın Alınan Ürün Sayısı</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">Tüm Ürünler <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
 
 
     </section>
@@ -313,615 +196,207 @@
 
 
     <section class="content ">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Son Siparişlerim</h3>
+                    </div>
+                    <div class="box-body">
+                        <table id="siparislerim" class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Sipariş Numarası</th>
+                                <th>Ödeme Şekli</th>
+                                <th>Sipariş Durumu</th>
+                                <th>Sipariş Tarihi</th>
+                                <th>Tutar</th>
+                                <th>Sponsor</th>
+                                <th>Detay/Güncelle/Sil</th>
 
 
-      <div class="box">
+                            </tr>
+                            </thead>
+                            <tbody>
 
-        <div class="box-body">
-          <div class="box-header">
-            <h3 class="box-title">Kampanyalı Ürünler</h3>
-          </div>
+                            {% if orders.all %}
+                                {% for order in orders %}
 
-          <div class="col-md-2 col-sm-12">
-            <div class="product-grid4">
-              <div class="product-image4">
-                <a href="#">
-                  <img class="pic-1" src="img/img-1.jpg">
-                  <img class="pic-2" src="img/img-2.jpg">
-                </a>
-                <ul class="social">
-                  <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                  <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                </ul>
-                <span class="product-new-label">YENİ</span>
-                <span class="product-discount-label">-10%</span>
-              </div>
-              <div class="product-content">
-                <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                <div class="price">
-                  14.40 TL
-                  <span>16.00 TL</span>
+
+                                    <tr>
+                                        <td>{{ forloop.counter }} </td>
+                                        <td><a href="#">{{ order.id }}</a></td>
+
+                                        <td>{{ order.payment_type }}</td>
+
+
+                                        {% for order_situations in order.order_situations.all %}
+                                            {% if order_situations.name == "Ödeme Bekliyor" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-info"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+
+
+                                            {% elif order_situations.name == "Kargoda" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-warning"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+
+                                            {% elif order_situations.name == "Hazırlanıyor" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-success"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+                                            {% elif order_situations.name == "İptal Edildi" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-danger"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+                                            {% elif order_situations.name == "Tamamlandı" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-primary"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+
+
+                                            {% elif order_situations.name == "İade Edildi" %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-default"> {{ order_situations.name }}</span>
+                                                </td>
+
+
+                                            {% else %}
+                                                <td><span style="font-size: 100%"
+                                                          class="label label-default"> Deneme</span>
+                                                </td>
+                                            {% endif %}
+
+
+                                        {% endfor %}
+
+
+                                        <td>{{ order.creationDate }}</td>
+
+
+                                        <td>Tutar TL</td>
+
+                                        <td>{{ order.sponsor }}</td>
+
+                                        <td>
+                                            <div class="btn-group">
+                                                <a class="btn btn-info" onclick="getMyOrder({{ order.id }})"><i
+                                                        class="fa fa-align-left"></i>Detay</a>
+
+
+                                            </div>
+                                        </td>
+
+
+                                    </tr>
+
+                                {% endfor %}
+                            {% endif %}
+
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
                 </div>
 
-                <form action="#" method="post">
-                  <div class="form-group">
-                    <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                  </div>
-
-                  <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                </form>
-              </div>
             </div>
-          </div>
+            <div class="col-lg-6">
 
 
-
-
-
-
-
-
-          <div class="col-md-2 col-sm-12">
-            <div class="product-grid4">
-              <div class="product-image4">
-                <a href="#">
-                  <img class="pic-1" src="img/img-1.jpg">
-                  <img class="pic-2" src="img/img-2.jpg">
-                </a>
-                <ul class="social">
-                  <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                  <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                </ul>
-                <span class="product-new-label">YENİ</span>
-                <span class="product-discount-label">-10%</span>
-              </div>
-              <div class="product-content">
-                <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                <div class="price">
-                  14.40 TL
-                  <span>16.00 TL</span>
-                </div>
-
-                <form action="#" method="post">
-                  <div class="form-group">
-                    <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                  </div>
-
-                  <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                </form>
-              </div>
             </div>
-          </div>
-
-
-          <div class="col-md-2 col-sm-12">
-            <div class="product-grid4">
-              <div class="product-image4">
-                <a href="#">
-                  <img class="pic-1" src="img/img-1.jpg">
-                  <img class="pic-2" src="img/img-2.jpg">
-                </a>
-                <ul class="social">
-                  <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                  <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                </ul>
-                <span class="product-new-label">YENİ</span>
-                <span class="product-discount-label">-10%</span>
-              </div>
-              <div class="product-content">
-                <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                <div class="price">
-                  14.40 TL
-                  <span>16.00 TL</span>
-                </div>
-
-                <form action="#" method="post">
-                  <div class="form-group">
-                    <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                  </div>
-
-                  <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                </form>
-              </div>
-            </div>
-          </div>
-
-
-
-          <div class="col-md-2 col-sm-12">
-            <div class="product-grid4">
-              <div class="product-image4">
-                <a href="#">
-                  <img class="pic-1" src="img/img-1.jpg">
-                  <img class="pic-2" src="img/img-2.jpg">
-                </a>
-                <ul class="social">
-                  <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                  <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                </ul>
-                <span class="product-new-label">YENİ</span>
-                <span class="product-discount-label">-10%</span>
-              </div>
-              <div class="product-content">
-                <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                <div class="price">
-                  14.40 TL
-                  <span>16.00 TL</span>
-                </div>
-
-                <form action="#" method="post">
-                  <div class="form-group">
-                    <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                  </div>
-
-                  <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                </form>
-              </div>
-            </div>
-          </div>
-
-
-
         </div>
-      </div>
-
-
 
     </section>
 
 
-
-
-
-
-
-    <section class="content ">
-
-
-      <div class="box">
-
-        <div class="box-body">
-
-
-
-          <div class="col-md-3">
-            <div class="box-header">
-              <h3 class="box-title">Önerilen Ürünler </h3>
-            </div>
-            <div class="box box-solid">
-
-              <div class="box-body">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                  </ol>
-                  <div class="carousel-inner">
-
-                    <div class=" item active col-md-12 col-sm-12">
-                      <div class="product-grid4">
-                        <div class="product-image4">
-                          <a href="#">
-                            <img class="pic-1" src="img/img-1.jpg">
-                            <img class="pic-2" src="img/img-2.jpg">
-                          </a>
-                          <ul class="social">
-                            <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                          </ul>
-                          <span class="product-new-label">YENİ</span>
-                          <span class="product-discount-label">-10%</span>
-                        </div>
-                        <div class="product-content">
-                          <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                          <div class="price">
-                            14.40 TL
-                            <span>16.00 TL</span>
-                          </div>
-
-                          <form action="#" method="post">
-                            <div class="form-group">
-                              <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                            </div>
-
-                            <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class=" item  col-md-12 col-sm-12">
-                      <div class="product-grid4">
-                        <div class="product-image4">
-                          <a href="#">
-                            <img class="pic-1" src="img/img-1.jpg">
-                            <img class="pic-2" src="img/img-2.jpg">
-                          </a>
-                          <ul class="social">
-                            <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                          </ul>
-                          <span class="product-new-label">YENİ</span>
-                          <span class="product-discount-label">-10%</span>
-                        </div>
-                        <div class="product-content">
-                          <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                          <div class="price">
-                            14.40 TL
-                            <span>16.00 TL</span>
-                          </div>
-
-                          <form action="#" method="post">
-                            <div class="form-group">
-                              <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                            </div>
-
-                            <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-                    <div class=" item  col-md-12 col-sm-12">
-                      <div class="product-grid4">
-                        <div class="product-image4">
-                          <a href="#">
-                            <img class="pic-1" src="img/img-1.jpg">
-                            <img class="pic-2" src="img/img-2.jpg">
-                          </a>
-                          <ul class="social">
-                            <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                          </ul>
-                          <span class="product-new-label">YENİ</span>
-                          <span class="product-discount-label">-10%</span>
-                        </div>
-                        <div class="product-content">
-                          <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                          <div class="price">
-                            14.40 TL
-                            <span>16.00 TL</span>
-                          </div>
-
-                          <form action="#" method="post">
-                            <div class="form-group">
-                              <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                            </div>
-
-                            <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-
-
-
-                  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                    <span class="fa fa-angle-left"></span>
-                  </a>
-                  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                    <span class="fa fa-angle-right"></span>
-                  </a>
-                </div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- /.box -->
-          </div>
-
-
-
-
-
-          </div>
-
-          <div class="col-md-3">
-            <div class="box-header">
-              <h3 class="box-title">Kampanyalı Ürünler </h3>
-            </div>
-            <div class="box box-solid">
-
-              <div class="box-body">
-                <div id="carousel-example-generic2" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                  </ol>
-                  <div class="carousel-inner">
-
-                    <div class=" item active col-md-12 col-sm-12">
-                      <div class="product-grid4">
-                        <div class="product-image4">
-                          <a href="#">
-                            <img class="pic-1" src="img/img-1.jpg">
-                            <img class="pic-2" src="img/img-2.jpg">
-                          </a>
-                          <ul class="social">
-                            <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                          </ul>
-                          <span class="product-new-label">YENİ</span>
-                          <span class="product-discount-label">-10%</span>
-                        </div>
-                        <div class="product-content">
-                          <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                          <div class="price">
-                            14.40 TL
-                            <span>16.00 TL</span>
-                          </div>
-
-                          <form action="#" method="post">
-                            <div class="form-group">
-                              <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                            </div>
-
-                            <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class=" item  col-md-12 col-sm-12">
-                      <div class="product-grid4">
-                        <div class="product-image4">
-                          <a href="#">
-                            <img class="pic-1" src="img/img-1.jpg">
-                            <img class="pic-2" src="img/img-2.jpg">
-                          </a>
-                          <ul class="social">
-                            <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                          </ul>
-                          <span class="product-new-label">YENİ</span>
-                          <span class="product-discount-label">-10%</span>
-                        </div>
-                        <div class="product-content">
-                          <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                          <div class="price">
-                            14.40 TL
-                            <span>16.00 TL</span>
-                          </div>
-
-                          <form action="#" method="post">
-                            <div class="form-group">
-                              <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                            </div>
-
-                            <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-                    <div class=" item  col-md-12 col-sm-12">
-                      <div class="product-grid4">
-                        <div class="product-image4">
-                          <a href="#">
-                            <img class="pic-1" src="img/img-1.jpg">
-                            <img class="pic-2" src="img/img-2.jpg">
-                          </a>
-                          <ul class="social">
-                            <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                          </ul>
-                          <span class="product-new-label">YENİ</span>
-                          <span class="product-discount-label">-10%</span>
-                        </div>
-                        <div class="product-content">
-                          <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                          <div class="price">
-                            14.40 TL
-                            <span>16.00 TL</span>
-                          </div>
-
-                          <form action="#" method="post">
-                            <div class="form-group">
-                              <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                            </div>
-
-                            <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-
-
-
-                    <a class="left carousel-control" href="#carousel-example-generic2" data-slide="prev">
-                      <span class="fa fa-angle-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic2" data-slide="next">
-                      <span class="fa fa-angle-right"></span>
-                    </a>
-                  </div>
-                </div>
-                <!-- /.box-body -->
-              </div>
-              <!-- /.box -->
-            </div>
-
-
-
-
-
-          </div>
-
-          <div class="col-md-3">
-            <div class="box-header">
-              <h3 class="box-title">Çok Satan Ürünler </h3>
-            </div>
-            <div class="box box-solid">
-
-              <div class="box-body">
-                <div id="carousel-example-generic3" class="carousel slide" data-ride="carousel">
-                  <ol class="carousel-indicators">
-                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                  </ol>
-                  <div class="carousel-inner">
-
-                    <div class=" item active col-md-12 col-sm-12">
-                      <div class="product-grid4">
-                        <div class="product-image4">
-                          <a href="#">
-                            <img class="pic-1" src="img/img-1.jpg">
-                            <img class="pic-2" src="img/img-2.jpg">
-                          </a>
-                          <ul class="social">
-                            <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                          </ul>
-                          <span class="product-new-label">YENİ</span>
-                          <span class="product-discount-label">-10%</span>
-                        </div>
-                        <div class="product-content">
-                          <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                          <div class="price">
-                            14.40 TL
-                            <span>16.00 TL</span>
-                          </div>
-
-                          <form action="#" method="post">
-                            <div class="form-group">
-                              <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                            </div>
-
-                            <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-
-                    <div class=" item  col-md-12 col-sm-12">
-                      <div class="product-grid4">
-                        <div class="product-image4">
-                          <a href="#">
-                            <img class="pic-1" src="img/img-1.jpg">
-                            <img class="pic-2" src="img/img-2.jpg">
-                          </a>
-                          <ul class="social">
-                            <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                          </ul>
-                          <span class="product-new-label">YENİ</span>
-                          <span class="product-discount-label">-10%</span>
-                        </div>
-                        <div class="product-content">
-                          <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                          <div class="price">
-                            14.40 TL
-                            <span>16.00 TL</span>
-                          </div>
-
-                          <form action="#" method="post">
-                            <div class="form-group">
-                              <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                            </div>
-
-                            <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-                    <div class=" item  col-md-12 col-sm-12">
-                      <div class="product-grid4">
-                        <div class="product-image4">
-                          <a href="#">
-                            <img class="pic-1" src="img/img-1.jpg">
-                            <img class="pic-2" src="img/img-2.jpg">
-                          </a>
-                          <ul class="social">
-                            <li><a href="#" data-tip="Detayları Görüntüle"><i class="fa fa-eye"></i></a></li>
-                            <li><a href="#" data-tip="Sepete Ekle"><i class="fa fa-shopping-cart"></i></a></li>
-                          </ul>
-                          <span class="product-new-label">YENİ</span>
-                          <span class="product-discount-label">-10%</span>
-                        </div>
-                        <div class="product-content">
-                          <h3 class="title"><a href="#">Araç Temizleme Sıvısı 8</a></h3>
-                          <div class="price">
-                            14.40 TL
-                            <span>16.00 TL</span>
-                          </div>
-
-                          <form action="#" method="post">
-                            <div class="form-group">
-                              <input type="number" style="margin-bottom:10px" class="form-control"  placeholder="Adet">
-
-                            </div>
-
-                            <button type="button" class="btn btn-block btn-default  add-to-cart">Sepete Ekle</button>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-
-
-
-                    <a class="left carousel-control" href="#carousel-example-generic3" data-slide="prev">
-                      <span class="fa fa-angle-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic3" data-slide="next">
-                      <span class="fa fa-angle-right"></span>
-                    </a>
-                  </div>
-                </div>
-                <!-- /.box-body -->
-              </div>
-              <!-- /.box -->
-            </div>
-
-
-
-
-
-          </div>
-
-
-
-
-        </div>
-      </div>
-
-
-
-    </section>
-
-
+    <script>
+        $(function () {
+            $('#siparislerim').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true
+            })
+
+        })
+    </script>
+
+
+    <script>
+
+
+        function getMyOrder(id) {
+
+            var html = '';
+            $.get(" {% url "inoks:getMyOrder" pk=12121   %}".replace(/12121/, id.toString()))
+                .done(function (response) {
+
+                    var order = response.order[0];
+                    html += ' <div class="box-body box-profile">';
+                    html += ' <img class="profile-user-img img-responsive img-circle" src="' + order.product.productImage + '" alt="User profile picture">';
+                    html += '<h3 class="profile-username text-center">' + order.quantity + '</h3>';
+                    html += '<p class="text-muted text-center">' + order.quantity + '</p>';
+                    html += ' <ul class="list-group list-group-unbordered">';
+                    html += '<div class="row">';
+                    html += '<div class="col-md-6">';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Ürün Adı</b> <a class="pull-right">' + order.product.name + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Ürün Fiyatı</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Stok Adeti</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>İndirimli Fiyatı</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>İndirim Başlangıç</b> <a class="pull-right">' + order.quantity + '</a></li></div>';
+
+                    html += '<div class="col-md-6" style="border-left: thin solid #000000">';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>İndirim Bitiş</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Ürün Bilgileri</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Etkin</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Kayıt Tarihi</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>En Son Login</b> <a class="pull-right">' + order.quantity + '</a></li></div>' +
+                        '</div></ul>';
+
+
+                    $(".bodys").html(html);
+
+                });
+
+            $('.bd-example-modal-lg').modal('show');
+
+
+            $(".bd-example-modal-lg").on("hidden.bs.modal", function () {
+                // put your default event here
+                $(".bodys").html("");
+            });
+
+
+        }
+
+
+    </script>
 
 
 

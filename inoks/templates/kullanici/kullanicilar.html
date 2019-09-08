@@ -149,12 +149,12 @@
                             <tr>
                                 <th>#</th>
                                 <th>Üye Numarası</th>
-                                <th>Sponsor</th>
                                 <th>Ad</th>
                                 <th>Soyad</th>
                                 <th>E-Mail</th>
                                 <th>Telefon</th>
                                 <th>İl</th>
+                                 <th>Sponsor</th>
                                 <th>Detay/Sil</th>
 
 
@@ -166,12 +166,12 @@
                                     <tr>
                                         <td>{{ forloop.counter }} </td>
                                         <td><a href="#">{{ profile.id }}</a></td>
-                                        <td><a href="#">{{ profile.sponsor }}</a></td>
                                         <td>{{ profile.user.first_name }}</td>
                                         <td>{{ profile.user.last_name }}</td>
                                         <td>{{ profile.user.email }}</td>
                                         <td>{{ profile.mobilePhone }}</td>
                                         <td>{{ profile.city }}</td>
+                                          <td><a href="#">{{ profile.sponsor }}</a></td>
                                         <td>
                                             <div class="btn-group">
 

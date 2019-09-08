@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from inoks.models import Order, Product
+from inoks.models import Order, Product, OrderSituations
 
 
 class OrderForm(ModelForm):
@@ -12,7 +12,12 @@ class OrderForm(ModelForm):
                                          attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%; '}))
 
-
+    order_situations = forms.ModelChoiceField(queryset=OrderSituations.objects.all(),
+                                              to_field_name='name',
+                                              empty_label="Seçiniz",
+                                              widget=forms.Select(
+                                                  attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                                         'style': 'width: 100%; '}))
 
     class Meta:
         model = Order

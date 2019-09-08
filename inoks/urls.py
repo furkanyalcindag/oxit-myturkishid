@@ -18,6 +18,7 @@ urlpatterns = [
         name='bekleyen-siparisler-sil'),
     url(r'dashboard/admin-dashboard/(?P<pk>\d+)$', DashboardViews.getPendingOrder, name='getPendingOrder'),
     url(r'siparis-onayla/$', DashboardViews.pendingOrderActive, name="siparis-onayla"),
+    url(r'dashboard/user-dashboard/(?P<pk>\d+)$', DashboardViews.getMyOrder, name='getMyOrder'),
 
     # Kullanıcılar
     url(r'kullanici/kullanici-ekle/$', UserViews.return_add_users, name='kullanici-ekle'),

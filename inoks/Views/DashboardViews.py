@@ -40,7 +40,12 @@ def return_admin_dashboard(request):
 
 @login_required
 def return_user_dashboard(request):
-    return render(request, 'dashboard/user-dashboard.html')
+    current_user = request.user
+    userprofile = Profile.objects.get(user=current_user)
+    orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id)
+    my_orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id).count()
+    return render(request, 'dashboard/user-dashboard.html',
+                  {'my_orders': my_orders, 'orders': orders})
 
 
 @api_view()
@@ -125,3 +130,15 @@ def pendingOrderActive(request):
         except Exception as e:
 
             return JsonResponse({'status': 'Fail', 'msg': e})
+
+
+@api_view()
+def getMyOrder(request, pk):
+    order = Order.objects.filter(pk=pk)
+
+    data = OrderSerializer(order, many=True)
+
+    responseData = {}
+    responseData['order'] = data.data
+    responseData['order'][0]
+    return JsonResponse(responseData, safe=True)

@@ -1,5 +1,7 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
@@ -33,8 +35,8 @@ def return_add_orders(request):
             order.save()
 
             order.product.add(order_form.cleaned_data['product'])
-            situation = OrderSituations.objects.get(name='Ödeme Bekliyor')
-            order.order_situations.add(situation)
+
+            order.order_situations.add(order_form.cleaned_data['order_situations'])
 
             order.save()
 
