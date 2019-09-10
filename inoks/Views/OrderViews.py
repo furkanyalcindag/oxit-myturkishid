@@ -8,14 +8,16 @@ from rest_framework.decorators import api_view
 
 from inoks.Forms.OrderForm import OrderForm
 from inoks.Forms.OrderSituationsForm import OrderSituationsForm
-from inoks.models import Order, OrderSituations, Profile
+from inoks.models import Order, OrderSituations, Profile, Product
+from inoks.models.OrderObject import OrderObject
 from inoks.serializers.order_serializers import OrderSerializer
 from inoks.services.general_methods import activeOrder
 
 
 @login_required
 def return_add_orders(request):
-    order_form = OrderForm();
+    order_form = OrderForm()
+    products = Product.objects.all()
     if request.method == 'POST':
 
         order_form = OrderForm(request.POST)
@@ -27,7 +29,7 @@ def return_add_orders(request):
                           quantity=order_form.cleaned_data['quantity'],
                           city=order_form.cleaned_data['city'],
                           district=order_form.cleaned_data['district'],
-                          sponsor=order_form.cleaned_data['sponsor'],
+
                           address=order_form.cleaned_data['address'],
                           payment_type=order_form.cleaned_data['payment_type'],
                           isContract=order_form.cleaned_data['isContract'])
@@ -36,17 +38,18 @@ def return_add_orders(request):
 
             order.product.add(order_form.cleaned_data['product'])
 
-            order.order_situations.add(order_form.cleaned_data['order_situations'])
+            order.order_situations.add(OrderSituations.objects.get(name='Ödeme Bekliyor'))
 
             order.save()
 
+            messages.success(request, 'Sipariş başarıyla eklendi.')
             return redirect('inoks:siparis-ekle')
 
         else:
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'siparisler/siparis-ekle.html', {'order_form': order_form})
+    return render(request, 'siparisler/siparis-ekle.html', {'order_form': order_form,'products':products})
 
 
 @login_required
@@ -132,7 +135,21 @@ def pendingOrderActive(request):
 def return_my_orders(request):
     current_user = request.user
     userprofile = Profile.objects.get(user=current_user)
-    orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id)
+    orderss = Order.objects.filter(isApprove=True, profile_id=userprofile.id)
+
+    orders = []
+
+    for order in orderss:
+        orderObject = OrderObject(order=order, total_price=0)
+
+        price = 0
+
+        for product in order.product.all():
+            price = price + product.price
+
+        orderObject.total_price = price
+        orders.append(orderObject)
+
     return render(request, 'siparisler/siparislerim.html', {'orders': orders})
 
 

@@ -54,7 +54,7 @@
         {% for message in messages %}
 
 
-            {% if message.tags is 'warning' %}
+            {% if message.tags == 'warning' %}
 
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -242,7 +242,7 @@
                     html += '<div class="row">';
                     html += '<div class="col-md-6">';
                     html += ' <li class="list-group-item">';
-                    html += '<b>Üye Numarası</b> <a class="pull-right">' + profile.user.id + '</a></li>';
+                    html += '<b>Üye Numarası</b> <a class="pull-right">' + profile.id + '</a></li>';
                     html += ' <li class="list-group-item">';
                     html += '<b>E-Mail</b> <a class="pull-right">' + profile.user.email + '</a></li>';
                     html += ' <li class="list-group-item">';
@@ -256,7 +256,7 @@
 
                     html += '<div class="col-md-6" style="border-left: thin solid #000000">';
                     html += ' <li class="list-group-item">';
-                    html += '<b>Sponsor</b> <a class="pull-right">' + profile.sponsor + '</a></li>';
+                    html += '<b>Sponsor</b> <a class="pull-right">' + profile.sponsor.id + '</a></li>';
                     html += ' <li class="list-group-item">';
                     html += '<b>Başvuru Tarihi</b> <a class="pull-right">' + profile.creationDate + '</a></li>';
                     html += ' <li class="list-group-item">';

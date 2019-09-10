@@ -9,8 +9,11 @@ from rest_framework.decorators import api_view
 
 from education.Forms.UserForm import UserForm
 from inoks.Forms.ProfileForm import ProfileForm
+from inoks.Forms.ProfileUpdateForm import ProfileUpdateForm
+from inoks.Forms.UserUpdateForm import UserUpdateForm
 from inoks.models import Profile
 from inoks.serializers.profile_serializers import ProfileSerializer
+from inoks.services import general_methods
 from inoks.services.general_methods import activeUser, passiveUser, reactiveUser
 
 
@@ -49,6 +52,7 @@ def return_add_users(request):
                              district=profile_form.cleaned_data['district'],
                              sponsor=profile_form.cleaned_data['sponsor'])
             profil.sponsor = profile_form.cleaned_data['sponsor']
+            profil.isContract = profile_form.cleaned_data['isContract']
             sponsorNumber = Profile.objects.filter(sponsor=profile_form.cleaned_data['sponsor']).count()
 
             if sponsorNumber > 2:
@@ -71,6 +75,9 @@ def return_add_users(request):
                 return redirect('inoks:kullanici-ekle')
 
         else:
+            isExist = general_methods.existMail(data['email'])
+            if isExist:
+                messages.warning(request, 'Mail adresi başka bir üyemiz tarafından kullanılmaktadır.')
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
@@ -82,18 +89,16 @@ def users_update(request, pk):
     current_user = request.user
     user = User.objects.get(id=current_user.id)
 
-    user_form = UserForm(request.POST or None, instance=user)
+    user_form = UserUpdateForm(request.POST or None, instance=user)
     profile = Profile.objects.get(pk=user.profile.pk)
-    profile_form = ProfileForm(request.POST or None, request.FILES or None, instance=profile)
+    profile_form = ProfileUpdateForm(request.POST or None, request.FILES or None, instance=profile)
 
     if request.method == 'POST':
 
-        if user_form.is_valid() or profile_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
 
-            user.username = user_form.cleaned_data['email']
             user.first_name = user_form.cleaned_data['first_name']
             user.last_name = user_form.cleaned_data['last_name']
-            user.email = user_form.cleaned_data['email']
             user.is_active = True
             user.save()
             profile_form.save()

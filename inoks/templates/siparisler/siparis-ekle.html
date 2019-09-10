@@ -4,6 +4,7 @@
 
 
 
+
     <section class="content">
 
         <!-- /.row -->
@@ -36,10 +37,6 @@
                                     {{ order_form.profile }}
                                 </div>
 
-                                <div class="form-group">
-                                    <label> {{ order_form.sponsor.label }}</label>
-                                    {{ order_form.sponsor }}
-                                </div>
 
                                 <div class="form-group">
                                     <label> {{ order_form.product.label }}</label>
@@ -51,6 +48,23 @@
                                     {{ order_form.quantity }}
                                 </div>
 
+                                <div class="dropdown form-group">
+
+                                <label> Ürünler</label>
+                                    <input type="text" id="droptxt" class="list form-control" readonly>
+                                    <div id="contents" class="contents">
+
+                                        {% for product in products %}
+                                            <div class="list">
+                                                <input type="checkbox" id="{{ product.id }}" class="list" value="{{ product.name }}"/>
+                                                <label for="apple" class="list">{{ product.name }} </label>
+                                                <input type="hidden" class="list quantity" min="1" value="1"/>
+                                            </div>
+                                        {% endfor %}
+
+
+                                    </div>
+                                </div>
 
                                 <div class="form-group">
                                     <label> {{ order_form.city.label }}</label>
@@ -109,6 +123,86 @@
 
     </section>
 
+    <script>
+
+        var txt = document.getElementById('droptxt'),
+            content = document.getElementById('contents'),
+            list = document.querySelectorAll('.contents input[type="checkbox"]'),
+            quantity = document.querySelectorAll('.quantity');
+
+        txt.addEventListener('click', function () {
+            content.classList.toggle('show')
+        })
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (e) {
+            if (!e.target.matches('.list')) {
+                if (content.classList.contains('show')) content.classList.remove('show')
+            }
+        }
+
+        list.forEach(function (item, index) {
+            item.addEventListener('click', function () {
+                quantity[index].type = (item.checked) ? 'number' : 'hidden';
+                calc()
+            })
+        })
+
+        quantity.forEach(function (item) {
+            item.addEventListener('input', calc)
+        })
+
+        function calc() {
+            for (var i = 0, arr = []; i < list.length; i++) {
+                if (list[i].checked) arr.push(quantity[i].value + ' x ' + list[i].value)
+            }
+
+            txt.value = arr.join(', ')
+        }
+
+    </script>
+
+    <style>
+
+        #droptxt {
+            padding: 8px;
+            /*width: 300px; */
+            cursor: pointer;
+            box-sizing: border-box
+        }
+
+        .dropdown {
+            position: relative;
+            /*display: inline-block */
+        }
+
+        .contents {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            width: 100%;
+            overflow: auto;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
+            z-index: 1
+        }
+
+        .quantity {
+            float: right;
+            width: 40px
+        }
+
+        .contents div {
+            padding: 10px 15px
+        }
+
+        .contents div:hover {
+            background-color: #ddd
+        }
+
+        .show {
+            display: block
+        }
+    </style>
 
 
 
