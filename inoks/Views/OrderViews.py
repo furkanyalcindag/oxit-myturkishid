@@ -24,9 +24,13 @@ def return_add_orders(request):
 
         if order_form.is_valid():
 
+            products_quantity = order_form.cleaned_data['droptxt']
+
+            products_quantity = products_quantity.split(',')
+
             order = Order(profile=order_form.cleaned_data['profile'],
 
-                          quantity=order_form.cleaned_data['quantity'],
+
                           city=order_form.cleaned_data['city'],
                           district=order_form.cleaned_data['district'],
 
@@ -36,7 +40,15 @@ def return_add_orders(request):
 
             order.save()
 
-            order.product.add(order_form.cleaned_data['product'])
+            for products_q in products_quantity:
+                product = products_q.split('x')
+
+                for i in range(int(product[0].strip())):
+                    order.product.add(Product.objects.get(id=int(product[1].strip())))
+
+            order.save()
+
+            #order.product.add(order_form.cleaned_data['product'])
 
             order.order_situations.add(OrderSituations.objects.get(name='Ödeme Bekliyor'))
 
@@ -49,7 +61,7 @@ def return_add_orders(request):
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'siparisler/siparis-ekle.html', {'order_form': order_form,'products':products})
+    return render(request, 'siparisler/siparis-ekle.html', {'order_form': order_form, 'products': products})
 
 
 @login_required
