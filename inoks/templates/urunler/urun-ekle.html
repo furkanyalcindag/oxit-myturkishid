@@ -34,7 +34,10 @@
 
                                 <div class="form-group">
 
-                                    <img src="/media/{{ product_form.productImage.value|default_if_none:"" }}"  width="100" height="100">
+                                    {% if durum == "GUNCELLE" %}
+                                        <img src="/media/{{ product_form.productImage.value|default_if_none:"" }}"
+                                             width="100" height="100">
+                                    {% endif %}
                                     <label>{{ product_form.productImage.label }}</label>
                                     {{ product_form.productImage }}
 
@@ -50,10 +53,10 @@
                                     {{ product_form.price }}
                                 </div>
 
-                                <div class="form-group">
+                               <!-- <div class="form-group">
                                     <label> {{ product_form.discountPrice.label }}</label>
                                     {{ product_form.discountPrice }}
-                                </div>
+                                </div> -->
 
                                 <div class="form-group">
                                     <label> {{ product_form.stock.label }}</label>
@@ -65,7 +68,7 @@
                                     {{ product_form.category }}
                                 </div>
 
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label> {{ product_form.discountStartDate.label }}</label>
                                     {{ product_form.discountStartDate }}
                                 </div>
@@ -73,7 +76,7 @@
                                 <div class="form-group">
                                     <label> {{ product_form.discountFinishDate.label }}</label>
                                     {{ product_form.discountFinishDate }}
-                                </div>
+                                </div> -->
 
                                 <div class="form-group">
                                     <label> {{ product_form.info.label }}</label>

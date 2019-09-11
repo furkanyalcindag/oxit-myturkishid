@@ -127,7 +127,6 @@
 
 
 
-
     <section class="content">
 
         <!-- /.row -->
@@ -152,13 +151,14 @@
                             <tr>
                                 <th>#</th>
                                 <th>Sipariş Numarası</th>
-                                <th>Üye</th>
-                                <th>Sponsor</th>
+
+
                                 <th>Ödeme Şekli</th>
 
 
                                 <th>Sipariş Durumu</th>
                                 <th>Sipariş Tarihi</th>
+                                <th>Ürünler</th>
                                 <th>Tutar</th>
                                 <th>Detay/Güncelle/Sil</th>
 
@@ -167,96 +167,96 @@
                             </thead>
                             <tbody>
 
-                            {% if orders.all %}
-                                {% for order in orders %}
-
-
-                                    <tr>
-                                        <td>{{ forloop.counter }} </td>
-                                        <td><a href="#">{{ order.id }}</a></td>
-                                        <td>{{ order.profile }}</td>
-                                        <td>{{ order.sponsor }}</td>
-                                        <td>{{ order.payment_type }}</td>
-
-
-                                        {% for order_situations in order.order_situations.all %}
-                                            {% if order_situations.name == "Ödeme Bekliyor" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-info"> {{ order_situations.name }}</span>
-                                                </td>
+                            {% for order in orders %}
 
 
 
+                                <tr>
+                                    <td>{{ forloop.counter }} </td>
+                                    <td><a href="#">{{ order.order.id }}</a></td>
 
-                                            {% elif order_situations.name == "Kargoda" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-warning"> {{ order_situations.name }}</span>
-                                                </td>
-
-
-
-                                            {% elif order_situations.name == "Hazırlanıyor" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-success"> {{ order_situations.name }}</span>
-                                                </td>
+                                    <td>{{ order.order.payment_type }}</td>
 
 
-                                            {% elif order_situations.name == "İptal Edildi" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-danger"> {{ order_situations.name }}</span>
-                                                </td>
-
-
-                                            {% elif order_situations.name == "Tamamlandı" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-primary"> {{ order_situations.name }}</span>
-                                                </td>
+                                    {% for order_situations in order.order.order_situations.all %}
+                                        {% if order_situations.name == "Ödeme Bekliyor" %}
+                                            <td><span style="font-size: 100%"
+                                                      class="label label-info"> {{ order_situations.name }}</span>
+                                            </td>
 
 
 
 
-                                            {% elif order_situations.name == "İade Edildi" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-default"> {{ order_situations.name }}</span>
-                                                </td>
+                                        {% elif order_situations.name == "Kargoda" %}
+                                            <td><span style="font-size: 100%"
+                                                      class="label label-warning"> {{ order_situations.name }}</span>
+                                            </td>
 
 
-                                            {% else %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-default"> Deneme</span>
-                                                </td>
-                                            {% endif %}
+
+                                        {% elif order_situations.name == "Hazırlanıyor" %}
+                                            <td><span style="font-size: 100%"
+                                                      class="label label-success"> {{ order_situations.name }}</span>
+                                            </td>
 
 
-                                        {% endfor %}
+                                        {% elif order_situations.name == "İptal Edildi" %}
+                                            <td><span style="font-size: 100%"
+                                                      class="label label-danger"> {{ order_situations.name }}</span>
+                                            </td>
 
 
-                                        <td>{{ order.creationDate }}</td>
+                                        {% elif order_situations.name == "Tamamlandı" %}
+                                            <td><span style="font-size: 100%"
+                                                      class="label label-primary"> {{ order_situations.name }}</span>
+                                            </td>
 
 
-                                         <td>
-                                            <ul> {% for product in order.product.all %}
-
-                                                <li>{{ product.name }} -  {{ product.price }} TL</li>
-
-                                            {% endfor %}</ul>
-
-                                        </td>
-
-                                        <td>
-                                            <div class="btn-group">
-                                                <a class="btn btn-info" onclick="getMyOrder({{ order.id }})"><i
-                                                        class="fa fa-align-left"></i>Detay</a>
 
 
-                                            </div>
-                                        </td>
+                                        {% elif order_situations.name == "İade Edildi" %}
+                                            <td><span style="font-size: 100%"
+                                                      class="label label-default"> {{ order_situations.name }}</span>
+                                            </td>
 
 
-                                    </tr>
+                                        {% else %}
+                                            <td><span style="font-size: 100%"
+                                                      class="label label-default"> Deneme</span>
+                                            </td>
+                                        {% endif %}
 
-                                {% endfor %}
-                            {% endif %}
+
+                                    {% endfor %}
+
+
+                                    <td>{{ order.order.creationDate }}</td>
+
+
+                                    <td width=200px>
+                                        <ul> {% for product in order.order.product.all %}
+
+                                            <li>{{ product.name }} - {{ product.price }} TL</li>
+
+                                        {% endfor %}</ul>
+
+                                    </td>
+
+                                    <td>{{ order.total_price }}</td>
+
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-info" onclick="getMyOrder({{ order.order.id }})"><i
+                                                    class="fa fa-align-left"></i>Detay</a>
+
+
+                                        </div>
+                                    </td>
+
+
+                                </tr>
+
+                            {% endfor %}
 
 
                             </tbody>
@@ -353,6 +353,9 @@
 
 
     </script>
+
+
+
 
 
 {% endblock %}

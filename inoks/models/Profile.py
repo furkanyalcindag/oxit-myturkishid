@@ -5,7 +5,7 @@ from inoks.models import City, Job, District
 
 
 class Profile(models.Model):
-    GİRİLMEDİ = 'Seçiniz'
+
     MALE = 'Erkek'
     FEMALE = 'Kadın'
 
@@ -18,7 +18,7 @@ class Profile(models.Model):
     okumadı = 'Okumadı'
 
     GENDER_CHOICES = (
-        (GİRİLMEDİ, 'Seçiniz'),
+
         (MALE, 'Erkek'),
         (FEMALE, 'Kadın'),
     )
@@ -43,7 +43,7 @@ class Profile(models.Model):
     creationDate = models.DateTimeField(auto_now_add=True, verbose_name='Kayıt Tarihi')
     modificationDate = models.DateTimeField(auto_now=True, verbose_name='Güncelleme Tarihi')
     gender = models.CharField(max_length=128, null=False, blank=False, verbose_name='Cinsiyeti', choices=GENDER_CHOICES,
-                              default=GİRİLMEDİ)
+                              default=MALE)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=False, blank=False,
                              verbose_name='İl')
     district = models.ForeignKey(District, null=False, blank=False, on_delete=models.CASCADE, verbose_name='İlçe')
@@ -55,6 +55,7 @@ class Profile(models.Model):
     isApprove = models.BooleanField(default=False, null=False, blank=False)
     isActive = models.BooleanField(default=False)
     isContract = models.BooleanField(default=False)
+    activePassiveDate = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return '%d %s %s %s' % (self.id, '-', self.user.first_name, self.user.last_name)

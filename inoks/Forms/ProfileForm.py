@@ -5,12 +5,13 @@ from inoks.models import Profile
 
 
 class ProfileForm(ModelForm):
+    isContract= forms.BooleanField(required=True)
     class Meta:
         model = Profile
 
         fields = (
             'profileImage', 'address', 'mobilePhone', 'gender', 'tc', 'birthDate', 'job', 'city', 'educationLevel',
-            'sponsor', 'district')
+            'sponsor', 'district','isContract')
         widgets = {
             'address': forms.Textarea(
                 attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required'}),
@@ -39,4 +40,6 @@ class ProfileForm(ModelForm):
 
         'educationLevel': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                               'style': 'width: 100%;', 'required': 'required'}),
+
+
         }

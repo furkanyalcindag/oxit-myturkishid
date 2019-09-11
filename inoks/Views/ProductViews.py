@@ -12,7 +12,8 @@ from inoks.serializers.product_serializers import ProductSerializer
 
 @login_required
 def return_add_products(request):
-    product_form = ProductForm();
+    product_form = ProductForm()
+    durum = "EKLE"
 
     if request.method == 'POST':
 
@@ -23,18 +24,22 @@ def return_add_products(request):
             product = Product(productImage=product_form.cleaned_data['productImage'],
                               name=product_form.cleaned_data['name'],
                               price=product_form.cleaned_data['price'],
-                              discountPrice=product_form.cleaned_data['discountPrice'],
+
                               stock=product_form.cleaned_data['stock'],
 
-                              discountStartDate=product_form.cleaned_data['discountStartDate'],
-                              discountFinishDate=product_form.cleaned_data['discountFinishDate'],
+
                               info=product_form.cleaned_data['info'])
 
             product.save()
 
-            product.category.add(product_form.cleaned_data['category'])
+            for category in product_form.cleaned_data['category']:
+                product.category.add(category)
 
             product.save()
+
+            messages.success(request, 'Ürün Kaydedildi.')
+
+
 
             return redirect('inoks:urunler')
 
@@ -42,7 +47,7 @@ def return_add_products(request):
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'urunler/urun-ekle.html', {'product_form': product_form})
+    return render(request, 'urunler/urun-ekle.html', {'product_form': product_form, 'durum': durum})
 
 
 @login_required
@@ -93,21 +98,25 @@ def productCategory_update(request, pk):
 def product_update(request, pk):
     product = Product.objects.get(id=pk)
     product_form = ProductForm(request.POST or None, instance=product)
+    durum = "GUNCELLE"
 
-    if product_form.is_valid():
-        product.category.clear()
-        product.category.add(product_form.cleaned_data['category'])
-        product.save()
+    if request.method == 'POST':
+        if product_form.is_valid():
+            product.category.clear()
+            for category in product_form.cleaned_data['category']:
+                product.category.add(category)
 
-        messages.warning(request, 'Başarıyla Güncellendi')
+            product.save()
 
-        return redirect('inoks:urun-listesi')
+            messages.warning(request, 'Başarıyla Güncellendi')
 
-    else:
+            return redirect('inoks:urun-listesi')
 
-        messages.warning(request, 'Alanları Kontrol Ediniz')
+        else:
 
-    return render(request, 'urunler/urun-ekle.html', {'product_form': product_form})
+            messages.warning(request, 'Alanları Kontrol Ediniz')
+
+    return render(request, 'urunler/urun-ekle.html', {'product_form': product_form, 'durum': durum})
 
 
 @api_view()
