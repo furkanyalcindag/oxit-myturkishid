@@ -24,6 +24,7 @@
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">Sipariş Oluştur</h3>
+                            <p style="float: right; font-size:160%;" id="price1">Toplam :0 ₺</p>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
@@ -38,26 +39,20 @@
                                 </div>
 
 
-                                <div class="form-group">
-                                    <label> {{ order_form.product.label }}</label>
-                                    {{ order_form.product }}
-                                </div>
-
-                                <div class="form-group">
-                                    <label> {{ order_form.quantity.label }}</label>
-                                    {{ order_form.quantity }}
-                                </div>
 
                                 <div class="dropdown form-group">
 
-                                <label> Ürünler</label>
-                                    <input type="text" id="droptxt" class="list form-control" readonly>
+                                    <label> Ürünler</label>
+                                    {{ order_form.droptxt }}
+                                    <textarea type="text" id="droptxt" class="list form-control" rows="4" cols="50"></textarea>
                                     <div id="contents" class="contents">
 
                                         {% for product in products %}
                                             <div class="list">
-                                                <input type="checkbox" id="{{ product.id }}" class="list" value="{{ product.name }}"/>
-                                                <label for="apple" class="list">{{ product.name }} </label>
+                                                <input type="checkbox" id="{{ product.id }}" class="list"
+                                                       value="{{ product.name }}" name="{{ product.price }}"/>
+                                                <label for="apple" class="list">{{ product.name }} ( {{ product.price }}
+                                                    ₺)</label>
                                                 <input type="hidden" class="list quantity" min="1" value="1"/>
                                             </div>
                                         {% endfor %}
@@ -105,6 +100,7 @@
 
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">Kaydet</button>
+                                <p style="float: right; font-size:160%;" id="price">Toplam :0 ₺</p>
                             </div>
                         </form>
                     </div>
@@ -126,13 +122,17 @@
     <script>
 
         var txt = document.getElementById('droptxt'),
+            txt2 = document.getElementById('id_droptxt'),
             content = document.getElementById('contents'),
             list = document.querySelectorAll('.contents input[type="checkbox"]'),
             quantity = document.querySelectorAll('.quantity');
 
+
         txt.addEventListener('click', function () {
             content.classList.toggle('show')
         })
+
+
 
         // Close the dropdown if the user clicks outside of it
         window.onclick = function (e) {
@@ -154,11 +154,46 @@
 
         function calc() {
             for (var i = 0, arr = []; i < list.length; i++) {
-                if (list[i].checked) arr.push(quantity[i].value + ' x ' + list[i].value)
+                if (list[i].checked) arr.push(quantity[i].value + ' x ' + list[i].value + '(' + list[i].name + ')')
+
             }
 
-            txt.value = arr.join(', ')
+            for (var i = 0, arr2 = []; i < list.length; i++) {
+                if (list[i].checked) arr2.push(quantity[i].value + ' x ' + list[i].id)
+
+            }
+
+            txt.value = arr.join('- \n')
+            myFunction()
+            txt2.value = arr2.join(', ')
+
         }
+
+
+        function myFunction() {
+            var deger = 0;
+            var str = document.getElementById('droptxt').value;
+            var res = str.split("-");
+            for (index = 0; index < res.length; ++index) {
+
+                res1 = res[index].split('x');
+
+                var mySubString = res1[1].substring(
+                    res1[1].lastIndexOf("(") + 1,
+                    res1[1].lastIndexOf(")")
+                );
+
+                deger = deger + (parseInt(res1[0].trim(), 10) * parseFloat(mySubString.trim()));
+
+
+
+
+            }
+            document.getElementById('price').innerHTML = "Toplam :" +deger + " ₺";
+              document.getElementById('price1').innerHTML = "Toplam :" +deger + " ₺";
+            deger =0
+        }
+
 
     </script>
 
