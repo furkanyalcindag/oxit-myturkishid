@@ -17,7 +17,7 @@ class Order(models.Model):
     )
 
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Üye Adı')
-    product = models.ManyToManyField(Product)
+    product = models.ManyToManyField(Product, through='OrderProduct', through_fields=('order','product'))
     order_situations = models.ManyToManyField(OrderSituations, default='Ödeme Bekliyor')
     quantity = models.IntegerField(null=True, blank=True, verbose_name='Sipariş Adeti')
     city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='İl')
