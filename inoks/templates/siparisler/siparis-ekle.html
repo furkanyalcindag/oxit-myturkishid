@@ -30,7 +30,7 @@
 
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+                    <h4><i class="icon fa fa-ban"></i> Başarılı!</h4>
 
 
                     <ul class="messages">
@@ -133,10 +133,12 @@
 
 
                                 <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> <a href="#">Sözleşmeyi</a> okudum,anladım,onaylıyorum
-                                    </label>
-                                </div>
+                                        <label>
+                                            {{ order_form.isContract }}
+                                            <a href="#">Satış Sözleşmesini</a>
+                                            okudum,anladım,onaylıyorum
+                                        </label>
+                                    </div>
 
                             </div>
                             <!-- /.box-body -->

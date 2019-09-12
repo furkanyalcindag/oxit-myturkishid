@@ -13,7 +13,7 @@ class OrderForm(ModelForm):
         #                                        'style': 'width: 100%; '}))
 
     droptxt = forms.CharField(widget=forms.HiddenInput())
-
+    isContract = forms.BooleanField(required=True)
     class Meta:
         model = Order
         fields = (
@@ -29,8 +29,11 @@ class OrderForm(ModelForm):
             'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%; '}),
 
-            'district': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                            'style': 'width: 100%; '}),
+            'district': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'İlçe', 'required': 'required'}),
+
+
+
 
             'address': forms.Textarea(
                 attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required'}),

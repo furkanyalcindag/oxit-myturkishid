@@ -30,14 +30,13 @@ def return_add_orders(request):
 
             order = Order(profile=order_form.cleaned_data['profile'],
 
-
                           city=order_form.cleaned_data['city'],
                           district=order_form.cleaned_data['district'],
 
                           address=order_form.cleaned_data['address'],
                           payment_type=order_form.cleaned_data['payment_type'],
                           isContract=order_form.cleaned_data['isContract'])
-
+            order.isContract = order_form.cleaned_data['isContract']
             order.save()
 
             for products_q in products_quantity:
@@ -48,7 +47,7 @@ def return_add_orders(request):
 
             order.save()
 
-            #order.product.add(order_form.cleaned_data['product'])
+            # order.product.add(order_form.cleaned_data['product'])
 
             order.order_situations.add(OrderSituations.objects.get(name='Ödeme Bekliyor'))
 

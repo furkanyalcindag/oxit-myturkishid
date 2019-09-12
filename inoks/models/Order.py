@@ -1,6 +1,6 @@
 from django.db import models
 
-from inoks.models import Profile, City, District
+from inoks.models import Profile, City
 
 from inoks.models.OrderSituations import OrderSituations
 from inoks.models.Product import Product
@@ -21,7 +21,7 @@ class Order(models.Model):
     order_situations = models.ManyToManyField(OrderSituations, default='Ödeme Bekliyor')
     quantity = models.IntegerField(null=True, blank=True, verbose_name='Sipariş Adeti')
     city = models.ForeignKey(City, on_delete=models.CASCADE, verbose_name='İl')
-    district = models.ForeignKey(District, on_delete=models.CASCADE, verbose_name='İlçe', default=None)
+    district = models.TextField(blank=False, null=False, verbose_name='İlçe')
     address = models.TextField(blank=True, null=True, verbose_name='Adres')
     sponsor = models.TextField(blank=True, null=True, verbose_name='Sponsor')
     payment_type = models.CharField(max_length=128, verbose_name='Ödeme Türü', choices=PAYMENT_CHOICES, default=DOOR)
