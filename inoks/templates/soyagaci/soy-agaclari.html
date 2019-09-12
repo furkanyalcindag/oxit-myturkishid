@@ -24,22 +24,22 @@
                                     id: {{ tree.id }},
 
                                     AdSoyad: "{{ tree.user.first_name }}  {{ tree.user.last_name }} ",
-                                    DurumMeslek: "A-Mühendis",
+                                    Durum: " {%  if tree.user.is_active == True %} Aktif {% else  %} Pasif  {% endif %}",
                                     Email: "{{ tree.user.email }}",
 
                                     DogumTarihi: "{{ tree.birthDate }}",
-                                    img: "/media/{{tree.profileImage}}"
+                                    img: "{%  if tree.user.is_active == True %} /media/{{tree.profileImage}} {% else  %} /media/profile/passive-user.png  {% endif %}"
                                 },
                             {% else %}
                                 {
                                     id: {{ tree.id }},
                                     pid: {{ tree.sponsor_id }},
                                     AdSoyad: "{{ tree.user.first_name }}  {{ tree.user.last_name }} ",
-                                    DurumMeslek: "A-Mühendis",
+                                    Durum: " {%  if tree.user.is_active == True %} Aktif {% else  %} Pasif  {% endif %}",
                                     Email: "{{ tree.user.email }}",
 
                                     DogumTarihi: "{{ tree.birthDate }}",
-                                    img: "/media/{{tree.profileImage}}"
+                                     img: "{%  if tree.user.is_active == True %} /media/{{tree.profileImage}} {% else  %} /media/profile/passive-user.png  {% endif %}"
                                 },
                             {% endif %}
 
@@ -80,7 +80,7 @@
                     },
                     nodeBinding: {
                         field_0: "AdSoyad",
-                        field_1: "DurumMeslek",
+                        field_1: "Durum",
                         img_0: "img",
                         field_number_children: "field_number_children"
                     },
