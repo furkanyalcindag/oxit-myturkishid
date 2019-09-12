@@ -5,12 +5,9 @@ from inoks.models import City, Job, District
 
 
 class Profile(models.Model):
-
     MALE = 'Erkek'
     FEMALE = 'Kadın'
 
-
-    Seçilmedi = 'Seçiniz'
     ilkokul = 'İlkokul'
     lise = 'Lise'
     lisans = 'Lisans'
@@ -24,7 +21,7 @@ class Profile(models.Model):
     )
 
     SCHOOL_CHOICES = (
-        (Seçilmedi, 'Seçiniz'),
+
         (ilkokul, 'İlkokul'),
         (lise, 'Lise'),
         (lisans, 'Lisans'),
@@ -46,11 +43,11 @@ class Profile(models.Model):
                               default=MALE)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=False, blank=False,
                              verbose_name='İl')
-    district = models.ForeignKey(District, null=False, blank=False, on_delete=models.CASCADE, verbose_name='İlçe')
+    district = models.TextField(blank=False, null=False, verbose_name='İlçe')
     job = models.ForeignKey(Job, on_delete=models.CASCADE, null=False, blank=False, verbose_name='Meslek')
     educationLevel = models.CharField(max_length=128, null=False, blank=False, verbose_name="Eğitim Düzeyi",
                                       choices=SCHOOL_CHOICES,
-                                      default=Seçilmedi)
+                                      default=ilkokul)
     sponsor = models.ForeignKey("Profile", on_delete=models.CASCADE, verbose_name='Sponsor', related_name='sp')
     isApprove = models.BooleanField(default=False, null=False, blank=False)
     isActive = models.BooleanField(default=False)

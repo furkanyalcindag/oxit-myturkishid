@@ -146,7 +146,6 @@
                             <tr>
                                 <th>#</th>
                                 <th>Üye Numarası</th>
-                                <th>Sponsor</th>
                                 <th>Ad</th>
                                 <th>Soyad</th>
                                 <th>E-Mail</th>
@@ -163,7 +162,6 @@
                                     <tr>
                                         <td>{{ forloop.counter }} </td>
                                         <td><a href="#">{{ profile.id }}</a></td>
-                                        <td><a href="#">{{ profile.sponsor }}</a></td>
                                         <td>{{ profile.user.first_name }}</td>
                                         <td>{{ profile.user.last_name }}</td>
                                         <td>{{ profile.user.email }}</td>
@@ -252,7 +250,7 @@
                     html += ' <li class="list-group-item">';
                     html += '<b>İl</b> <a class="pull-right">' + profile.city.name + '</a></li>';
                     html += ' <li class="list-group-item">';
-                    html += '<b>İlçe</b> <a class="pull-right">' + profile.district.name + '</a></li></div>';
+                    html += '<b>İlçe</b> <a class="pull-right">' + profile.district + '</a></li></div>';
 
                     html += '<div class="col-md-6" style="border-left: thin solid #000000">';
                     html += ' <li class="list-group-item">';

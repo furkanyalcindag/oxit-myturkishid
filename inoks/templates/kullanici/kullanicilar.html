@@ -57,7 +57,7 @@
         {% for message in messages %}
 
 
-            {% if message.tags is 'warning' %}
+            {% if message.tags == 'warning' %}
 
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -154,7 +154,7 @@
                                 <th>E-Mail</th>
                                 <th>Telefon</th>
                                 <th>İl</th>
-                                 <th>Sponsor</th>
+
                                 <th>Detay/Sil</th>
 
 
@@ -171,7 +171,7 @@
                                         <td>{{ profile.user.email }}</td>
                                         <td>{{ profile.mobilePhone }}</td>
                                         <td>{{ profile.city }}</td>
-                                          <td><a href="#">{{ profile.sponsor }}</a></td>
+
                                         <td>
                                             <div class="btn-group">
 
@@ -253,7 +253,7 @@
                     html += ' <li class="list-group-item">';
                     html += '<b>İl</b> <a class="pull-right">' + profile.city.name + '</a></li>';
                     html += ' <li class="list-group-item">';
-                    html += '<b>İlçe</b> <a class="pull-right">' + profile.district.name + '</a></li></div>';
+                    html += '<b>İlçe</b> <a class="pull-right">' + profile.district + '</a></li></div>';
 
                     html += '<div class="col-md-6" style="border-left: thin solid #000000">';
                     html += ' <li class="list-group-item">';

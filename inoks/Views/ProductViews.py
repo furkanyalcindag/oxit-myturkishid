@@ -131,6 +131,19 @@ def getProduct(request, pk):
     return JsonResponse(responseData, safe=True)
 
 
+@api_view()
+def getProducts(request, pk):
+    product = Product.objects.filter(pk=pk)
+
+    data = ProductSerializer(product, many=True)
+
+    responseData = {}
+    responseData['product'] = data.data
+    responseData['product'][0]
+    return JsonResponse(responseData, safe=True)
+
+
+
 @login_required
 def return_product_list(request):
     product_list = Product.objects.all()
@@ -159,7 +172,7 @@ def return_automotive_products(request):
 def return_products(request):
     genel = Product.objects.filter(category=1)
     organik = Product.objects.filter(category=2)
-    arac = Product.objects.filter(category=3)
+    arac = Product.objects.all()
     return render(request, 'urunler/urunler.html', {'genel': genel, 'organik': organik, 'arac': arac})
 
 

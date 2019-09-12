@@ -51,6 +51,7 @@ urlpatterns = [
     url(r'urunler/urun-kategori-ekle/duzenle/(?P<pk>\d+)$', ProductViews.productCategory_update,
         name='urun-kategori-ekle-duzenle'),
     url(r'urunler/urun-listesi/(?P<pk>\d+)$', ProductViews.getProduct, name='getProduct'),
+    url(r'urunler/urunler/(?P<pk>\d+)$', ProductViews.getProducts, name='getProducts'),
 
     # Siparisler
     url(r'siparisler/siparis-ekle/$', OrderViews.return_add_orders, name='siparis-ekle'),
@@ -78,6 +79,8 @@ urlpatterns = [
     # Kazançlar
     url(r'kazanclar/kazanclar/$', EarningsViews.return_all_earnings_report, name='kazanclar'),
     url(r'kazanclar/kazanclarim/$', EarningsViews.return_my_earnings_report, name='kazanclarim'),
+    url(r'kazanclar/odenecekler/$', EarningsViews.return_odenecekler, name='odenecekler'),
+    url(r'kazanclar/odenenler/$', EarningsViews.return_odenenler, name='odenenler'),
 
     # Ayarlar
     url(r'ayarlar/profil-ayarlari/$', SettingViews.return_profil_settings, name='profil-ayarlari'),

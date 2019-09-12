@@ -57,7 +57,7 @@
         {% for message in messages %}
 
 
-            {% if message.tags is 'warning' %}
+            {% if message.tags == 'warning' %}
 
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -152,7 +152,6 @@
                                 <th>Fotoğraf</th>
                                 <th>Ürün Adı</th>
                                 <th>Fiyatı</th>
-                                <th>Stok</th>
                                 <th>Kategori</th>
                                 <th>Detay/Güncelleme/Silme</th>
 
@@ -172,7 +171,7 @@
                                         </td>
                                         <td>{{ product_lists.name }}</td>
                                         <td>{{ product_lists.price }} TL</td>
-                                        <td>{{ product_lists.stock }} Adet</td>
+
 
 
                                         <td>
@@ -297,34 +296,9 @@
                     var product = response.product[0];
                     html += ' <div class="box-body box-profile">';
                     html += ' <img class="profile-user-img img-responsive img-circle" src="' + product.productImage + '" alt="User profile picture">';
-                    html += '<h3 class="profile-username text-center">' + product.name + '</h3>';
+                    html += '<h3 class="profile-username text-center">' + product.name + ' /  ' + product.price  +  '  ' + 'TL' +'</h3>';
                     html += '<p class="text-muted text-center">' + product.info + '</p>';
-                    html += ' <ul class="list-group list-group-unbordered">';
-                    html += '<div class="row">';
-                    html += '<div class="col-md-6">';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Ürün Adı</b> <a class="pull-right">' + product.name + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Ürün Fiyatı</b> <a class="pull-right">' + product.price + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Stok Adeti</b> <a class="pull-right">' + product.stock + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>İndirimli Fiyatı</b> <a class="pull-right">' + product.discountPrice + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>İndirim Başlangıç</b> <a class="pull-right">' + product.discountStartDate + '</a></li></div>';
 
-                    html += '<div class="col-md-6" style="border-left: thin solid #000000">';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>İndirim Bitiş</b> <a class="pull-right">' + product.discountFinishDate + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Ürün Bilgileri</b> <a class="pull-right">' + product.info + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Etkin</b> <a class="pull-right">' + product.price + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Kayıt Tarihi</b> <a class="pull-right">' + product.price + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>En Son Login</b> <a class="pull-right">' + product.price + '</a></li></div>' +
-                        '</div></ul>';
 
 
                     $(".bodys").html(html);

@@ -9,7 +9,7 @@ def return_my_earnings_report(request):
     current_user = request.user
     userprofile = Profile.objects.get(user=current_user)
 
-    total_my_orders = Order.objects.filter(isApprove=True,profile_id=userprofile.id).count()
+    total_my_orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id).count()
     orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id)
     return render(request, 'kazanclar/kazanclarim.html', {'orders': orders, 'total_my_orders': total_my_orders})
 
@@ -20,3 +20,13 @@ def return_all_earnings_report(request):
     orders = Order.objects.filter(isApprove=True)
 
     return render(request, 'kazanclar/kazanclar.html', {'orders': orders, 'total_my_orders': total_my_orders})
+
+
+@login_required
+def return_odenenler(request):
+    return render(request, 'kazanclar/odenenler.html')
+
+
+@login_required
+def return_odenecekler(request):
+    return render(request, 'kazanclar/odenecekler.html')

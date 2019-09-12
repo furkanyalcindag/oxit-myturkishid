@@ -5,6 +5,122 @@
     <link rel="stylesheet" href="{% static 'bower_components/product/product.css' %} ">
 
 
+ <!-- success modal -->
+    <div class="modal modal-success modal-success-food fade in" id="modal-success" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">İşlem Başarılı</h4>
+                </div>
+                <div class="modal-body successModal">
+                    ...
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-outline btn-ok">Tamam</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal modal-danger fade in deneme22" tabindex="-1" role="dialog" id="modal-danger"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Uyarı</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Silmek istediğinizden emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf"
+                            data-dismiss="modal">Evet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-close">Hayır</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+    {% if messages %}
+        {% for message in messages %}
+
+
+            {% if message.tags == 'warning' %}
+
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+
+            {% endif %}
+
+
+            {% if message.tags == 'success' %}
+
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+
+    {% endif %}
+
+
+
+
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+
+
+            <div class="modal-content" style="height:fit-content">
+
+                <div class="modal-header" style="background-color:#3c8dbc ">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body bodys">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <section class="content">
@@ -33,11 +149,7 @@
 
                             <div class="row">
 
-                                <div class="box box-primary">
-                                    <div class="box-header with-border">
 
-                                        <h3 class="box-title">Araç Temizlik Ürünleri </h3>
-                                    </div>
 
                                     {% if arac.all %}
                                         {% for araclar in arac %}
@@ -52,21 +164,21 @@
                                                                   src="/media/{{ araclar.productImage }}">
                                                         </a>
                                                         <ul class="social">
-                                                            <li><a href="#" data-tip="Detayları Görüntüle"><i
+                                                         <!--   <li><a href="#" data-tip="Detayları Görüntüle"><i
                                                                     class="fa fa-eye"></i></a></li>
                                                             <li><a href="#" data-tip="Sepete Ekle"><i
-                                                                    class="fa fa-shopping-cart"></i></a></li>
+                                                                    class="fa fa-shopping-cart"></i></a></li> -->
                                                         </ul>
 
                                                     </div>
                                                     <div class="product-content">
                                                         <h3 class="title"><a href="#"> <td>{{ araclar.name }}</td></a></h3>
                                                         <div class="price">
-                                                            {{ araclar.discountPrice }} TL
-                                                            <span>{{ araclar.price }} TL</span>
+                                                            {{ araclar.price }} TL
+
                                                         </div>
 
-                                                        <form action="#" method="post">
+                                                      <!--   <form action="#" method="post">
                                                             <div class="form-group">
                                                                 <input type="number" style="margin-bottom:10px"
                                                                        class="form-control" placeholder="Adet">
@@ -77,7 +189,17 @@
                                                                     class="btn btn-block btn-default  add-to-cart">
                                                                 Sepete Ekle
                                                             </button>
-                                                        </form>
+                                                        </form> -->
+
+
+                                                         <div class="btn-group">
+                                                <a class="btn btn-info" onclick="getProducts({{ araclar.id }})"><i
+                                                        class="fa fa-align-left"></i>Detay</a>
+                                                <a href="{% url "inoks:siparis-ekle"  %}" type="button" class="btn btn-warning"><i
+                                                        class="fa fa-edit"></i>Sipariş Ver
+                                                </a>
+
+                                            </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -86,135 +208,8 @@
                                     {% endif %}
 
 
-                                </div>
+
                             </div>
-
-
-
-
-
-
-
-
-     <div class="row">
-
-                                <div class="box box-primary">
-                                    <div class="box-header with-border">
-
-                                        <h3 class="box-title">Organik Temizlik Ürünleri </h3>
-                                    </div>
-
-                                    {% if organik.all %}
-                                        {% for organikler in organik %}
-
-                                            <div class="col-md-3 col-sm-6">
-                                                <div class="product-grid4">
-                                                    <div class="product-image4">
-                                                        <a href="#">
-                                                            <img class="pic-1"
-                                                                 src="/media/{{ organikler.productImage }}">
-                                                            <img class="pic-2"
-                                                                  src="/media/{{ organikler.productImage }}">
-                                                        </a>
-                                                        <ul class="social">
-                                                            <li><a href="#" data-tip="Detayları Görüntüle"><i
-                                                                    class="fa fa-eye"></i></a></li>
-                                                            <li><a href="#" data-tip="Sepete Ekle"><i
-                                                                    class="fa fa-shopping-cart"></i></a></li>
-                                                        </ul>
-
-                                                    </div>
-                                                    <div class="product-content">
-                                                        <h3 class="title"><a href="#"> <td>{{ organikler.name }}</td></a></h3>
-                                                        <div class="price">
-                                                            {{ organikler.discountPrice }} TL
-                                                            <span>{{ organikler.price }} TL</span>
-                                                        </div>
-
-                                                        <form action="#" method="post">
-                                                            <div class="form-group">
-                                                                <input type="number" style="margin-bottom:10px"
-                                                                       class="form-control" placeholder="Adet">
-
-                                                            </div>
-
-                                                            <button type="button"
-                                                                    class="btn btn-block btn-default  add-to-cart">
-                                                                Sepete Ekle
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        {% endfor %}
-                                    {% endif %}
-
-
-                                </div>
-                            </div>
-
-
-
-
-                         <div class="row">
-
-                                <div class="box box-primary">
-                                    <div class="box-header with-border">
-
-                                        <h3 class="box-title">Genel Temizlik Ürünleri </h3>
-                                    </div>
-
-                                    {% if genel.all %}
-                                        {% for geneller in genel %}
-
-                                            <div class="col-md-3 col-sm-6">
-                                                <div class="product-grid4">
-                                                    <div class="product-image4">
-                                                        <a href="#">
-                                                            <img class="pic-1"
-                                                                 src="/media/{{ geneller.productImage }}">
-                                                            <img class="pic-2"
-                                                                  src="/media/{{ geneller.productImage }}">
-                                                        </a>
-                                                        <ul class="social">
-                                                            <li><a href="#" data-tip="Detayları Görüntüle"><i
-                                                                    class="fa fa-eye"></i></a></li>
-                                                            <li><a href="#" data-tip="Sepete Ekle"><i
-                                                                    class="fa fa-shopping-cart"></i></a></li>
-                                                        </ul>
-
-                                                    </div>
-                                                    <div class="product-content">
-                                                        <h3 class="title"><a href="#"> <td>{{ geneller.name }}</td></a></h3>
-                                                        <div class="price">
-                                                            {{ geneller.discountPrice }} TL
-                                                            <span>{{ geneller.price }} TL</span>
-                                                        </div>
-
-                                                        <form action="#" method="post">
-                                                            <div class="form-group">
-                                                                <input type="number" style="margin-bottom:10px"
-                                                                       class="form-control" placeholder="Adet">
-
-                                                            </div>
-
-                                                            <button type="button"
-                                                                    class="btn btn-block btn-default  add-to-cart">
-                                                                Sepete Ekle
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        {% endfor %}
-                                    {% endif %}
-
-
-                                </div>
-                            </div>
-
 
 
 
@@ -249,6 +244,40 @@
     </section>
 
 
+ <script>
+
+
+        function getProducts(id) {
+
+            var html = '';
+            $.get(" {% url "inoks:getProducts" pk=12121   %}".replace(/12121/, id.toString()))
+                .done(function (response) {
+
+                    var product = response.product[0];
+                    html += ' <div class="box-body box-profile">';
+                    html += ' <img class="profile-user-img img-responsive img-circle" src="' + product.productImage + '" alt="User profile picture">';
+                    html += '<h3 class="profile-username text-center">' + product.name + ' /  ' + product.price  +  '  ' + 'TL' +'</h3>';
+                    html += '<p class="text-muted text-center">' + product.info + '</p>';
+
+
+
+                    $(".bodys").html(html);
+
+                });
+
+            $('.bd-example-modal-lg').modal('show');
+
+
+            $(".bd-example-modal-lg").on("hidden.bs.modal", function () {
+                // put your default event here
+                $(".bodys").html("");
+            });
+
+
+        }
+
+
+    </script>
 
 
 

@@ -2,36 +2,47 @@
 
 {% block content %}
 
-
-    {% if messages %}
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+ {% if messages %}
+        {% for message in messages %}
 
 
-            {% for message in messages %}
+            {% if message.tags == 'warning' %}
 
-
-                {% if message.tags == 'warning' %}
-
-
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
 
 
                     <ul class="messages">
-
-                        <li class="{{ message.tags }}">{{ message }}</li>
-
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
                     </ul>
 
 
+                </div>
+
+            {% endif %}
 
 
-                {% endif %}
+            {% if message.tags == 'success' %}
+
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
 
 
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
 
 
-            {% endfor %}  </div>
+                </div>
+
+            {% endif %}
+        {% endfor %}
 
 
     {% endif %}

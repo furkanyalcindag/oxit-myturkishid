@@ -5,41 +5,41 @@ from inoks.models import Profile
 
 
 class ProfileForm(ModelForm):
-    isContract= forms.BooleanField(required=True)
+    isContract = forms.BooleanField(required=True)
+
     class Meta:
         model = Profile
 
         fields = (
             'profileImage', 'address', 'mobilePhone', 'gender', 'tc', 'birthDate', 'job', 'city', 'educationLevel',
-            'sponsor', 'district','isContract')
+            'sponsor', 'district', 'isContract')
         widgets = {
             'address': forms.Textarea(
                 attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required'}),
             'mobilePhone': forms.TextInput(
                 attrs={'class': 'form-control ', 'placeholder': 'Telefon Numarası', 'required': 'required'}),
-            'gender': forms.Select( attrs={'class': 'form-control select2 select2-hidden-accessible',
+            'gender': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                           'style': 'width: 100%;', 'required': 'required'}),
-        'tc': forms.TextInput(
-            attrs={'class': 'form-control', 'placeholder': 'T.C. Kimlik Numarası', 'required': 'required'}),
+            'tc': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'T.C. Kimlik Numarası', 'required': 'required'}),
 
-        'birthDate': forms.DateInput(
-            attrs={'class': 'form-control  pull-right', 'id': 'datepicker', 'autocomplete': 'off',
-                   'onkeydown': 'return false'}),
+            'birthDate': forms.DateInput(
+                attrs={'class': 'form-control  pull-right', 'id': 'datepicker', 'autocomplete': 'off',
+                       'onkeydown': 'return false'}),
 
-        'sponsor': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                       'style': 'width: 100%; ', 'required': 'required'}),
+            'sponsor': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                           'style': 'width: 100%; ', 'required': 'required'}),
 
-        'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                    'style': 'width: 100%; ', 'required': 'required'}),
-
-        'district': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+            'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%; ', 'required': 'required'}),
 
-        'job': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                   'style': 'width: 100%;', 'required': 'required'}),
+            'district': forms.TextInput(
+                attrs={'class': 'form-control ', 'placeholder': 'İlçe', 'required': 'required'}),
 
-        'educationLevel': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                              'style': 'width: 100%;', 'required': 'required'}),
+            'job': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                       'style': 'width: 100%;', 'required': 'required'}),
 
+            'educationLevel': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                                  'style': 'width: 100%;', 'required': 'required'}),
 
         }

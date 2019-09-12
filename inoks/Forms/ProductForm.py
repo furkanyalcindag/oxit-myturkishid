@@ -14,6 +14,12 @@ class ProductForm(ModelForm):
         model = Product
         fields = (
             'productImage', 'name', 'price', 'stock', 'category',  'info')
+        labels = {
+            'price': 'Ürün Fiyatı',
+
+
+
+        }
         widgets = {
             'name': forms.TextInput(
                 attrs={'class': 'form-control ', 'placeholder': 'Ürün Adı', 'required': 'required'}),
@@ -30,7 +36,7 @@ class ProductForm(ModelForm):
                        'onkeydown': 'return false'}),
 
             'info': forms.Textarea(
-                attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required'}),
+                attrs={'class': 'form-control ', 'placeholder': 'Ürün Bilgileri', 'rows': '4', 'required': 'required'}),
 
         }
 
