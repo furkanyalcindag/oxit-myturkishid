@@ -8,7 +8,7 @@ from rest_framework.decorators import api_view
 
 from inoks.Forms.OrderForm import OrderForm
 from inoks.Forms.OrderSituationsForm import OrderSituationsForm
-from inoks.models import Order, OrderSituations, Profile, Product
+from inoks.models import Order, OrderSituations, Profile, Product, OrderProduct
 from inoks.models.OrderObject import OrderObject
 from inoks.serializers.order_serializers import OrderSerializer
 from inoks.services.general_methods import activeOrder
@@ -23,6 +23,8 @@ def return_add_orders(request):
         order_form = OrderForm(request.POST)
 
         if order_form.is_valid():
+
+            total_price = 0
 
             products_quantity = order_form.cleaned_data['droptxt']
 
@@ -41,10 +43,14 @@ def return_add_orders(request):
 
             for products_q in products_quantity:
                 product = products_q.split('x')
+                prod = Product.objects.get(id=int(product[1].strip()))
+                orderProduct = OrderProduct(order=order, product=prod,
+                                            quantity=int(product[0].strip()))
+                orderProduct.save()
 
-                for i in range(int(product[0].strip())):
-                    order.product.add(Product.objects.get(id=int(product[1].strip())))
+                total_price = total_price + (int(product[0].strip()) * prod.price)
 
+            order.totalPrice = total_price
             order.save()
 
             # order.product.add(order_form.cleaned_data['product'])
@@ -153,15 +159,10 @@ def return_my_orders(request):
     for order in orderss:
         orderObject = OrderObject(order=order, total_price=0)
 
-        price = 0
-
-        for product in order.product.all():
-            price = price + product.price
-
-        orderObject.total_price = price
+        orderObject.total_price = order.totalPrice
         orders.append(orderObject)
 
-    return render(request, 'siparisler/siparislerim.html', {'orders': orders})
+    return render(request, 'siparisler/siparislerim.html', {'orders': orderss})
 
 
 @api_view()

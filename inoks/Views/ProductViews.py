@@ -1,34 +1,49 @@
 from django.contrib.auth.decorators import login_required
+from django.forms import modelformset_factory
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from rest_framework.decorators import api_view
 
+from inoks.Forms.ImageForm import ImageForm
 from inoks.Forms.ProductCategoryForm import ProductCategoryForm
 from inoks.Forms.ProductForm import ProductForm
 from inoks.models import Product, ProductCategory
+from inoks.models.ProductImage import ProductImage
 from inoks.serializers.product_serializers import ProductSerializer
 
 
 @login_required
 def return_add_products(request):
     product_form = ProductForm()
+
+    # image_form = modelformset_factory(ProductImage,
+    #                                 form=ImageForm, extra=4)
     durum = "EKLE"
 
     if request.method == 'POST':
 
         product_form = ProductForm(request.POST, request.FILES)
 
+        # image_form = image_form(request.POST, request.FILES,
+        # queryset=ProductImage.objects.none())
+
         if product_form.is_valid():
 
-            product = Product(productImage=product_form.cleaned_data['productImage'],
-                              name=product_form.cleaned_data['name'],
-                              price=product_form.cleaned_data['price'],
+            product = Product(
+                name=product_form.cleaned_data['name'],
+                price=product_form.cleaned_data['price'],
 
-                              stock=product_form.cleaned_data['stock'],
+                stock=product_form.cleaned_data['stock'],
 
+                info=product_form.cleaned_data['info'])
 
-                              info=product_form.cleaned_data['info'])
+            product.save()
+
+            for f in request.FILES.getlist('input2[]'):
+                productImages = ProductImage(productImage=f)
+                productImages.save()
+                product.productImage.add(productImages)
 
             product.save()
 
@@ -39,15 +54,14 @@ def return_add_products(request):
 
             messages.success(request, 'Ürün Kaydedildi.')
 
-
-
             return redirect('inoks:urunler')
 
         else:
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'urunler/urun-ekle.html', {'product_form': product_form, 'durum': durum})
+    return render(request, 'urunler/urun-ekle.html',
+                  {'product_form': product_form, 'durum': durum})
 
 
 @login_required
@@ -99,6 +113,7 @@ def product_update(request, pk):
     product = Product.objects.get(id=pk)
     product_form = ProductForm(request.POST or None, instance=product)
     durum = "GUNCELLE"
+    images = product.productImage.all()
 
     if request.method == 'POST':
         if product_form.is_valid():
@@ -116,7 +131,7 @@ def product_update(request, pk):
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'urunler/urun-ekle.html', {'product_form': product_form, 'durum': durum})
+    return render(request, 'urunler/urun-ekle.html', {'product_form': product_form, 'durum': durum, 'images':images})
 
 
 @api_view()
@@ -141,7 +156,6 @@ def getProducts(request, pk):
     responseData['product'] = data.data
     responseData['product'][0]
     return JsonResponse(responseData, safe=True)
-
 
 
 @login_required
@@ -172,8 +186,8 @@ def return_automotive_products(request):
 def return_products(request):
     genel = Product.objects.filter(category=1)
     organik = Product.objects.filter(category=2)
-    arac = Product.objects.all()
-    return render(request, 'urunler/urunler.html', {'genel': genel, 'organik': organik, 'arac': arac})
+    urunler = Product.objects.all()
+    return render(request, 'urunler/urunler.html', {'genel': genel, 'organik': organik, 'urunler': urunler})
 
 
 @login_required

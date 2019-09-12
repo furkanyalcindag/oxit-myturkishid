@@ -33,7 +33,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profileImage = models.ImageField(upload_to='profile/', null=True, blank=True, default='profile/user.png',
                                      verbose_name='Profil Resmi')
-    tc = models.CharField(max_length=11, null=False, blank=False, unique=True, verbose_name='T.C. Kimlik Numarası')
+    tc = models.CharField(max_length=11, null=False, blank=False, verbose_name='T.C. Kimlik Numarası')
     birthDate = models.DateField(null=True, verbose_name='Doğum Tarihi')
     mobilePhone = models.CharField(max_length=11, null=False, blank=False, verbose_name='Telefon Numarası')
     address = models.TextField(blank=False, null=False, verbose_name='Adres')

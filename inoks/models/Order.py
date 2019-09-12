@@ -28,6 +28,7 @@ class Order(models.Model):
     isContract = models.BooleanField(default=False)
     isApprove = models.BooleanField(default=False)
     isPayed = models.BooleanField(default=False)
+    totalPrice = models.DecimalField(max_digits=8, decimal_places=2, null=True, default=True)
     creationDate = models.DateTimeField(auto_now_add=True, verbose_name='Kayıt Tarihi')
     modificationDate = models.DateTimeField(auto_now=True, verbose_name='Güncelleme Tarihi')
 

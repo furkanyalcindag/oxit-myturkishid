@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{% static 'bower_components/product/product.css' %} ">
 
 
- <!-- success modal -->
+    <!-- success modal -->
     <div class="modal modal-success modal-success-food fade in" id="modal-success" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -145,86 +145,75 @@
                         <div class="container">
 
 
-
-
                             <div class="row">
 
 
+                                {% if urunler.all %}
+                                    {% for urun in urunler %}
 
-                                    {% if arac.all %}
-                                        {% for araclar in arac %}
+                                        <div class="col-md-3 col-sm-6">
+                                            <div class="product-grid4">
+                                                <div class="product-image4">
+                                                    <a href="#">
+                                                        {% if urun.productImage.all %}
 
-                                            <div class="col-md-3 col-sm-6">
-                                                <div class="product-grid4">
-                                                    <div class="product-image4">
-                                                        <a href="#">
                                                             <img class="pic-1"
-                                                                 src="/media/{{ araclar.productImage }}">
+                                                                 src="/media/{{ urun.productImage.all.0.productImage }}">
                                                             <img class="pic-2"
-                                                                  src="/media/{{ araclar.productImage }}">
-                                                        </a>
-                                                        <ul class="social">
-                                                         <!--   <li><a href="#" data-tip="Detayları Görüntüle"><i
-                                                                    class="fa fa-eye"></i></a></li>
-                                                            <li><a href="#" data-tip="Sepete Ekle"><i
-                                                                    class="fa fa-shopping-cart"></i></a></li> -->
-                                                        </ul>
+                                                                 src="/media/{{ urun.productImage.all.1.productImage  }}">
+
+                                                        {% endif %}
+
+                                                    </a>
+                                                    <ul class="social">
+                                                        <!--   <li><a href="#" data-tip="Detayları Görüntüle"><i
+                                                                   class="fa fa-eye"></i></a></li>
+                                                           <li><a href="#" data-tip="Sepete Ekle"><i
+                                                                   class="fa fa-shopping-cart"></i></a></li> -->
+                                                    </ul>
+
+                                                </div>
+                                                <div class="product-content">
+                                                    <h3 class="title"><a href="#">
+                                                        <td>{{ urun.name }}</td>
+                                                    </a></h3>
+                                                    <div class="price">
+                                                        {{ urun.price }} TL
 
                                                     </div>
-                                                    <div class="product-content">
-                                                        <h3 class="title"><a href="#"> <td>{{ araclar.name }}</td></a></h3>
-                                                        <div class="price">
-                                                            {{ araclar.price }} TL
 
-                                                        </div>
+                                                    <!--   <form action="#" method="post">
+                                                          <div class="form-group">
+                                                              <input type="number" style="margin-bottom:10px"
+                                                                     class="form-control" placeholder="Adet">
 
-                                                      <!--   <form action="#" method="post">
-                                                            <div class="form-group">
-                                                                <input type="number" style="margin-bottom:10px"
-                                                                       class="form-control" placeholder="Adet">
+                                                          </div>
 
-                                                            </div>
-
-                                                            <button type="button"
-                                                                    class="btn btn-block btn-default  add-to-cart">
-                                                                Sepete Ekle
-                                                            </button>
-                                                        </form> -->
+                                                          <button type="button"
+                                                                  class="btn btn-block btn-default  add-to-cart">
+                                                              Sepete Ekle
+                                                          </button>
+                                                      </form> -->
 
 
-                                                         <div class="btn-group">
-                                                <a class="btn btn-info" onclick="getProducts({{ araclar.id }})"><i
-                                                        class="fa fa-align-left"></i>Detay</a>
-                                                <a href="{% url "inoks:siparis-ekle"  %}" type="button" class="btn btn-warning"><i
-                                                        class="fa fa-edit"></i>Sipariş Ver
-                                                </a>
+                                                    <div class="btn-group">
+                                                        <a class="btn btn-info" onclick="getProducts({{ urun.id }})"><i
+                                                                class="fa fa-align-left"></i>Detay</a>
+                                                        <a href="{% url "inoks:siparis-ekle" %}" type="button"
+                                                           class="btn btn-warning"><i
+                                                                class="fa fa-edit"></i>Sipariş Ver
+                                                        </a>
 
-                                            </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                        {% endfor %}
-                                    {% endif %}
-
+                                    {% endfor %}
+                                {% endif %}
 
 
                             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                         </div>
@@ -244,7 +233,7 @@
     </section>
 
 
- <script>
+    <script>
 
 
         function getProducts(id) {
@@ -256,9 +245,8 @@
                     var product = response.product[0];
                     html += ' <div class="box-body box-profile">';
                     html += ' <img class="profile-user-img img-responsive img-circle" src="' + product.productImage + '" alt="User profile picture">';
-                    html += '<h3 class="profile-username text-center">' + product.name + ' /  ' + product.price  +  '  ' + 'TL' +'</h3>';
+                    html += '<h3 class="profile-username text-center">' + product.name + ' /  ' + product.price + '  ' + 'TL' + '</h3>';
                     html += '<p class="text-muted text-center">' + product.info + '</p>';
-
 
 
                     $(".bodys").html(html);
