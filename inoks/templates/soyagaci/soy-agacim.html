@@ -17,38 +17,48 @@
 
 
 
-                    {% if trees.all %}
-                        {% for tree in trees %}
-                            {% if  tree.id == profile_id %}
-                                {
-                                    id: {{ tree.id }},
-
-                                    AdSoyad: "{{ tree.user.first_name }}  {{ tree.user.last_name }} ",
-                                    DurumMeslek: "A-Mühendis",
-                                    Email: "{{ tree.user.email }}",
-
-                                    DogumTarihi: "{{ tree.birthDate }}",
-                                    img: "/media/{{tree.profileImage}}"
-                                },
-                            {% else %}
-                                {
-                                    id: {{ tree.id }},
-                                    pid: {{ tree.sponsor_id }},
-                                    AdSoyad: "{{ tree.user.first_name }}  {{ tree.user.last_name }} ",
-                                    DurumMeslek: "A-Mühendis",
-                                    Email: "{{ tree.user.email }}",
-
-                                    DogumTarihi: "{{ tree.birthDate }}",
-                                    img: "/media/{{tree.profileImage}}"
-                                },
-                            {% endif %}
 
 
+                    {% for tree in trees %}
+
+                        {% if  tree.profile.id == profile_id  %}
+                            {
+                                id: {{ tree.profile.id }},
+
+                                AdSoyad: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ",
+                                Durum: " {%  if tree.user.is_active == True %}Aktif {% else  %}Pasif  {% endif %}",
+                                Email: "{{ tree.profile.user.email }}",
+                                Sponsor: "{{ tree.profile.sponsor_id }} ",
+                                Tel: "{{ tree.profile.mobilePhone }}",
+                                Meslek: "{{ tree.profile.job.name }}",
+                                KatilimTarihi: "{{ tree.profile.creationDate }}",
+                                AktifPasifTarihi: "{{ tree.profile.activePassiveDate }}",
+                                DogumTarihi: "{{ tree.profile.birthDate }}",
+                                img: "{%  if tree.profile.user.is_active == True %} /media/{{tree.profile.profileImage}} {% else  %}/media/profile/passive-user.png  {% endif %}"
+                            },
+                        {% else %}
+                            {
+                                id: {{ tree.profile.id }},
+                                pid: {{ tree.profile.sponsor_id }},
+                                AdSoyad: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ",
+                                Durum: " {%  if tree.profile.user.is_active == True %}Aktif {% else  %}Pasif  {% endif %}",
+                               Email: "{{ tree.profile.user.email }}",
+                                Sponsor: "{{ tree.profile.sponsor_id }} ",
+                                Tel: "{{ tree.profile.mobilePhone }}",
+                                Meslek: "{{ tree.profile.job.name }}",
+                                KatilimTarihi: "{{ tree.profile.creationDate }}",
+                                AktifPasifTarihi: "{{ tree.profile.activePassiveDate }}",
+                                DogumTarihi: "{{ tree.profile.birthDate }}",
+                                img: "{%  if tree.profile.user.is_active == True %} /media/{{tree.profile.profileImage}} {% else  %}/media/profile/passive-user.png  {% endif %}"
+                            },
+                        {% endif %}
 
 
 
-                        {% endfor %}
-                    {% endif %}
+
+
+                    {% endfor %}
+
 
 
                 ];
@@ -79,14 +89,15 @@
                     },
                     nodeBinding: {
                         field_0: "AdSoyad",
-                        field_1: "DurumMeslek",
+                        field_1: "Durum",
                         img_0: "img",
                         field_number_children: "field_number_children"
                     },
                     nodes: nodes
                 });
                 chart.fit();
-            };
+            }
+                ;
         </script>
 
     </section>

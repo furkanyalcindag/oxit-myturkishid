@@ -3,6 +3,7 @@ import datetime
 from django.contrib.auth.models import User
 
 from inoks.models import Profile, Order, Menu, MenuAdmin
+from inoks.models.ProfileControlObject import ProfileControlObject
 
 
 def getMenu(request):
@@ -55,3 +56,31 @@ def existMail(mail):
         return False
     else:
         return True
+
+
+# sponsor sponsor  olanları getir
+def rtrnProfileBySponsorID(profile_list):
+    # profiles = Profile.objects.filter(sponsor=sponsor)
+
+    copy_profile_list = profile_list.copy()
+
+    for prof in copy_profile_list:
+
+        if not prof.is_controlled:
+            profiles = Profile.objects.filter(sponsor=prof.profile)
+            for profile in profiles:
+                profile_object = ProfileControlObject(profile=profile, is_controlled=False)
+                profile_list.append(profile_object)
+
+            for index in range(len(profile_list)):
+                if profile_list[index] == prof:
+                    profile_list[index].is_controlled = True
+
+    res = sum(1 for i in profile_list if not i.is_controlled)
+
+    if res == 0:
+        return profile_list
+
+    return rtrnProfileBySponsorID(profile_list)
+
+
