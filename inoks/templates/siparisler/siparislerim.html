@@ -301,34 +301,22 @@
 
                     var order = response.order[0];
                     html += ' <div class="box-body box-profile">';
-                    html += ' <img class="profile-user-img img-responsive img-circle" src="' + order.product.productImage + '" alt="User profile picture">';
-                    html += '<h3 class="profile-username text-center">' + order.quantity + '</h3>';
-                    html += '<p class="text-muted text-center">' + order.quantity + '</p>';
                     html += ' <ul class="list-group list-group-unbordered">';
                     html += '<div class="row">';
                     html += '<div class="col-md-6">';
                     html += ' <li class="list-group-item">';
-                    html += '<b>Ürün Adı</b> <a class="pull-right">' + order.product.name + '</a></li>';
+                    html += '<b>Sözleşme Onaylandı Mı ?</b> <a class="pull-right">' + order.isContract + '</a></li>';
                     html += ' <li class="list-group-item">';
-                    html += '<b>Ürün Fiyatı</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Stok Adeti</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>İndirimli Fiyatı</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>İndirim Başlangıç</b> <a class="pull-right">' + order.quantity + '</a></li></div>';
-
+                    html += '<b>İl</b> <a class="pull-right">'  +  order.city.name   + '</a></li></div>';
                     html += '<div class="col-md-6" style="border-left: thin solid #000000">';
                     html += ' <li class="list-group-item">';
-                    html += '<b>İndirim Bitiş</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += '<b>Toplam Tutar</b> <a class="pull-right">' + order.totalPrice + '</a></li>';
                     html += ' <li class="list-group-item">';
-                    html += '<b>Ürün Bilgileri</b> <a class="pull-right">' + order.quantity + '</a></li>';
+                    html += '<b>İlçe</b> <a class="pull-right">' + order.district  +  ' TL' +  '</a></li></div>';
+
+                    html += '<div class="col-md-12" >';
                     html += ' <li class="list-group-item">';
-                    html += '<b>Etkin</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Kayıt Tarihi</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>En Son Login</b> <a class="pull-right">' + order.quantity + '</a></li></div>' +
+                    html += '<b>Adres</b> <a class="pull-right">' + order.address + '</a></li></div>' +
                         '</div></ul>';
 
 

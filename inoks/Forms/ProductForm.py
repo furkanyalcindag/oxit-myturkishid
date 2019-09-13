@@ -17,8 +17,6 @@ class ProductForm(ModelForm):
         labels = {
             'price': 'Ürün Fiyatı',
 
-
-
         }
         widgets = {
             'name': forms.TextInput(

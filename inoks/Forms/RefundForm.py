@@ -16,6 +16,12 @@ class RefundForm(ModelForm):
         model = Refund
         fields = (
             'order', 'product', 'profile', 'orderQuantity', 'isOpen', 'refundSituations')
+        labels = {
+            'isOpen': 'Ürün Açıldı Mı?',
+            'refundSituations': 'İade Durumları?',
+
+        }
+
         widgets = {
             'order': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                          'style': 'width: 100%; '}),

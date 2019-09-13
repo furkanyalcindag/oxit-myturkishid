@@ -24,22 +24,30 @@
                                     id: {{ tree.id }},
 
                                     AdSoyad: "{{ tree.user.first_name }}  {{ tree.user.last_name }} ",
-                                    Durum: " {%  if tree.user.is_active == True %} Aktif {% else  %} Pasif  {% endif %}",
+                                    Durum: "{%  if tree.user.is_active == True %}Aktif{% else  %}Pasif{% endif %}",
                                     Email: "{{ tree.user.email }}",
-
+                                    Sponsor: "{{ tree.sponsor_id }} ",
+                                    Tel: "{{ tree.mobilePhone }}",
+                                    Meslek: "{{ tree.job.name }}",
+                                    KatilimTarihi: "{{ tree.creationDate }}",
+                                    AktifPasifTarihi: "{{ tree.activePassiveDate }}",
                                     DogumTarihi: "{{ tree.birthDate }}",
-                                    img: "{%  if tree.user.is_active == True %} /media/{{tree.profileImage}} {% else  %} /media/profile/passive-user.png  {% endif %}"
+                                    img: "{%  if tree.user.is_active == True %} /media/{{tree.profileImage}} {% else  %}/media/profile/passive-user.png  {% endif %}"
                                 },
                             {% else %}
                                 {
                                     id: {{ tree.id }},
                                     pid: {{ tree.sponsor_id }},
                                     AdSoyad: "{{ tree.user.first_name }}  {{ tree.user.last_name }} ",
-                                    Durum: " {%  if tree.user.is_active == True %} Aktif {% else  %} Pasif  {% endif %}",
+                                    Durum: "{%  if tree.user.is_active == True %}Aktif{% else  %}Pasif{% endif %}",
                                     Email: "{{ tree.user.email }}",
-
+                                    Sponsor: "{{ tree.sponsor_id }} ",
+                                    Tel: "{{ tree.mobilePhone }}",
+                                    Meslek: "{{ tree.job.name }}",
+                                    KatilimTarihi: "{{ tree.creationDate }}",
+                                    AktifPasifTarihi: "{{ tree.activePassiveDate }}",
                                     DogumTarihi: "{{ tree.birthDate }}",
-                                     img: "{%  if tree.user.is_active == True %} /media/{{tree.profileImage}} {% else  %} /media/profile/passive-user.png  {% endif %}"
+                                    img: "{%  if tree.user.is_active == True %} /media/{{tree.profileImage}} {% else  %}/media/profile/passive-user.png  {% endif %}"
                                 },
                             {% endif %}
 
