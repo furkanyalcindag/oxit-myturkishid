@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render
 from rest_framework.decorators import api_view
+
+from inoks import tasks
 from inoks.models import Profile, Product, Order
 from inoks.serializers.order_serializers import OrderSerializer
 from inoks.serializers.profile_serializers import ProfileSerializer
@@ -134,6 +136,7 @@ def pendingOrderActive(request):
 
 @api_view()
 def getMyOrder(request, pk):
+    tasks.demo_task("hdsds")
     order = Order.objects.filter(pk=pk)
 
     data = OrderSerializer(order, many=True)

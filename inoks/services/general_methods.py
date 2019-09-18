@@ -2,7 +2,7 @@ import datetime
 
 from django.contrib.auth.models import User
 
-from inoks.models import Profile, Order, Menu, MenuAdmin, Refund
+from inoks.models import Profile, Order, Menu, MenuAdmin
 from inoks.models.ProfileControlObject import ProfileControlObject
 
 
@@ -50,20 +50,6 @@ def activeOrder(request, pk):
     return order
 
 
-def activeRefund(request, pk):
-    refund = Refund.objects.get(pk=pk)
-    refund.isApprove = True
-    refund.save()
-    return refund
-
-
-def passiveRefund(request, pk):
-    refund = Refund.objects.get(pk=pk)
-    refund.isApprove = False
-    refund.save()
-    return refund
-
-
 def existMail(mail):
     users = User.objects.filter(email=mail)
     if len(users) == 0:
@@ -96,3 +82,5 @@ def rtrnProfileBySponsorID(profile_list):
         return profile_list
 
     return rtrnProfileBySponsorID(profile_list)
+
+

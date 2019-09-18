@@ -4,8 +4,8 @@
 
 
     <section class="content">
-
-        <script src="https:///balkangraph.com/js/latest/OrgChart.js"></script>
+        {% load staticfiles %}
+        <script src="{% static 'dist/js/balkan.js' %}"></script>
 
 
         <div id="tree"></div>
@@ -24,6 +24,7 @@
                         {% if  tree.profile.id == profile_id  %}
                             {
                                 id: {{ tree.profile.id }},
+                                order_total: {{ tree.total_order }},
 
                                 AdSoyad: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ",
                                 Durum: " {%  if tree.user.is_active == True %}Aktif {% else  %}Pasif  {% endif %}",
@@ -34,22 +35,23 @@
                                 KatilimTarihi: "{{ tree.profile.creationDate }}",
                                 AktifPasifTarihi: "{{ tree.profile.activePassiveDate }}",
                                 DogumTarihi: "{{ tree.profile.birthDate }}",
-                                img: "{%  if tree.profile.user.is_active == True %} /media/{{tree.profile.profileImage}} {% else  %}/media/profile/passive-user.png  {% endif %}"
+                                img: "{%  if tree.profile.user.is_active == True %} /media/{{tree.profile.profileImage}}{% else  %}/media/profile/passive-user.png  {% endif %}"
                             },
                         {% else %}
                             {
                                 id: {{ tree.profile.id }},
+                                order_total: {{ tree.total_order }},
                                 pid: {{ tree.profile.sponsor_id }},
                                 AdSoyad: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ",
                                 Durum: " {%  if tree.profile.user.is_active == True %}Aktif {% else  %}Pasif  {% endif %}",
-                               Email: "{{ tree.profile.user.email }}",
+                                Email: "{{ tree.profile.user.email }}",
                                 Sponsor: "{{ tree.profile.sponsor_id }} ",
                                 Tel: "{{ tree.profile.mobilePhone }}",
                                 Meslek: "{{ tree.profile.job.name }}",
                                 KatilimTarihi: "{{ tree.profile.creationDate }}",
                                 AktifPasifTarihi: "{{ tree.profile.activePassiveDate }}",
                                 DogumTarihi: "{{ tree.profile.birthDate }}",
-                                img: "{%  if tree.profile.user.is_active == True %} /media/{{tree.profile.profileImage}} {% else  %}/media/profile/passive-user.png  {% endif %}"
+                                img: "{%  if tree.profile.user.is_active == True %} /media/{{tree.profile.profileImage}}{% else  %}/media/profile/passive-user.png  {% endif %}"
                             },
                         {% endif %}
 
@@ -90,6 +92,8 @@
                     nodeBinding: {
                         field_0: "AdSoyad",
                         field_1: "Durum",
+                        field_2: "order_total",
+
                         img_0: "img",
                         field_number_children: "field_number_children"
                     },
@@ -97,7 +101,7 @@
                 });
                 chart.fit();
             }
-                ;
+            ;
         </script>
 
     </section>
