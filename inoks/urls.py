@@ -64,14 +64,22 @@ urlpatterns = [
         name='bekleyen-siparisler-sil'),
     url(r'siparisler/bekleyen-siparisler/(?P<pk>\d+)$', OrderViews.getPendingOrder, name='getPendingOrder'),
     url(r'siparis-onayla/$', OrderViews.pendingOrderActive, name="siparis-onayla"),
+    url(r'siparisler/siparisler/sil/(?P<pk>\d+)$', OrderViews.orders_delete,
+        name='siparislersil'),
+    url(r'siparisler/siparisler/(?P<pk>\d+)$', OrderViews.getOrder, name='getOrder'),
 
     # İadeler
     url(r'iadeler/iade-olustur/$', RefundViews.return_add_refund, name='iade-olustur'),
     url(r'iadeler/iadeler/$', RefundViews.return_refunds, name='iadeler'),
+    url(r'iadeler/iadelerim/$', RefundViews.return_my_refunds, name='iadelerim'),
     url(r'iadeler/iade-durumlari/$', RefundViews.return_refund_situations, name='iade-durumlari'),
     url(r'iadeler/iade-durumlari/sil/(?P<pk>\d+)$', RefundViews.refund_situations_delete, name='iade-durum-sil'),
     url(r'iadeler/iade-durumlari/duzenle/(?P<pk>\d+)$', RefundViews.refund_situations_update,
         name='iade-durum-duzenle'),
+    url(r'iade-onayla/$', RefundViews.pendingRefundActive, name="iade-onayla"),
+    url(r'iade-reddet/$', RefundViews.pendingRefundPassive, name="iade-reddet"),
+    url(r'iadeler/bekleyen-iadeler/$', RefundViews.return_pendings_refunds, name='bekleyen-iadeler'),
+
 
     # Raporlar
     url(r'raporlar/rapor-olustur/$', ReportViews.return_create_report, name='rapor-olustur'),

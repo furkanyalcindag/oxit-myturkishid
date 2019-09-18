@@ -159,6 +159,7 @@
 
                                 <th>Sipariş Durumu</th>
                                 <th>Sipariş Tarihi</th>
+                                <th>Ürünler</th>
                                 <th>Tutar</th>
                                 <th>Detay/Güncelle/Sil</th>
 
@@ -234,27 +235,26 @@
                                         <td>{{ order.creationDate }}</td>
 
 
-                                        <td>
-                                            <ul> {% for product in order.product.all %}
+                                        <td width=200px>
+                                            <ul> {% for product in order.orderproduct_set.all %}
 
-                                                {{ order.quantity|mul:product.price }}
+                                                <li><font style="color: #0b58a2">{{ product.quantity }}
+                                                    X </font>{{ product.product.name }} {{ product.product.price }} TL </li>
 
                                             {% endfor %}</ul>
 
                                         </td>
 
-
+                                        <td>{{ order.totalPrice }} TL</td>
                                         <td>
                                             <div class="btn-group">
-                                                <a class="btn btn-info"><i
+                                                <a class="btn btn-info" onclick="getOrder({{ order.id }})"><i
                                                         class="fa fa-align-left"></i>Detay</a>
-                                                <a href="#" type="button"
-                                                   class="btn btn-warning"><i
-                                                        class="fa fa-edit"></i>Güncelle
-                                                </a>
+
                                                 <a class="btn btn-danger"
-                                                   data-toggle="modal"><i
-                                                        class="fa fa-trash"></i>Sil</a>
+                                                   data-toggle="modal"
+                                                   onclick=deleteOrders({{ order.pk }})><i
+                                                        class="fa fa-trash"></i> Sil </a>
                                             </div>
                                         </td>
 
@@ -296,5 +296,107 @@
 
         })
     </script>
+
+
+
+
+    <script>
+        function deleteOrders(id) {
+            // $('#modal-danger').modal('show');
+            console.log(id);
+            var html = ''
+            $("#modal-danger").on("shown.bs.modal", function (e) {
+                $("#btn-conf").click(function () {
+                    $.ajax({
+                        url: "{% url "inoks:siparislersil" pk=212121223232323232 %}".replace(/212121223232323232/, id.toString()),
+                        type: "POST",
+                        data: {
+                            'csrfmiddlewaretoken': "{{  csrf_token  }}",
+                            isActive: 'False'
+                        },
+                        success: function (result) {
+
+                            html = ' Sipariş Başarıyla Silindi';
+
+                            $(".successModal").html(html);
+                            $('#modal-success').on("shown.bs.modal", function (e) {
+                                $(".btn-ok").click(function () {
+
+                                    window.location.replace("{% url "inoks:siparisler" %}");
+
+                                });
+
+                            }).modal('show');
+
+
+                            console.log(result.status)
+                        }
+                    });
+                });
+            }).modal('show');
+            $('#btn-close').click(function () {
+                $('#modal-danger').modal('hide');
+            });
+
+        }
+    </script>
+
+
+
+
+    <script>
+
+
+        function getOrder(id) {
+
+            var html = '';
+            $.get(" {% url "inoks:getOrder" pk=12121   %}".replace(/12121/, id.toString()))
+                .done(function (response) {
+
+                    var order = response.order[0];
+                    html += ' <div class="box-body box-profile">';
+                    html += ' <ul class="list-group list-group-unbordered">';
+                    html += '<div class="row">';
+                    html += '<div class="col-md-6">';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Sözleşme Onaylandı Mı ?</b> <a class="pull-right">' + order.isContract + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Üye Adı</b> <a class="pull-right">' + order.profile.user.first_name + ' '+ order.profile.user.last_name + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>İl</b> <a class="pull-right">' + order.city.name + '</a></li></div>';
+                    html += '<div class="col-md-6" style="border-left: thin solid #000000">';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Toplam Tutar</b> <a class="pull-right">' + order.totalPrice + ' TL' + '</a></li>';
+                      html += ' <li class="list-group-item">';
+                    html += '<b>Sponsor</b> <a class="pull-right">' +  order.profile.sponsor.id + ' - '    + order.profile.sponsor.user.first_name + ' ' + order.profile.sponsor.user.last_name +  '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>İlçe</b> <a class="pull-right">' + order.district + '</a></li></div>';
+
+                    html += '<div class="col-md-12" >';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>Adres</b> <a class="pull-right">' + order.address + '</a></li></div>' +
+                        '</div></ul>';
+
+
+                    $(".bodys").html(html);
+
+                });
+
+            $('.bd-example-modal-lg').modal('show');
+
+
+            $(".bd-example-modal-lg").on("hidden.bs.modal", function () {
+                // put your default event here
+                $(".bodys").html("");
+            });
+
+
+        }
+
+
+    </script>
+
+
+
 
 {% endblock %}

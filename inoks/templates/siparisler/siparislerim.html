@@ -232,13 +232,14 @@
                                     <td width=200px>
                                         <ul> {% for product in order.orderproduct_set.all %}
 
-                                            <li><font style="color: #0b58a2">{{ product.quantity }}  X </font>{{ product.product.name }} </li>
+                                                <li><font style="color: #0b58a2">{{ product.quantity }}
+                                                    X </font>{{ product.product.name }} {{ product.product.price }} TL </li>
 
-                                        {% endfor %}</ul>
+                                            {% endfor %}</ul>
 
                                     </td>
 
-                                    <td>{{ order.totalPrice }}</td>
+                                    <td>{{ order.totalPrice }} TL</td>
 
                                     <td>
                                         <div class="btn-group">
@@ -307,12 +308,16 @@
                     html += ' <li class="list-group-item">';
                     html += '<b>Sözleşme Onaylandı Mı ?</b> <a class="pull-right">' + order.isContract + '</a></li>';
                     html += ' <li class="list-group-item">';
-                    html += '<b>İl</b> <a class="pull-right">'  +  order.city.name   + '</a></li></div>';
+                    html += '<b>Üye Adı</b> <a class="pull-right">' + order.profile.user.first_name + ' '+ order.profile.user.last_name + '</a></li>';
+                    html += ' <li class="list-group-item">';
+                    html += '<b>İl</b> <a class="pull-right">' + order.city.name + '</a></li></div>';
                     html += '<div class="col-md-6" style="border-left: thin solid #000000">';
                     html += ' <li class="list-group-item">';
-                    html += '<b>Toplam Tutar</b> <a class="pull-right">' + order.totalPrice + '</a></li>';
+                    html += '<b>Toplam Tutar</b> <a class="pull-right">' + order.totalPrice + ' TL' + '</a></li>';
+                      html += ' <li class="list-group-item">';
+                    html += '<b>Sponsor</b> <a class="pull-right">' +  order.profile.sponsor.id + ' - '    + order.profile.sponsor.user.first_name + ' ' + order.profile.sponsor.user.last_name +  '</a></li>';
                     html += ' <li class="list-group-item">';
-                    html += '<b>İlçe</b> <a class="pull-right">' + order.district  +  ' TL' +  '</a></li></div>';
+                    html += '<b>İlçe</b> <a class="pull-right">' + order.district + '</a></li></div>';
 
                     html += '<div class="col-md-12" >';
                     html += ' <li class="list-group-item">';

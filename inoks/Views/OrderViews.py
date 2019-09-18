@@ -175,3 +175,29 @@ def getMyOrder(request, pk):
     responseData['order'] = data.data
     responseData['order'][0]
     return JsonResponse(responseData, safe=True)
+
+
+@login_required
+def orders_delete(request, pk):
+    if request.method == 'POST' and request.is_ajax():
+        try:
+            obj = Order.objects.get(pk=pk)
+            obj.delete()
+            return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
+        except Order.DoesNotExist:
+            return JsonResponse({'status': 'Fail', 'msg': 'Object does not exist'})
+
+    else:
+        return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
+
+
+@api_view()
+def getOrder(request, pk):
+    order = Order.objects.filter(pk=pk)
+
+    data = OrderSerializer(order, many=True)
+
+    responseData = {}
+    responseData['order'] = data.data
+    responseData['order'][0]
+    return JsonResponse(responseData, safe=True)

@@ -15,7 +15,7 @@ class RefundForm(ModelForm):
     class Meta:
         model = Refund
         fields = (
-            'order', 'product', 'profile', 'orderQuantity', 'isOpen', 'refundSituations')
+            'order', 'product',  'orderQuantity', 'isOpen', 'refundSituations')
         labels = {
             'isOpen': 'Ürün Açıldı Mı?',
             'refundSituations': 'İade Durumları?',
@@ -28,10 +28,7 @@ class RefundForm(ModelForm):
             'product': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                            'style': 'width: 100%; '}),
 
-            'profile': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%; '}),
-
-            'orderQuantity': forms.TextInput(
+            'orderQuantity': forms.NumberInput(
                 attrs={'class': 'form-control ', 'placeholder': 'Ürün Miktarı', 'required': 'required'}),
 
             'isOpen': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',

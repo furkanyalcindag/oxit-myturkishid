@@ -4,8 +4,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from inoks.Forms.RefundForm import RefundForm
 from inoks.Forms.RefundSituationsForm import RefundSituationsForm
-from inoks.models import Refund
+from inoks.models import Refund, Profile
 from inoks.models.RefundSituations import RefundSituations
+from inoks.services.general_methods import activeRefund, passiveRefund
 
 
 @login_required
@@ -17,20 +18,22 @@ def return_add_refund(request):
         refund_form = RefundForm(request.POST, request.FILES)
 
         if refund_form.is_valid():
+            current_user = request.user
+            refunduser = Profile.objects.get(user=current_user)
 
             refund = Refund(order=refund_form.cleaned_data['order'],
                             product=refund_form.cleaned_data['product'],
-                            profile=refund_form.cleaned_data['profile'],
                             orderQuantity=refund_form.cleaned_data['orderQuantity'],
-                            isOpen=refund_form.cleaned_data['isOpen'])
+                            isOpen=refund_form.cleaned_data['isOpen'],
+                            profile=refunduser)
 
             refund.save()
 
             refund.refundSituations.add(refund_form.cleaned_data['refundSituations'])
 
             refund.save()
-
-            return redirect('inoks:iadeler')
+            messages.success(request, 'İade Kaydı Başarıyla Oluşturulmuştur.')
+            return redirect('inoks:iade-olustur')
 
         else:
 
@@ -40,9 +43,56 @@ def return_add_refund(request):
 
 
 @login_required
+def pendingRefundActive(request):
+    if request.POST:
+        try:
+
+            user_id = request.POST.get('user_id')
+
+            activeRefund(request, int(user_id))
+
+            return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
+
+        except Exception as e:
+
+            return JsonResponse({'status': 'Fail', 'msg': e})
+
+
+@login_required
+def pendingRefundPassive(request):
+    if request.POST:
+        try:
+
+            user_id = request.POST.get('user_id')
+
+            passiveRefund(request, int(user_id))
+
+            return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
+
+        except Exception as e:
+
+            return JsonResponse({'status': 'Fail', 'msg': e})
+
+
+@login_required
 def return_refunds(request):
     refund_list = Refund.objects.all()
     return render(request, 'iadeler/iadeler.html', {'refund_list': refund_list})
+
+
+@login_required
+def return_pendings_refunds(request):
+    refund_list = Refund.objects.filter(isApprove=None)
+    return render(request, 'iadeler/bekleyen-iadeler.html', {'refund_list': refund_list})
+
+
+@login_required
+def return_my_refunds(request):
+    current_user = request.user
+    refund = Profile.objects.get(user=current_user)
+
+    refund_list = Refund.objects.filter(profile_id=refund.id)
+    return render(request, 'iadeler/iadelerim.html', {'refund_list': refund_list})
 
 
 @login_required
@@ -90,7 +140,8 @@ def refund_situations_update(request, pk):
 
     if refund_situations_form.is_valid():
         refund_situations_form.save()
-        messages.warning(request, 'Başarıyla Güncellendi')
+        messages.success(request, 'İade Durumu Başarıyla Güncellendi')
+
         redirect('inoks:iade-durumlari')
     else:
         messages.warning(request, 'Alanları Kontrol Ediniz')
