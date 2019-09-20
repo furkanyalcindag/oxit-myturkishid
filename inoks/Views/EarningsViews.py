@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 from inoks.models import Order, Profile
+from inoks.services import general_methods
 
 
 @login_required
@@ -30,3 +31,28 @@ def return_odenenler(request):
 @login_required
 def return_odenecekler(request):
     return render(request, 'kazanclar/odenecekler.html')
+
+
+
+def calculate_earning(request):
+    userprofile = Profile.objects.filter(user__is_active=True)
+
+    for user in userprofile:
+
+        profileArray = []
+        levelDict = dict()
+        level = 1
+        total_earning = 0
+
+        profileArray.append(user.id)
+
+        general_methods.returnLevelTree(profileArray, levelDict, level)
+
+        for i in range(7):
+            total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
+
+
+
+
+
+
