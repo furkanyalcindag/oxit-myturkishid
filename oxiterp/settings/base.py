@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mathfilters',
     # own
-    'background_task',
+    
 
     'rest_framework',
     'accounts',
