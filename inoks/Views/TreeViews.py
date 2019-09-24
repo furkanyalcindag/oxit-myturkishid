@@ -51,7 +51,7 @@ def return_all_tree(request):
     profileArray = []
     levelDict = dict()
     level = 1
-    profileArray.append(Profile.objects.get(id=1).id)
+    profileArray.append(Profile.objects.get(id=7).id)
 
     general_methods.returnLevelTree(profileArray, levelDict, level)
 

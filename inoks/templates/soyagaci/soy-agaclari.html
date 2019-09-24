@@ -14,17 +14,12 @@
 
             window.onload = function () {
                 var nodes = [
-
-
-
-
                     {% for tree in trees %}
 
-                        {% if  tree.profile.id == 1  %}
+                        {% if  tree.profile.id == 7  %}
                             {
                                 id: {{ tree.profile.id }},
                                 order_total: {{ tree.total_order }},
-
                                 AdSoyad: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ",
                                 Durum: " {%  if tree.user.is_active == True %}Aktif {% else  %}Pasif  {% endif %}",
                                 Email: "{{ tree.profile.user.email }}",
@@ -44,7 +39,7 @@
                                 AdSoyad: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ",
                                 Durum: " {%  if tree.profile.user.is_active == True %}Aktif {% else  %} Pasif  {% endif %}",
                                 Email: "{{ tree.profile.user.email }}",
-                                Sponsor: "{{ tree.profile.sponsor_id }} ",
+                                Sponsor: "{{ tree.profile.sponsor_id }}",
                                 Tel: "{{ tree.profile.mobilePhone }}",
                                 Meslek: "{{ tree.profile.job.name }}",
                                 KatilimTarihi: "{{ tree.profile.creationDate }}",
