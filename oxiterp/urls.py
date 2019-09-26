@@ -32,8 +32,8 @@ urlpatterns = [
     # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     #path('', include('accounts.urls')),
     #path('accounts/', include('django.contrib.auth.urls'))
-    path('accounts/', include('accounts.urls')),
-    path('egitim/', include('education.urls')),
+    path('', include('accounts.urls')),
+    #path('egitim/', include('education.urls')),
     path('inoks/', include('inoks.urls')),
 ]
 
