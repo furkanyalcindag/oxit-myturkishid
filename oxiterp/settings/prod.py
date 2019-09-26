@@ -10,7 +10,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'oxit_inoks',
-        'USER': 'user_oxit',
+        'USER': 'postgres',
         'PASSWORD': 'oxit2016',
         'HOST': 'localhost',
         'PORT': '5432',
