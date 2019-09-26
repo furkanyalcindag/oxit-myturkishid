@@ -99,7 +99,7 @@ def productCategory_update(request, pk):
 
     if product_category_form.is_valid():
         product_category_form.save()
-        messages.warning(request, 'Başarıyla Güncellendi')
+        messages.success(request, 'Başarıyla Güncellendi')
         return redirect('inoks:urun-kategori-ekle')
     else:
         messages.warning(request, 'Alanları Kontrol Ediniz')
@@ -130,7 +130,7 @@ def product_update(request, pk):
 
             product.save()
 
-            messages.warning(request, 'Başarıyla Güncellendi')
+            messages.success(request, 'Başarıyla Güncellendi')
 
             return redirect('inoks:urun-listesi')
 

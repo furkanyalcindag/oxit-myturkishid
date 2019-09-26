@@ -27,8 +27,15 @@ def login(request):
         if user is not None:
             # correct username and password login the user
             auth.login(request, user)
-            # return render(request, 'patient/:patient/index', context={})
-            return redirect('inoks:admin-dashboard')
+
+            if user.groups.all()[0].name == 'Admin':
+                return redirect('inoks:admin-dashboard')
+
+            elif user.groups.all()[0].name == 'Üye':
+                return redirect('inoks:user-dashboard')
+
+            else:
+                return redirect('accounts:logout')
 
         else:
             messages.add_message(request, messages.SUCCESS, 'Mail Adresi Ve Şifre Uyumsuzluğu')
