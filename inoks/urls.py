@@ -38,9 +38,6 @@ urlpatterns = [
 
     # Urunler
     url(r'urunler/urun-ekle/$', ProductViews.return_add_products, name='urun-ekle'),
-    url(r'urunler/organik-temizlik-urunleri/$', ProductViews.return_health_products, name='organik-temizlik-urunleri'),
-    url(r'urunler/genel-temizlik-urunleri/$', ProductViews.return_cleaning_products, name='genel-temizlik-urunleri'),
-    url(r'urunler/arac-temizlik-urunleri/$', ProductViews.return_automotive_products, name='arac-temizlik-urunleri'),
     url(r'urunler/urunler/$', ProductViews.return_products, name='urunler'),
     url(r'urunler/urun-kategori-ekle/$', ProductViews.return_add_product_category, name='urun-kategori-ekle'),
     url(r'urunler/urun-listesi/$', ProductViews.return_product_list, name='urun-listesi'),

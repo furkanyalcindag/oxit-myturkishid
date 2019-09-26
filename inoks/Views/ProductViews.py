@@ -171,22 +171,7 @@ def return_product_list(request):
     return render(request, 'urunler/urun-listesi.html', {'product_list': product_list})
 
 
-@login_required
-def return_cleaning_products(request):
-    products = Product.objects.filter(category=1)
-    return render(request, 'urunler/genel-temizlik-urunleri.html', {'products': products})
 
-
-@login_required
-def return_health_products(request):
-    products = Product.objects.filter(category=2)
-    return render(request, 'urunler/organik-temizlik-urunleri.html', {'products': products})
-
-
-@login_required
-def return_automotive_products(request):
-    products = Product.objects.filter(category=3)
-    return render(request, 'urunler/arac-temizlik-urunleri.html', {'products': products})
 
 
 @login_required

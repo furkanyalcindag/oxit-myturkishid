@@ -52,7 +52,6 @@
     </div>
 
 
-
     {% if messages %}
         {% for message in messages %}
 
@@ -61,7 +60,7 @@
 
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+                    <h4><i class="icon fa fa-ban"></i> Hata !</h4>
 
 
                     <ul class="messages">
@@ -80,7 +79,7 @@
 
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+                    <h4><i class="icon fa fa-check"></i> Başarılı !</h4>
 
 
                     <ul class="messages">
@@ -97,9 +96,6 @@
 
 
     {% endif %}
-
-
-
 
 
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -145,10 +141,19 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Ürünler Listesi</h3>
                         </div>
+                    <div class="box-header with-border">
+                                <div class="btn-group">
+                                    <a href="{% url "inoks:urun-ekle" %}"
+                                       type="button" class="btn btn-success"><i
+                                            class="fa fa-edit"></i> Ürün Ekle
+                                    </a>
+                                </div>
+                            </div>
+
                         <table id="urun" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th>No</th>
                                 <th>Fotoğraf</th>
                                 <th>Ürün Adı</th>
                                 <th>Fiyatı</th>
@@ -166,12 +171,12 @@
                                 {% for product_lists in product_list %}
                                     <tr>
                                         <td>{{ forloop.counter }} </td>
-                                        <td><img src="/media/{{ product_lists.productImage.all.0.productImage}}" width="50px"
+                                        <td><img src="/media/{{ product_lists.productImage.all.0.productImage }}"
+                                                 width="50px"
                                                  height="50px"/>
                                         </td>
                                         <td>{{ product_lists.name }}</td>
                                         <td>{{ product_lists.price }} TL</td>
-
 
 
                                         <td>
@@ -188,7 +193,8 @@
                                             <div class="btn-group">
                                                 <a class="btn btn-info" onclick="getProduct({{ product_lists.id }})"><i
                                                         class="fa fa-align-left"></i>Detay</a>
-                                                <a href="{% url "inoks:urun-duzenle" product_lists.pk %}" type="button" class="btn btn-warning"><i
+                                                <a href="{% url "inoks:urun-duzenle" product_lists.pk %}" type="button"
+                                                   class="btn btn-warning"><i
                                                         class="fa fa-edit"></i>Güncelle
                                                 </a>
                                                 <a class="btn btn-danger"
@@ -258,7 +264,7 @@
                         },
                         success: function (result) {
 
-                            html =  'Ürün  Başarıyla Silindi';
+                            html = 'Ürün  Başarıyla Silindi';
                             debugger;
                             $(".successModal").html(html);
                             $('#modal-success').on("shown.bs.modal", function (e) {
@@ -294,13 +300,12 @@
                 .done(function (response) {
 
                     var product = response.product[0];
-                    var image =product.productImage;
+                    var image = product.productImage;
 
                     html += ' <div class="box-body box-profile">';
                     html += ' <img class="profile-user-img img-responsive img-circle" src="' + image[0].productImage + '" alt="User profile picture">';
-                    html += '<h3 class="profile-username text-center">' + product.name + ' /  ' + product.price  +  '  ' + 'TL' +'</h3>';
+                    html += '<h3 class="profile-username text-center">' + product.name + ' /  ' + product.price + '  ' + 'TL' + '</h3>';
                     html += '<p class="text-muted text-center">' + product.info + '</p>';
-
 
 
                     $(".bodys").html(html);

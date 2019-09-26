@@ -38,7 +38,7 @@ def login(request):
 
 
 def forgot(request):
-    return render(request, 'registration/forgot-password.html')
+    return render(request, 'registration/forgot.html')
 
 
 def pagelogout(request):

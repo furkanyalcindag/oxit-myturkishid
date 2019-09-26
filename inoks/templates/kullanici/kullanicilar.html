@@ -52,7 +52,6 @@
     </div>
 
 
-
     {% if messages %}
         {% for message in messages %}
 
@@ -61,7 +60,7 @@
 
                 <div class="alert alert-danger alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+                    <h4><i class="icon fa fa-ban"></i> Hata !</h4>
 
 
                     <ul class="messages">
@@ -80,7 +79,7 @@
 
                 <div class="alert alert-success alert-dismissible">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+                    <h4><i class="icon fa fa-check"></i> Başarılı !</h4>
 
 
                     <ul class="messages">
@@ -97,9 +96,6 @@
 
 
     {% endif %}
-
-
-
 
 
 
@@ -144,10 +140,20 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Tüm Kullanıcılar</h3>
                         </div>
+
+                     <div class="box-header with-border">
+                                <div class="btn-group">
+                                    <a href="{% url "inoks:kullanici-ekle" %}"
+                                       type="button" class="btn btn-success"><i
+                                            class="fa fa-edit"></i> Üye Ekle
+                                    </a>
+                                </div>
+                            </div>
+
                         <table id="tum" class="table table-bordered table-hover">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th>No</th>
                                 <th>Üye Numarası</th>
                                 <th>Ad</th>
                                 <th>Soyad</th>
