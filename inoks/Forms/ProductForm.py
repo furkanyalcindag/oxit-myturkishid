@@ -13,7 +13,7 @@ class ProductForm(ModelForm):
     class Meta:
         model = Product
         fields = (
-             'name', 'price', 'stock', 'category',  'info')
+            'name', 'price', 'stock', 'category', 'info')
         labels = {
             'price': 'Ürün Fiyatı',
 
@@ -28,7 +28,7 @@ class ProductForm(ModelForm):
 
             'discountStartDate': forms.DateInput(
                 attrs={'class': 'form-control  pull-right', 'id': 'datepicker', 'autocomplete': 'off',
-                       'onkeydown': 'return false','required':'false'}),
+                       'onkeydown': 'return false', 'required': 'false'}),
             'discountFinishDate': forms.DateInput(
                 attrs={'class': 'form-control  pull-right', 'id': 'datepicker2', 'autocomplete': 'off',
                        'onkeydown': 'return false'}),
@@ -47,12 +47,15 @@ class ProductForm(ModelForm):
         # (otherwise, 'toppings' list should be empty)
 
         if kwargs.get('instance'):
+            print(kwargs.get('instance').category.all())
             # We get the 'initial' keyword argument or initialize it
             # as a dict if it didn't exist.
             initial = kwargs.setdefault('initial', {})
             # The widget for a ModelMultipleChoiceField expects
             # a list of primary key for the selected data.
+            forms.ModelForm.__init__(self, *args, **kwargs)
             initial['category'] = [t.pk for t in kwargs['instance'].category.all()]
+            self.fields['category'].initial = initial['category']
 
         forms.ModelForm.__init__(self, *args, **kwargs)
         self.fields['category'].widget.attrs = {'class': 'form-control select2 select2-hidden-accessible',

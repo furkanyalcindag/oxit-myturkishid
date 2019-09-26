@@ -181,6 +181,12 @@
 
         // Close the dropdown if the user clicks outside of it
         window.onclick = function (e) {
+             var str = document.getElementById('droptxt').value;
+             if (str === ""){
+                   document.getElementById('price').innerHTML = "Toplam :" +0 + " ₺";
+              document.getElementById('price1').innerHTML = "Toplam :" +0 + " ₺";
+             }
+
             if (!e.target.matches('.list')) {
                 if (content.classList.contains('show')) content.classList.remove('show')
             }
@@ -233,6 +239,9 @@
 
 
 
+            }
+            if (res.length === 0){
+                deger =0;
             }
             document.getElementById('price').innerHTML = "Toplam :" +deger + " ₺";
               document.getElementById('price1').innerHTML = "Toplam :" +deger + " ₺";

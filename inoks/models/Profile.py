@@ -7,17 +7,19 @@ from inoks.models import City, Job, District
 class Profile(models.Model):
     MALE = 'Erkek'
     FEMALE = 'Kadın'
+    UNKNOWN = 'Belirtmek İstemiyorum'
 
     ilkokul = 'İlkokul'
     lise = 'Lise'
     lisans = 'Lisans'
     master = 'Yüksek Lisans'
-    okumadı = 'Okumadı'
+    pre = 'Önlisans'
 
     GENDER_CHOICES = (
 
         (MALE, 'Erkek'),
         (FEMALE, 'Kadın'),
+        (UNKNOWN, 'Belirtmek İstemiyorum')
     )
 
     SCHOOL_CHOICES = (
@@ -26,7 +28,7 @@ class Profile(models.Model):
         (lise, 'Lise'),
         (lisans, 'Lisans'),
         (master, 'Yüksek Lisans'),
-        (okumadı, 'Okumadı'),
+        (pre, 'Önlisans'),
 
     )
 

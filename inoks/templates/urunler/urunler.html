@@ -135,21 +135,24 @@
 
                 <div class="box-body">
 
-
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Ürünler</h3>
-                        </div>
+                    {% if kategoriler.all %}
 
 
-                        <div class="container">
+                        {% for kategori in kategoriler %}
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <h3 class="box-title">{{ kategori.name }}</h3>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
 
-
-                            <div class="row">
-
-
-                                {% if urunler.all %}
+                                         {% if urunler.all %}
                                     {% for urun in urunler %}
+
+
+                                        {% if kategori in urun.category.all %}
+
+
 
                                         <div class="col-md-3 col-sm-6">
                                             <div class="product-grid4">
@@ -160,7 +163,7 @@
                                                             <img class="pic-1"
                                                                  src="/media/{{ urun.productImage.all.0.productImage }}">
                                                             <img class="pic-2"
-                                                                 src="/media/{{ urun.productImage.all.1.productImage  }}">
+                                                                 src="/media/{{ urun.productImage.all.1.productImage }}">
 
                                                         {% endif %}
 
@@ -208,19 +211,31 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {% endif %}
 
                                     {% endfor %}
                                 {% endif %}
 
 
+
+
+
+
+
+
+
+
+                                    </div>
+                                </div>
                             </div>
 
-
-                        </div>
-                    </div>
+                        {% endfor %}
 
 
-                </div>
+
+                    {% endif %}
+
+
                 <!-- /.box -->
 
 
@@ -244,7 +259,7 @@
 
                     var product = response.product[0];
                     html += ' <div class="box-body box-profile">';
-                    html += ' <img class="profile-user-img img-responsive img-circle" src="' + product.productImage + '" alt="User profile picture">';
+                    html += ' <img class="profile-user-img img-responsive img-circle" src="' + product.productImage[0].productImage + '" alt="User profile picture">';
                     html += '<h3 class="profile-username text-center">' + product.name + ' /  ' + product.price + '  ' + 'TL' + '</h3>';
                     html += '<p class="text-muted text-center">' + product.info + '</p>';
 

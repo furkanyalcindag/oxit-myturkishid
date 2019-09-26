@@ -123,6 +123,13 @@ def product_update(request, pk):
 
             product.save()
 
+            for f in request.FILES.getlist('input2[]'):
+                productImages = ProductImage(productImage=f)
+                productImages.save()
+                product.productImage.add(productImages)
+
+            product.save()
+
             messages.warning(request, 'Başarıyla Güncellendi')
 
             return redirect('inoks:urun-listesi')
@@ -131,7 +138,7 @@ def product_update(request, pk):
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'urunler/urun-ekle.html', {'product_form': product_form, 'durum': durum, 'images':images})
+    return render(request, 'urunler/urun-ekle.html', {'product_form': product_form, 'durum': durum, 'images': images})
 
 
 @api_view()
@@ -186,8 +193,10 @@ def return_automotive_products(request):
 def return_products(request):
     genel = Product.objects.filter(category=1)
     organik = Product.objects.filter(category=2)
+    categories = ProductCategory.objects.all()
     urunler = Product.objects.all()
-    return render(request, 'urunler/urunler.html', {'genel': genel, 'organik': organik, 'urunler': urunler})
+    return render(request, 'urunler/urunler.html',
+                  {'genel': genel, 'organik': organik, 'kategoriler': categories, 'urunler': urunler})
 
 
 @login_required
