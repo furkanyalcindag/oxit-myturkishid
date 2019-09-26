@@ -9,7 +9,7 @@ ALLOWED_HOSTS = ['*']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'oxit-inoks',
+        'NAME': 'oxit_inoks',
         'USER': 'user_oxit',
         'PASSWORD': 'oxit2016',
         'HOST': 'localhost',
