@@ -3,6 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
 from django.core.mail import EmailMultiAlternatives
+from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
@@ -116,7 +117,7 @@ def users_update(request, pk):
 
 @login_required
 def return_users(request):
-    users = Profile.objects.filter(user__is_active=True)
+    users = Profile.objects.filter(user__is_active=True).filter(~Q(user__groups__name='Admin'))
 
     return render(request, 'kullanici/kullanicilar.html', {'users': users})
 

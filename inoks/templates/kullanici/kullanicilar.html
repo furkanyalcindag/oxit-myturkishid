@@ -326,6 +326,11 @@ function formatDate(date) {
 
         function activeDeactive(user_id, is_true) {
 
+
+debugger;
+             $(".deneme22").on("shown.bs.modal", function (e) {
+                $("#btn-conf").click(function () {
+
             $.ajax({
                 url: "{% url 'inoks:kullanici-iptal-et' %}",
                 type: "post", // or "get"
@@ -344,6 +349,10 @@ function formatDate(date) {
                         swal("Başarılı", result.messages, "error");
                     }
                 }
+            });
+                });}).modal('show');
+            $('#btn-close').click(function () {
+                $('#modal-danger').modal('hide');
             });
         }
 

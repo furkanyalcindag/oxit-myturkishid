@@ -174,7 +174,7 @@ def calculate_earning(levelDict, level):
             for orderPrice in levelDict[str(level)]:
                 earning = earning + float(orderPrice.total_order)
 
-            if earning < 1500:
+            if earning < 2500:
                 return 0
             else:
                 return float(earning * 6 / 100)
@@ -184,7 +184,7 @@ def calculate_earning(levelDict, level):
             for orderPrice in levelDict[str(level)]:
                 earning = earning + float(orderPrice.total_order)
 
-            if earning < 4500:
+            if earning < 7500:
                 return 0
             else:
                 return float(earning * 5 / 100)
@@ -194,7 +194,7 @@ def calculate_earning(levelDict, level):
         for orderPrice in levelDict[str(level)]:
             earning = earning + float(orderPrice.total_order)
 
-        if earning < 13500:
+        if earning < 22500:
             return 0
         else:
             return float(earning * 4 / 100)
@@ -204,7 +204,7 @@ def calculate_earning(levelDict, level):
         for orderPrice in levelDict[str(level)]:
             earning = earning + float(orderPrice.total_order)
 
-        if earning < 40500:
+        if earning < 67500:
             return 0
         else:
             return float(earning * 3 / 100)
@@ -214,7 +214,7 @@ def calculate_earning(levelDict, level):
         for orderPrice in levelDict[str(level)]:
             earning = earning + float(orderPrice.total_order)
 
-        if earning < 121500:
+        if earning < 202500:
             return 0
         else:
             return float(earning * 2 / 100)
@@ -224,7 +224,7 @@ def calculate_earning(levelDict, level):
         for orderPrice in levelDict[str(level)]:
             earning = earning + float(orderPrice.total_order)
 
-        if earning < 364500:
+        if earning < 607500:
             return 0
         else:
             return float(earning * 1 / 100)
