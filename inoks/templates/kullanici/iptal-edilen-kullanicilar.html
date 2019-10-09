@@ -137,7 +137,7 @@
 
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Üyeliği İptal Edilen Kullanıcılar</h3>
+                            <h3 class="box-title">Üyeliği İptal Edilen Üyeler</h3>
                         </div>
                         <table id="iptal" class="table table-bordered table-hover">
                             <thead>
@@ -221,7 +221,19 @@
 
 
     <script>
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
 
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [day, month, year].join('.');
+}
 
         function getDeactiveProfile(id) {
 
@@ -230,6 +242,7 @@
                 .done(function (response) {
 
                     var profile = response.profile[0];
+                     profile.creationDate=formatDate(profile.creationDate);
                     html += ' <div class="box-body box-profile">';
                     html += ' <img class="profile-user-img img-responsive img-circle" style="width: 100px; height: 100px;" src="' + profile.profileImage + '" alt="User profile picture">';
                     html += '<h3 class="profile-username text-center">' + profile.user.first_name + ' ' + profile.user.last_name + '</h3>';

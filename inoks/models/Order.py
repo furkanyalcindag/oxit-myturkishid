@@ -7,12 +7,10 @@ from inoks.models.Product import Product
 
 
 class Order(models.Model):
-    DOOR = 'Kapıda Ödeme'
-    CREDIT = 'Kredi Kartı'
+
     TRANSFER = 'Havale/EFT'
     PAYMENT_CHOICES = (
-        (DOOR, 'Kapıda Ödeme'),
-        (CREDIT, 'Kredi Kartı'),
+
         (TRANSFER, 'Havale/EFT'),
     )
 
@@ -24,7 +22,7 @@ class Order(models.Model):
     district = models.TextField(blank=False, null=False, verbose_name='İlçe')
     address = models.TextField(blank=True, null=True, verbose_name='Adres')
     sponsor = models.TextField(blank=True, null=True, verbose_name='Sponsor')
-    payment_type = models.CharField(max_length=128, verbose_name='Ödeme Türü', choices=PAYMENT_CHOICES, default=DOOR)
+    payment_type = models.CharField(max_length=128, verbose_name='Ödeme Türü', choices=PAYMENT_CHOICES, default=TRANSFER)
     isContract = models.BooleanField(default=False)
     isApprove = models.BooleanField(default=False)
     isPayed = models.BooleanField(default=False)

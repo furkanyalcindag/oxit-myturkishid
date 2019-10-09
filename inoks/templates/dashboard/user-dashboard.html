@@ -146,13 +146,13 @@
                     <div class="inner">
                         <h3>{{ my_orders }}</h3>
 
-                        <p>Toplam Sipariş Sayım</p>
+                        <p>Onaylı Siparişlerim</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
 
                     </div>
-                    <a href="#" class="small-box-footer">Tüm Siparişler <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="siparisler/siparislerim/" class="small-box-footer">Onaylı Siparişlerim <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -197,212 +197,10 @@
 
 
 
-    <section class="content ">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Son Siparişlerim</h3>
-                    </div>
-                    <div class="box-body">
-                        <table id="siparislerim" class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Sipariş Numarası</th>
-                                <th>Ödeme Şekli</th>
-                                <th>Sipariş Durumu</th>
-                                <th>Sipariş Tarihi</th>
-                                <th>Tutar</th>
-                                <th>Sponsor</th>
-                                <th>Detay/Güncelle/Sil</th>
 
 
-                            </tr>
-                            </thead>
-                            <tbody>
 
-                            {% if orders.all %}
-                                {% for order in orders %}
 
-
-                                    <tr>
-                                        <td>{{ forloop.counter }} </td>
-                                        <td><a href="#">{{ order.id }}</a></td>
-
-                                        <td>{{ order.payment_type }}</td>
-
-
-                                        {% for order_situations in order.order_situations.all %}
-                                            {% if order_situations.name == "Ödeme Bekliyor" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-info"> {{ order_situations.name }}</span>
-                                                </td>
-
-
-
-
-                                            {% elif order_situations.name == "Kargoda" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-warning"> {{ order_situations.name }}</span>
-                                                </td>
-
-
-
-                                            {% elif order_situations.name == "Hazırlanıyor" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-success"> {{ order_situations.name }}</span>
-                                                </td>
-
-
-                                            {% elif order_situations.name == "İptal Edildi" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-danger"> {{ order_situations.name }}</span>
-                                                </td>
-
-
-                                            {% elif order_situations.name == "Tamamlandı" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-primary"> {{ order_situations.name }}</span>
-                                                </td>
-
-
-
-
-                                            {% elif order_situations.name == "İade Edildi" %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-default"> {{ order_situations.name }}</span>
-                                                </td>
-
-
-                                            {% else %}
-                                                <td><span style="font-size: 100%"
-                                                          class="label label-default"> Deneme</span>
-                                                </td>
-                                            {% endif %}
-
-
-                                        {% endfor %}
-
-
-                                        <td>{{ order.creationDate }}</td>
-
-
-                                        <td>Tutar TL</td>
-
-                                        <td>{{ order.sponsor }}</td>
-
-                                        <td>
-                                            <div class="btn-group">
-                                                <a class="btn btn-info" onclick="getMyOrder({{ order.id }})"><i
-                                                        class="fa fa-align-left"></i>Detay</a>
-
-
-                                            </div>
-                                        </td>
-
-
-                                    </tr>
-
-                                {% endfor %}
-                            {% endif %}
-
-
-                            </tbody>
-                        </table>
-                    </div>
-
-
-                </div>
-
-            </div>
-            <div class="col-lg-6">
-
-
-            </div>
-        </div>
-
-    </section>
-
-
-
-
-
-
-    <script>
-        $(function () {
-            $('#siparislerim').DataTable({
-                'paging': true,
-                'lengthChange': true,
-                'searching': true,
-                'ordering': true,
-                'info': true,
-                'autoWidth': true
-            })
-
-        })
-    </script>
-
-
-    <script>
-
-
-        function getMyOrder(id) {
-
-            var html = '';
-            $.get(" {% url "inoks:getMyOrder" pk=12121   %}".replace(/12121/, id.toString()))
-                .done(function (response) {
-
-                    var order = response.order[0];
-                    html += ' <div class="box-body box-profile">';
-                    html += ' <img class="profile-user-img img-responsive img-circle" src="' + order.product.productImage + '" alt="User profile picture">';
-                    html += '<h3 class="profile-username text-center">' + order.quantity + '</h3>';
-                    html += '<p class="text-muted text-center">' + order.quantity + '</p>';
-                    html += ' <ul class="list-group list-group-unbordered">';
-                    html += '<div class="row">';
-                    html += '<div class="col-md-6">';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Ürün Adı</b> <a class="pull-right">' + order.product.name + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Ürün Fiyatı</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Stok Adeti</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>İndirimli Fiyatı</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>İndirim Başlangıç</b> <a class="pull-right">' + order.quantity + '</a></li></div>';
-
-                    html += '<div class="col-md-6" style="border-left: thin solid #000000">';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>İndirim Bitiş</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Ürün Bilgileri</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Etkin</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>Kayıt Tarihi</b> <a class="pull-right">' + order.quantity + '</a></li>';
-                    html += ' <li class="list-group-item">';
-                    html += '<b>En Son Login</b> <a class="pull-right">' + order.quantity + '</a></li></div>' +
-                        '</div></ul>';
-
-
-                    $(".bodys").html(html);
-
-                });
-
-            $('.bd-example-modal-lg').modal('show');
-
-
-            $(".bd-example-modal-lg").on("hidden.bs.modal", function () {
-                // put your default event here
-                $(".bodys").html("");
-            });
-
-
-        }
-
-
-    </script>
 
 
 

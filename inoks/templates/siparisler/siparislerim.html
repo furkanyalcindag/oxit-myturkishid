@@ -231,13 +231,13 @@
                                         <ul> {% for product in order.orderproduct_set.all %}
 
                                                 <li><font style="color: #0b58a2">{{ product.quantity }}
-                                                    X </font>{{ product.product.name }} {{ product.product.price }} TL </li>
+                                                    X </font>{{ product.product.name }} {{ product.product.price }} TL +KDV </li>
 
                                             {% endfor %}</ul>
 
                                     </td>
 
-                                    <td>{{ order.totalPrice }} TL</td>
+                                    <td>{{ order.totalPrice }} TL +KDV</td>
 
                                     <td>
                                         <div class="btn-group">

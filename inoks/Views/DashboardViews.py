@@ -44,10 +44,9 @@ def return_admin_dashboard(request):
 def return_user_dashboard(request):
     current_user = request.user
     userprofile = Profile.objects.get(user=current_user)
-    orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id)
     my_orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id).count()
     return render(request, 'dashboard/user-dashboard.html',
-                  {'my_orders': my_orders, 'orders': orders})
+                  {'my_orders': my_orders})
 
 
 @api_view()

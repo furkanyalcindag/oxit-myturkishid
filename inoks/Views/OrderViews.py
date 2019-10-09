@@ -18,6 +18,9 @@ from inoks.services.general_methods import activeOrder
 def return_add_orders(request):
     order_form = OrderForm()
     products = Product.objects.all()
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+
     if request.method == 'POST':
 
         order_form = OrderForm(request.POST)
@@ -30,7 +33,7 @@ def return_add_orders(request):
 
             products_quantity = products_quantity.split(',')
 
-            order = Order(profile=order_form.cleaned_data['profile'],
+            order = Order(profile=profile,
 
                           city=order_form.cleaned_data['city'],
                           district=order_form.cleaned_data['district'],

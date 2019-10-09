@@ -17,13 +17,10 @@ class OrderForm(ModelForm):
     class Meta:
         model = Order
         fields = (
-            'profile',  'city', 'district', 'address',
+            'city', 'district', 'address',
             'payment_type',
             'isContract')
         widgets = {
-            'profile': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%; '}),
-
 
 
             'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',

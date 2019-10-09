@@ -37,7 +37,7 @@ class Profile(models.Model):
                                      verbose_name='Profil Resmi')
     tc = models.CharField(max_length=11, null=False, blank=False, verbose_name='T.C. Kimlik Numarası')
     birthDate = models.DateField(null=True, verbose_name='Doğum Tarihi')
-    mobilePhone = models.CharField(max_length=11, null=False, blank=False, verbose_name='Telefon Numarası')
+    mobilePhone = models.CharField(max_length=10, null=False, blank=False, verbose_name='Telefon Numarası')
     address = models.TextField(blank=False, null=False, verbose_name='Adres')
     creationDate = models.DateTimeField(auto_now_add=True, verbose_name='Kayıt Tarihi')
     modificationDate = models.DateTimeField(auto_now=True, verbose_name='Güncelleme Tarihi')

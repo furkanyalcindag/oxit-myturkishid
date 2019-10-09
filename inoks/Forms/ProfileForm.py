@@ -17,11 +17,11 @@ class ProfileForm(ModelForm):
             'address': forms.Textarea(
                 attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required'}),
             'mobilePhone': forms.TextInput(
-                attrs={'class': 'form-control ', 'placeholder': 'Telefon Numarası', 'required': 'required', 'maxlength':'10'}),
+                attrs={'class': 'form-control ', 'placeholder': 'Telefon Numarası', 'required': 'required',  'maxlength':'10', 'minlength':'10'}),
             'gender': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                           'style': 'width: 100%;', 'required': 'required'}),
             'tc': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'T.C. Kimlik Numarası', 'required': 'required', 'maxlength':'10'}),
+                attrs={'class': 'form-control', 'placeholder': 'T.C. Kimlik Numarası', 'required': 'required', 'maxlength':'11', 'minlength':'11'}),
 
             'birthDate': forms.DateInput(
                 attrs={'class': 'form-control  pull-right', 'id': 'datepicker', 'autocomplete': 'off',
