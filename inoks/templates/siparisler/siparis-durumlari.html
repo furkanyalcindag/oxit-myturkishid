@@ -64,35 +64,18 @@
 
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Sipariş Durumları Ekle</h3>
+                            <h3 class="box-title">Sipariş Durumları</h3>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form method="post" role="form">
-                            <div class="box-body">
-                                {% csrf_token %}
 
-
-                                <div class="form-group">
-                                    <label> {{ order_situations_form.name.label }}</label>
-                                    {{ order_situations_form.name }}
-                                </div>
-
-
-                            </div>
-                            <!-- /.box-body -->
-
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">Kaydet</button>
-                            </div>
-                        </form>
 
 
                          <table id="kategori" class="table table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Ürün Kategori Adı</th>
+                                <th>Adı</th>
 
                             </tr>
                             </thead>

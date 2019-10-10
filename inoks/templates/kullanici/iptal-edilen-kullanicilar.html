@@ -34,7 +34,7 @@
                     <h4 class="modal-title">Uyarı</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Silmek istediğinizden emin misiniz?</p>
+                    <p>Üyeyi aktif etmek istediğinizden emin misiniz?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf"
@@ -310,6 +310,9 @@ function formatDate(date) {
 
         function activeDeactive(user_id, is_true) {
 
+              $(".deneme22").on("shown.bs.modal", function (e) {
+                $("#btn-conf").click(function () {
+
             $.ajax({
                 url: "{% url 'inoks:kullanici-aktif-et' %}",
                 type: "post", // or "get"
@@ -328,6 +331,10 @@ function formatDate(date) {
                         swal("Başarılı", result.messages, "error");
                     }
                 }
+            });
+       });}).modal('show');
+            $('#btn-close').click(function () {
+                $('#modal-danger').modal('hide');
             });
         }
 

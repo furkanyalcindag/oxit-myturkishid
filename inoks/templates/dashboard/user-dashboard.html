@@ -1,6 +1,7 @@
 {% extends 'base_layout.html' %}
 {% block content %}
-
+ {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bower_components/product/product-dashboard.css' %} ">
 
 
     <!-- success modal -->
@@ -152,7 +153,7 @@
                         <i class="ion ion-bag"></i>
 
                     </div>
-                    <a href="siparisler/siparislerim/" class="small-box-footer">Onaylı Siparişlerim <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="siparisler/siparislerim/" class="small-box-footer"> Siparişlerim <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -186,7 +187,169 @@
                     <a href="#" class="small-box-footer">Tüm Ürünler <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
-            <!-- ./col -->
+
+
+
+
+
+                 <div class="col-lg-6 col-xs-6 box-body">
+
+
+                            <div class="box box-primary">
+                                <div class="box-header with-border" style="text-align: center;">
+                                    <h3 class="box-title">Çok Satan Ürünler</h3>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+
+                                         {% if coksatanlar.all %}
+                                    {% for urun in coksatanlar %}
+
+
+
+
+                                        <div class="col-md-2 col-sm-6">
+                                            <div class="product-grid4">
+                                                <div class="product-image4">
+                                                    <a href="#">
+                                                        {% if urun.productImage.all %}
+
+                                                            <img class="pic-1"
+                                                                 src="/media/{{ urun.productImage.all.0.productImage }}">
+                                                            <img class="pic-2"
+                                                                 src="/media/{{ urun.productImage.all.1.productImage }}">
+
+                                                        {% endif %}
+
+                                                    </a>
+                                                    <ul class="social">
+                                                        <!--   <li><a href="#" data-tip="Detayları Görüntüle"><i
+                                                                   class="fa fa-eye"></i></a></li>
+                                                           <li><a href="#" data-tip="Sepete Ekle"><i
+                                                                   class="fa fa-shopping-cart"></i></a></li> -->
+                                                    </ul>
+
+                                                </div>
+                                                <div class="product-content">
+                                                    <h3 class="title"><a href="#">
+                                                        <td>{{ urun.name }}</td>
+                                                    </a></h3>
+                                                    <div class="price">
+                                                        {{ urun.price }} TL + KDV
+
+                                                    </div>
+
+
+
+                                                  <div class="btn-group" style="display: grid">
+                                                        <a class="btn btn-info" onclick="getProducts({{ urun.id }})"><i
+                                                                class="fa fa-align-left"></i> Detay </a><br>
+                                                        <a href="{% url "inoks:siparis-ekle" %}" type="button"
+                                                           class="btn btn-warning"><i
+                                                                class="fa fa-shopping-cart"></i> Sipariş Ver
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    {% endfor %}
+                                {% endif %}
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+  </div>
+
+ <div class="col-lg-6 col-xs-6 box-body">
+
+
+                            <div class="box box-primary">
+                                <div class="box-header with-border" style="text-align: center;">
+                                    <h3 class="box-title">Önerilen Ürünler</h3>
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+
+                                         {% if onerilenler.all %}
+                                    {% for urun in onerilenler %}
+
+
+
+
+                                        <div class="col-md-2 col-sm-6">
+                                            <div class="product-grid4">
+                                                <div class="product-image4">
+                                                    <a href="#">
+                                                        {% if urun.productImage.all %}
+
+                                                            <img class="pic-1"
+                                                                 src="/media/{{ urun.productImage.all.0.productImage }}">
+                                                            <img class="pic-2"
+                                                                 src="/media/{{ urun.productImage.all.1.productImage }}">
+
+                                                        {% endif %}
+
+                                                    </a>
+                                                    <ul class="social">
+                                                        <!--   <li><a href="#" data-tip="Detayları Görüntüle"><i
+                                                                   class="fa fa-eye"></i></a></li>
+                                                           <li><a href="#" data-tip="Sepete Ekle"><i
+                                                                   class="fa fa-shopping-cart"></i></a></li> -->
+                                                    </ul>
+
+                                                </div>
+                                                <div class="product-content">
+                                                    <h3 class="title"><a href="#">
+                                                        <td>{{ urun.name }}</td>
+                                                    </a></h3>
+                                                    <div class="price">
+                                                        {{ urun.price }} TL + KDV
+
+                                                    </div>
+
+
+
+                                                    <div class="btn-group" style="display: grid">
+                                                        <a class="btn btn-info" onclick="getProducts({{ urun.id }})"><i
+                                                                class="fa fa-align-left"></i> Detay </a><br>
+                                                        <a href="{% url "inoks:siparis-ekle" %}" type="button"
+                                                           class="btn btn-warning"><i
+                                                                class="fa fa-shopping-cart"></i> Sipariş Ver
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    {% endfor %}
+                                {% endif %}
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+  </div>
+
+
+
+
+
+
+
         </div>
 
 

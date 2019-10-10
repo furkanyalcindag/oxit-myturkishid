@@ -52,6 +52,67 @@
 
 
 
+        <div class="modal modal-danger fade in siparis-onay" tabindex="-2" role="dialog" id="siparis-onay"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Uyarı</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Siparişi onaylamak istediğinizden emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf-2"
+                            data-dismiss="modal">Evet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-siparis">Hayır</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+
+
+
+
+
+        <div class="modal modal-danger fade in uye-onay" tabindex="-3" role="dialog" id="uye-onay"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Uyarı</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Üyeyi onaylamak istediğinizden emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf-3"
+                            data-dismiss="modal">Evet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-uye">Hayır</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+
+
+
+
       {% if messages %}
         {% for message in messages %}
 
@@ -140,7 +201,7 @@
                         <i class="ion ion-person-add"></i>
 
                     </div>
-                    <a href="kullanici/kullanicilar" class="small-box-footer">Tüm Kullanıcılar <i
+                    <a href="kullanici/kullanicilar" class="small-box-footer"> Üyeler <i
                             class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -166,15 +227,15 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>4440 TL</h3>
+                        <h3>4440 TL </h3>
 
-                        <p>Toplam Ciro Miktarı</p>
+                        <p>Toplam Ciro Miktarı (+KDV)</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
 
                     </div>
-                    <a href="#" class="small-box-footer">Tüm Kazançlar <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="#" class="small-box-footer"> Ciro <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -189,7 +250,7 @@
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
-                    <a href="urunler/urunler" class="small-box-footer">Tüm Ürünler <i
+                    <a href="urunler/urunler" class="small-box-footer"> Ürünler <i
                             class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -213,11 +274,11 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Sipariş</th>
+                                <th>Sipariş </th>
 
                                 <th>Üye</th>
                                 <th>Sponsor</th>
-                                <th>Miktarı</th>
+
                                 <th>Ödeme</th>
 
                                 <th>Onayla/Detay/Sil</th>
@@ -229,10 +290,10 @@
                                 {% for pending_order in pending_orders %}
                                     <tr>
                                         <td>{{ forloop.counter }} </td>
-                                        <td><a href="#">{{ pending_order.id }}</a></td>
+                                        <td>{{ pending_order.id }}</td>
                                         <td>{{ pending_order.profile }}</td>
-                                        <td>{{ pending_order.sponsor }}</td>
-                                        <td>{{ pending_order.quantity }}</td>
+                                        <td>{{ pending_order.profile.sponsor }}</td>
+
 
 
                                         <td>{{ pending_order.payment_type }}</td>
@@ -270,7 +331,7 @@
             <div class="col-lg-6">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Onay Bekleyen Kullanıcılar</h3>
+                        <h3 class="box-title">Onay Bekleyen Üyeler</h3>
                     </div>
                     <div class="box-body">
                         <table id="uyeler" class="table table-bordered table-hover">
@@ -351,7 +412,7 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <i class="fa fa-bar-chart-o"></i>
-                        <h3 class="box-title">Kullanıcı Sayısı</h3>
+                        <h3 class="box-title">Üye Sayısı</h3>
                     </div>
                     <div class="box-body">
 
@@ -364,7 +425,9 @@
                                     <div id="bar-chart-2" style="height: 300px;"></div>
                                 </div>
                                 <!-- /.box-body-->
-
+ <div class="box-footer text-center">
+                        <a href="kullanici/kullanicilar" class="uppercase">TÜM ÜYELER</a>
+                    </div>
                         </div>
 
 
@@ -390,12 +453,13 @@
 
 {% for product in order.product.all %}
 
+
+
+
                                                 <li class="item">
-                                        <div class="product-img">
-                                            <img src="/media/{{ product.productImage }}" alt="">
-                                        </div>
-                                        <div class="product-info">
-                                            <a href="#" class="product-title">{{ product.name }}
+
+                                        <div class="product-info" style="margin-left: 0">
+                                            <a href="#" class="product-title"> {{ forloop.counter }} - {{ product.name }}
                                                 <span class="label  label-warning pull-right">{{ product.price }} TL</span></a>
                                             <span class="product-description">
                           {{ order.profile }} - {{ order.creationDate }}
@@ -414,6 +478,7 @@
                         </ul>
                     </div>
                     <!-- /.box-body -->
+
                     <div class="box-footer text-center">
                         <a href="siparisler/siparisler" class="uppercase">TÜM SİPARİŞLER</a>
                     </div>
@@ -421,7 +486,7 @@
                 </div>
             </div>
 
-
+ <!--
             <div class="col-lg-4">
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -441,9 +506,9 @@
                     Geçen aya göre %50 artış
                   </span>
                         </div>
-                        <!-- /.info-box-content -->
+
                     </div>
-                    <!-- /.info-box -->
+
                     <div class="info-box bg-green">
                         <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
 
@@ -458,13 +523,13 @@
                     Geçen aya göre %20 artış
                   </span>
                         </div>
-                        <!-- /.info-box-content -->
+
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
-            <div class="col-lg-4">
+         <!--    <div class="col-lg-4">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <h3 class="box-title">En Aktif Şehirler</h3>
@@ -491,48 +556,13 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
 
 
         </div>
 
 
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -690,6 +720,9 @@
 
 
         function activeDeactive(user_id, is_true) {
+$(".uye-onay").on("shown.bs.modal", function (e) {
+                $("#btn-conf-3").click(function () {
+
 
             $.ajax({
                 url: "{% url 'inoks:kullanici-onayla' %}",
@@ -709,6 +742,11 @@
                         swal("Başarılı", result.messages, "error");
                     }
                 }
+            });
+                });
+           }).modal('show');
+            $('#btn-uye').click(function () {
+                $('#uye-onay').modal('hide');
             });
         }
 
@@ -848,6 +886,8 @@
 
 
         function orderActive(user_id, is_true) {
+  $(".siparis-onay").on("shown.bs.modal", function (e) {
+                $("#btn-conf-2").click(function () {
 
             $.ajax({
                 url: "{% url 'inoks:siparis-onayla' %}",
@@ -867,6 +907,11 @@
                         swal("Başarılı", result.messages, "error");
                     }
                 }
+            });
+          });
+           }).modal('show');
+            $('#btn-siparis').click(function () {
+                $('#siparis-onay').modal('hide');
             });
         }
 

@@ -2,7 +2,7 @@
 
 {% block content %}
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static 'bower_components/product/product.css' %} ">
+    <link rel="stylesheet" href="{% static 'bower_components/product/product-dashboard.css' %} ">
 
 
     <!-- success modal -->
@@ -149,7 +149,7 @@
 
 
 
-                                        <div class="col-md-3 col-sm-6">
+                                        <div class="col-md-2 col-sm-6">
                                             <div class="product-grid4">
                                                 <div class="product-image4">
                                                     <a href="#">
@@ -194,12 +194,12 @@
                                                       </form> -->
 
 
-                                                    <div class="btn-group">
+                                                    <div class="btn-group" style="display: grid">
                                                         <a class="btn btn-info" onclick="getProducts({{ urun.id }})"><i
-                                                                class="fa fa-align-left"></i>Detay</a>
+                                                                class="fa fa-align-left"></i> Detay </a><br>
                                                         <a href="{% url "inoks:siparis-ekle" %}" type="button"
                                                            class="btn btn-warning"><i
-                                                                class="fa fa-edit"></i>Sipariş Ver
+                                                                class="fa fa-shopping-cart"></i> Sipariş Ver
                                                         </a>
 
                                                     </div>
@@ -210,13 +210,6 @@
 
                                     {% endfor %}
                                 {% endif %}
-
-
-
-
-
-
-
 
 
 

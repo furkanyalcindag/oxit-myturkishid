@@ -176,12 +176,11 @@ def return_product_list(request):
 
 @login_required
 def return_products(request):
-    genel = Product.objects.filter(category=1)
-    organik = Product.objects.filter(category=2)
+
     categories = ProductCategory.objects.all()
     urunler = Product.objects.all()
     return render(request, 'urunler/urunler.html',
-                  {'genel': genel, 'organik': organik, 'kategoriler': categories, 'urunler': urunler})
+                  {'kategoriler': categories, 'urunler': urunler})
 
 
 @login_required

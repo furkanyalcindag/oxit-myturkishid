@@ -6,7 +6,7 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 
 from inoks import tasks
-from inoks.models import Profile, Product, Order
+from inoks.models import Profile, Product, Order, ProductCategory
 from inoks.serializers.order_serializers import OrderSerializer
 from inoks.serializers.profile_serializers import ProfileSerializer
 from inoks.services.general_methods import activeUser, activeOrder
@@ -45,8 +45,11 @@ def return_user_dashboard(request):
     current_user = request.user
     userprofile = Profile.objects.get(user=current_user)
     my_orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id).count()
+    coksatanlar = Product.objects.filter(category=16)
+    onerilenler = Product.objects.filter(category=17)
+
     return render(request, 'dashboard/user-dashboard.html',
-                  {'my_orders': my_orders})
+                  {'my_orders': my_orders,'onerilenler':onerilenler, 'coksatanlar':coksatanlar})
 
 
 @api_view()

@@ -118,7 +118,7 @@ body {
 
 .fixed .content-wrapper,
 .fixed .right-side {
-    padding-top: 50px
+    padding-top: 20px
 }
 
 @media (max-width: 767px) {
@@ -1761,7 +1761,7 @@ a:focus {
 }
 
 .box.box-primary {
-    border-top-color: #3c8dbc
+    border-top-color: #249991
 }
 
 .box.box-info {
@@ -3089,7 +3089,8 @@ a:focus {
 .table-bordered > thead > tr > td,
 .table-bordered > tbody > tr > td,
 .table-bordered > tfoot > tr > td {
-    border: 1px solid #f4f4f4
+    border: 1px solid #f4f4f4;
+    text-align:center;
 }
 
 .table-bordered > thead > tr > th,
