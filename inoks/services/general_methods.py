@@ -126,6 +126,62 @@ def monthlyMemberOrderTotal(profile):
     return orders_sum
 
 
+def monthlyMemberOrderTotalByDate(profile, month, year):
+    datetime_current = datetime.datetime.today()
+    year = year
+    month = month
+    num_days = calendar.monthrange(year, month)[1]
+
+    datetime_start = datetime.datetime(year, month, 1, 0, 0)
+
+    datetime_end = datetime.datetime(year, month, num_days, 23, 59)
+
+    # scores = Score.objects.filter(creationDate__range=(datetime_start, datetime_end)).order_by('score')[:100]
+    order2 = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(
+        profile=profile)
+    orders_sum = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(
+        profile=profile).aggregate(
+        total_price=Sum('totalPrice'))
+
+    return orders_sum
+
+
+def returnLevelTreeByDate(profileArray, levelDict, level, month, year):
+    profiles = []
+    profiles = Profile.objects.filter(id__in=profileArray)
+    profile_list = []
+
+    for profile in profiles:
+        total_order = monthlyMemberOrderTotalByDate(profile, month, year)['total_price']
+        if total_order is None:
+            total_order = 0
+        total_order = str(float(str(total_order).replace(",", ".")))
+
+        profile_object = ProfileControlObject(profile=profile, is_controlled=False,
+                                              total_order=total_order)
+        profile_list.append(profile_object)
+
+    levelDict[str(level)] = profile_list
+
+    id_array = []
+
+    if level < 7:
+        for profile in profiles:
+
+            profileSponsor = Profile.objects.filter(sponsor__id=profile.id)
+
+            for sponsor in profileSponsor:
+                id_array.append(sponsor.id)
+
+        returnLevelTreeByDate(id_array, levelDict, level + 1,month,year)
+
+    elif level == 7:
+        return levelDict
+
+    else:
+        return 0
+
+
 def returnLevelTree(profileArray, levelDict, level):
     profiles = []
     profiles = Profile.objects.filter(id__in=profileArray)

@@ -29,6 +29,7 @@ class Order(models.Model):
     totalPrice = models.DecimalField(max_digits=8, decimal_places=2, null=True, default=True)
     creationDate = models.DateTimeField(auto_now_add=True, verbose_name='Kayıt Tarihi')
     modificationDate = models.DateTimeField(auto_now=True, verbose_name='Güncelleme Tarihi')
+    paidDate = models.DateTimeField(null=True, blank=True, verbose_name='Kayıt Tarihi')
 
     def __str__(self):
         return '%d ' % self.id

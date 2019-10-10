@@ -59,41 +59,68 @@
                 <div class="col-lg-3 col-xs-6">
                     <section class="content-header">
                         <h1>
-                            01/05/2019 - 22/05/2019
+                           {{ part }}
                         </h1>
                     </section>
                 </div>
                 <div class="col-lg-3 col-xs-6">
 
                 </div>
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-1 col-xs-6">
 
                 </div>
-                <div class="col-lg-3 col-xs-6">
-                    <div style="float: right" class="form-group">
-                        <label>Ödenecekler Tarihi Seç</label>
+                <div class="col-lg-5 col-xs-6">
+                    <form method="post" enctype="multipart/form-data" role="form">
+                        {% csrf_token %}
+                        <div style="float: right" class="form-group">
+                            <label>Ödenecekler Tarihi Seç</label>
 
-                        <div class="input-group">
-                            <button type="button" class="btn btn-default pull-right" id="daterange-btn">
-                    <span>
-                      <i class="fa fa-calendar"></i> Tarih Aralığı Seç
-                    </span>
-                                <i class="fa fa-caret-down"></i>
-                            </button>
-                        </div>
-                    </div>
+                            <div class="input-group">
+                                <div>
+                                    <select class="form-control select2 select2-hidden-accessible" style="width: 100%;"
+                                            name="ay" id='gMonth2'>
+                                        <option value=''>Ay</option>
+                                        <option value='1'>Ocak</option>
+                                        <option value='2'>Şubat</option>
+                                        <option value='3'>Mart</option>
+                                        <option value='4'>Nisan</option>
+                                        <option value='5'>Mayıs</option>
+                                        <option value='6'>Haziran</option>
+                                        <option value='7'>Temmuz</option>
+                                        <option value='8'>Ağustos</option>
+                                        <option value='9'>Eylül</option>
+                                        <option value='10'>Ekim</option>
+                                        <option value='11'>Kasım</option>
+                                        <option value='12'>Aralık</option>
+                                    </select>
+
+                                    <select class="form-control select2 select2-hidden-accessible" style="width: 50%;"
+                                            name="yil" id='year'>
+                                        <option value=''>Yıl</option>
+                                        <option value='2019'>2019</option>
+                                        <option value='2020'>2020</option>
+                                        <option value='2021'>2021</option>
+
+                                    </select>
+                                    <button type="submit" class="btn btn-primary">Göster</button>
+                                </div>
+                    </form>
+
+
                 </div>
             </div>
+        </div>
+        </div>
         </div>
 
 
         <div class="row">
             <div class="box-body">
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
 
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>4555 TL </h3>
+                            <h3>{{ total }} ₺ </h3>
                             <p>Toplam Ödenecekler</p>
                         </div>
                         <div class="icon">
@@ -105,10 +132,10 @@
                 </div>
 
 
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>1255 TL </h3>
+                            <h3>{{ total_paid }} ₺ </h3>
                             <p>Toplam Ödenenenler</p>
                         </div>
                         <div class="icon">
@@ -119,12 +146,12 @@
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-lg-3 col-xs-6">
+                <div class="col-lg-4 col-xs-6">
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>12587 TL </h3>
+                            <h3>{{ not_paid }} ₺ </h3>
 
-                            <p>Haftalık Ödenecekler </p>
+                            <p>Kalan</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-arrow-graph-up-right"></i>
@@ -135,19 +162,7 @@
                 </div>
                 <!-- ./col -->
 
-                <div class="col-lg-3 col-xs-6">
-                    <div class="small-box bg-red">
-                        <div class="inner">
-                            <h3>12587 TL </h3>
 
-                            <p>Aylık Ödenecekler </p>
-                        </div>
-                        <div class="icon">
-                            <i class="ion ion-arrow-graph-down-right"></i>
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -173,7 +188,7 @@
                                 <th>No</th>
                                 <th>Sipariş Numarası</th>
                                 <th>Üye</th>
-                                <th>Sipariş Tutarı</th>
+
                                 <th>Prim Ücreti</th>
                                 <th>Öde</th>
 
@@ -183,25 +198,31 @@
                             <tbody>
 
 
-                            <tr>
-                                <td>1</td>
-                                <td><a href="#">78</a></td>
-                                <td>Hakkı Şimşek</td>
-                                <td>500 TL</td>
-                                <td>30 TL</td>
 
 
-                                <td>
-                                    <div class="btn-group">
-                                        <a class="btn btn-success"><i
-                                                class="fa fa-check"></i>Öde</a>
+                                {% for key, value in earnDict.items %}
+                                    {% if value > 0 %}
+                                         <tr>
+                                    <td>1</td>
+                                    <td><a href="#">78</a></td>
+                                    <td>{{ key }}</td>
+                                    <td>{{ value }}</td>
 
 
-                                    </div>
-                                </td>
+
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-success"><i
+                                                    class="fa fa-check"></i>Öde</a>
 
 
-                            </tr>
+                                        </div>
+                                    </td>
+                                         </tr>
+                                    {% endif %}
+                                {% endfor %}
+
+
 
 
                             </tbody>
