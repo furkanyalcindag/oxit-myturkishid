@@ -4,7 +4,7 @@ import datetime
 from django.contrib.auth.models import User
 from django.db.models import Sum
 
-from inoks.models import Profile, Order, Menu, MenuAdmin, Refund
+from inoks.models import Profile, Order, Menu, MenuAdmin, Refund, earningPayments
 from inoks.models.ProfileControlObject import ProfileControlObject
 
 
@@ -173,7 +173,7 @@ def returnLevelTreeByDate(profileArray, levelDict, level, month, year):
             for sponsor in profileSponsor:
                 id_array.append(sponsor.id)
 
-        returnLevelTreeByDate(id_array, levelDict, level + 1,month,year)
+        returnLevelTreeByDate(id_array, levelDict, level + 1, month, year)
 
     elif level == 7:
         return levelDict
@@ -285,3 +285,14 @@ def calculate_earning(levelDict, level):
         else:
             return float(earning * 1 / 100)
     return 0
+
+
+def monthlyTotalPaidByDate(month, year):
+    orders_sum = earningPayments.objects.filter(payedDate=month + '/' + year)
+
+    total = 0
+
+    for totals in orders_sum:
+        total = total + totals.paymentTotal
+
+    return total

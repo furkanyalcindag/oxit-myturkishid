@@ -1,9 +1,31 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-    {% load staticfiles %}
 
+<div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="modal-danger"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Uyarı</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Ödeme yapmak istediğinizden emin misiniz?</p>
 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf"
+                            data-dismiss="modal">Evet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-close">Hayır</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
     {% if messages %}
         {% for message in messages %}
 
@@ -59,7 +81,7 @@
                 <div class="col-lg-3 col-xs-6">
                     <section class="content-header">
                         <h1>
-                           {{ part }}
+                            {{ part }}
                         </h1>
                     </section>
                 </div>
@@ -186,9 +208,9 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Sipariş Numarası</th>
-                                <th>Üye</th>
 
+                                <th>Üye</th>
+                                <th>Toplam Sipariş</th>
                                 <th>Prim Ücreti</th>
                                 <th>Öde</th>
 
@@ -197,32 +219,36 @@
                             </thead>
                             <tbody>
 
+                            {% load app_filter %}
 
 
+                            {% for earn in earnDict %}
+                                {% if earn.earning > 0 %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
 
-                                {% for key, value in earnDict.items %}
-                                    {% if value > 0 %}
-                                         <tr>
-                                    <td>1</td>
-                                    <td><a href="#">78</a></td>
-                                    <td>{{ key }}</td>
-                                    <td>{{ value }}</td>
-
-
-
-                                    <td>
-                                        <div class="btn-group">
-                                            <a class="btn btn-success"><i
-                                                    class="fa fa-check"></i>Öde</a>
+                                        <td>{{ earn.profile }}</td>
+                                        <td>  {{ earn.total_price|get_item:'total_price' }} ₺ </td>
+                                        <td>{{ earn.earning }} ₺</td>
 
 
-                                        </div>
-                                    </td>
-                                         </tr>
-                                    {% endif %}
-                                {% endfor %}
+                                        <td>
+                                            <div class="btn-group">
+                                                {% if earn.is_paid %}
+                                                    <a class="btn btn-success"><i
+                                                            class="fa fa-check"></i>Ödendi - {{ earn.paid_date }}</a>
+
+                                                {% else %}
+                                                    <a class="btn btn-danger" onclick="makePayment({{ earn.profile.id }} , {{ month }} +'/'+{{ year }},{{ earn.earning }})"><i
+                                                            class="fa fa-check"></i>Öde {{ part }}</a>
+                                                {% endif %}
 
 
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
 
 
                             </tbody>
@@ -256,6 +282,82 @@
             })
 
         })
+    </script>
+
+
+
+
+    <script>
+
+
+        function makePayment(profile_id,part,payment) {
+            $(".deneme23").on("shown.bs.modal", function (e) {
+                $("#btn-conf").click(function () {
+                    $.ajax({
+                        url: "{% url 'inoks:odeme-yap' %}",
+                        type: "post", // or "get"
+                        data: {
+                            profile_id:profile_id ,
+
+                            part: part.valueOf(),
+                            payment: payment
+
+                        },
+                        success: function (result) {
+
+                            if (result.status == 'Success') {
+                                swal("Başarılı", "Bekleyen Kullanıcı Başarıyla güncellendi.", "success");
+                                window.location.replace("{% url "inoks:odenecekler" %}");
+
+
+                            } else {
+                                swal("Başarılı", result.messages, "error");
+                            }
+                        }
+                    });
+                });
+
+            }).modal('show');
+            $('#btn-close').click(function () {
+                $('#modal-danger').modal('hide');
+            });
+        }
+
+
+        function getCookie(name) {
+            var cookieValue = null;
+            var i = 0;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (i; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            crossDomain: false, // obviates need for sameOrigin test
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+
     </script>
 
 
