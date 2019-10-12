@@ -212,7 +212,7 @@
                                 <th>Üye</th>
                                 <th>Toplam Sipariş</th>
                                 <th>Prim Ücreti</th>
-                                <th>Öde</th>
+                                <th>Ödeme Durumu</th>
 
 
                             </tr>
@@ -228,7 +228,7 @@
                                         <td>{{ forloop.counter }}</td>
 
                                         <td>{{ earn.profile }}</td>
-                                        <td>  {{ earn.total_price|get_item:'total_price' }} ₺ </td>
+                                        <td>  {{ earn.total_price|get_item:'total_price' }} ₺ + KDV </td>
                                         <td>{{ earn.earning }} ₺</td>
 
 

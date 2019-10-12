@@ -119,7 +119,7 @@ def monthlyMemberOrderTotal(profile):
     # scores = Score.objects.filter(creationDate__range=(datetime_start, datetime_end)).order_by('score')[:100]
     order2 = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(
         profile=profile)
-    orders_sum = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(
+    orders_sum = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(isApprove=True).filter(
         profile=profile).aggregate(
         total_price=Sum('totalPrice'))
 
@@ -137,9 +137,9 @@ def monthlyMemberOrderTotalByDate(profile, month, year):
     datetime_end = datetime.datetime(year, month, num_days, 23, 59)
 
     # scores = Score.objects.filter(creationDate__range=(datetime_start, datetime_end)).order_by('score')[:100]
-    order2 = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(
+    order2 = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(isApprove=True).filter(
         profile=profile)
-    orders_sum = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(
+    orders_sum = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(isApprove=True).filter(
         profile=profile).aggregate(
         total_price=Sum('totalPrice'))
 
@@ -296,3 +296,20 @@ def monthlyTotalPaidByDate(month, year):
         total = total + totals.paymentTotal
 
     return total
+
+
+def monthlOrderTotalAllTime():
+    # scores = Score.objects.filter(creationDate__range=(datetime_start, datetime_end)).order_by('score')[:100]
+
+    orders_sum = Order.objects.filter(isApprove=True).aggregate(
+        total_price=Sum('totalPrice'))
+
+    return orders_sum['total_price']
+
+
+def monthlMemberOrderTotalAllTime(profile):
+    orders_sum = Order.objects.filter(isApprove=True).filter(
+        profile=profile).aggregate(
+        total_price=Sum('totalPrice'))
+
+    return orders_sum
