@@ -4,7 +4,7 @@ import datetime
 from django.contrib.auth.models import User
 from django.db.models import Sum
 
-from inoks.models import Profile, Order, Menu, MenuAdmin, Refund
+from inoks.models import Profile, Order, Menu, MenuAdmin, Refund, earningPayments
 from inoks.models.ProfileControlObject import ProfileControlObject
 
 
@@ -119,11 +119,67 @@ def monthlyMemberOrderTotal(profile):
     # scores = Score.objects.filter(creationDate__range=(datetime_start, datetime_end)).order_by('score')[:100]
     order2 = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(
         profile=profile)
-    orders_sum = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(
+    orders_sum = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(isApprove=True).filter(
         profile=profile).aggregate(
         total_price=Sum('totalPrice'))
 
     return orders_sum
+
+
+def monthlyMemberOrderTotalByDate(profile, month, year):
+    datetime_current = datetime.datetime.today()
+    year = year
+    month = month
+    num_days = calendar.monthrange(year, month)[1]
+
+    datetime_start = datetime.datetime(year, month, 1, 0, 0)
+
+    datetime_end = datetime.datetime(year, month, num_days, 23, 59)
+
+    # scores = Score.objects.filter(creationDate__range=(datetime_start, datetime_end)).order_by('score')[:100]
+    order2 = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(isApprove=True).filter(
+        profile=profile)
+    orders_sum = Order.objects.filter(creationDate__range=(datetime_start, datetime_end)).filter(isApprove=True).filter(
+        profile=profile).aggregate(
+        total_price=Sum('totalPrice'))
+
+    return orders_sum
+
+
+def returnLevelTreeByDate(profileArray, levelDict, level, month, year):
+    profiles = []
+    profiles = Profile.objects.filter(id__in=profileArray)
+    profile_list = []
+
+    for profile in profiles:
+        total_order = monthlyMemberOrderTotalByDate(profile, month, year)['total_price']
+        if total_order is None:
+            total_order = 0
+        total_order = str(float(str(total_order).replace(",", ".")))
+
+        profile_object = ProfileControlObject(profile=profile, is_controlled=False,
+                                              total_order=total_order)
+        profile_list.append(profile_object)
+
+    levelDict[str(level)] = profile_list
+
+    id_array = []
+
+    if level < 7:
+        for profile in profiles:
+
+            profileSponsor = Profile.objects.filter(sponsor__id=profile.id)
+
+            for sponsor in profileSponsor:
+                id_array.append(sponsor.id)
+
+        returnLevelTreeByDate(id_array, levelDict, level + 1, month, year)
+
+    elif level == 7:
+        return levelDict
+
+    else:
+        return 0
 
 
 def returnLevelTree(profileArray, levelDict, level):
@@ -229,3 +285,31 @@ def calculate_earning(levelDict, level):
         else:
             return float(earning * 1 / 100)
     return 0
+
+
+def monthlyTotalPaidByDate(month, year):
+    orders_sum = earningPayments.objects.filter(payedDate=month + '/' + year)
+
+    total = 0
+
+    for totals in orders_sum:
+        total = total + totals.paymentTotal
+
+    return total
+
+
+def monthlOrderTotalAllTime():
+    # scores = Score.objects.filter(creationDate__range=(datetime_start, datetime_end)).order_by('score')[:100]
+
+    orders_sum = Order.objects.filter(isApprove=True).aggregate(
+        total_price=Sum('totalPrice'))
+
+    return orders_sum['total_price']
+
+
+def monthlMemberOrderTotalAllTime(profile):
+    orders_sum = Order.objects.filter(isApprove=True).filter(
+        profile=profile).aggregate(
+        total_price=Sum('totalPrice'))
+
+    return orders_sum

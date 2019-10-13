@@ -86,6 +86,7 @@ urlpatterns = [
     url(r'kazanclar/kazanclarim/$', EarningsViews.return_my_earnings_report, name='kazanclarim'),
     url(r'kazanclar/odenecekler/$', EarningsViews.return_odenecekler, name='odenecekler'),
     url(r'kazanclar/odenenler/$', EarningsViews.return_odenenler, name='odenenler'),
+    url(r'odeme-yap/$', EarningsViews.make_pay, name="odeme-yap"),
 
     # Ayarlar
     url(r'ayarlar/profil-ayarlari/$', SettingViews.return_profil_settings, name='profil-ayarlari'),
