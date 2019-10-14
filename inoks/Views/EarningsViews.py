@@ -11,12 +11,98 @@ from inoks.services import general_methods
 
 @login_required
 def return_my_earnings_report(request):
-    current_user = request.user
-    userprofile = Profile.objects.get(user=current_user)
+    userprofile = Profile.objects.filter(user=request.user)
+    earnDict = dict()
+    earningArray = []
+    total = float(0.00)
+    total_paid = 0
+    not_paid = 0
+    datetime_current = datetime.datetime.today()
+    year = datetime_current.year
+    month = datetime_current.month
+    part = str(month) + "/" + str(year)
+    total_paid = general_methods.monthlyTotalPaidByDate(str(month), str(year))
+    for user in userprofile:
 
-    total_my_orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id).count()
-    orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id)
-    return render(request, 'kazanclar/kazanclarim.html', {'orders': orders, 'total_my_orders': total_my_orders})
+        profileArray = []
+        levelDict = dict()
+        level = 1
+        total_earning = 0
+
+        profileArray.append(user.id)
+
+        general_methods.returnLevelTree(profileArray, levelDict, level)
+
+        for i in range(7):
+            total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
+
+        earnDict[user] = total_earning
+        total_object = TotalOrderObject(profile=None, total_price=0, earning=0, is_paid=False, paid_date=None)
+        total_object.profile = user
+        total_object.earning = total_earning
+        total_object.total_price = general_methods.monthlyMemberOrderTotal(user, )
+        payment = earningPayments.objects.filter(profile=user,
+                                                 payedDate=part)
+        if payment.count() > 0:
+            total_object.is_paid = True
+            total_object.paid_date = payment[0].creationDate
+
+        earningArray.append(total_object)
+
+    for key in earnDict:
+        total = total + float(earnDict[key])
+
+    if request.method == 'POST':
+        userprofile = Profile.objects.filter(user=request.user)
+        earnDict = dict()
+        earningArray = []
+        total = 0
+        total_paid = 0
+        not_paid = 0
+
+        total_paid = general_methods.monthlyTotalPaidByDate(request.POST['ay'], request.POST['yil'])
+
+        part = request.POST['ay'] + "/" + request.POST['yil']
+
+        for user in userprofile:
+
+            profileArray = []
+            levelDict = dict()
+            level = 1
+            total_earning = 0
+
+            profileArray.append(user.id)
+
+            general_methods.returnLevelTreeByDate(profileArray, levelDict, level, int(request.POST['ay']),
+                                                  int(request.POST['yil']))
+
+            for i in range(7):
+                total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
+
+            earnDict[user] = total_earning
+            total_object = TotalOrderObject(profile=None, total_price=0, earning=0, is_paid=False, paid_date=None)
+            total_object.profile = user
+            total_object.earning = total_earning
+            total_object.total_price = general_methods.monthlyMemberOrderTotalByDate(user, int(request.POST['ay']),
+                                                                                     int(request.POST['yil']))
+            payment = earningPayments.objects.filter(profile=user,
+                                                     payedDate=request.POST['ay'] + "/" + request.POST['yil'])
+            if payment.count() > 0:
+                total_object.is_paid = True
+                total_object.paid_date = payment[0].creationDate
+
+            earningArray.append(total_object)
+
+        for key in earnDict:
+            total = total + float(earnDict[key])
+
+        return render(request, 'kazanclar/kazanclarim.html',
+                      {"earnDict": earningArray, 'total': total, 'total_paid': total_paid,
+                       'not_paid': float(total) - float(total_paid),
+                       'part': part, 'month': request.POST['ay'], 'year': request.POST['yil']})
+    return render(request, 'kazanclar/kazanclarim.html', {"earnDict": earningArray, 'total': total, 'total_paid': total_paid,
+                       'not_paid': float(total) - float(total_paid),
+                       'part': part, 'month': str(month), 'year': str(year)})
 
 
 @login_required
