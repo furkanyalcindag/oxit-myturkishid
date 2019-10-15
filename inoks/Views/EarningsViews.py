@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib.auth.decorators import login_required
+from django.core.mail import EmailMultiAlternatives
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -100,9 +101,10 @@ def return_my_earnings_report(request):
                       {"earnDict": earningArray, 'total': total, 'total_paid': total_paid,
                        'not_paid': float(total) - float(total_paid),
                        'part': part, 'month': request.POST['ay'], 'year': request.POST['yil']})
-    return render(request, 'kazanclar/kazanclarim.html', {"earnDict": earningArray, 'total': total, 'total_paid': total_paid,
-                       'not_paid': float(total) - float(total_paid),
-                       'part': part, 'month': str(month), 'year': str(year)})
+    return render(request, 'kazanclar/kazanclarim.html',
+                  {"earnDict": earningArray, 'total': total, 'total_paid': total_paid,
+                   'not_paid': float(total) - float(total_paid),
+                   'part': part, 'month': str(month), 'year': str(year)})
 
 
 @login_required
@@ -254,6 +256,13 @@ def make_pay(request):
                                       paymentTotal=payment)
 
             payment.save()
+
+            subject, from_email, to = 'INOKS Ödeme Yapıldı', 'ik@oxityazilim.com', payment.profile.user.email
+            text_content = 'Sayın ' + payment.profile.user.first_name + ' ' + payment.profile.user.last_name + '<br>'
+            html_content = payment.payedDate + ' dönemine ait' + payment.paymentTotal + ' ₺ ödemeiniz yapılmıştır.'
+            msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+            msg.attach_alternative(html_content, "text/html")
+            msg.send()
 
             return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
 
