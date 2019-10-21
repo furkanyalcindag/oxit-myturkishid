@@ -293,7 +293,7 @@ def monthlyTotalPaidByDate(month, year):
     total = 0
 
     for totals in orders_sum:
-        total = total + totals.paymentTotal
+        total = float(total) + float(totals.paymentTotal)
 
     return total
 

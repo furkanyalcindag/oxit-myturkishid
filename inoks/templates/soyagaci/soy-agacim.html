@@ -28,7 +28,7 @@
                                 new primitives.orgdiagram.ItemConfig({
                                     id: {{ tree.profile.id }},
                                     parent: null,
-                                    title: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ({%  if tree.profile.user.is_active == True %}Aktif{% else  %}Pasif{% endif %})",
+                                    title: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ({{  tree.profile.id  }}) ({%  if tree.profile.user.is_active == True %}Aktif{% else  %}Pasif{% endif %})",
                                     telefon : "{{ tree.profile.mobilePhone }} ",
 
                                     description: "Sipariş :"+{{ tree.total_order }} + "₺"   ,
@@ -45,7 +45,7 @@
                                  new primitives.orgdiagram.ItemConfig({
                                     id: {{ tree.profile.id }},
                                     parent: {{ tree.profile.sponsor_id }},
-                                   title: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ({%  if tree.profile.user.is_active == True %}Aktif{% else  %}Pasif{% endif %})",
+                                   title: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }}({{  tree.profile.id  }})  ({%  if tree.profile.user.is_active == True %}Aktif{% else  %}Pasif{% endif %})",
                                     telefon : "{{ tree.profile.mobilePhone }} ",
                                     description: "Sipariş :"+{{ tree.total_order }} + "₺" ,
                                     email : "{{ tree.profile.user.email }}",
@@ -262,9 +262,7 @@
                                 KatilimTarihi: "{{ tree.profile.creationDate }}",
                                 AktifPasifTarihi: "{{ tree.profile.activePassiveDate }}",
                                 DogumTarihi: "{{ tree.profile.birthDate }}",
-                                img: "{%  if tree.profile.user.is_active == True %} /media/
-                                    {{tree.profile.profileImage}}{% else  %}
-                                    /media/profile/passive-user.png  {% endif %}"
+                                img: "{%  if tree.profile.user.is_active == True %} /media/{{tree.profile.profileImage}}{% else  %}/media/profile/passive-user.png  {% endif %}"
                             },
                         {% else %}
                             {
@@ -272,8 +270,7 @@
                                 order_total: {{ tree.total_order }},
                                 pid: {{ tree.profile.sponsor_id }},
                                 AdSoyad: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ",
-                                Durum: " {%  if tree.profile.user.is_active == True %}Aktif {% else  %}
-                                    Pasif  {% endif %}",
+                                Durum: " {%  if tree.profile.user.is_active == True %}Aktif {% else  %}Pasif  {% endif %}",
                                 Email: "{{ tree.profile.user.email }}",
                                 Sponsor: "{{ tree.profile.sponsor_id }}",
                                 Tel: "{{ tree.profile.mobilePhone }}",
@@ -281,9 +278,7 @@
                                 KatilimTarihi: "{{ tree.profile.creationDate }}",
                                 AktifPasifTarihi: "{{ tree.profile.activePassiveDate }}",
                                 DogumTarihi: "{{ tree.profile.birthDate }}",
-                                img: "{%  if tree.profile.user.is_active == True %} /media/
-                                    {{tree.profile.profileImage}}{% else  %}
-                                    /media/profile/passive-user.png  {% endif %}"
+                                img: "{%  if tree.profile.user.is_active == True %} /media/{{tree.profile.profileImage}}{% else  %}/media/profile/passive-user.png  {% endif %}"
                             },
                         {% endif %}
 

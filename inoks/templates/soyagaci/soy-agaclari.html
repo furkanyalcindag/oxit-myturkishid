@@ -28,7 +28,7 @@
                                 new primitives.orgdiagram.ItemConfig({
                                     id: {{ tree.profile.id }},
                                     parent: null,
-                                    title: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ({%  if tree.profile.user.is_active == True %}Aktif{% else  %}Pasif{% endif %})",
+                                    title: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ({{  tree.profile.id  }}) ({%  if tree.profile.user.is_active == True %}Aktif{% else  %}Pasif{% endif %})",
                                     telefon : "{{ tree.profile.mobilePhone }} ",
 
                                     description: "Sipariş :"+{{ tree.total_order }} + "₺"   ,
@@ -45,7 +45,7 @@
                                  new primitives.orgdiagram.ItemConfig({
                                     id: {{ tree.profile.id }},
                                     parent: {{ tree.profile.sponsor_id }},
-                                   title: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ({%  if tree.profile.user.is_active == True %}Aktif{% else  %}Pasif{% endif %})",
+                                   title: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ({{  tree.profile.id  }}) ({%  if tree.profile.user.is_active == True %}Aktif{% else  %}Pasif{% endif %})",
                                     telefon : "{{ tree.profile.mobilePhone }} ",
                                     description: "Sipariş :"+{{ tree.total_order }} + "₺" ,
                                     email : "{{ tree.profile.user.email }}",

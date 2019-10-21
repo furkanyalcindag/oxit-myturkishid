@@ -122,14 +122,15 @@ def return_users(request):
     return render(request, 'kullanici/kullanicilar.html', {'users': users})
 
 
+
 @login_required
 def return_my_users(request):
     current_user = request.user
     userprofile = Profile.objects.get(user=current_user)
 
-    users = Profile.objects.filter(user__is_active=True, sponsor_id=userprofile.id)
+    users = Profile.objects.filter(sponsor_id=userprofile.id)
 
-    return render(request, 'kullanici/kullanicilar.html', {'users': users})
+    return render(request, 'kullanici/uyelerim.html', {'users': users})
 
 
 @login_required

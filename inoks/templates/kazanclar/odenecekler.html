@@ -239,8 +239,8 @@
                                                             class="fa fa-check"></i>Ödendi - {{ earn.paid_date }}</a>
 
                                                 {% else %}
-                                                    <a class="btn btn-danger" onclick="makePayment({{ earn.profile.id }} , {{ month }} +'/'+{{ year }},{{ earn.earning }})"><i
-                                                            class="fa fa-check"></i>Öde {{ part }}</a>
+                                                    <a class="btn btn-danger" onclick="makePayment({{ earn.profile.id }} , {{ month }} +'/'+{{ year }}, '{{earn.earning }}'.replace(/,/g, '.'))">
+                                                            <i class="fa fa-check"></i>Öde {{ part }}</a>
                                                 {% endif %}
 
 
@@ -291,6 +291,7 @@
 
 
         function makePayment(profile_id,part,payment) {
+            var price = parseFloat(payment.toString().replace(',', '.'))
             $(".deneme23").on("shown.bs.modal", function (e) {
                 $("#btn-conf").click(function () {
                     $.ajax({
@@ -300,7 +301,7 @@
                             profile_id:profile_id ,
 
                             part: part.valueOf(),
-                            payment: payment
+                            payment: price
 
                         },
                         success: function (result) {
