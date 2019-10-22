@@ -351,12 +351,22 @@
                 .done(function (response) {
 
                     var order = response.order[0];
+                    console.log(order.isContract);
+                    var situation = order.isContract;
+                    console.log(situation);
+                    if(situation){
+                        console.log("deneme");
+                        situation = 'Onaylandı'
+                    }
+                    if(!situation){
+                        situation = 'Onaylanmadı'
+                    }
                     html += ' <div class="box-body box-profile">';
                     html += ' <ul class="list-group list-group-unbordered">';
                     html += '<div class="row">';
                     html += '<div class="col-md-6">';
                     html += ' <li class="list-group-item">';
-                    html += '<b>Sözleşme Onaylandı Mı ?</b> <a class="pull-right">' + order.isContract + '</a></li>';
+                    html += '<b>Sözleşme Onaylandı Mı ?</b> <a class="pull-right">' + situation + '</a></li>';
                     html += ' <li class="list-group-item">';
                     html += '<b>Üye Adı</b> <a class="pull-right">' + order.profile.user.first_name + ' '+ order.profile.user.last_name + '</a></li>';
                     html += ' <li class="list-group-item">';
