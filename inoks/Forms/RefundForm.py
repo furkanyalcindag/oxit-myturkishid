@@ -29,7 +29,7 @@ class RefundForm(ModelForm):
                                            'style': 'width: 100%; '}),
 
             'orderQuantity': forms.NumberInput(
-                attrs={'class': 'form-control ', 'placeholder': 'Ürün Miktarı', 'required': 'required'}),
+                attrs={'class': 'form-control ', 'min':'1', 'placeholder': 'Ürün Miktarı', 'required': 'required'}),
 
             'isOpen': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                           'style': 'width: 100%;'})

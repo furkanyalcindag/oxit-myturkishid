@@ -24,8 +24,8 @@ class ProfileForm(ModelForm):
                 attrs={'class': 'form-control', 'placeholder': 'T.C. Kimlik Numarası', 'required': 'required', 'maxlength':'11', 'minlength':'11'}),
 
             'birthDate': forms.DateInput(
-                attrs={'class': 'form-control  pull-right', 'id': 'datepicker', 'autocomplete': 'off',
-                       'onkeydown': 'return false'}),
+                attrs={'class': 'form-control  pull-right',  'type':'date', 'autocomplete': 'off',
+                       }),
 
             'sponsor': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                            'style': 'width: 100%; ', 'required': 'required'}),
