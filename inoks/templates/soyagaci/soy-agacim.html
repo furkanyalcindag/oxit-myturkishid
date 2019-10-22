@@ -31,7 +31,7 @@
                                     title: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }} ({{  tree.profile.id  }}) ({%  if tree.profile.user.is_active == True %}Aktif{% else  %}Pasif{% endif %})",
                                     telefon : "{{ tree.profile.mobilePhone }} ",
 
-                                    description: "Sipariş :"+{{ tree.total_order }} + "₺"   ,
+                                    description: "Sipariş :"+{{ tree.total_order }} + " puan"   ,
                                     email : "{{ tree.profile.user.email }}",
                                     image: "{%  if tree.profile.user.is_active == True %} /media/{{tree.profile.profileImage}}{% else  %}/media/profile/passive-user.png  {% endif %}"
                                 }),
@@ -47,7 +47,7 @@
                                     parent: {{ tree.profile.sponsor_id }},
                                    title: "{{ tree.profile.user.first_name }}  {{ tree.profile.user.last_name }}({{  tree.profile.id  }})  ({%  if tree.profile.user.is_active == True %}Aktif{% else  %}Pasif{% endif %})",
                                     telefon : "{{ tree.profile.mobilePhone }} ",
-                                    description: "Sipariş :"+{{ tree.total_order }} + "₺" ,
+                                    description: "Sipariş :"+{{ tree.total_order }} + " puan" ,
                                     email : "{{ tree.profile.user.email }}",
                                     image: "{%  if tree.profile.user.is_active == True %} /media/{{tree.profile.profileImage}}{% else  %}/media/profile/passive-user.png  {% endif %}"
                                 }),
