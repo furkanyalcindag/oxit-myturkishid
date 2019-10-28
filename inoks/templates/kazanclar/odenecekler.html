@@ -2,6 +2,47 @@
 
 {% block content %}
 
+
+    <style>
+#cover-spin {
+    position:fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(255,255,255,0.7);
+    z-index:9999;
+    display:none;
+}
+
+@-webkit-keyframes spin {
+	from {-webkit-transform:rotate(0deg);}
+	to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
+}
+
+#cover-spin::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:48%;top:40%;
+    width:40px;height:40px;
+    border-style:solid;
+    border-color:black;
+    border-top-color:transparent;
+    border-width: 4px;
+    border-radius:50%;
+    -webkit-animation: spin .8s linear infinite;
+    animation: spin .8s linear infinite;
+}
+</style>
+
+
+
+
+
 <div class="modal modal-warning fade in deneme23" tabindex="-1" role="dialog" id="modal-danger"
          aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
@@ -74,7 +115,7 @@
 
 
     <section class="content">
-
+<div id="cover-spin"></div>
 
         <div class="row">
             <div class="box-body">
@@ -291,9 +332,11 @@
 
 
         function makePayment(profile_id,part,payment) {
+
             var price = parseFloat(payment.toString().replace(',', '.'))
             $(".deneme23").on("shown.bs.modal", function (e) {
                 $("#btn-conf").click(function () {
+                    document.getElementById("cover-spin").style.display = "block";
                     $.ajax({
                         url: "{% url 'inoks:odeme-yap' %}",
                         type: "post", // or "get"
@@ -307,7 +350,8 @@
                         success: function (result) {
 
                             if (result.status == 'Success') {
-                                swal("Başarılı", "Bekleyen Kullanıcı Başarıyla güncellendi.", "success");
+                                 document.getElementById("cover-spin").style.display = "none";
+                                swal("Başarılı", "<ödeme başarıyla gerçekleştirildi.", "success");
                                 window.location.replace("{% url "inoks:odenecekler" %}");
 
 

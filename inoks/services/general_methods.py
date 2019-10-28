@@ -222,6 +222,7 @@ def calculate_earning(levelDict, level):
     earning = 0
 
     if level == 1:
+        print(levelDict[str(level)])
         return 0
 
     if level == 2:
@@ -285,6 +286,79 @@ def calculate_earning(levelDict, level):
         else:
             return float(earning * 1 / 100)
     return 0
+
+
+def calculate_order_of_tree(levelDict):
+    earning = 0
+
+    for i in range(7):
+
+        if i + 1 == 1:
+            for orderPrice in levelDict[str(i + 1)]:
+                earning = earning + float(orderPrice.total_order)
+
+        if i + 1 == 2:
+
+            for orderPrice in levelDict[str(i + 1)]:
+                earning = earning + float(orderPrice.total_order)
+
+        if i + 1 == 3:
+
+            for orderPrice in levelDict[str(i + 1)]:
+                earning = earning + float(orderPrice.total_order)
+
+        if i + 1 == 4:
+
+            for orderPrice in levelDict[str(i + 1)]:
+                earning = earning + float(orderPrice.total_order)
+
+        if i + 1 == 5:
+
+            for orderPrice in levelDict[str(i + 1)]:
+                earning = earning + float(orderPrice.total_order)
+
+        if i + 1 == 6:
+
+            for orderPrice in levelDict[str(i + 1)]:
+                earning = earning + float(orderPrice.total_order)
+
+        if i + 1 == 7:
+
+            for orderPrice in levelDict[str(i + 1)]:
+                earning = earning + float(orderPrice.total_order)
+
+    return earning
+
+
+def calculate_earning_of_tree(levelDict):
+    earning = 0
+
+    total_order = calculate_order_of_tree(levelDict)
+
+    if total_order >= 607500:
+        earning = float(total_order * 1 / 100)
+
+    elif 202500 <= total_order < 607500:
+        earning = float(total_order * 2 / 100)
+
+    elif 67500 <= total_order < 202500:
+        earning = float(total_order * 3 / 100)
+
+    elif 22500 <= total_order < 67500:
+        earning = float(total_order * 4 / 100)
+
+    elif 7500 <= total_order < 22500:
+        if len(levelDict[str(3)]) == 9:
+            earning = float(total_order * 5 / 100)
+
+    elif 2500 <= total_order < 22500:
+        if len(levelDict[str(2)]) == 3:
+            earning = float(total_order * 6 / 100)
+
+    else:
+        earning = 0
+
+    return earning
 
 
 def monthlyTotalPaidByDate(month, year):

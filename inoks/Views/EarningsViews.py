@@ -34,9 +34,10 @@ def return_my_earnings_report(request):
 
         general_methods.returnLevelTree(profileArray, levelDict, level)
 
-        for i in range(7):
-            total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
+        #for i in range(7):
+         #   total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
 
+        total_earning = general_methods.calculate_earning_of_tree(levelDict)
         earnDict[user] = total_earning
         total_object = TotalOrderObject(profile=None, total_price=0, earning=0, is_paid=False, paid_date=None)
         total_object.profile = user
@@ -77,9 +78,10 @@ def return_my_earnings_report(request):
             general_methods.returnLevelTreeByDate(profileArray, levelDict, level, int(request.POST['ay']),
                                                   int(request.POST['yil']))
 
-            for i in range(7):
-                total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
+            #for i in range(7):
+             #   total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
 
+            total_earning = general_methods.calculate_earning_of_tree(levelDict)
             earnDict[user] = total_earning
             total_object = TotalOrderObject(profile=None, total_price=0, earning=0, is_paid=False, paid_date=None)
             total_object.profile = user
@@ -122,7 +124,7 @@ def return_odenenler(request):
 
 @login_required
 def return_odenecekler(request):
-    userprofile = Profile.objects.filter(user__is_active=True)
+    userprofile = Profile.objects.filter(user__is_active=True).exclude(user__groups__name="Admin")
     earnDict = dict()
     earningArray = []
     total = float(0.00)
@@ -144,8 +146,10 @@ def return_odenecekler(request):
 
         general_methods.returnLevelTree(profileArray, levelDict, level)
 
-        for i in range(7):
-            total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
+        # for i in range(7):
+        #   total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
+
+        total_earning = general_methods.calculate_earning_of_tree(levelDict)
 
         earnDict[user] = total_earning
         total_object = TotalOrderObject(profile=None, total_price=0, earning=0, is_paid=False, paid_date=None)
@@ -164,7 +168,7 @@ def return_odenecekler(request):
         total = total + float(earnDict[key])
 
     if request.method == 'POST':
-        userprofile = Profile.objects.filter(user__is_active=True)
+        userprofile = Profile.objects.filter(user__is_active=True).exclude(user__groups__name="Admin")
         earnDict = dict()
         earningArray = []
         total = 0
@@ -187,8 +191,11 @@ def return_odenecekler(request):
             general_methods.returnLevelTreeByDate(profileArray, levelDict, level, int(request.POST['ay']),
                                                   int(request.POST['yil']))
 
-            for i in range(7):
-                total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
+
+            #for i in range(7):
+             #   total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
+
+            total_earning = general_methods.calculate_earning_of_tree(levelDict)
 
             earnDict[user] = total_earning
             total_object = TotalOrderObject(profile=None, total_price=0, earning=0, is_paid=False, paid_date=None)
