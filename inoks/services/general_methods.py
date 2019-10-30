@@ -350,10 +350,16 @@ def calculate_earning_of_tree(levelDict):
     elif 7500 <= total_order < 22500:
         if len(levelDict[str(3)]) == 9:
             earning = float(total_order * 5 / 100)
+        elif len(levelDict[str(2)]) == 3:
+            earning = float(total_order * 6 / 100)
+        else:
+            earning = 0
 
     elif 2500 <= total_order < 22500:
         if len(levelDict[str(2)]) == 3:
             earning = float(total_order * 6 / 100)
+        else:
+            earning = 0
 
     else:
         earning = 0
