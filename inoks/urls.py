@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from inoks.Views import ProductViews, UserViews, OrderViews, ReportViews, EarningsViews, DashboardViews, SettingViews, \
-    TreeViews, RefundViews
+    TreeViews, RefundViews, CityViews
 
 app_name = 'inoks'
 
@@ -64,6 +64,7 @@ urlpatterns = [
     url(r'siparisler/siparisler/sil/(?P<pk>\d+)$', OrderViews.orders_delete,
         name='siparislersil'),
     url(r'siparisler/siparisler/(?P<pk>\d+)$', OrderViews.getOrder, name='getOrder'),
+    url(r'siparisler/sepet-siparis-ekle/$', OrderViews.return_add_orders_from_cart, name='kart-siparis-ekle'),
 
     # İadeler
     url(r'iadeler/iade-olustur/$', RefundViews.return_add_refund, name='iade-olustur'),
@@ -96,4 +97,5 @@ urlpatterns = [
     url(r'soyagaci/soy-agacim/$', TreeViews.return_my_tree, name='soy-agacim'),
     url(r'soyagaci/soy-agaclari/$', TreeViews.return_all_tree, name='soy-agaclari'),
 
+    url(r'ilce-getir/$', CityViews.get_districts, name="ilce-getir"),
 ]

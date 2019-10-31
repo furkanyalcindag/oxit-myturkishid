@@ -1,7 +1,11 @@
+import json
+import pickle
+
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core import serializers
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
@@ -9,8 +13,10 @@ from rest_framework.decorators import api_view
 from inoks.Forms.OrderForm import OrderForm
 from inoks.Forms.OrderSituationsForm import OrderSituationsForm
 from inoks.models import Order, OrderSituations, Profile, Product, OrderProduct
+from inoks.models.CartObject import CartObject
 from inoks.models.OrderObject import OrderObject
 from inoks.serializers.order_serializers import OrderSerializer
+from inoks.serializers.product_cart_serializer import CartSerializer
 from inoks.services.general_methods import activeOrder
 
 
@@ -70,6 +76,89 @@ def return_add_orders(request):
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
     return render(request, 'siparisler/siparis-ekle.html', {'order_form': order_form, 'products': products})
+
+
+@login_required
+def return_add_orders_from_cart(request):
+    order_form = OrderForm()
+    products = Product.objects.all()
+    current_user = request.user
+    profile = Profile.objects.get(user=current_user)
+
+    myDict = dict(request.GET)
+    urun_miktar = []
+    urun_miktar_2 = []
+    myDict2 = dict()
+
+    for key in myDict:
+        if key.startswith('cust'):
+            pickup_dict = dict()
+            x = myDict[key][0].split("&")
+            x = CartObject(product_id=x[0], quantity=x[1])
+            urun_miktar.append(x)
+            pickup_dict['product_id'] = x.product_id
+            pickup_dict['quantity'] = x.quantity
+            urun_miktar_2.append(pickup_dict)
+
+    myDict2['deneme'] = urun_miktar
+    serializer = CartSerializer(urun_miktar, many=True)
+    data = json.dumps(serializer.data)
+    #data = serializers.serialize('json', myDict2)
+   # serializer = CartSerializer(urun_miktar, many=True)
+
+    #data = serializer.data
+
+
+    if request.method == 'POST':
+
+        order_form = OrderForm(request.POST)
+
+        if order_form.is_valid():
+
+            total_price = 0
+
+            products_quantity = order_form.cleaned_data['droptxt']
+
+            products_quantity = products_quantity.split(',')
+
+            order = Order(profile=profile,
+
+                          city=order_form.cleaned_data['city'],
+                          district=order_form.cleaned_data['district'],
+
+                          address=order_form.cleaned_data['address'],
+                          payment_type=order_form.cleaned_data['payment_type'],
+                          isContract=order_form.cleaned_data['isContract'])
+            order.isContract = order_form.cleaned_data['isContract']
+            order.save()
+
+            for products_q in products_quantity:
+                product = products_q.split('x')
+                prod = Product.objects.get(id=int(product[1].strip()))
+                orderProduct = OrderProduct(order=order, product=prod,
+                                            quantity=int(product[0].strip()))
+                orderProduct.save()
+
+                total_price = total_price + (int(product[0].strip()) * prod.price)
+
+            order.totalPrice = total_price
+            order.save()
+
+            # order.product.add(order_form.cleaned_data['product'])
+
+            order.order_situations.add(OrderSituations.objects.get(name='Ödeme Bekliyor'))
+
+            order.save()
+
+            messages.success(request, 'Sipariş başarıyla eklendi.')
+            return redirect('inoks:siparis-ekle')
+
+        else:
+
+            messages.warning(request, 'Alanları Kontrol Ediniz')
+
+    return render(request, 'siparisler/siparis-ekle.html',
+                  {'order_form': order_form, 'products': products, 'product_array': data})
 
 
 @login_required

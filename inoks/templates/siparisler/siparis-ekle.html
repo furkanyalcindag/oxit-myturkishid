@@ -76,14 +76,12 @@
                                 {% csrf_token %}
 
 
-
-
-
                                 <div class="dropdown form-group">
 
                                     <label> Ürünler</label>
                                     {{ order_form.droptxt }}
-                                    <textarea type="text" id="droptxt" class="list form-control" rows="4" cols="50"></textarea>
+                                    <textarea type="text" id="droptxt" class="list form-control" rows="4"
+                                              cols="50"></textarea>
                                     <div id="contents" class="contents">
 
                                         {% for product in products %}
@@ -92,7 +90,8 @@
                                                        value="{{ product.name }}" name="{{ product.price }}"/>
                                                 <label for="apple" class="list">{{ product.name }} ( {{ product.price }}
                                                     ₺)</label>
-                                                <input type="hidden" class="list quantity" min="1" value="1"/>
+                                                <input type="hidden" class="list quantity" id="q_{{ product.id }}"
+                                                       min="1" value="1"/>
                                             </div>
                                         {% endfor %}
 
@@ -129,12 +128,12 @@
 
 
                                 <div class="checkbox">
-                                        <label>
-                                            {{ order_form.isContract }}
-                                            <a href="#">Satış Sözleşmesini</a>
-                                            okudum,anladım,onaylıyorum
-                                        </label>
-                                    </div>
+                                    <label>
+                                        {{ order_form.isContract }}
+                                        <a href="#">Satış Sözleşmesini</a>
+                                        okudum,anladım,onaylıyorum
+                                    </label>
+                                </div>
 
                             </div>
                             <!-- /.box-body -->
@@ -174,14 +173,13 @@
         })
 
 
-
         // Close the dropdown if the user clicks outside of it
         window.onclick = function (e) {
-             var str = document.getElementById('droptxt').value;
-             if (str === ""){
-                   document.getElementById('price').innerHTML = "Toplam :" +0 + " ₺";
-              document.getElementById('price1').innerHTML = "Toplam :" +0 + " ₺";
-             }
+            var str = document.getElementById('droptxt').value;
+            if (str === "") {
+                document.getElementById('price').innerHTML = "Toplam :" + 0 + " ₺";
+                document.getElementById('price1').innerHTML = "Toplam :" + 0 + " ₺";
+            }
 
             if (!e.target.matches('.list')) {
                 if (content.classList.contains('show')) content.classList.remove('show')
@@ -233,18 +231,116 @@
                 deger = deger + (parseInt(res1[0].trim(), 10) * parseFloat(mySubString.trim()));
 
 
-
-
             }
-            if (res.length === 0){
-                deger =0;
+            if (res.length === 0) {
+                deger = 0;
             }
-            document.getElementById('price').innerHTML = "Toplam :" +deger + " ₺";
-              document.getElementById('price1').innerHTML = "Toplam :" +deger + " ₺";
-            deger =0
+            document.getElementById('price').innerHTML = "Toplam :" + deger + " ₺";
+            document.getElementById('price1').innerHTML = "Toplam :" + deger + " ₺";
+            deger = 0
         }
 
 
+        function onLoadPage() {
+
+            var a = "{{product_array}}";
+
+            console.log("");
+            console.log(a);
+
+
+        }
+
+
+        $(window).on('load', function () {
+
+
+            var a = '{{product_array|safe}}';
+
+
+            if (a === "") {
+
+            } else {
+
+                let x = JSON.parse(a);
+
+
+                for (var i = 0; i < x.length; i++) {
+
+
+                    document.getElementById('q_' + x[i].product_id).value = x[i].quantity;
+                    document.getElementById(x[i].product_id).checked = true;
+                }
+
+                calc();
+
+            }
+
+
+            //document.getElementById('q_31').value=12;
+            //document.getElementById("31").checked = true;
+
+
+        });
+
+
+        function ilceGetir() {
+
+            var e = document.getElementById("id_city");
+            var il_id = e.options[e.selectedIndex].value;
+            $.ajax({
+                url: "{% url 'inoks:ilce-getir' %}",
+                type: "post", // or "get"
+                data: {
+                    il_id: il_id,
+
+                },
+                success: function (result) {
+                    debugger;
+
+                    let select = document.getElementById("ilce_id");
+                    select.options[select.options.length] = new Option('Text 1', 'Value1');
+
+                     $('#ilce_id').empty();
+                    for(let i =0;i<result.ilceler.length;i++){
+                         select.options[select.options.length] = new Option(result.ilceler[i].name, result.ilceler[i].name);
+                    }
+                }
+            });
+        }
+
+        function getCookie(name) {
+            var cookieValue = null;
+            var i = 0;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (i; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            crossDomain: false, // obviates need for sameOrigin test
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
     </script>
 
     <style>

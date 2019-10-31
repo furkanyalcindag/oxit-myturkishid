@@ -4,6 +4,11 @@ from django.forms import ModelForm
 from inoks.models import Order, Product, OrderSituations
 
 
+CHOICES_WITH_BLANK = (
+    ('', '--------'),
+
+)
+
 class OrderForm(ModelForm):
     #product = forms.ModelChoiceField(queryset=Product.objects.all(),
      #                                to_field_name='name',
@@ -24,10 +29,11 @@ class OrderForm(ModelForm):
 
 
             'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                        'style': 'width: 100%; '}),
+                                        'style': 'width: 100%; ', "onChange":'ilceGetir()'}),
 
-            'district': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'İlçe', 'required': 'required'}),
+            'district': forms.Select(choices=CHOICES_WITH_BLANK,attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                        'style': 'width: 100%; ', 'id':'ilce_id'}
+              ),
 
 
 

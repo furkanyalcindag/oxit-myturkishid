@@ -3,7 +3,10 @@ from django.forms import ModelForm
 
 from inoks.models import Profile
 
+CHOICES_WITH_BLANK = (
+    ('', '--------'),
 
+)
 class ProfileUpdateForm(ModelForm):
     class Meta:
         model = Profile
@@ -29,7 +32,7 @@ class ProfileUpdateForm(ModelForm):
                                        'style': 'width: 100%; ', 'required': 'required'}),
 
         'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                    'style': 'width: 100%; ', 'required': 'required'}),
+                                    'style': 'width: 100%; ', 'required': 'required',"onChange":'ilceGetir()'}),
 
         'district': forms.TextInput(
                 attrs={'class': 'form-control ', 'placeholder': 'İlçe', 'required': 'required'}),

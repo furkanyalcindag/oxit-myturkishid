@@ -3,6 +3,11 @@ from django.forms import ModelForm
 
 from inoks.models import Profile
 
+CHOICES_WITH_BLANK = (
+    ('', '--------'),
+
+)
+
 
 class ProfileForm(ModelForm):
     isContract = forms.BooleanField(required=True)
@@ -31,10 +36,12 @@ class ProfileForm(ModelForm):
                                            'style': 'width: 100%; ', 'required': 'required'}),
 
             'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                        'style': 'width: 100%; ', 'required': 'required'}),
+                                        'style': 'width: 100%; ', 'required': 'required',"onChange":'ilceGetir()'}),
 
-            'district': forms.TextInput(
-                attrs={'class': 'form-control ', 'placeholder': 'İlçe', 'required': 'required'}),
+             'district': forms.Select(choices=CHOICES_WITH_BLANK,attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                        'style': 'width: 100%; ', 'id':'ilce_id'}
+              ),
+
 
             'job': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                        'style': 'width: 100%;', 'required': 'required'}),

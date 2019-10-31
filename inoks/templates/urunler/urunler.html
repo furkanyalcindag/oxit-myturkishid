@@ -5,6 +5,60 @@
     <link rel="stylesheet" href="{% static 'bower_components/product/product-dashboard.css' %} ">
 
 
+
+    <!--cart Modal -->
+    <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alışveriş Sepeti</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{% url "inoks:kart-siparis-ekle" %}">
+                    <div class="modal-body">
+                        <table class="show-cart table">
+
+                        </table>
+                        <div>Toplam Tutar: <span class="total-cart"></span> ₺</div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <input type="submit" name="urun_diger" class="btn btn-primary" value="Sipariş Ver"></input>
+
+                        <a  class="button clear-cart btn btn-danger">Sepeti Boşalt</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <style>
+
+        body {
+            padding-top: 80px;
+        }
+
+        .show-cart li {
+            display: flex;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-img-top {
+            width: 200px;
+            height: 200px;
+            align-self: center;
+        }
+
+    </style>
+
+
+
     <!-- success modal -->
     <div class="modal modal-success modal-success-food fade in" id="modal-success" style="display: none;">
         <div class="modal-dialog">
@@ -123,7 +177,13 @@
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
+            <div class="col pull-right">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart"><i
+                                                                            class="fa fa-shopping-cart"></i> Alışveriş Sepeti (<span
+                        class="total-count"></span>)
+                </button>
 
+            </div>
 
             <section class="col-lg-12 ">
 
@@ -141,76 +201,79 @@
                                 <div class="container">
                                     <div class="row">
 
-                                         {% if urunler.all %}
-                                    {% for urun in urunler %}
+                                        {% if urunler.all %}
+                                            {% for urun in urunler %}
 
 
-                                        {% if kategori in urun.category.all %}
+                                                {% if kategori in urun.category.all %}
 
 
 
-                                        <div class="col-md-3 col-sm-6">
-                                            <div class="product-grid4">
-                                                <div class="product-image4">
-                                                    <a href="#">
-                                                        {% if urun.productImage.all %}
+                                                    <div class="col-md-3 col-sm-6">
+                                                        <div class="product-grid4">
+                                                            <div class="product-image4">
+                                                                <a href="#">
+                                                                    {% if urun.productImage.all %}
 
-                                                            <img class="pic-1"
-                                                                 src="/media/{{ urun.productImage.all.0.productImage }}">
-                                                            <img class="pic-2"
-                                                                 src="/media/{{ urun.productImage.all.1.productImage }}">
+                                                                        <img class="pic-1"
+                                                                             src="/media/{{ urun.productImage.all.0.productImage }}">
+                                                                        <img class="pic-2"
+                                                                             src="/media/{{ urun.productImage.all.1.productImage }}">
 
-                                                        {% endif %}
+                                                                    {% endif %}
 
-                                                    </a>
-                                                    <ul class="social">
-                                                        <!--   <li><a href="#" data-tip="Detayları Görüntüle"><i
-                                                                   class="fa fa-eye"></i></a></li>
-                                                           <li><a href="#" data-tip="Sepete Ekle"><i
-                                                                   class="fa fa-shopping-cart"></i></a></li> -->
-                                                    </ul>
+                                                                </a>
+                                                                <ul class="social">
+                                                                    <!--   <li><a href="#" data-tip="Detayları Görüntüle"><i
+                                                                               class="fa fa-eye"></i></a></li>
+                                                                       <li><a href="#" data-tip="Sepete Ekle"><i
+                                                                               class="fa fa-shopping-cart"></i></a></li> -->
+                                                                </ul>
 
-                                                </div>
-                                                <div class="product-content">
-                                                    <h3 class="title"><a href="#">
-                                                        <td>{{ urun.name }}</td>
-                                                    </a></h3>
-                                                    <div class="price">
-                                                        {{ urun.price }} TL + KDV
+                                                            </div>
+                                                            <div class="product-content">
+                                                                <h3 class="title"><a href="#">
+                                                                    <td>{{ urun.name }}</td>
+                                                                </a></h3>
+                                                                <div class="price">
+                                                                    {{ urun.price }} TL + KDV
 
+                                                                </div>
+
+                                                                <!--   <form action="#" method="post">
+                                                                      <div class="form-group">
+                                                                          <input type="number" style="margin-bottom:10px"
+                                                                                 class="form-control" placeholder="Adet">
+
+                                                                      </div>
+
+                                                                      <button type="button"
+                                                                              class="btn btn-block btn-default  add-to-cart">
+                                                                          Sepete Ekle
+                                                                      </button>
+                                                                  </form> -->
+
+
+                                                                <div class="btn-group" style="display: grid">
+                                                                    <a class="btn btn-info"
+                                                                       onclick="getProducts({{ urun.id }})"><i
+                                                                            class="fa fa-align-left"></i> Detay </a><br>
+                                                                    <a href="#"
+                                                                       class="btn btn-warning add-to-cart"
+                                                                       data-id="{{ urun.id }}"
+                                                                       data-name="{{ urun.name }}"
+                                                                       data-price=" {{ urun.price }}"><i
+                                                                            class="fa fa-shopping-cart"></i> Sepete Ekle
+                                                                    </a>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
+                                                {% endif %}
 
-                                                    <!--   <form action="#" method="post">
-                                                          <div class="form-group">
-                                                              <input type="number" style="margin-bottom:10px"
-                                                                     class="form-control" placeholder="Adet">
-
-                                                          </div>
-
-                                                          <button type="button"
-                                                                  class="btn btn-block btn-default  add-to-cart">
-                                                              Sepete Ekle
-                                                          </button>
-                                                      </form> -->
-
-
-                                                    <div class="btn-group" style="display: grid">
-                                                        <a class="btn btn-info" onclick="getProducts({{ urun.id }})"><i
-                                                                class="fa fa-align-left"></i> Detay </a><br>
-                                                        <a href="{% url "inoks:siparis-ekle" %}" type="button"
-                                                           class="btn btn-warning"><i
-                                                                class="fa fa-shopping-cart"></i> Sipariş Ver
-                                                        </a>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            {% endfor %}
                                         {% endif %}
-
-                                    {% endfor %}
-                                {% endif %}
-
 
 
                                     </div>
@@ -224,9 +287,9 @@
                     {% endif %}
 
 
-                <!-- /.box -->
+                    <!-- /.box -->
 
-  </div>
+                </div>
             </section>
 
 
@@ -269,6 +332,292 @@
 
 
     </script>
+
+
+
+    <script>
+
+
+        // ************************************************
+        // Shopping Cart API
+        // ************************************************
+
+        var shoppingCart = (function () {
+            // =============================
+            // Private methods and propeties
+            // =============================
+            cart = [];
+
+            // Constructor
+            function Item(name, price, count, id) {
+                this.name = name;
+                this.price = price;
+                this.count = count;
+                this.id = id;
+            }
+
+            // Save cart
+            function saveCart() {
+                sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
+            }
+
+            // Load cart
+            function loadCart() {
+                cart = JSON.parse(sessionStorage.getItem('shoppingCart'));
+            }
+
+            if (sessionStorage.getItem("shoppingCart") != null) {
+                loadCart();
+            }
+
+
+            // =============================
+            // Public methods and propeties
+            // =============================
+            var obj = {};
+
+            // Add to cart
+            obj.addItemToCart = function (name, price, count, id) {
+                for (var item in cart) {
+                    if (cart[item].name === name) {
+                        cart[item].count++;
+                        saveCart();
+                        return;
+                    }
+                }
+                var item = new Item(name, price, count, id);
+                cart.push(item);
+                saveCart();
+            }
+            // Set count from item
+            obj.setCountForItem = function (name, count) {
+                for (var i in cart) {
+                    if (cart[i].name === name) {
+                        cart[i].count = count;
+                        break;
+                    }
+                }
+            };
+            // Remove item from cart
+            obj.removeItemFromCart = function (name) {
+                for (var item in cart) {
+                    if (cart[item].name === name) {
+                        cart[item].count--;
+                        if (cart[item].count === 0) {
+                            cart.splice(item, 1);
+                        }
+                        break;
+                    }
+                }
+                saveCart();
+            }
+
+            // Remove all items from cart
+            obj.removeItemFromCartAll = function (id) {
+                for (var item in cart) {
+                    if (cart[item].id === id) {
+                        cart.splice(item, 1);
+                        break;
+                    }
+                }
+                saveCart();
+            }
+
+            // Clear cart
+            obj.clearCart = function () {
+                cart = [];
+                saveCart();
+            }
+
+            // Count cart
+            obj.totalCount = function () {
+                var totalCount = 0;
+                for (var item in cart) {
+                    totalCount += cart[item].count;
+                }
+                return totalCount;
+            }
+
+            // Total cart
+            obj.totalCart = function () {
+                var totalCart = 0;
+                for (var item in cart) {
+                    totalCart += cart[item].price * cart[item].count;
+                }
+                return Number(totalCart.toFixed(2));
+            }
+
+            // List cart
+            obj.listCart = function () {
+                var cartCopy = [];
+                for (i in cart) {
+                    item = cart[i];
+                    itemCopy = {};
+                    for (p in item) {
+                        itemCopy[p] = item[p];
+
+                    }
+                    itemCopy.total = Number(item.price * item.count).toFixed(2);
+                    cartCopy.push(itemCopy)
+                }
+                return cartCopy;
+            }
+
+            // cart : Array
+            // Item : Object/Class
+            // addItemToCart : Function
+            // removeItemFromCart : Function
+            // removeItemFromCartAll : Function
+            // clearCart : Function
+            // countCart : Function
+            // totalCart : Function
+            // listCart : Function
+            // saveCart : Function
+            // loadCart : Function
+            return obj;
+        })();
+
+
+        // *****************************************
+        // Triggers / Events
+        // *****************************************
+        // Add item
+        $('.add-to-cart').click(function (event) {
+
+            var x = $(this).data('price').replace(',', '.')
+            event.preventDefault();
+            var name = $(this).data('name');
+
+            var id = $(this).data('id');
+            var price = Number(x);
+            shoppingCart.addItemToCart(name, price, 1, id);
+            displayCart();
+        });
+
+        // Clear items
+        $('.clear-cart').click(function () {
+            shoppingCart.clearCart();
+            displayCart();
+        });
+
+
+        function displayCart() {
+            var cartArray = shoppingCart.listCart();
+            var output = "";
+
+            for (var i in cartArray) {
+                output += "<tr>"
+                    + "<td>" + cartArray[i].name + cartArray[i].id + "</td>"
+                    + "<td>(" + cartArray[i].price + ")</td>"
+                    + "<td><div class='input-group'>"
+                    + "<input type='number' style='width:130px' class='item-count form-control' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>"
+                    + "<input type='hidden' id='productId' name='custId_"+cartArray[i].id+"' value='"+cartArray[i].id+"&"+cartArray[i].count+"'>"
+                    + "</div></td>"
+                    + "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name + " data-id=" + cartArray[i].id + ">X</button></td>"
+                    + " = "
+                    + "<td>" + cartArray[i].total + "</td>"
+                    + "</tr>";
+            }
+            $('.show-cart').html(output);
+            $('.total-cart').html(shoppingCart.totalCart());
+            $('.total-count').html(shoppingCart.totalCount());
+        }
+
+        // Delete item button
+
+        $('.show-cart').on("click", ".delete-item", function (event) {
+            var name = $(this).data('id');
+            console.log(name);
+            shoppingCart.removeItemFromCartAll(name);
+            displayCart();
+        })
+
+
+        // -1
+        $('.show-cart').on("click", ".minus-item", function (event) {
+            var name = $(this).data('name')
+            shoppingCart.removeItemFromCart(name);
+            displayCart();
+        })
+        // +1
+        $('.show-cart').on("click", ".plus-item", function (event) {
+            var name = $(this).data('name')
+            shoppingCart.addItemToCart(name);
+            displayCart();
+        })
+
+        // Item count input
+        $('.show-cart').on("change", ".item-count", function (event) {
+            var name = $(this).data('name');
+            var count = Number($(this).val());
+            shoppingCart.setCountForItem(name, count);
+            displayCart();
+        });
+
+        displayCart();
+
+
+        function activeDeactive(user_id, is_true) {
+
+
+            $.ajax({
+                url: "{% url 'inoks:siparis-ekle' %}",
+                type: "post", // or "get"
+                data: {
+                    data: item,
+
+                },
+                success: function (result) {
+
+                    if (result.status == 'Success') {
+                        swal("Başarılı", "Üye Durumu Başarıyla Güncellendi.", "success");
+                        window.location.replace("{% url "inoks:iptal-edilen-kullanicilar" %}");
+
+
+                    } else {
+                        swal("Başarılı", result.messages, "error");
+                    }
+                }
+            });
+        }
+
+
+        function getCookie(name) {
+            var cookieValue = null;
+            var i = 0;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (i; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            crossDomain: false, // obviates need for sameOrigin test
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+
+    </script>
+
 
 
 
