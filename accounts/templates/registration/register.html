@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html style="overflow-y: hidden">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>BAVEN</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css' %}">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'bower_components/font-awesome/css/font-awesome.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{% static 'bower_components/Ionicons/css/ionicons.min.css' %} ">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'dist/css/AdminLTE.min.css' %}">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{% static 'plugins/iCheck/square/blue.css' %}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <script src="{% static 'alert/sweetalert.min.js' %}"></script>
+</head>
+<body class="hold-transition login-page">
+<div class="login-box" style="width: 700px">
+    <div class="login-logo">
+        <a href="#"><b>BAVEN </b></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Hoşgeldiniz</p>
+
+        {% if messages %}
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-ban"></i> Hata!</h4>
+
+
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+
+
+            </div>
+        {% endif %}
+
+
+
+
+        <form action="" method="post">
+
+
+            <div class="box-body">
+                {% csrf_token %}
+
+
+                <div class="col-md-6">
+
+
+                    <div class="form-group">
+                        <label>{{ profile_form.profileImage.label }}</label>
+
+                        {{ profile_form.profileImage }}
+                        <!-- /.input group -->
+                    </div>
+
+                    <div class="form-group">
+                        <label> {{ user_form.first_name.label }}</label>
+                        {{ user_form.first_name }}
+                    </div>
+
+                    <div class="form-group">
+                        <label> {{ user_form.last_name.label }}</label>
+                        {{ user_form.last_name }}
+                    </div>
+
+
+                    <div class="form-group">
+                        <label> {{ user_form.email.label }}</label>
+                        {{ user_form.email }}
+                    </div>
+
+
+                    <div class="form-group">
+                        <label> {{ profile_form.tc.label }}</label>
+                        {{ profile_form.tc }}
+                    </div>
+
+                    <div class="form-group">
+                        <label> {{ profile_form.mobilePhone.label }}</label>
+                        {{ profile_form.mobilePhone }}
+                    </div>
+                    <div class="form-group">
+                        <label> {{ profile_form.city.label }}</label>
+                        {{ profile_form.city }}
+                    </div>
+
+                    <div class="form-group">
+                        <label> {{ profile_form.district.label }}</label>
+                        {{ profile_form.district }}
+                    </div>
+
+
+                </div>
+
+                <div class="col-md-6">
+
+
+                    <div class="form-group">
+                        <label> {{ profile_form.address.label }}</label>
+                        {{ profile_form.address }}
+                    </div>
+
+
+                    <div class="form-group">
+                        <label> {{ profile_form.gender.label }}</label>
+                        {{ profile_form.gender }}
+                    </div>
+
+                    <div class="form-group">
+                        <label> {{ profile_form.job.label }}</label>
+                        {{ profile_form.job }}
+                    </div>
+
+                    <div class="form-group">
+                        <label> {{ profile_form.educationLevel.label }}</label>
+                        {{ profile_form.educationLevel }}
+                    </div>
+
+                    <div class="form-group">
+                        <label> {{ profile_form.birthDate.label }}</label>
+                        {{ profile_form.birthDate }}
+                    </div>
+                    <hr>
+
+                    <div class="input-group ">
+
+                        {{ profile_form.sponsor }}
+                        <span class="input-group-btn">
+                      <a class="button btn btn-info btn-flat" id='dogrula'
+                         onclick="sponsorDogrula(document.getElementById('id_sponsor').value)"><i class='fa fa-hand-pointer-o' aria-hidden='true'></i>Doğrula</a>
+                    </span>
+                    </div>
+
+
+                    <div class="checkbox">
+                        <label>
+                            {{ profile_form.isContract }}
+
+
+                            <a href="#">Sözleşmeyi</a>
+                            okudum,anladım,onaylıyorum
+                        </label>
+                    </div>
+
+
+                </div>
+
+
+                <div class="box-footer pull-right ">
+                    <button id="sbmt" disabled type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+
+
+            </div>
+            <!-- /.box-body -->
+
+        </form>
+
+
+        <a href="/" class="text-center">Giriş Yap</a><br>
+
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 3 -->
+
+
+<script>
+
+    function sponsorDogrula(sponsor) {
+
+
+        $.ajax({
+            url: "{% url 'inoks:sponsor-dogrula' %}",
+            type: "post", // or "get"
+            data: {
+                sponsor: sponsor,
+
+            },
+            success: function (result) {
+                if (result.isExist) {
+                    swal("Başarılı", result.msg, "success");
+                    document.getElementById('sbmt').disabled = false;
+                    document.getElementById("dogrula").innerHTML = "<i class='fa fa-hand-pointer-o' aria-hidden='true'></i>Doğrulandı";
+                    document.getElementById("dogrula").classList.remove("btn-info");
+                    document.getElementById("dogrula").classList.remove("btn-danger");
+                    document.getElementById("dogrula").classList.add("btn-success");
+                } else {
+                    swal("Doğrulama Hatası", result.msg, "error");
+                }
+
+
+            }
+        });
+    }
+
+    function buttonDisabled() {
+
+        document.getElementById('sbmt').disabled = true;
+        document.getElementById("dogrula").innerHTML = "<i class='fa fa-hand-pointer-o' aria-hidden='true'></i>Doğrulanmadı";
+        document.getElementById("dogrula").classList.remove("btn-info");
+        document.getElementById("dogrula").classList.add("btn-danger");
+    }
+
+
+    function ilceGetir() {
+
+        var e = document.getElementById("id_city");
+        var il_id = e.options[e.selectedIndex].value;
+        $.ajax({
+            url: "{% url 'inoks:ilce-getir' %}",
+            type: "post", // or "get"
+            data: {
+                il_id: il_id,
+
+            },
+            success: function (result) {
+
+
+                let select = document.getElementById("ilce_id");
+                select.options[select.options.length] = new Option('Text 1', 'Value1');
+
+                $('#ilce_id').empty();
+                for (let i = 0; i < result.ilceler.length; i++) {
+                    select.options[select.options.length] = new Option(result.ilceler[i].name, result.ilceler[i].name);
+                }
+            }
+        });
+    }
+
+    function getCookie(name) {
+        var cookieValue = null;
+        var i = 0;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (i; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        crossDomain: false, // obviates need for sameOrigin test
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

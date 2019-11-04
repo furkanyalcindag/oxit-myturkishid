@@ -55,8 +55,14 @@ def return_add_users(request):
             profil.sponsor = profile_form.cleaned_data['sponsor']
             profil.isContract = profile_form.cleaned_data['isContract']
             sponsorNumber = Profile.objects.filter(sponsor=profile_form.cleaned_data['sponsor']).count()
+            sp_profile = Profile.objects.get(pk=profile_form.cleaned_data['sponsor'].pk)
 
-            if sponsorNumber > 2:
+            if sp_profile.user.groups.all()[0].name  == 'Admin':
+                limit = 9
+            else:
+                limit = 2
+
+            if sponsorNumber > limit:
                 messages.warning(request, 'Üyeye Sponsor Eklenemez. Sponsor Alanı Dolmuştur.')
                 return redirect('inoks:kullanici-ekle')
             else:

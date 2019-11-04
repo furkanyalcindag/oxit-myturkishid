@@ -92,6 +92,8 @@ urlpatterns = [
     # Ayarlar
     url(r'ayarlar/profil-ayarlari/$', SettingViews.return_profil_settings, name='profil-ayarlari'),
     url(r'ayarlar/sistem-ayarlari/$', SettingViews.return_system_settings, name='sistem-ayarlari'),
+    url(r'sponsor-dogrula/$', SettingViews.sponsor_isexist, name="sponsor-dogrula"),
+
 
     # SoyAgacı
     url(r'soyagaci/soy-agacim/$', TreeViews.return_my_tree, name='soy-agacim'),
