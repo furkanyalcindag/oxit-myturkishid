@@ -175,7 +175,9 @@ def return_odenecekler(request):
         # for i in range(7):
         #   total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
 
-        total_earning = general_methods.calculate_earning_of_tree(levelDict)
+        order_total_member =general_methods.monthlyMemberOrderTotal(user, )
+
+        total_earning = general_methods.calculate_earning_of_tree(levelDict,order_total_member)
 
         # earnDict[user] = total_earning
         # x = (total_earning * 100) / 118
@@ -185,7 +187,7 @@ def return_odenecekler(request):
                                         tree_price=0, kdv_tree_price=0, income_tax_tree_price=0,total_earn_with_tax=0)
         total_object.profile = user
         total_object.earning = earnDict[user]
-        total_object.total_price = general_methods.monthlyMemberOrderTotal(user, )
+        total_object.total_price = order_total_member
 
         total_object.tree_price = total_earning
         #total_object.kdv_tree_price = total_earning - x
@@ -229,7 +231,10 @@ def return_odenecekler(request):
             # for i in range(7):
             #   total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
 
-            total_earning = general_methods.calculate_earning_of_tree(levelDict)
+            order_total_member = general_methods.monthlyMemberOrderTotalByDate(user, int(request.POST['ay']),
+                                                                                     int(request.POST['yil']))
+
+            total_earning = general_methods.calculate_earning_of_tree(levelDict, order_total_member)
 
             # earnDict[user] = total_earning
             #x = (total_earning * 100) / 118
@@ -239,8 +244,7 @@ def return_odenecekler(request):
                                             tree_price=0, kdv_tree_price=0, income_tax_tree_price=0,total_earn_with_tax=0)
             total_object.profile = user
             total_object.earning = earnDict[user]
-            total_object.total_price = general_methods.monthlyMemberOrderTotalByDate(user, int(request.POST['ay']),
-                                                                                     int(request.POST['yil']))
+            total_object.total_price =order_total_member
             total_object.tree_price = calculate_order_of_tree(levelDict)
             #total_object.kdv_tree_price = total_earning - x
             total_object.income_tax_price = (x * 20 / 100)
