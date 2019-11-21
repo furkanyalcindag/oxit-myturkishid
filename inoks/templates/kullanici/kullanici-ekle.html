@@ -1,7 +1,7 @@
 {% extends 'base_layout.html' %}
 
 {% block content %}
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
     {% if messages %}
         {% for message in messages %}
 
@@ -156,6 +156,10 @@
                                         <label> {{ profile_form.sponsor.label }}</label>
                                         {{ profile_form.sponsor }}
                                     </div>
+                                    <div class="form-group">
+                                        <label> IBAN</label>
+                                        {{ profile_form.iban }}
+                                    </div>
 
 
                                     <div class="checkbox">
@@ -196,7 +200,15 @@
     </section>
 
     <script>
-    function ilceGetir() {
+
+
+        $(document).ready(function () {
+            $('.iban').mask('SS00 0000 0000 0000 0000 00', {
+                placeholder: '____ ____ ____ ____ ____ __'
+            });
+        });
+
+        function ilceGetir() {
 
             var e = document.getElementById("id_city");
             var il_id = e.options[e.selectedIndex].value;
@@ -213,9 +225,9 @@
                     let select = document.getElementById("ilce_id");
                     select.options[select.options.length] = new Option('Text 1', 'Value1');
 
-                     $('#ilce_id').empty();
-                    for(let i =0;i<result.ilceler.length;i++){
-                         select.options[select.options.length] = new Option(result.ilceler[i].name, result.ilceler[i].name);
+                    $('#ilce_id').empty();
+                    for (let i = 0; i < result.ilceler.length; i++) {
+                        select.options[select.options.length] = new Option(result.ilceler[i].name, result.ilceler[i].name);
                     }
                 }
             });

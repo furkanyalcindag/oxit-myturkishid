@@ -74,7 +74,10 @@
                         <form method="post" role="form">
                             <div class="box-body">
                                 {% csrf_token %}
-
+<div class="form-group">
+                                    <label> {{ order_form.profile.label }}</label>
+                                    {{ order_form.profile }}
+                                </div>
 
                                 <div class="dropdown form-group">
 
@@ -99,6 +102,8 @@
                                     </div>
                                 </div>
 
+
+
                                 <div class="form-group">
                                     <label> {{ order_form.city.label }}</label>
                                     {{ order_form.city }}
@@ -116,14 +121,36 @@
                                     {{ order_form.address }}
                                 </div>
 
+
                                 <div class="form-group">
                                     <label> {{ order_form.payment_type.label }}</label>
                                     {{ order_form.payment_type }}
                                 </div>
 
-                                <div class="form-group">
-                                    <label> {{ order_form.order_situations.label }}</label>
-                                    {{ order_form.order_situations }}
+
+
+                              <div class="form-group">
+                                    <div class="row">
+
+                                        <div class="col-md-6"> <input type="checkbox" name="is_digeradres" id="check_diger" onclick="digerAdres();"> Farklı adrese gönder</div>
+
+                                         <div class="col-md-6"> <input type="checkbox" name="is_kurumsal" id="check_kase" onclick="kurumsal();"> Kurumsal</div>
+
+
+                                    </div>
+
+
+
+                                </div>
+
+                                <div class="form-group diger" id="diger" style="display: none">
+                                    <label>Diğer Adres</label>
+                                    <textarea cols="40" rows="2" name="diger_adres" class="form-control " placeholder="Adres"></textarea>
+                                </div>
+
+                             <div class="form-group" id="kase" style="display: none">
+                                    <label>Şirket Kaşe Bilgileri</label>
+                                    <textarea cols="40" rows="2" class="form-control " name="kurumsal_bilgi"placeholder="Kaşe"></textarea>
                                 </div>
 
 
@@ -170,7 +197,7 @@
 
         txt.addEventListener('click', function () {
             content.classList.toggle('show')
-        })
+        });
 
 
         // Close the dropdown if the user clicks outside of it
@@ -184,18 +211,49 @@
             if (!e.target.matches('.list')) {
                 if (content.classList.contains('show')) content.classList.remove('show')
             }
-        }
+        };
 
         list.forEach(function (item, index) {
             item.addEventListener('click', function () {
                 quantity[index].type = (item.checked) ? 'number' : 'hidden';
                 calc()
             })
-        })
+        });
 
         quantity.forEach(function (item) {
             item.addEventListener('input', calc)
-        })
+        });
+
+
+        function digerAdres() {
+
+            var inputElements = document.getElementById('check_diger');
+            console.log(inputElements);
+            console.log("dfddf");
+            if (inputElements.checked) {
+                document.getElementById("diger").style.display='block';
+            }
+            else {
+                 document.getElementById("diger").style.display="none";
+            }
+
+
+        }
+
+        function kurumsal() {
+
+            var inputElements = document.getElementById('check_kase');
+            console.log(inputElements);
+
+            if (inputElements.checked) {
+                document.getElementById("kase").style.display='block';
+            }
+            else {
+                 document.getElementById("kase").style.display="none";
+            }
+
+
+        }
 
         function calc() {
             for (var i = 0, arr = []; i < list.length; i++) {
@@ -284,6 +342,39 @@
         });
 
 
+        window.onload = function () {
+
+            ilkIlceGetir("{{ profile.district }}");
+
+        };
+
+        function ilkIlceGetir(ilce) {
+
+            var e = document.getElementById("id_city");
+            var il_id = e.options[e.selectedIndex].value;
+            $.ajax({
+                url: "{% url 'inoks:ilce-getir' %}",
+                type: "post", // or "get"
+                data: {
+                    il_id: il_id,
+
+                },
+                success: function (result) {
+                    debugger;
+
+                    let select = document.getElementById("ilce_id");
+                    select.options[select.options.length] = new Option('Text 1', 'Value1');
+
+                    $('#ilce_id').empty();
+                    for (let i = 0; i < result.ilceler.length; i++) {
+                        select.options[select.options.length] = new Option(result.ilceler[i].name, result.ilceler[i].name);
+                    }
+
+                    document.getElementById("ilce_id").value = ilce;
+                }
+            });
+        }
+
         function ilceGetir() {
 
             var e = document.getElementById("id_city");
@@ -301,9 +392,9 @@
                     let select = document.getElementById("ilce_id");
                     select.options[select.options.length] = new Option('Text 1', 'Value1');
 
-                     $('#ilce_id').empty();
-                    for(let i =0;i<result.ilceler.length;i++){
-                         select.options[select.options.length] = new Option(result.ilceler[i].name, result.ilceler[i].name);
+                    $('#ilce_id').empty();
+                    for (let i = 0; i < result.ilceler.length; i++) {
+                        select.options[select.options.length] = new Option(result.ilceler[i].name, result.ilceler[i].name);
                     }
                 }
             });

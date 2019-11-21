@@ -183,7 +183,7 @@
 
                     <div class="small-box bg-aqua">
                         <div class="inner">
-                            <h3>{{ total }} ₺ </h3>
+                            <h3>{{ total|floatformat:2 }} ₺ </h3>
                             <p>Toplam Ödenecekler</p>
                         </div>
                         <div class="icon">
@@ -198,7 +198,7 @@
                 <div class="col-lg-4 col-xs-6">
                     <div class="small-box bg-green">
                         <div class="inner">
-                            <h3>{{ total_paid }} ₺ </h3>
+                            <h3>{{ total_paid|floatformat:2  }} ₺ </h3>
                             <p>Toplam Ödenenenler</p>
                         </div>
                         <div class="icon">
@@ -212,7 +212,7 @@
                 <div class="col-lg-4 col-xs-6">
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>{{ not_paid }} ₺ </h3>
+                            <h3>{{ not_paid|floatformat:2  }} ₺ </h3>
 
                             <p>Kalan</p>
                         </div>
@@ -251,8 +251,12 @@
                                 <th>No</th>
 
                                 <th>Üye</th>
-                                <th>Toplam Sipariş</th>
-                                <th>Prim Ücreti</th>
+                                <th>Üye Sipariş</th>
+                                 <th>Üyenin Ağaç Sipariş</th>
+                                <th>Prim</th>
+                                <th>Gelir Vergisi Kesintisi</th>
+
+                                <th>Net Prim Ücreti</th>
                                 <th>Ödeme Durumu</th>
 
 
@@ -269,8 +273,13 @@
                                         <td>{{ forloop.counter }}</td>
 
                                         <td>{{ earn.profile }}</td>
-                                        <td>  {{ earn.total_price|get_item:'total_price' }} ₺ + KDV </td>
-                                        <td>{{ earn.earning }} ₺</td>
+                                        <td>  {{ earn.total_price|get_item:'total_price' }} ₺ </td>
+                                     <td>  {{ earn.tree_price}} ₺ </td>
+                                    <td>{{ earn.total_earn_with_tax|floatformat:2 }} ₺</td>
+
+                                     <td>  {{ earn.income_tax_price|floatformat:2}} ₺ </td>
+
+                                        <td>{{ earn.earning|floatformat:2 }} ₺</td>
 
 
                                         <td>

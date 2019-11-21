@@ -32,6 +32,7 @@
 
     <script src="{% static 'bower_components/jquery/dist/jquery.min.js' %}"></script>
     <script src="{% static 'alert/sweetalert.min.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box" style="width: 700px">
@@ -145,6 +146,11 @@
                         <label> {{ profile_form.birthDate.label }}</label>
                         {{ profile_form.birthDate }}
                     </div>
+
+                    <div class="form-group">
+                        <label> IBAN</label>
+                        {{ profile_form.iban }}
+                    </div>
                     <hr>
 
                     <div class="input-group ">
@@ -152,7 +158,8 @@
                         {{ profile_form.sponsor }}
                         <span class="input-group-btn">
                       <a class="button btn btn-info btn-flat" id='dogrula'
-                         onclick="sponsorDogrula(document.getElementById('id_sponsor').value)"><i class='fa fa-hand-pointer-o' aria-hidden='true'></i>Doğrula</a>
+                         onclick="sponsorDogrula(document.getElementById('id_sponsor').value)"><i
+                              class='fa fa-hand-pointer-o' aria-hidden='true'></i>Doğrula</a>
                     </span>
                     </div>
 
@@ -207,7 +214,7 @@
             },
             success: function (result) {
                 if (result.isExist) {
-                    swal("Başarılı", result.msg, "success");
+                    swal(result.adSoyad, result.msg, "success");
                     document.getElementById('sbmt').disabled = false;
                     document.getElementById("dogrula").innerHTML = "<i class='fa fa-hand-pointer-o' aria-hidden='true'></i>Doğrulandı";
                     document.getElementById("dogrula").classList.remove("btn-info");

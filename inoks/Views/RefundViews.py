@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
@@ -6,11 +7,17 @@ from inoks.Forms.RefundForm import RefundForm
 from inoks.Forms.RefundSituationsForm import RefundSituationsForm
 from inoks.models import Refund, Profile
 from inoks.models.RefundSituations import RefundSituations
+from inoks.services import general_methods
 from inoks.services.general_methods import activeRefund, passiveRefund
 
 
 @login_required
 def return_add_refund(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     refund_form = RefundForm()
 
     if request.method == 'POST':
@@ -76,18 +83,33 @@ def pendingRefundPassive(request):
 
 @login_required
 def return_refunds(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     refund_list = Refund.objects.all()
     return render(request, 'iadeler/iadeler.html', {'refund_list': refund_list})
 
 
 @login_required
 def return_pendings_refunds(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     refund_list = Refund.objects.filter(isApprove=None)
     return render(request, 'iadeler/bekleyen-iadeler.html', {'refund_list': refund_list})
 
 
 @login_required
 def return_my_refunds(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     current_user = request.user
     refund = Profile.objects.get(user=current_user)
 
@@ -97,6 +119,11 @@ def return_my_refunds(request):
 
 @login_required
 def return_refund_situations(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     refund_situations_form = RefundSituationsForm();
 
     if request.method == 'POST':
@@ -135,6 +162,11 @@ def refund_situations_delete(request, pk):
 
 @login_required
 def refund_situations_update(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     refundSituations = RefundSituations.objects.get(id=pk)
     refund_situations_form = RefundSituationsForm(request.POST or None, instance=refundSituations)
 

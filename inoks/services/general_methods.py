@@ -1,7 +1,7 @@
 import calendar
 import datetime
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.db.models import Sum
 
 from inoks.models import Profile, Order, Menu, MenuAdmin, Refund, earningPayments
@@ -330,34 +330,128 @@ def calculate_order_of_tree(levelDict):
     return earning
 
 
-def calculate_earning_of_tree(levelDict):
+def calculate_earning_of_tree(levelDict, total_order_member):
     earning = 0
+
+    kademe = 0
 
     total_order = calculate_order_of_tree(levelDict)
 
-    if total_order >= 607500:
-        earning = float(total_order * 1 / 100)
+    total_order1 = (total_order * 100) / 118
+
+    if total_order >= 10648000:
+        earning = float(total_order1 * 1 / 100)
+        kademe = 10
+
+    elif 4840000 <= total_order < 10648000:
+        earning = float(total_order1 * 2 / 100)
+        kademe = 9
+
+    elif 2200000 <= total_order < 4840000:
+        earning = float(total_order1 * 3 / 100)
+        kademe = 8
+
+    elif 1000000 <= total_order < 2200000:
+        earning = float(total_order1 * 4 / 100)
+        kademe = 7
+
+    elif 607500 <= total_order < 1000000:
+        earning = float(total_order1 * 1 / 100)
+        kademe = 6
 
     elif 202500 <= total_order < 607500:
-        earning = float(total_order * 2 / 100)
+        earning = float(total_order1 * 2 / 100)
+        kademe = 5
 
     elif 67500 <= total_order < 202500:
-        earning = float(total_order * 3 / 100)
+        earning = float(total_order1 * 3 / 100)
+        kademe = 4
 
     elif 22500 <= total_order < 67500:
-        earning = float(total_order * 4 / 100)
+        earning = float(total_order1 * 4 / 100)
+        kademe = 3
 
     elif 7500 <= total_order < 22500:
         if len(levelDict[str(3)]) == 9:
-            earning = float(total_order * 5 / 100)
+            earning = float(total_order1 * 5 / 100)
+            kademe = 2
         elif len(levelDict[str(2)]) == 3:
-            earning = float(total_order * 6 / 100)
+            earning = float(total_order1 * 6 / 100)
+            kademe = 1
         else:
             earning = 0
 
     elif 2500 <= total_order < 22500:
         if len(levelDict[str(2)]) == 3:
-            earning = float(total_order * 6 / 100)
+            earning = float(total_order1 * 6 / 100)
+            kademe = 1
+        else:
+            earning = 0
+
+    else:
+        earning = 0
+
+    # kademeye göre sipariş kontrolü
+    if kademe == 0:
+        earning = 0
+
+    elif kademe == 1:
+        if total_order_member >= 60:
+            earning = earning
+        else:
+            earning = 0
+
+    elif kademe == 2:
+        if total_order_member >= 60:
+            earning = earning
+        else:
+            earning = 0
+
+    elif kademe == 3:
+        if total_order_member >= 60:
+            earning = earning
+        else:
+            earning = 0
+
+    elif kademe == 4:
+        if total_order_member >= 120:
+            earning = earning
+        else:
+            earning = 0
+
+    elif kademe == 5:
+        if total_order_member >= 120:
+            earning = earning
+        else:
+            earning = 0
+
+    elif kademe == 6:
+        if total_order_member >= 120:
+            earning = earning
+        else:
+            earning = 0
+
+    elif kademe == 7:
+        if total_order_member >= 240:
+            earning = earning
+        else:
+            earning = 0
+
+    elif kademe == 8:
+        if total_order_member >= 120:
+            earning = earning
+        else:
+            earning = 0
+
+    elif kademe == 9:
+        if total_order_member >= 120:
+            earning = earning
+        else:
+            earning = 0
+
+    elif kademe == 10:
+        if total_order_member >= 120:
+            earning = earning
         else:
             earning = 0
 
@@ -393,3 +487,40 @@ def monthlMemberOrderTotalAllTime(profile):
         total_price=Sum('totalPrice'))
 
     return orders_sum
+
+
+def show_urls(urllist, depth=0):
+    urls = []
+
+    # show_urls(urls.urlpatterns)
+    for entry in urllist:
+
+        urls.append(entry)
+        perm = Permission(name=entry.name, codename=entry.pattern.regex.pattern, content_type_id=11)
+
+        if Permission.objects.filter(name=entry.name).count() == 0:
+            perm.save()
+        if hasattr(entry, 'url_patterns'):
+            show_urls(entry.url_patterns, depth + 1)
+
+    return urls
+
+
+def control_access(request):
+    group = request.user.groups.all()[0]
+
+    permissions = group.permissions.all()
+
+    is_exist = False
+
+    for perm in permissions:
+
+        if request.resolver_match.url_name == perm.name:
+            is_exist = True
+
+    if group.name == "Admin":
+        is_exist = True
+
+    return is_exist
+
+

@@ -1,11 +1,13 @@
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User, Group, Permission
 from django.core.mail import EmailMultiAlternatives
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 
 # Create your views here.
+from inoks import urls
 from inoks.Forms.ProfileFormForMember import ProfileForm
 from education.Forms.UserForm import UserForm
 from inoks.models import Profile
@@ -115,14 +117,15 @@ def register_member(request):
                              mobilePhone=profile_form.cleaned_data['mobilePhone'],
                              birthDate=profile_form.cleaned_data['birthDate'],
                              district=profile_form.cleaned_data['district'],
-                             sponsor=profile_form.cleaned_data['sponsor'])
+                             sponsor=profile_form.cleaned_data['sponsor'],
+                             iban=profile_form.cleaned_data['iban'])
             profil.sponsor = profile_form.cleaned_data['sponsor']
             profil.isContract = profile_form.cleaned_data['isContract']
             sponsorNumber = Profile.objects.filter(sponsor=profile_form.cleaned_data['sponsor']).count()
-            sp_profile=Profile.objects.get(pk=profile_form.cleaned_data['sponsor'].pk)
+            sp_profile = Profile.objects.get(pk=profile_form.cleaned_data['sponsor'].pk)
             limit = 0
 
-            if sp_profile.user.groups.all()[0].name  == 'Admin':
+            if sp_profile.user.groups.all()[0].name == 'Admin':
                 limit = 9
             else:
                 limit = 2
@@ -154,3 +157,62 @@ def register_member(request):
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
     return render(request, 'registration/register.html', {'user_form': user_form, 'profile_form': profile_form})
+
+
+def groups(request):
+    group = Group.objects.all()
+
+    return render(request, 'permission/groups.html', {'groups': group})
+
+
+@login_required
+def permission(request, pk):
+    general_methods.show_urls(urls.urlpatterns, 0)
+    group = Group.objects.get(pk=pk)
+    menu = ""
+    ownMenu = ""
+
+    groups = group.permissions.all()
+    per = []
+    menu2 = []
+
+    for gr in groups:
+        per.append(gr.codename)
+
+    ownMenu = group.permissions.all()
+
+    menu = Permission.objects.all()
+
+    for men in menu:
+        if men.codename in per:
+            print("echo")
+        else:
+            menu2.append(men)
+
+    return render(request, 'permission/izin-ayar.html',
+                  {'menu': menu2, 'ownmenu': ownMenu, 'group': group})
+
+
+@login_required
+def permission_post(request):
+    if request.POST:
+        try:
+            permissions = request.POST.getlist('values[]')
+            group = Group.objects.get(pk=request.POST.get('group'))
+
+            group.permissions.clear()
+            group.save()
+            if len(permissions) == 0:
+                return JsonResponse({'status': 'Success', 'messages': 'Sınıf listesi boş'})
+            else:
+                for id in permissions:
+                    perm = Permission.objects.get(pk=id)
+                    group.permissions.add(perm)
+
+            group.save()
+            return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
+        except Permission.DoesNotExist:
+            return JsonResponse({'status': 'Fail', 'msg': 'Object does not exist'})
+
+    else:
+        return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})

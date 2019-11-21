@@ -21,11 +21,13 @@ def return_system_settings(request):
 def sponsor_isexist(request):
     try:
         isExist = False
+        adSoyad = ''
         sponsor = request.POST['sponsor']
         profile = Profile.objects.filter(pk=sponsor)
 
         if len(profile) > 0:
             isExist = True
+            adSoyad = profile[0].user.first_name + ' ' + profile[0].user.last_name
 
         situation = dict()
         situation['situation'] = isExist
@@ -36,11 +38,9 @@ def sponsor_isexist(request):
         responseData['isExist'] = data.data
 
         if isExist:
-            return JsonResponse({'status': 'Success', 'msg': 'Sponsor Doğrulandı', 'isExist': True})
+            return JsonResponse({'status': 'Success', 'msg': 'Sponsor Doğrulandı', 'isExist': True, 'adSoyad': adSoyad})
         else:
             return JsonResponse({'status': 'Success', 'msg': 'Sponsor Bulunamadı', 'isExist': False})
-
-
 
     except Exception as e:
 

@@ -20,6 +20,11 @@ from inoks.services.general_methods import activeUser, passiveUser, reactiveUser
 
 @login_required
 def return_add_users(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     user_form = UserForm()
     profile_form = ProfileForm()
 
@@ -39,6 +44,7 @@ def return_add_users(request):
             password = User.objects.make_random_password()
             user.set_password(password)
             user2.groups.add(group)
+            user.is_active = True
             user.save()
 
             profil = Profile(user=user, tc=profile_form.cleaned_data['tc'],
@@ -51,13 +57,14 @@ def return_add_users(request):
                              mobilePhone=profile_form.cleaned_data['mobilePhone'],
                              birthDate=profile_form.cleaned_data['birthDate'],
                              district=profile_form.cleaned_data['district'],
-                             sponsor=profile_form.cleaned_data['sponsor'])
+                             sponsor=profile_form.cleaned_data['sponsor'],
+                             iban=profile_form.cleaned_data['iban'])
             profil.sponsor = profile_form.cleaned_data['sponsor']
             profil.isContract = profile_form.cleaned_data['isContract']
             sponsorNumber = Profile.objects.filter(sponsor=profile_form.cleaned_data['sponsor']).count()
             sp_profile = Profile.objects.get(pk=profile_form.cleaned_data['sponsor'].pk)
 
-            if sp_profile.user.groups.all()[0].name  == 'Admin':
+            if sp_profile.user.groups.all()[0].name == 'Admin':
                 limit = 9
             else:
                 limit = 2
@@ -93,6 +100,11 @@ def return_add_users(request):
 
 @login_required
 def users_update(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     current_user = request.user
     user = User.objects.get(id=current_user.id)
 
@@ -123,14 +135,23 @@ def users_update(request, pk):
 
 @login_required
 def return_users(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     users = Profile.objects.filter(user__is_active=True).filter(~Q(user__groups__name='Admin'))
 
     return render(request, 'kullanici/kullanicilar.html', {'users': users})
 
 
-
 @login_required
 def return_my_users(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     current_user = request.user
     userprofile = Profile.objects.get(user=current_user)
 
@@ -249,6 +270,11 @@ def pending_profile_delete(request, pk):
 
 @login_required
 def return_deactive_users(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     users = Profile.objects.filter(user__is_active=False, isApprove=True)
 
     return render(request, 'kullanici/iptal-edilen-kullanicilar.html', {'users': users})

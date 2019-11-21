@@ -1,3 +1,4 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.forms import modelformset_factory
 from django.http import JsonResponse
@@ -11,10 +12,16 @@ from inoks.Forms.ProductForm import ProductForm
 from inoks.models import Product, ProductCategory
 from inoks.models.ProductImage import ProductImage
 from inoks.serializers.product_serializers import ProductSerializer
+from inoks.services import general_methods
 
 
 @login_required
 def return_add_products(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     product_form = ProductForm()
 
     # image_form = modelformset_factory(ProductImage,
@@ -94,6 +101,11 @@ def productCategory_delete(request, pk):
 
 @login_required
 def productCategory_update(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     productCategory = ProductCategory.objects.get(id=pk)
     product_category_form = ProductCategoryForm(request.POST or None, instance=productCategory)
 
@@ -110,6 +122,11 @@ def productCategory_update(request, pk):
 
 @login_required
 def product_update(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     product = Product.objects.get(id=pk)
     product_form = ProductForm(request.POST or None, instance=product)
     durum = "GUNCELLE"
@@ -167,7 +184,13 @@ def getProducts(request, pk):
 
 @login_required
 def return_product_list(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     product_list = Product.objects.all()
+
     return render(request, 'urunler/urun-listesi.html', {'product_list': product_list})
 
 
@@ -176,15 +199,25 @@ def return_product_list(request):
 
 @login_required
 def return_products(request):
+    perm = general_methods.control_access(request)
 
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     categories = ProductCategory.objects.all()
     urunler = Product.objects.all()
+
     return render(request, 'urunler/urunler.html',
                   {'kategoriler': categories, 'urunler': urunler})
 
 
 @login_required
 def return_add_product_category(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     product_category_form = ProductCategoryForm();
 
     if request.method == 'POST':

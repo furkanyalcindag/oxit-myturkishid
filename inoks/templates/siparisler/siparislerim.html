@@ -231,13 +231,13 @@
                                         <ul> {% for product in order.orderproduct_set.all %}
 
                                                 <li><font style="color: #0b58a2">{{ product.quantity }}
-                                                    X </font>{{ product.product.name }} {{ product.product.price }} TL +KDV </li>
+                                                    X </font>{{ product.product.name }} {{ product.product.price }} TL</li>
 
                                             {% endfor %}</ul>
 
                                     </td>
 
-                                    <td>{{ order.totalPrice }} TL +KDV</td>
+                                    <td>{{ order.totalPrice }} TL</td>
 
                                     <td>
                                         <div class="btn-group">
@@ -328,7 +328,13 @@
 
                     html += '<div class="col-md-12" >';
                     html += ' <li class="list-group-item">';
-                    html += '<b>Adres</b> <a class="pull-right">' + order.address + '</a></li></div>' +
+                    html += '<b>Adres</b> <a class="pull-right">' + order.address + '</a></li>' +
+                        '';
+                     html += ' <li class="list-group-item">';
+                     html += '<b>Diğer Adres</b> <a class="pull-right">' + order.otherAddress + '</a></li>' +
+                        '';
+                      html += ' <li class="list-group-item">';
+                      html += '<b>Kurumsal</b> <a class="pull-right">' + order.companyInfo + '</a></li></div>' +
                         '</div></ul>';
 
 

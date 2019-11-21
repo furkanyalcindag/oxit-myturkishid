@@ -1,8 +1,9 @@
 import datetime
 
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 
 from inoks import tasks
@@ -15,6 +16,11 @@ from inoks.services.general_methods import activeUser, activeOrder
 
 @login_required
 def return_admin_dashboard(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     today = datetime.date.today()
     today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
     today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
@@ -48,6 +54,11 @@ def return_admin_dashboard(request):
 
 @login_required
 def return_user_dashboard(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     current_user = request.user
     userprofile = Profile.objects.get(user=current_user)
     my_orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id).count()

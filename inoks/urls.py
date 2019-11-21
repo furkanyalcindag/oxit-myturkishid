@@ -14,9 +14,9 @@ urlpatterns = [
         name='bekleyen-kullanicilar-sil'),
     url(r'dashboard/admin-dashboard/(?P<pk>\d+)$', DashboardViews.getPendingProfile, name='getPendingProfile'),
     url(r'kullanici-onayla/$', DashboardViews.profile_active_passive, name="kullanici-onayla"),
-    url(r'dashboard/admin-dashboard/sil/(?P<pk>\d+)$', DashboardViews.pending_order_delete,
+    url(r'dashboard/admin-dashboard/bekleyen-siparis-sil/(?P<pk>\d+)$', DashboardViews.pending_order_delete,
         name='bekleyen-siparisler-sil'),
-    url(r'dashboard/admin-dashboard/(?P<pk>\d+)$', DashboardViews.getPendingOrder, name='getPendingOrder'),
+    url(r'dashboard/admin-dashboard/pending-order/(?P<pk>\d+)$', DashboardViews.getPendingOrder, name='getPendingOrder'),
     url(r'siparis-onayla/$', DashboardViews.pendingOrderActive, name="siparis-onayla"),
     url(r'dashboard/user-dashboard/(?P<pk>\d+)$', DashboardViews.getMyOrder, name='getMyOrder'),
 
@@ -52,6 +52,7 @@ urlpatterns = [
 
     # Siparisler
     url(r'siparisler/siparis-ekle/$', OrderViews.return_add_orders, name='siparis-ekle'),
+    url(r'siparisler/admin-siparis-ekle/$', OrderViews.return_add_orders_admin, name='admin-siparis-ekle'),
     url(r'siparisler/bekleyen-siparisler/$', OrderViews.return_pending_orders, name='bekleyen-siparisler'),
     url(r'siparisler/siparislerim/$', OrderViews.return_my_orders, name='siparislerim'),
     url(r'siparisler/siparislerim/(?P<pk>\d+)$', OrderViews.getMyOrder, name='getMyOrder'),
@@ -65,6 +66,7 @@ urlpatterns = [
         name='siparislersil'),
     url(r'siparisler/siparisler/(?P<pk>\d+)$', OrderViews.getOrder, name='getOrder'),
     url(r'siparisler/sepet-siparis-ekle/$', OrderViews.return_add_orders_from_cart, name='kart-siparis-ekle'),
+    url(r'siparis-durumu-guncelle/$', OrderViews.siparis_durumu_guncelle, name="siparis-durumu-guncelle"),
 
     # İadeler
     url(r'iadeler/iade-olustur/$', RefundViews.return_add_refund, name='iade-olustur'),

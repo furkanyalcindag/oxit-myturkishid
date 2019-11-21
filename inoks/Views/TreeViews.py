@@ -1,5 +1,6 @@
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from inoks.models import Profile
 from inoks.models.ProfileControlObject import ProfileControlObject
@@ -8,6 +9,11 @@ from inoks.services import general_methods
 
 @login_required
 def return_my_tree(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     profilList = []
     current_user = request.user
     total_earning = 0
@@ -47,6 +53,11 @@ def return_my_tree(request):
 
 @login_required
 def return_all_tree(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     trees = []
     profileArray = []
     levelDict = dict()

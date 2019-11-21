@@ -55,6 +55,7 @@ class Profile(models.Model):
     isActive = models.BooleanField(default=False)
     isContract = models.BooleanField(default=False)
     activePassiveDate = models.DateTimeField(null=True, blank=True)
+    iban = models.TextField(blank=True, null=True, verbose_name='iban')
 
     def __str__(self):
         return '%d %s %s %s' % (self.id, '-', self.user.first_name, self.user.last_name)

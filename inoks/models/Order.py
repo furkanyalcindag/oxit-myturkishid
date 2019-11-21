@@ -7,7 +7,6 @@ from inoks.models.Product import Product
 
 
 class Order(models.Model):
-
     TRANSFER = 'Havale/EFT'
     PAYMENT_CHOICES = (
 
@@ -22,7 +21,8 @@ class Order(models.Model):
     district = models.TextField(blank=False, null=False, verbose_name='İlçe')
     address = models.TextField(blank=True, null=True, verbose_name='Adres')
     sponsor = models.TextField(blank=True, null=True, verbose_name='Sponsor')
-    payment_type = models.CharField(max_length=128, verbose_name='Ödeme Türü', choices=PAYMENT_CHOICES, default=TRANSFER)
+    payment_type = models.CharField(max_length=128, verbose_name='Ödeme Türü', choices=PAYMENT_CHOICES,
+                                    default=TRANSFER)
     isContract = models.BooleanField(default=False)
     isApprove = models.BooleanField(default=False)
     isPayed = models.BooleanField(default=False)
@@ -30,6 +30,14 @@ class Order(models.Model):
     creationDate = models.DateTimeField(auto_now_add=True, verbose_name='Kayıt Tarihi')
     modificationDate = models.DateTimeField(auto_now=True, verbose_name='Güncelleme Tarihi')
     paidDate = models.DateTimeField(null=True, blank=True, verbose_name='Kayıt Tarihi')
+    otherAddress = models.TextField(blank=True, null=True, verbose_name='Diğer Adres')
+    companyInfo = models.TextField(blank=True, null=True, verbose_name='Şirket Bilgileri')
 
     def __str__(self):
         return '%d ' % self.id
+
+    def latest_catch(self):
+        if len(self.order_situations.all())>0:
+            return self.order_situations.all()[len(self.order_situations.all())-1]
+        else:
+            return 0
