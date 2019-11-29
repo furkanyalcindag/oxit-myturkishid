@@ -54,7 +54,7 @@ class ProfileForm(ModelForm):
 
             'iban': forms.TextInput(
                 attrs={'class': 'form-control iban', 'placeholder': 'iban',
-                       'pattern': '^DE\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$', 'required': 'required',
+                        'required': 'required',
                        'maxlength': '11', 'minlength': '11'}),
 
         }
