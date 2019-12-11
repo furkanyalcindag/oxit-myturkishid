@@ -7,10 +7,10 @@ from inoks.models.Product import Product
 
 
 class Order(models.Model):
-    TRANSFER = 'Havale/EFT'
+    TRANSFER = 'Kredi Kartı'
     PAYMENT_CHOICES = (
 
-        (TRANSFER, 'Havale/EFT'),
+        (TRANSFER, 'Kredi Kartı'),
     )
 
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Üye Adı')

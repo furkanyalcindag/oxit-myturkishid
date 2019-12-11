@@ -1,6 +1,12 @@
+import base64
+import binascii
+import hashlib
+import hmac
 import json
 import pickle
+import sys
 
+import requests
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -9,6 +15,7 @@ from django.core import serializers
 from django.core.mail import EmailMultiAlternatives
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from rest_framework.decorators import api_view
 
 from inoks.Forms.OrderForm import OrderForm
@@ -21,7 +28,6 @@ from inoks.serializers.order_serializers import OrderSerializer
 from inoks.serializers.product_cart_serializer import CartSerializer
 from inoks.services import general_methods
 from inoks.services.general_methods import activeOrder
-
 
 
 @login_required
@@ -38,7 +44,7 @@ def return_add_orders_admin(request):
 
     if request.method == 'POST':
 
-        order_form = OrderForm(request.POST)
+        order_form = OrderFormAdmin(request.POST)
 
         if order_form.is_valid():
 
@@ -48,6 +54,7 @@ def return_add_orders_admin(request):
 
             products_quantity = products_quantity.split(',')
 
+            order_product_card = []
 
             order = Order(profile=order_form.cleaned_data['profile'],
 
@@ -67,6 +74,7 @@ def return_add_orders_admin(request):
                 orderProduct = OrderProduct(order=order, product=prod,
                                             quantity=int(product[0].strip()))
                 orderProduct.save()
+                order_product_card.append(orderProduct)
 
                 total_price = total_price + (int(product[0].strip()) * prod.price)
 
@@ -80,7 +88,9 @@ def return_add_orders_admin(request):
             order.save()
 
             messages.success(request, 'Sipariş başarıyla eklendi.')
-            return redirect('inoks:siparis-ekle')
+
+            return redirect('inoks:odeme-yap', siparis=order.id)
+
 
         else:
 
@@ -88,6 +98,7 @@ def return_add_orders_admin(request):
 
     return render(request, 'siparisler/siparis-ekle.html',
                   {'order_form': order_form, 'products': products, 'profile': profile})
+
 
 @login_required
 def return_add_orders(request):
@@ -112,6 +123,7 @@ def return_add_orders(request):
             products_quantity = order_form.cleaned_data['droptxt']
 
             products_quantity = products_quantity.split(',')
+            order_product_card = []
 
             order = Order(profile=profile,
 
@@ -131,6 +143,7 @@ def return_add_orders(request):
                 orderProduct = OrderProduct(order=order, product=prod,
                                             quantity=int(product[0].strip()))
                 orderProduct.save()
+                order_product_card.append(orderProduct)
 
                 total_price = total_price + (int(product[0].strip()) * prod.price)
 
@@ -144,7 +157,8 @@ def return_add_orders(request):
             order.save()
 
             messages.success(request, 'Sipariş başarıyla eklendi.')
-            return redirect('inoks:siparis-ekle')
+            # return redirect('inoks:siparis-ekle')
+            return redirect('inoks:odeme-yap', siparis=order.id)
 
         else:
 
@@ -201,6 +215,8 @@ def return_add_orders_from_cart(request):
 
             products_quantity = products_quantity.split(',')
 
+            order_product_card = []
+
             order = Order(profile=profile,
 
                           city=order_form.cleaned_data['city'],
@@ -219,6 +235,7 @@ def return_add_orders_from_cart(request):
                 orderProduct = OrderProduct(order=order, product=prod,
                                             quantity=int(product[0].strip()))
                 orderProduct.save()
+                order_product_card.append(orderProduct)
 
                 total_price = total_price + (int(product[0].strip()) * prod.price)
 
@@ -232,7 +249,7 @@ def return_add_orders_from_cart(request):
             order.save()
 
             messages.success(request, 'Sipariş başarıyla eklendi.')
-            return redirect('inoks:siparis-ekle')
+            return redirect('inoks:odeme-yap', siparis=order.id)
 
         else:
 
@@ -421,7 +438,7 @@ def siparis_durumu_guncelle(request):
         order.save()
 
         subject, from_email, to = 'BAVEN Sipariş Durumunuz Güncellendi ', 'ik@oxityazilim.com', order.profile.user.email
-        text_content = order_id +'numaralı sipariş durumunuz güncellendi.'
+        text_content = order_id + 'numaralı sipariş durumunuz güncellendi.'
         html_content = '<p> <strong>Site adresi:</strong> <a href="http://www.smutekgrup.com"></a>www.mutekgrup.com</p>'
         html_content = html_content + '<p><strong>Yeni Sipariş Durumu: </strong> ' + situation.name + '</p>'
 
@@ -434,3 +451,208 @@ def siparis_durumu_guncelle(request):
     except Exception as e:
 
         return JsonResponse({'status': 'Fail', 'msg': 'Sipariş durumu güncellenmedi'})
+
+
+def build_string(*args):
+    return ''.join([str(a) for a in args])
+
+
+def odemeYap(request, siparis):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    order = Order.objects.get(pk=siparis)
+    order_products = OrderProduct.objects.filter(order=order)
+
+    user_basket = []
+    user_basket_content = []
+    user_basket_content.append("Örnek ürün 1")
+    user_basket_content.append("18.00")
+    user_basket_content.append("1")
+
+    user_basket_content2 = []
+    user_basket_content2.append("Örnek ürün 2")
+    user_basket_content2.append("18.00")
+    user_basket_content2.append("1")
+    user_basket.append(user_basket_content)
+    # user_basket.append(user_basket_content2)
+
+    encodedBytes = base64.b64encode(json.dumps(user_basket).encode())
+    # encodedStr = str(encodedBytes, "utf-8")
+
+    # data = base64.urlsafe_b64encode(json.dumps({'a': 123}).encode())
+
+    merchant_id = '146950'
+    merchant_key = 'Tw7p6HFLrbuyMBQ9'
+    merchant_salt = 'HNZx6niqsJJjiiRq'
+    #
+    ## Müşterinizin sitenizde kayıtlı veya form vasıtasıyla aldığınız eposta adresi
+    email = order.profile.user.email
+    #
+    ## Tahsil edilecek tutar.
+    payment_amount = int(order.totalPrice * 100)
+    # 9.99 için 9.99 * 100 = 999 gönderilmelidir.
+    #
+    ## Sipariş numarası: Her işlemde benzersiz olmalıdır!! Bu bilgi bildirim sayfanıza yapılacak bildirimde geri gönderilir.
+    merchant_oid = order.id
+    #
+    ## Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız ad ve soyad bilgisi
+    user_name = order.profile.user.first_name + " " + order.profile.user.last_name
+    #
+    ## Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız adres bilgisi
+    user_address = order.address
+    #
+    ## Müşterinizin sitenizde kayıtlı veya form aracılığıyla aldığınız telefon bilgisi
+    user_phone = order.profile.mobilePhone
+    #
+    ## Başarılı ödeme sonrası müşterinizin yönlendirileceği sayfa
+    ## !!! Bu sayfa siparişi onaylayacağınız sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
+    ## !!! Siparişi onaylayacağız sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
+    merchant_ok_url = "http://185.122.203.112/odeme-basarisiz/"
+    #
+    ## Ödeme sürecinde beklenmedik bir hata oluşması durumunda müşterinizin yönlendirileceği sayfa
+    ## !!! Bu sayfa siparişi iptal edeceğiniz sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
+    ## !!! Siparişi iptal edeceğiniz sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
+    merchant_fail_url = "http://185.122.203.112/odeme-basarili/"
+    #
+    ## Müşterinin sepet/sipariş içeriği
+    user_basket = encodedBytes.decode("utf-8")
+    #
+    # *ÖRNEK $user_basket oluşturma - Ürün adedine göre array'leri çoğaltabilirsiniz
+
+    ############################################################################################
+
+    ## Kullanıcının IP adresi
+
+    ## !!! Eğer bu örnek kodu sunucuda değil local makinanızda çalıştırıyorsanız
+    ## buraya dış ip adresinizi (https://www.whatismyip.com/) yazmalısınız. Aksi halde geçersiz paytr_token hatası alırsınız.
+    user_ip = "78.177.33.217"
+    ##
+
+    ## İşlem zaman aşımı süresi - dakika cinsinden
+    timeout_limit = "30"
+
+    ## Hata mesajlarının ekrana basılması için entegrasyon ve test sürecinde 1 olarak bırakın. Daha sonra 0 yapabilirsiniz.
+    debug_on = 1
+
+    ## Mağaza canlı modda iken test işlem yapmak için 1 olarak gönderilebilir.
+    test_mode = 0
+
+    no_installment = 0
+    # // Taksityapılmasını istemiyorsanız, sadece tek çekim  sunacaksanız 1yapın
+
+    ## Sayfada görüntülenecek taksit adedini sınırlamak istiyorsanız uygun şekilde değiştirin.
+    ## Sıfır (0) gönderilmesi durumunda yürürlükteki en fazla izin verilen taksit geçerli olur.
+    max_installment = 0
+
+    currency = "TL"
+
+    hash_str = merchant_id + user_ip + str(merchant_oid) + email + str(payment_amount) + user_basket + str(
+        no_installment) + str(max_installment) + currency + str(test_mode)
+
+    """dig = hmac.new(
+        b'Tw7p6HFLrbuyMRQ9', msg=hash_str + merchant_salt,
+        digestmod=hashlib.sha256).hexdigest()
+    paytr_token = base64.b64encode(bytes(binascii.hexlify(dig)))"""
+
+    x = hash_str + merchant_salt
+    dig = hmac.new('Tw7p6HFLrbuyMRQ9'.encode(), x.encode('utf-8'), hashlib.sha256)
+    a = base64.b64encode(dig.digest()).decode()
+
+    data = hash_str + merchant_salt
+    message = bytes(hash_str + merchant_salt, 'utf-8')
+    secret = bytes(merchant_key, 'utf-8')
+
+    hash = hmac.new(secret, data.encode('utf-8'), hashlib.sha256)
+
+    b = hash.digest()
+
+    # to base64
+    b = base64.b64encode(b).decode()
+
+    hmac_hash = base64.b64encode(
+        hmac.new(bytearray(merchant_key, 'utf-8'), data.encode('utf-8'), hashlib.sha256).digest())
+
+    print(hmac_hash)
+
+    # b = bytes(  merchant_key.encode('utf-8'))
+
+    # h = hmac.new(b, hash_str + merchant_salt, hashlib.sha256).hexdigest()
+
+    """paytr_token = base64.b64encode(
+        hmac.new(hash_str + merchant_salt, merchant_key,  digestmod=hashlib.sha256).digest())"""
+
+    parameters = {
+        'merchant_id': merchant_id,
+        'user_ip': user_ip,
+        'merchant_oid': merchant_oid,
+        'email': email,
+        'payment_amount': payment_amount,
+        'paytr_token': b,
+        'user_basket': user_basket,
+        'debug_on': debug_on,
+        'no_installment': no_installment,
+        'max_installment': max_installment,
+        'user_name': user_name,
+        'user_address': user_address,
+        'user_phone': user_phone,
+        'merchant_ok_url': merchant_ok_url,
+        'merchant_fail_url': merchant_fail_url,
+        'timeout_limit': timeout_limit,
+        'currency': currency,
+        'test_mode': test_mode
+    }
+
+    response = requests.post("https://www.paytr.com/odeme/api/get-token", data=parameters, verify=False, timeout=90)
+
+    return render(request, "odeme/odeme.html",
+                  {"token": json.loads(response.text)['token'], "card": order_products, "total": order.totalPrice})
+
+
+def odeme_sonuc(request):
+    post = request.POST
+
+    merchant_key = 'Tw7p6HFLrbuyMBQ9'
+    merchant_salt = 'HNZx6niqsJJjiiRq'
+
+    data = request.POST.get("merchant_oid") + merchant_salt + request.POST.get("status") + request.POST.get(
+        "total_amount")
+
+    message = bytes(data, 'utf-8')
+    secret = bytes(merchant_key, 'utf-8')
+
+    hash = hmac.new(secret, data.encode('utf-8'), hashlib.sha256)
+
+    b = hash.digest()
+
+    # to base64
+    b = base64.b64encode(b).decode()
+
+    order = Order.objects.get(pk=request.POST.get('merchant_oid'))
+
+    if b != request.POST.get("hash"):
+        sys.exit()
+
+    if request.POST.get("status") == 'success':  ## Ödeme Onaylandı
+
+        order.isPayed = True
+        order.order_situations.add(OrderSituations.objects.get(name="Onay Bekliyor"))
+        order.save()
+
+    else:
+        order.delete()
+
+    render(request, "odeme/odeme-bildirim.html", {"odeme": "OK"})
+
+
+def basarili_odeme(request):
+
+    return render(request,'odeme/basarili-odeme.html')
+
+
+def basarisiz_odeme(request):
+
+    return render(request,'odeme/basarisiz-odeme.html')

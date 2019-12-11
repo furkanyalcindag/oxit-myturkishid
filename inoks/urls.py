@@ -102,4 +102,11 @@ urlpatterns = [
     url(r'soyagaci/soy-agaclari/$', TreeViews.return_all_tree, name='soy-agaclari'),
 
     url(r'ilce-getir/$', CityViews.get_districts, name="ilce-getir"),
+
+
+    # odeme
+    url(r'odeme-modul/(?P<siparis>\d+)$', OrderViews.odemeYap, name='odeme-yap'),
+    url(r'odeme-bildirim/$', OrderViews.odeme_sonuc(), name='odeme-sonuc'),
+    url(r'odeme-basarili/$', OrderViews.basarili_odeme, name='odeme-basarili'),
+    url(r'odeme-basarisiz/$', OrderViews.basarisiz_odeme, name='basarisiz-odeme'),
 ]
