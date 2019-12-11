@@ -634,6 +634,7 @@ def odeme_sonuc(request):
     # to base64
     b = base64.b64encode(b).decode()
 
+    print(request.POST.get('merchant_oid'))
     order = Order.objects.get(pk=int(request.POST.get('merchant_oid')))
 
     if b != request.POST.get("hash"):
