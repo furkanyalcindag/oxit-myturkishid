@@ -16,6 +16,7 @@ from django.core.mail import EmailMultiAlternatives
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 
 from inoks.Forms.OrderForm import OrderForm
@@ -611,7 +612,7 @@ def odemeYap(request, siparis):
     return render(request, "odeme/odeme.html",
                   {"token": json.loads(response.text)['token'], "card": order_products, "total": order.totalPrice})
 
-
+@csrf_exempt
 def odeme_sonuc(request):
     post = request.POST
 
