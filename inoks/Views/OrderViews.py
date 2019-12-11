@@ -612,6 +612,7 @@ def odemeYap(request, siparis):
     return render(request, "odeme/odeme.html",
                   {"token": json.loads(response.text)['token'], "card": order_products, "total": order.totalPrice})
 
+
 @csrf_exempt
 def odeme_sonuc(request):
     post = request.POST
@@ -619,7 +620,8 @@ def odeme_sonuc(request):
     merchant_key = 'Tw7p6HFLrbuyMBQ9'
     merchant_salt = 'HNZx6niqsJJjiiRq'
 
-    data = str(request.POST.get("merchant_oid")) + merchant_salt + str(request.POST.get("status")) + str(request.POST.get("total_amount"))
+    data = str(request.POST.get("merchant_oid")) + merchant_salt + str(request.POST.get("status")) + str(
+        request.POST.get("total_amount"))
     print(data)
 
     message = bytes(data, 'utf-8')
@@ -648,7 +650,7 @@ def odeme_sonuc(request):
 
     print("OK")
 
-    render(request, "odeme/odeme-bildirim.html", {"odeme": "OK"})
+    return render(request, "odeme/odeme-bildirim.html", {"odeme": "OK"})
 
 
 def basarili_odeme(request):
