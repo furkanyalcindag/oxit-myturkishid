@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core import serializers
 from django.core.mail import EmailMultiAlternatives
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
@@ -650,6 +650,9 @@ def odeme_sonuc(request):
         order.delete()
 
     print("OK")
+
+    response= HttpResponse()
+    response.write("OK")
 
     return render(request, "odeme/odeme-bildirim.html", {"odeme": "OK"})
 
