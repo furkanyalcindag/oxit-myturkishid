@@ -512,12 +512,12 @@ def odemeYap(request, siparis):
     ## Başarılı ödeme sonrası müşterinizin yönlendirileceği sayfa
     ## !!! Bu sayfa siparişi onaylayacağınız sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
     ## !!! Siparişi onaylayacağız sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
-    merchant_ok_url = "http://185.122.203.112/inoks/odeme-basarisiz/"
+    merchant_ok_url = "http://185.122.203.112/inoks/odeme-basarili/"
     #
     ## Ödeme sürecinde beklenmedik bir hata oluşması durumunda müşterinizin yönlendirileceği sayfa
     ## !!! Bu sayfa siparişi iptal edeceğiniz sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
     ## !!! Siparişi iptal edeceğiniz sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
-    merchant_fail_url = "http://185.122.203.112/inoks/odeme-basarili/"
+    merchant_fail_url = "http://185.122.203.112/inoks/odeme-basarisiz/"
     #
     ## Müşterinin sepet/sipariş içeriği
     user_basket = encodedBytes.decode("utf-8")
