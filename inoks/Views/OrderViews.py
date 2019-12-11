@@ -619,7 +619,7 @@ def odeme_sonuc(request):
     merchant_key = 'Tw7p6HFLrbuyMBQ9'
     merchant_salt = 'HNZx6niqsJJjiiRq'
 
-    data = request.POST.get("merchant_oid") + merchant_salt + request.POST.get("status") + request.POST.get("total_amount")
+    data = str(request.POST.get("merchant_oid")) + merchant_salt + str(request.POST.get("status")) + str(request.POST.get("total_amount"))
 
     message = bytes(data, 'utf-8')
     secret = bytes(merchant_key, 'utf-8')
