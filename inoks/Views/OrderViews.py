@@ -511,12 +511,12 @@ def odemeYap(request, siparis):
     ## Başarılı ödeme sonrası müşterinizin yönlendirileceği sayfa
     ## !!! Bu sayfa siparişi onaylayacağınız sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
     ## !!! Siparişi onaylayacağız sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
-    merchant_ok_url = "http://185.122.203.112/odeme-basarisiz/"
+    merchant_ok_url = "http://185.122.203.112/inoks/odeme-basarisiz/"
     #
     ## Ödeme sürecinde beklenmedik bir hata oluşması durumunda müşterinizin yönlendirileceği sayfa
     ## !!! Bu sayfa siparişi iptal edeceğiniz sayfa değildir! Yalnızca müşterinizi bilgilendireceğiniz sayfadır!
     ## !!! Siparişi iptal edeceğiniz sayfa "Bildirim URL" sayfasıdır (Bakınız: 2.ADIM Klasörü).
-    merchant_fail_url = "http://185.122.203.112/odeme-basarili/"
+    merchant_fail_url = "http://185.122.203.112/inoks/odeme-basarili/"
     #
     ## Müşterinin sepet/sipariş içeriği
     user_basket = encodedBytes.decode("utf-8")
@@ -618,8 +618,7 @@ def odeme_sonuc(request):
     merchant_key = 'Tw7p6HFLrbuyMBQ9'
     merchant_salt = 'HNZx6niqsJJjiiRq'
 
-    data = request.POST.get("merchant_oid") + merchant_salt + request.POST.get("status") + request.POST.get(
-        "total_amount")
+    data = request.POST.get("merchant_oid") + merchant_salt + request.POST.get("status") + request.POST.get("total_amount")
 
     message = bytes(data, 'utf-8')
     secret = bytes(merchant_key, 'utf-8')
@@ -651,10 +650,8 @@ def odeme_sonuc(request):
 
 
 def basarili_odeme(request):
-
-    return render(request,'odeme/basarili-odeme.html')
+    return render(request, 'odeme/basarili-odeme.html')
 
 
 def basarisiz_odeme(request):
-
-    return render(request,'odeme/basarisiz-odeme.html')
+    return render(request, 'odeme/basarisiz-odeme.html')
