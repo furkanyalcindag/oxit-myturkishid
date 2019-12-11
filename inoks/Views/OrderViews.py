@@ -645,6 +645,8 @@ def odeme_sonuc(request):
     else:
         order.delete()
 
+    print("OK")
+
     render(request, "odeme/odeme-bildirim.html", {"odeme": "OK"})
 
 
