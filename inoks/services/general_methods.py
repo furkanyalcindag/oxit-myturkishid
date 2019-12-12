@@ -339,6 +339,9 @@ def calculate_earning_of_tree(levelDict, total_order_member):
 
     total_order_member = total_order_member['total_price']
 
+    if total_order_member is None:
+        total_order_member=0
+
     total_order1 = (total_order * 100) / 118
 
     if total_order >= 10648000:

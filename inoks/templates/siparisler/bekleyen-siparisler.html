@@ -63,7 +63,7 @@
                     <p>Silmek istediğinizden emin misiniz?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf"
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf1"
                             data-dismiss="modal">Evet
                     </button>
                     <button type="button" class="btn btn-outline" id="btn-sil">Hayır</button>
@@ -303,38 +303,7 @@
                 $('#aktif').modal('hide');
             });
         }
-        function getCookie(name) {
-            var cookieValue = null;
-            var i = 0;
-            if (document.cookie && document.cookie !== '') {
-                var cookies = document.cookie.split(';');
-                for (i; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
 
-        var csrftoken = getCookie('csrftoken');
-
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-
-        $.ajaxSetup({
-            crossDomain: false, // obviates need for sameOrigin test
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type)) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-        });
 
 
     </script>
@@ -420,9 +389,9 @@
         function deletePendingOrder(id) {
             // $('#modal-danger').modal('show');
             console.log(id);
-            var html = ''
+            var html = '';
             $("#sil").on("shown.bs.modal", function (e) {
-                $("#btn-conf").click(function () {
+                $("#btn-conf1").click(function () {
                     $.ajax({
                         url: "{% url "inoks:bekleyen-siparisler-sil" pk=212121223232323232 %}".replace(/212121223232323232/, id.toString()),
                         type: "POST",
@@ -450,11 +419,46 @@
                     });
                 });
             }).modal('show');
-            $('#btn-sil').click(function () {
-                $('#sil').modal('hide');
+            $('#btn-close').click(function () {
+                $('#modal-danger').modal('hide');
             });
 
         }
+
+
+
+         function getCookie(name) {
+            var cookieValue = null;
+            var i = 0;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (i; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            crossDomain: false, // obviates need for sameOrigin test
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
     </script>
 
 
