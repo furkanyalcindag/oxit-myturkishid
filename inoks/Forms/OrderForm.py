@@ -39,7 +39,7 @@ class OrderForm(ModelForm):
 
 
             'address': forms.Textarea(
-                attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required'}),
+                attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required','disabled':'disabled'}),
 
             'payment_type': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%;'})

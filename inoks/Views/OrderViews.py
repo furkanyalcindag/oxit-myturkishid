@@ -108,10 +108,11 @@ def return_add_orders(request):
     if not perm:
         logout(request)
         return redirect('accounts:login')
-    order_form = OrderForm(instance=Profile.objects.get(user=request.user))
     products = Product.objects.all()
     current_user = request.user
     profile = Profile.objects.get(user=current_user)
+    order_form = OrderForm(instance=Profile.objects.get(user=request.user), initial={'address': profile.address})
+
 
     if request.method == 'POST':
 

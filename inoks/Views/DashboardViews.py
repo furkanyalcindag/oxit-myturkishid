@@ -61,17 +61,22 @@ def return_user_dashboard(request):
         return redirect('accounts:login')
     current_user = request.user
     userprofile = Profile.objects.get(user=current_user)
-    my_orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id).count()
+    orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id)
+    my_orders = orders.count()
     coksatanlar = Product.objects.filter(category=16)
     onerilenler = Product.objects.filter(category=17)
     total_order_price = general_methods.monthlMemberOrderTotalAllTime(userprofile)['total_price']
+
+    x = 0
+    for order in orders:
+        x = x + order.product.count()
 
     if total_order_price is None:
         total_order_price = 0
 
     return render(request, 'dashboard/user-dashboard.html',
                   {'my_orders': my_orders, 'onerilenler': onerilenler, 'coksatanlar': coksatanlar,
-                   'total_price': total_order_price})
+                   'total_price': total_order_price,'total_product':x})
 
 
 @api_view()

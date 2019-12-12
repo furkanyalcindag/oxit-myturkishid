@@ -15,7 +15,7 @@ class ProfileUpdateForm(ModelForm):
 
         fields = (
             'profileImage', 'address', 'mobilePhone', 'gender', 'tc', 'birthDate', 'job', 'city', 'educationLevel',
-            'sponsor', 'district')
+            'sponsor', 'district','iban')
         widgets = {
             'address': forms.Textarea(
                 attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required'}),
@@ -24,11 +24,11 @@ class ProfileUpdateForm(ModelForm):
             'gender': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                           'style': 'width: 100%;', 'required': 'required'}),
             'tc': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'T.C. Kimlik Numarası', 'required': 'required'}),
+                attrs={'class': 'form-control', 'placeholder': 'T.C. Kimlik Numarası', 'required': 'required','disabled':'disabled'}),
 
             'birthDate': forms.DateInput(
                 attrs={'class': 'form-control  pull-right', 'id': 'datepicker', 'autocomplete': 'off',
-                       'onkeydown': 'return false'}),
+                       'onkeydown': 'return false','disabled':'disabled'}),
 
 
             'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
@@ -47,4 +47,6 @@ class ProfileUpdateForm(ModelForm):
                 attrs={'class': 'form-control iban', 'placeholder': 'iban',
                        'pattern': '^DE\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$', 'required': 'required',
                        'maxlength': '11', 'minlength': '11'}),
+            'sponsor': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                           'style': 'width: 100%; ', 'required': 'required', 'disabled':'disabled'}),
         }
