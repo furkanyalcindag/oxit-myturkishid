@@ -44,7 +44,9 @@ def return_my_earnings_report(request):
         # for i in range(7):
         #   total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
 
-        total_earning = general_methods.calculate_earning_of_tree(levelDict)
+        order_total_member = general_methods.monthlyMemberOrderTotal(user)
+
+        total_earning = general_methods.calculate_earning_of_tree(levelDict,order_total_member)
         # earnDict[user] = total_earning
         x = total_earning
         earnDict[user] = x - (x * 20 / 100)
@@ -94,8 +96,10 @@ def return_my_earnings_report(request):
 
             # for i in range(7):
             #   total_earning = float(total_earning) + float(general_methods.calculate_earning(levelDict, i + 1))
+            order_total_member = general_methods.monthlyMemberOrderTotal(user)
 
-            total_earning = general_methods.calculate_earning_of_tree(levelDict)
+
+            total_earning = general_methods.calculate_earning_of_tree(levelDict,order_total_member)
             x=total_earning
             earnDict[user] = x - (x * 20 / 100)
             total_object = TotalOrderObject(profile=None, total_price=0, earning=0, is_paid=False, paid_date=None,
