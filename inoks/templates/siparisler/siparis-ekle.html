@@ -309,8 +309,8 @@
                 deger = deger +kargo;
 
             }
-            document.getElementById('price').innerHTML = "Toplam :" + parseFloat(deger) + " ₺";
-            document.getElementById('price1').innerHTML = "Toplam :" + deger + " ₺";
+            document.getElementById('price').innerHTML = "Toplam :" + parseFloat(deger).toFixed(2) + " ₺";
+            document.getElementById('price1').innerHTML = "Toplam :" + deger.toFixed(2) + " ₺";
             document.getElementById('kargo1').innerHTML = "Kargo :" + kargo + " ₺";
             deger = 0
         }
