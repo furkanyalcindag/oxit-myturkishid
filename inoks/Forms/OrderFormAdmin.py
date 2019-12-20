@@ -30,15 +30,15 @@ class OrderFormAdmin(ModelForm):
             'profile': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                            'style': 'width: 100%;', "onChange": 'bilgiGetir()'}),
 
-            'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                        'style': 'width: 100%; ', "onChange": 'ilceGetir()', 'disabled': 'disabled'}),
+            'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible disabled-select',
+                                        'style': 'width: 100%; ', "onChange": 'ilceGetir()'}),
 
-            'district': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'ilçe', 'required': 'required', 'disabled': 'disabled'}),
+             'district': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'ilçe', 'required': 'required' ,'readonly': 'readonly'}),
 
             'address': forms.Textarea(
                 attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required',
-                       'disabled': 'disabled'}),
+                       'readonly': 'readonly'}),
 
             'payment_type': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%;'})

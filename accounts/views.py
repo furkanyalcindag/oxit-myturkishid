@@ -105,6 +105,7 @@ def register_member(request):
             password = User.objects.make_random_password()
             user.set_password(password)
             user2.groups.add(group)
+            user.is_active = True
             user.save()
 
             profil = Profile(user=user, tc=profile_form.cleaned_data['tc'],
