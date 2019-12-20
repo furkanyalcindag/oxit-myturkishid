@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from inoks.Views import ProductViews, UserViews, OrderViews, ReportViews, EarningsViews, DashboardViews, SettingViews, \
-    TreeViews, RefundViews, CityViews
+    TreeViews, RefundViews, CityViews, APIViews
 
 app_name = 'inoks'
 
@@ -101,7 +101,10 @@ urlpatterns = [
     url(r'soyagaci/soy-agacim/$', TreeViews.return_my_tree, name='soy-agacim'),
     url(r'soyagaci/soy-agaclari/$', TreeViews.return_all_tree, name='soy-agaclari'),
 
+    #api
     url(r'ilce-getir/$', CityViews.get_districts, name="ilce-getir"),
+    url(r'adres-bilgi/$', APIViews.get_address_info, name="adres-bilgi"),
+    url(r'siparis/urun-bilgi-getir/$', APIViews.get_order_products.as_view(), name="siparis-urun-getir"),
 
 
     # odeme

@@ -28,18 +28,17 @@ class OrderFormAdmin(ModelForm):
             'isContract')
         widgets = {
             'profile': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%; '}),
+                                           'style': 'width: 100%;', "onChange": 'bilgiGetir()'}),
 
             'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                        'style': 'width: 100%; ', "onChange": 'ilceGetir()'}),
+                                        'style': 'width: 100%; ', "onChange": 'ilceGetir()', 'disabled': 'disabled'}),
 
-            'district': forms.Select(choices=CHOICES_WITH_BLANK,
-                                     attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                            'style': 'width: 100%; ', 'id': 'ilce_id'}
-                                     ),
+            'district': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'ilçe', 'required': 'required', 'disabled': 'disabled'}),
 
             'address': forms.Textarea(
-                attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required'}),
+                attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required',
+                       'disabled': 'disabled'}),
 
             'payment_type': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%;'})

@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 
 from inoks.models import Profile
@@ -58,3 +59,15 @@ class ProfileForm(ModelForm):
                        'maxlength': '11', 'minlength': '11'}),
 
         }
+
+    def clean_tc(self):
+        tc = self.cleaned_data['tc']
+        if Profile.objects.filter(tc=tc).exists():
+            raise ValidationError("Girdiğiniz TC başka bir üyemiz tarafından kullanılmakta.")
+        return tc
+
+    def clean_mobilePhone(self):
+        mobilePhone = self.cleaned_data['mobilePhone']
+        if Profile.objects.filter(mobilePhone=mobilePhone).exists():
+            raise ValidationError("Girdiğiniz Telefon numarası başka bir üyemiz tarafından kullanılmakta.")
+        return mobilePhone

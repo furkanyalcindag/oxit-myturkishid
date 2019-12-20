@@ -22,7 +22,7 @@ from rest_framework.decorators import api_view
 from inoks.Forms.OrderForm import OrderForm
 from inoks.Forms.OrderFormAdmin import OrderFormAdmin
 from inoks.Forms.OrderSituationsForm import OrderSituationsForm
-from inoks.models import Order, OrderSituations, Profile, Product, OrderProduct
+from inoks.models import Order, OrderSituations, Profile, Product, OrderProduct, City, Settings
 from inoks.models.CartObject import CartObject
 from inoks.models.OrderObject import OrderObject
 from inoks.serializers.order_serializers import OrderSerializer
@@ -38,6 +38,7 @@ def return_add_orders_admin(request):
     if not perm:
         logout(request)
         return redirect('accounts:login')
+    kargo = float(Settings.objects.filter(name='kargo')[0].value)
     order_form = OrderFormAdmin(instance=Profile.objects.get(user=request.user))
     products = Product.objects.all()
     current_user = request.user
@@ -79,7 +80,11 @@ def return_add_orders_admin(request):
 
                 total_price = total_price + (int(product[0].strip()) * prod.price)
 
-            order.totalPrice = total_price
+            if total_price >= 150:
+                order.totalPrice = total_price
+            else:
+                order.totalPrice = total_price + kargo
+
             order.save()
 
             # order.product.add(order_form.cleaned_data['product'])
@@ -98,7 +103,7 @@ def return_add_orders_admin(request):
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
     return render(request, 'siparisler/siparis-ekle.html',
-                  {'order_form': order_form, 'products': products, 'profile': profile})
+                  {'order_form': order_form, 'products': products, 'profile': profile, 'kargo': kargo})
 
 
 @login_required
@@ -108,11 +113,15 @@ def return_add_orders(request):
     if not perm:
         logout(request)
         return redirect('accounts:login')
+
+    kargo = float(Settings.objects.filter(name='kargo')[0].value)
     products = Product.objects.all()
     current_user = request.user
     profile = Profile.objects.get(user=current_user)
-    order_form = OrderForm(instance=Profile.objects.get(user=request.user), initial={'address': profile.address})
+    order_form = OrderForm(instance=Profile.objects.get(user=request.user),
+                           initial={'address': profile.address, 'city': profile.city, 'district': profile.district})
 
+    order_form.fields['city'].queryset = City.objects.filter(id=profile.city_id)
 
     if request.method == 'POST':
 
@@ -149,7 +158,11 @@ def return_add_orders(request):
 
                 total_price = total_price + (int(product[0].strip()) * prod.price)
 
-            order.totalPrice = total_price
+            if total_price >= 150:
+                order.totalPrice = total_price
+            else:
+                order.totalPrice = total_price + kargo
+
             order.save()
 
             # order.product.add(order_form.cleaned_data['product'])
@@ -157,17 +170,21 @@ def return_add_orders(request):
             order.order_situations.add(OrderSituations.objects.get(name='Ödeme Bekliyor'))
 
             order.save()
+            if order.payment_type == 'Havale/EFT':
+                messages.success(request, 'Sipariş başarıyla eklendi.')
 
-            messages.success(request, 'Sipariş başarıyla eklendi.')
-            # return redirect('inoks:siparis-ekle')
-            return redirect('inoks:odeme-yap', siparis=order.id)
+            else:
+
+                messages.success(request, 'Sipariş başarıyla eklendi.')
+                return redirect('inoks:odeme-yap', siparis=order.id)
+
 
         else:
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
     return render(request, 'siparisler/siparis-ekle.html',
-                  {'order_form': order_form, 'products': products, 'profile': profile})
+                  {'order_form': order_form, 'products': products, 'profile': profile, 'kargo': kargo})
 
 
 @login_required
@@ -177,10 +194,12 @@ def return_add_orders_from_cart(request):
     if not perm:
         logout(request)
         return redirect('accounts:login')
-    order_form = OrderForm()
+    kargo = float(Settings.objects.filter(name='kargo')[0].value)
     products = Product.objects.all()
     current_user = request.user
     profile = Profile.objects.get(user=current_user)
+    order_form = OrderForm(initial={'address': profile.address, 'city': profile.city, 'district': profile.district})
+    order_form.fields['city'].queryset = City.objects.filter(id=profile.city_id)
 
     myDict = dict(request.GET)
     urun_miktar = []
@@ -241,7 +260,11 @@ def return_add_orders_from_cart(request):
 
                 total_price = total_price + (int(product[0].strip()) * prod.price)
 
-            order.totalPrice = total_price
+            if total_price >= 150:
+                order.totalPrice = total_price
+            else:
+                order.totalPrice = total_price + kargo
+
             order.save()
 
             # order.product.add(order_form.cleaned_data['product'])
@@ -250,15 +273,21 @@ def return_add_orders_from_cart(request):
 
             order.save()
 
-            messages.success(request, 'Sipariş başarıyla eklendi.')
-            return redirect('inoks:odeme-yap', siparis=order.id)
+            if order.payment_type == 'Havale/EFT':
+                messages.success(request, 'Sipariş başarıyla eklendi.')
+
+            else:
+
+                messages.success(request, 'Sipariş başarıyla eklendi.')
+                return redirect('inoks:odeme-yap', siparis=order.id)
 
         else:
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
     return render(request, 'siparisler/siparis-ekle.html',
-                  {'order_form': order_form, 'products': products, 'product_array': data, 'profile': profile})
+                  {'order_form': order_form, 'products': products, 'product_array': data, 'profile': profile,
+                   'kargo': kargo})
 
 
 @login_required
@@ -470,7 +499,15 @@ def odemeYap(request, siparis):
     order_products = OrderProduct.objects.filter(order=order)
 
     user_basket = []
-    user_basket_content = []
+
+    for product in order_products:
+        user_basket_content = []
+        user_basket_content.append(product.product.name)
+        user_basket_content.append(str(product.product.price))
+        user_basket_content.append(str(product.quantity))
+        user_basket.append(user_basket_content)
+
+    """user_basket_content = []
     user_basket_content.append("Örnek ürün 1")
     user_basket_content.append("18.00")
     user_basket_content.append("1")
@@ -480,7 +517,7 @@ def odemeYap(request, siparis):
     user_basket_content2.append("18.00")
     user_basket_content2.append("1")
     user_basket.append(user_basket_content)
-    # user_basket.append(user_basket_content2)
+    # user_basket.append(user_basket_content2)"""
 
     encodedBytes = base64.b64encode(json.dumps(user_basket).encode())
     # encodedStr = str(encodedBytes, "utf-8")
@@ -652,7 +689,7 @@ def odeme_sonuc(request):
 
     print("OK")
 
-    response= HttpResponse()
+    response = HttpResponse()
     response.write("OK")
 
     return render(request, "odeme/odeme-bildirim.html", {"odeme": "OK"})

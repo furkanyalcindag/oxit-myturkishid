@@ -8,9 +8,11 @@ from inoks.models.Product import Product
 
 class Order(models.Model):
     TRANSFER = 'Kredi Kartı'
+    EFT = 'Havale/EFT'
     PAYMENT_CHOICES = (
 
         (TRANSFER, 'Kredi Kartı'),
+        (EFT , 'Havale/EFT')
     )
 
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name='Üye Adı')

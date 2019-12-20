@@ -67,14 +67,16 @@
                     <div class="box box-primary">
                         <div class="box-header with-border">
                             <h3 class="box-title">Sipariş Oluştur</h3>
-                            <p style="float: right; font-size:160%;" id="price1">Toplam :0 ₺</p>
+                            <p style="float: right; font-size:160%;" id="price1">Toplam :0 ₺ </p>
+                             <p style="float: right; font-size:160%;" id="">/</p>
+                            <p style="float: right; font-size:160%;" id="kargo1">Kargo :0 ₺</p>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
                         <form method="post" role="form">
                             <div class="box-body">
                                 {% csrf_token %}
-<div class="form-group">
+                                <div class="form-group">
                                     <label> {{ order_form.profile.label }}</label>
                                     {{ order_form.profile }}
                                 </div>
@@ -103,7 +105,6 @@
                                 </div>
 
 
-
                                 <div class="form-group">
                                     <label> {{ order_form.city.label }}</label>
                                     {{ order_form.city }}
@@ -128,29 +129,34 @@
                                 </div>
 
 
-
-                              <div class="form-group">
+                                <div class="form-group">
                                     <div class="row">
 
-                                        <div class="col-md-6"> <input type="checkbox" name="is_digeradres" id="check_diger" onclick="digerAdres();"> Farklı adrese gönder</div>
+                                        <div class="col-md-6"><input type="checkbox" name="is_digeradres"
+                                                                     id="check_diger" onclick="digerAdres();"> Farklı
+                                            adrese gönder
+                                        </div>
 
-                                         <div class="col-md-6"> <input type="checkbox" name="is_kurumsal" id="check_kase" onclick="kurumsal();"> Kurumsal</div>
+                                        <div class="col-md-6"><input type="checkbox" name="is_kurumsal" id="check_kase"
+                                                                     onclick="kurumsal();"> Kurumsal
+                                        </div>
 
 
                                     </div>
-
 
 
                                 </div>
 
                                 <div class="form-group diger" id="diger" style="display: none">
                                     <label>Diğer Adres</label>
-                                    <textarea cols="40" rows="2" name="diger_adres" class="form-control " placeholder="Adres"></textarea>
+                                    <textarea cols="40" rows="2" name="diger_adres" class="form-control "
+                                              placeholder="Adres"></textarea>
                                 </div>
 
-                             <div class="form-group" id="kase" style="display: none">
+                                <div class="form-group" id="kase" style="display: none">
                                     <label>Şirket Kaşe Bilgileri</label>
-                                    <textarea cols="40" rows="2" class="form-control " name="kurumsal_bilgi"placeholder="Kaşe"></textarea>
+                                    <textarea cols="40" rows="2" class="form-control " name="kurumsal_bilgi"
+                                              placeholder="Kaşe"></textarea>
                                 </div>
 
 
@@ -231,10 +237,9 @@
             console.log(inputElements);
             console.log("dfddf");
             if (inputElements.checked) {
-                document.getElementById("diger").style.display='block';
-            }
-            else {
-                 document.getElementById("diger").style.display="none";
+                document.getElementById("diger").style.display = 'block';
+            } else {
+                document.getElementById("diger").style.display = "none";
             }
 
 
@@ -246,10 +251,9 @@
             console.log(inputElements);
 
             if (inputElements.checked) {
-                document.getElementById("kase").style.display='block';
-            }
-            else {
-                 document.getElementById("kase").style.display="none";
+                document.getElementById("kase").style.display = 'block';
+            } else {
+                document.getElementById("kase").style.display = "none";
             }
 
 
@@ -275,6 +279,8 @@
 
         function myFunction() {
             var deger = 0;
+            var kargo = "{{ kargo }}";
+            kargo = parseFloat(kargo.replace(",", "."));
             var str = document.getElementById('droptxt').value;
             var res = str.split("-");
             for (index = 0; index < res.length; ++index) {
@@ -293,8 +299,19 @@
             if (res.length === 0) {
                 deger = 0;
             }
+
+            if(deger>=150){
+                deger=deger;
+                kargo = 0;
+            }
+            else {
+                console.log(kargo);
+                deger = deger +kargo;
+
+            }
             document.getElementById('price').innerHTML = "Toplam :" + deger + " ₺";
             document.getElementById('price1').innerHTML = "Toplam :" + deger + " ₺";
+            document.getElementById('kargo1').innerHTML = "Kargo :" + kargo + " ₺";
             deger = 0
         }
 
@@ -344,7 +361,8 @@
 
         window.onload = function () {
 
-            ilkIlceGetir("{{ profile.district }}");
+            //ilkIlceGetir("{{ profile.district }}");
+            $("#id_city").select2("readonly", true);
 
         };
 
@@ -396,6 +414,39 @@
                     for (let i = 0; i < result.ilceler.length; i++) {
                         select.options[select.options.length] = new Option(result.ilceler[i].name, result.ilceler[i].name);
                     }
+                }
+            });
+        }
+
+
+        function bilgiGetir() {
+
+
+            var id = document.getElementById("id_profile").options[document.getElementById("id_profile").selectedIndex].value;
+            $.ajax({
+                url: "{% url 'inoks:adres-bilgi' %}",
+                type: "post", // or "get"
+                data: {
+                    id: id,
+
+                },
+                success: function (result) {
+
+
+                    let select = document.getElementById("id_district");
+                    select.value = result.member.district;
+                    let select2 = document.getElementById("id_city");
+                     //select2.value =  result.member.city;
+debugger;
+                     $('#id_city').val(result.member.city); // Select the option with a value of '1'
+                     $('#id_city').trigger('change');
+                   // select2.options[select2.options.length] = new Option(result.member.city.id, result.member.city.name);
+                    let address = document.getElementById("id_address");
+                    address.value = result.member.address;
+
+
+
+
                 }
             });
         }

@@ -54,7 +54,14 @@
     </style>
 
 
-
+ <div class="modal fade bd-example-modal-lg" id="product" tabindex="-1" role="dialog"
+         aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" id="product-body">
+                ...
+            </div>
+        </div>
+    </div>
     <!-- success modal -->
     <div class="modal modal-success modal-success-food fade in" id="modal-success" style="display: none;">
         <div class="modal-dialog">
@@ -263,13 +270,8 @@
 
 
                                         <td width=200px>
-                                            <ul> {% for product in order.orderproduct_set.all %}
-
-                                                <li><font style="color: #0b58a2">{{ product.quantity }}
-                                                    X </font>{{ product.product.name }} {{ product.product.price }} TL
-                                                </li>
-
-                                            {% endfor %}</ul>
+                                              <a href="#" class="button btn btn-success"
+                                               onclick="order_products({{ order.id }})">Urunler</a>
 
                                         </td>
 
@@ -499,6 +501,56 @@
 
 
     <script>
+
+    function order_products(id) {
+
+            $('#product').modal('show');
+            $.ajax({
+                url: "{% url "inoks:siparis-urun-getir" %}",
+                type: "GET",
+                data: {
+
+                    id: id
+                },
+                success: function (result) {
+
+                    debugger;
+                    html = '   <table class="table">';
+                    html += '  <thead>';
+                    html += '   <tr>';
+                    html += '     <th scope="col">#</th>';
+                    html += '     <th scope="col">adı</th>';
+                    html += '    <th scope="col">miktarı</th>';
+
+                    html += '  </tr>';
+                    html += ' </thead>';
+                    html += ' <tbody>';
+
+                    for (i = 0; i < result.length; i++) {
+                        // do something
+                        var x = i +1;
+                        html += '  <tr>';
+                        html += '    <th scope="row">' + x + '</th>';
+                        html += '    <td>' + result[i].product_name + '</td>';
+                        html += '   <td>' + result[i].quantity + '</td>';
+
+                        html += '  </tr>';
+                    }
+
+
+
+                    html += ' </tbody>';
+                    html += ' </table>';
+
+
+                    document.getElementById('product-body').innerHTML = html;
+
+                    console.log(html);
+                }
+            });
+
+
+        }
 
         function getOrderSituation(order_id, situation_id) {
             document.getElementById("cover-spin").style.display = "block";

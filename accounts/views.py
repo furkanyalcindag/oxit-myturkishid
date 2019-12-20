@@ -154,6 +154,11 @@ def register_member(request):
             if isExist:
                 messages.warning(request, 'Mail adresi başka bir üyemiz tarafından kullanılmaktadır.')
 
+            for x in  profile_form.errors.as_data():
+                messages.warning(request, profile_form.errors[x][0])
+
+
+
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
     return render(request, 'registration/register.html', {'user_form': user_form, 'profile_form': profile_form})

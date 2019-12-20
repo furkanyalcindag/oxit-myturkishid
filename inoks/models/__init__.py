@@ -12,3 +12,4 @@ from .earningPayments import earningPayments
 from .Menu import Menu
 from .MenuAdmin import MenuAdmin
 from .OrderProduct import OrderProduct
+from .Settings import Settings
