@@ -4,7 +4,7 @@ import datetime
 from django.contrib.auth.models import User, Permission
 from django.db.models import Sum
 
-from inoks.models import Profile, Order, Menu, MenuAdmin, Refund, earningPayments
+from inoks.models import Profile, Order, Menu, MenuAdmin, Refund, earningPayments, OrderSituations
 from inoks.models.ProfileControlObject import ProfileControlObject
 
 
@@ -47,6 +47,7 @@ def reactiveUser(request, pk):
 
 def activeOrder(request, pk):
     order = Order.objects.get(pk=pk)
+    order.order_situations.add(OrderSituations.objects.get(name="Hazırlanıyor"))
     order.isApprove = True
     order.save()
     return order

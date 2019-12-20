@@ -298,8 +298,9 @@ def return_pending_orders(request):
         logout(request)
         return redirect('accounts:login')
     pending_orders = Order.objects.filter(isApprove=False)
+    order_situations = OrderSituations.objects.all()
 
-    return render(request, 'siparisler/bekleyen-siparisler.html', {'pending_orders': pending_orders})
+    return render(request, 'siparisler/bekleyen-siparisler.html', {'pending_orders': pending_orders,'order_situations': order_situations})
 
 
 @login_required
