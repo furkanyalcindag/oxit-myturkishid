@@ -83,7 +83,7 @@ def return_add_orders_admin(request):
             if total_price >= 150:
                 order.totalPrice = total_price
             else:
-                order.totalPrice = total_price + kargo
+                order.totalPrice = float(total_price) + kargo
 
             order.save()
 
@@ -161,7 +161,7 @@ def return_add_orders(request):
             if total_price >= 150:
                 order.totalPrice = total_price
             else:
-                order.totalPrice = total_price + kargo
+                order.totalPrice = float(total_price) + kargo
 
             order.save()
 
@@ -263,7 +263,7 @@ def return_add_orders_from_cart(request):
             if total_price >= 150:
                 order.totalPrice = total_price
             else:
-                order.totalPrice = total_price + kargo
+                order.totalPrice = float(total_price) + kargo
 
             order.save()
 
