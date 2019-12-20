@@ -292,7 +292,7 @@
                     res1[1].lastIndexOf(")")
                 );
 
-                deger = deger + (parseInt(res1[0].trim(), 10) * parseFloat(mySubString.trim()));
+                deger = parseFloat(deger) + (parseInt(res1[0].trim(), 10) * parseFloat(mySubString.trim().replace(",", ".")));
 
 
             }
@@ -309,7 +309,7 @@
                 deger = deger +kargo;
 
             }
-            document.getElementById('price').innerHTML = "Toplam :" + deger + " ₺";
+            document.getElementById('price').innerHTML = "Toplam :" + parseFloat(deger) + " ₺";
             document.getElementById('price1').innerHTML = "Toplam :" + deger + " ₺";
             document.getElementById('kargo1').innerHTML = "Kargo :" + kargo + " ₺";
             deger = 0
