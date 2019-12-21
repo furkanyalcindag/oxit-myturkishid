@@ -252,7 +252,10 @@
 
                 {% endif %}
 
-
+                                <li>
+                                    <a role="button" data-toggle="modal" data-target="#exampleModalCenter"><i
+                                            class=" fa fa-money"></i> Banka Bilgileri</a>
+                                </li>
             </ul>
 
 
@@ -262,6 +265,8 @@
 
     <div class="content-wrapper">
         <script src="{% static 'alert/sweetalert.min.js' %}"></script>
+
+
         {% block content %}
 
 
@@ -269,6 +274,30 @@
 
         {% endblock %}
 
+    <div class="modal fade" id="exampleModalCenter" bindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Banka Bilgileri</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+          <p> <strong>Iban:</strong> TR33 0011 1000 0000 0090 3944 08</p>
+          <p> <strong>Ünvan:</strong> Baven temizlik sistemleri</p>
+          <p> <strong>Banka:</strong>  QNB finansbank</p>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+
+      </div>
+    </div>
+  </div>
+</div>
 
     </div>
 

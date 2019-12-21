@@ -62,9 +62,9 @@ def forgot(request):
             # form.cleaned_data['password'] = make_password(form.cleaned_data['password'])
             user = obj.save()
             html_content = ''
-            subject, from_email, to = 'BAVEN Kullanıcı Bilgileri', 'no-reply@baven.com', obj.email
+            subject, from_email, to = 'BAVEN Kullanıcı Bilgileri', 'info@baven.net', obj.email
             text_content = 'Aşağıda ki bilgileri kullanarak sisteme giriş yapabilirsiniz.'
-            html_content = '<p> <strong>Site adresi:</strong> <a href="http://185.122.203.112/"></a>baven.com</p>'
+            html_content = '<p> <strong>Site adresi:</strong> <a href="http://185.122.203.112/"></a>baven.net</p>'
             html_content = html_content + '<p><strong>Kullanıcı Adı:</strong>' + obj.username + '</p>'
             html_content = html_content + '<p><strong>Şifre:</strong>' + password + '</p>'
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
@@ -133,13 +133,14 @@ def register_member(request):
 
             if sponsorNumber > limit:
                 messages.warning(request, 'Üyeye Sponsor Eklenemez. Sponsor Alanı Dolmuştur.')
+                user.delete()
                 return redirect('accounts:register')
             else:
                 profil.save()
 
-                subject, from_email, to = 'INOKS Kullanıcı Giriş Bilgileri', 'ik@oxityazilim.com', user2.email
+                subject, from_email, to = 'INOKS Kullanıcı Giriş Bilgileri', 'info@baven.net', user2.email
                 text_content = 'Aşağıda ki bilgileri kullanarak sisteme giriş yapabilirsiniz.'
-                html_content = '<p> <strong>Site adresi:</strong> <a href="http://www.smutekgrup.com"></a>www.mutekgrup.com</p>'
+                html_content = '<p> <strong>Site adresi:</strong> <a href="http://network.bavev.net"></a>network.baven.net</p>'
                 html_content = html_content + '<p><strong>Kullanıcı Adı: </strong>' + user2.username + '</p>'
                 html_content = html_content + '<p><strong>Şifre: </strong>' + password + '</p>'
                 msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
@@ -155,10 +156,8 @@ def register_member(request):
             if isExist:
                 messages.warning(request, 'Mail adresi başka bir üyemiz tarafından kullanılmaktadır.')
 
-            for x in  profile_form.errors.as_data():
+            for x in profile_form.errors.as_data():
                 messages.warning(request, profile_form.errors[x][0])
-
-
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
