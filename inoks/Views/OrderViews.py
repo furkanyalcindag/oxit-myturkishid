@@ -92,10 +92,14 @@ def return_add_orders_admin(request):
             order.order_situations.add(OrderSituations.objects.get(name='Ödeme Bekliyor'))
 
             order.save()
+            if order.payment_type == 'Havale/EFT':
+                messages.success(request, 'Sipariş başarıyla eklendi.')
 
-            messages.success(request, 'Sipariş başarıyla eklendi.')
+            else:
 
-            return redirect('inoks:odeme-yap', siparis=order.id)
+                messages.success(request, 'Sipariş başarıyla eklendi.')
+                return redirect('inoks:odeme-yap', siparis=order.id)
+
 
 
         else:
