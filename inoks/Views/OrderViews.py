@@ -94,6 +94,7 @@ def return_add_orders_admin(request):
             order.save()
             if order.payment_type == 'Havale/EFT':
                 messages.success(request, 'Sipariş başarıyla eklendi.')
+                return redirect('inoks:havale-eft-bilgi', siparis=order.id)
 
             else:
 
@@ -176,6 +177,7 @@ def return_add_orders(request):
             order.save()
             if order.payment_type == 'Havale/EFT':
                 messages.success(request, 'Sipariş başarıyla eklendi.')
+                return redirect('inoks:havale-eft-bilgi', siparis=order.id)
 
             else:
 
@@ -279,6 +281,7 @@ def return_add_orders_from_cart(request):
 
             if order.payment_type == 'Havale/EFT':
                 messages.success(request, 'Sipariş başarıyla eklendi.')
+                return redirect('inoks:havale-eft-bilgi', siparis=order.id)
 
             else:
 
@@ -304,7 +307,8 @@ def return_pending_orders(request):
     pending_orders = Order.objects.filter(isApprove=False)
     order_situations = OrderSituations.objects.all()
 
-    return render(request, 'siparisler/bekleyen-siparisler.html', {'pending_orders': pending_orders,'order_situations': order_situations})
+    return render(request, 'siparisler/bekleyen-siparisler.html',
+                  {'pending_orders': pending_orders, 'order_situations': order_situations})
 
 
 @login_required
@@ -706,3 +710,17 @@ def basarili_odeme(request):
 
 def basarisiz_odeme(request):
     return render(request, 'odeme/basarisiz-odeme.html')
+
+
+def havale_eft(request, siparis):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    order = Order.objects.get(pk=siparis)
+    order_products = OrderProduct.objects.filter(order=order)
+
+    return render(request, 'odeme/havale-eft-bilgi.html',
+                  {'card': order_products, 'siparis_no': siparis ,"total": order.totalPrice})

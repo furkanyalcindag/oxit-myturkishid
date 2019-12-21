@@ -112,4 +112,5 @@ urlpatterns = [
     url(r'odeme-bildirim/$', OrderViews.odeme_sonuc, name='odeme-sonuc'),
     url(r'odeme-basarili/$', OrderViews.basarili_odeme, name='odeme-basarili'),
     url(r'odeme-basarisiz/$', OrderViews.basarisiz_odeme, name='basarisiz-odeme'),
+    url(r'havale-eft-bilgi/(?P<siparis>\d+)$', OrderViews.havale_eft, name='havale-eft-bilgi'),
 ]
