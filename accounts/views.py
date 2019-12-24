@@ -138,9 +138,9 @@ def register_member(request):
             else:
                 profil.save()
 
-                subject, from_email, to = 'INOKS Kullanıcı Giriş Bilgileri', 'info@baven.net', user2.email
+                subject, from_email, to = 'Baven Kullanıcı Giriş Bilgileri', 'info@baven.net', user2.email
                 text_content = 'Aşağıda ki bilgileri kullanarak sisteme giriş yapabilirsiniz.'
-                html_content = '<p> <strong>Site adresi:</strong> <a href="http://network.bavev.net"></a>network.baven.net</p>'
+                html_content = '<p> <strong>Site adresi:</strong> <a href="https://network.bavev.net"></a>network.baven.net</p>'
                 html_content = html_content + '<p><strong>Kullanıcı Adı: </strong>' + user2.username + '</p>'
                 html_content = html_content + '<p><strong>Şifre: </strong>' + password + '</p>'
                 msg = EmailMultiAlternatives(subject, text_content, from_email, [to])

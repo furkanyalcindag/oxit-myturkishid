@@ -571,7 +571,8 @@
 
 
                     } else {
-                        swal("Başarılı", result.messages, "error");
+                          document.getElementById("cover-spin").style.display = "none";
+                        swal("Başarısız", result.msg, "error");
                     }
                 }
             });

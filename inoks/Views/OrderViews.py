@@ -501,9 +501,9 @@ def siparis_durumu_guncelle(request):
         order.order_situations.add(situation)
         order.save()
 
-        subject, from_email, to = 'BAVEN Sipariş Durumunuz Güncellendi ', 'ik@oxityazilim.com', order.profile.user.email
+        subject, from_email, to = 'BAVEN Sipariş Durumunuz Güncellendi ', 'info@baven.net', order.profile.user.email
         text_content = order_id + 'numaralı sipariş durumunuz güncellendi.'
-        html_content = '<p> <strong>Site adresi:</strong> <a href="http://www.smutekgrup.com"></a>www.mutekgrup.com</p>'
+        html_content = '<p> <strong>Site adresi:</strong> <a href="https://network.baven.net"></a>https://network.baven.net</p>'
         html_content = html_content + '<p><strong>Yeni Sipariş Durumu: </strong> ' + situation.name + '</p>'
 
         msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
