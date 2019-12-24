@@ -27,7 +27,7 @@ def sponsor_isexist(request):
 
         if len(profile) > 0:
             isExist = True
-            adSoyad = profile[0].user.first_name + ' ' + profile[0].user.last_name
+            adSoyad = profile[0].user.first_name[0]+ '****** ' + profile[0].user.last_name[0] + '******'
 
         situation = dict()
         situation['situation'] = isExist
