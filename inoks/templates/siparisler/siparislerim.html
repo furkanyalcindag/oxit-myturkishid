@@ -208,6 +208,9 @@
                                                                class="btn btn-warning"
                                                             ><i
                                                                     class="fa fa-align-left"></i>Ödeme Yap </a>
+
+                                                             <a class="btn btn-danger" onclick="deleteOrders({{ order.id }})"><i
+                                                    class="fa fa-trash"></i>sil</a>
                                                         {% endifequal %}
                                                     {% endif %}
                                                 {% endfor %}
@@ -263,6 +266,45 @@
 
 
     <script>
+
+     function deleteOrders(id) {
+            // $('#modal-danger').modal('show');
+            console.log(id);
+            var html = ''
+            $("#modal-danger").on("shown.bs.modal", function (e) {
+                $("#btn-conf").click(function () {
+                    $.ajax({
+                        url: "{% url "inoks:uye-siparis-sil" pk=212121223232323232 %}".replace(/212121223232323232/, id.toString()),
+                        type: "POST",
+                        data: {
+                            'csrfmiddlewaretoken': "{{  csrf_token  }}",
+
+                        },
+                        success: function (result) {
+
+                            html = ' Sipariş Başarıyla Silindi';
+
+                            $(".successModal").html(html);
+                            $('#modal-success').on("shown.bs.modal", function (e) {
+                                $(".btn-ok").click(function () {
+
+                                    window.location.replace("{% url "inoks:siparislerim" %}");
+
+                                });
+
+                            }).modal('show');
+
+
+                            console.log(result.status)
+                        }
+                    });
+                });
+            }).modal('show');
+            $('#btn-close').click(function () {
+                $('#modal-danger').modal('hide');
+            });
+
+        }
 
 
         function order_products(id) {

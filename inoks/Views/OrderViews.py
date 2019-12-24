@@ -431,6 +431,11 @@ def getMyOrder(request, pk):
 
 @login_required
 def orders_delete(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     if request.method == 'POST' and request.is_ajax():
         try:
             obj = Order.objects.get(pk=pk)
@@ -442,6 +447,25 @@ def orders_delete(request, pk):
     else:
         return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
 
+@login_required
+def orders_delete_member(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+    if request.method == 'POST' and request.is_ajax():
+        try:
+
+            obj = Order.objects.filter(profile__user=request.user).filter(pk=pk)
+            if obj[0].payment_type == 'Kredi Kartı' and obj[0].order_situations.last().name == 'Ödeme Bekliyor':
+                obj[0].delete()
+            return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
+        except Order.DoesNotExist:
+            return JsonResponse({'status': 'Fail', 'msg': 'Object does not exist'})
+
+    else:
+        return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
 
 @api_view()
 def getOrder(request, pk):

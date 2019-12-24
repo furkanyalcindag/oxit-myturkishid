@@ -64,6 +64,8 @@ urlpatterns = [
     url(r'siparis-onayla/$', OrderViews.pendingOrderActive, name="siparis-onayla"),
     url(r'siparisler/siparisler/sil/(?P<pk>\d+)$', OrderViews.orders_delete,
         name='siparislersil'),
+    url(r'siparisler/siparisler/uye-siparis-sil/(?P<pk>\d+)$', OrderViews.orders_delete_member,
+        name='uye-siparis-sil'),
     url(r'siparisler/siparisler/(?P<pk>\d+)$', OrderViews.getOrder, name='getOrder'),
     url(r'siparisler/sepet-siparis-ekle/$', OrderViews.return_add_orders_from_cart, name='kart-siparis-ekle'),
     url(r'siparis-durumu-guncelle/$', OrderViews.siparis_durumu_guncelle, name="siparis-durumu-guncelle"),
