@@ -56,7 +56,7 @@ class ProfileForm(ModelForm):
             'iban': forms.TextInput(
                 attrs={'class': 'form-control iban', 'placeholder': 'iban',
                         'required': 'required',
-                       'maxlength': '11', 'minlength': '11'}),
+                       }),
 
         }
 

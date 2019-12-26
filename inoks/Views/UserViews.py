@@ -146,6 +146,30 @@ def return_users(request):
 
 
 @login_required
+def send_information(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+    user = User.objects.get(pk=pk)
+    password = User.objects.make_random_password()
+    user.set_password(password)
+    user.save()
+
+    subject, from_email, to = 'Baven Kullanıcı Giriş Bilgileri', 'info@baven.net', user.email
+    text_content = 'Aşağıda ki bilgileri kullanarak sisteme giriş yapabilirsiniz.'
+    html_content = '<p> <strong>Site adresi:</strong> <a href="https://network.bavev.net"></a>network.baven.net</p>'
+    html_content = html_content + '<p><strong>Kullanıcı Adı: </strong>' + user.username + '</p>'
+    html_content = html_content + '<p><strong>Şifre: </strong>' + password + '</p>'
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
+    msg.attach_alternative(html_content, "text/html")
+    msg.send()
+
+    return render(request, 'kullanici/kullanici-bilgi.html', {'password': password, 'username': user.username})
+
+
+@login_required
 def return_my_users(request):
     perm = general_methods.control_access(request)
 

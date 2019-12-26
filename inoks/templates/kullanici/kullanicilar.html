@@ -181,7 +181,8 @@
                                         <td>
                                             <div class="btn-group">
 
-
+                                                  <a class="btn btn-primary" href="{% url 'inoks:kullanici-bilgi-gonder' profile.user.id %}"><i
+                                                        class="fa fa-lock"></i> Şifre Sıfırla </a>
                                                 <a class="btn btn-info" onclick="getAllProfile({{ profile.pk }})"><i
                                                         class="fa fa-align-left"></i> Detay </a>
 

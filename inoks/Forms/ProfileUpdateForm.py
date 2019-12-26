@@ -45,7 +45,7 @@ class ProfileUpdateForm(ModelForm):
                                                   'style': 'width: 100%;', 'required': 'required'}),
             'iban': forms.TextInput(
                 attrs={'class': 'form-control iban', 'placeholder': 'iban',
-                       'pattern': '^DE\d{2}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{4}[ ]\d{2}|DE\d{20}$', 'required': 'required',
+                       'required': 'required',
                        'maxlength': '11', 'minlength': '11'}),
             'sponsor': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                            'style': 'width: 100%; ', 'required': 'required', 'disabled':'disabled'}),
