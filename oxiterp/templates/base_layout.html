@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>BAVEN </title>
     <meta name="description" content="BAVEN"/>
+
     <meta name="keywords" content="BAVEN"/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -77,12 +78,22 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="#" class="logo">
+      {% if  user.groups.all.0.name == 'Üye' %}
+        <a href="{% url 'inoks:user-dashboard' %}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>BVN</b></span>
             <!-- logo for regular state and mobile devices -->
             <span class="logo-lg"><img width="125px" src="/media/logo.jpeg" alt="User Image" style="margin-bottom: 5px;"> </span>
         </a>
+
+        {% else %}
+        <a href="{% url 'inoks:admin-dashboard' %}" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>BVN</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><img width="125px" src="/media/logo.jpeg" alt="User Image" style="margin-bottom: 5px;"> </span>
+        </a>
+        {% endif %}
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
@@ -252,10 +263,6 @@
 
                 {% endif %}
 
-                                <li>
-                                    <a role="button" data-toggle="modal" data-target="#exampleModalCenter"><i
-                                            class=" fa fa-money"></i> Banka Bilgileri</a>
-                                </li>
             </ul>
 
 

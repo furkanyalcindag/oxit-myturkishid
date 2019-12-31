@@ -4,7 +4,21 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static 'bower_components/product/product-dashboard.css' %} ">
 
+    <div class="box box-success box-solid" id="toast" style="display: none" >
+        <div class="box-header with-border">
+            <h3 class="box-title">Başarılı</h3>
 
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" id="remove-toast"><i class="fa fa-times"></i></button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            Ürün sepete eklendi.
+        </div>
+        <!-- /.box-body -->
+    </div>
 
     <!--cart Modal -->
     <div class="modal fade" id="cart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -28,7 +42,7 @@
                         <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
                         <input type="submit" name="urun_diger" class="btn btn-primary" value="Sipariş Ver"></input>
 
-                        <a  class="button clear-cart btn btn-danger">Sepeti Boşalt</a>
+                        <a class="button clear-cart btn btn-danger">Sepeti Boşalt</a>
                     </div>
                 </form>
             </div>
@@ -174,12 +188,14 @@
 
     <section class="content">
 
+
         <!-- /.row -->
         <!-- Main row -->
         <div class="row">
             <div class="col pull-right">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart"><i
-                                                                            class="fa fa-shopping-cart"></i> Alışveriş Sepeti (<span
+                <button type="button" style="display: block;position: fixed ;right: 0;top: 80px;z-index:99 "
+                        class="btn btn-primary" data-toggle="modal" data-target="#cart"><i
+                        class="fa fa-shopping-cart"></i> Alışveriş Sepeti (<span
                         class="total-count"></span>)
                 </button>
 
@@ -338,6 +354,13 @@
     <script>
 
 
+    document.getElementById("remove-toast").onclick = function() {
+          document.getElementById("toast").style.display='none';
+
+
+
+    };
+
         // ************************************************
         // Shopping Cart API
         // ************************************************
@@ -359,6 +382,7 @@
             // Save cart
             function saveCart() {
                 sessionStorage.setItem('shoppingCart', JSON.stringify(cart));
+
             }
 
             // Load cart
@@ -492,7 +516,17 @@
             var price = Number(x);
             shoppingCart.addItemToCart(name, price, 1, id);
             displayCart();
+            document.getElementById("toast").style.display='block';
+            document.getElementById("toast").style.position='fixed';
+            document.getElementById("toast").style.right =0;
+            document.getElementById("toast").style.top = '123px';
+            document.getElementById("toast").style.zIndex=99;
+            document.getElementById("toast").style.width = '200px';
+
+
+
         });
+
 
         // Clear items
         $('.clear-cart').click(function () {
@@ -511,7 +545,7 @@
                     + "<td>(" + cartArray[i].price + ")</td>"
                     + "<td><div class='input-group'>"
                     + "<input type='number' style='width:130px' class='item-count form-control' data-name='" + cartArray[i].name + "' value='" + cartArray[i].count + "'>"
-                    + "<input type='hidden' id='productId' name='custId_"+cartArray[i].id+"' value='"+cartArray[i].id+"&"+cartArray[i].count+"'>"
+                    + "<input type='hidden' id='productId' name='custId_" + cartArray[i].id + "' value='" + cartArray[i].id + "&" + cartArray[i].count + "'>"
                     + "</div></td>"
                     + "<td><button class='delete-item btn btn-danger' data-name=" + cartArray[i].name + " data-id=" + cartArray[i].id + ">X</button></td>"
                     + " = "

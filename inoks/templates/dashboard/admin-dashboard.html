@@ -52,7 +52,7 @@
 
 
 
-        <div class="modal modal-danger fade in siparis-onay" tabindex="-2" role="dialog" id="siparis-onay"
+    <div class="modal modal-danger fade in siparis-onay" tabindex="-2" role="dialog" id="siparis-onay"
          aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -79,11 +79,7 @@
 
 
 
-
-
-
-
-        <div class="modal modal-danger fade in uye-onay" tabindex="-3" role="dialog" id="uye-onay"
+    <div class="modal modal-danger fade in uye-onay" tabindex="-3" role="dialog" id="uye-onay"
          aria-hidden="true" style="display: none;">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -113,7 +109,7 @@
 
 
 
-      {% if messages %}
+    {% if messages %}
         {% for message in messages %}
 
 
@@ -227,7 +223,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>{{ total_price }} ₺  </h3>
+                        <h3>{{ total_price }} ₺ </h3>
 
                         <p>Toplam Ciro Miktarı (+KDV)</p>
                     </div>
@@ -264,140 +260,76 @@
 
     <section class="content ">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Onay Bekleyen Siparişler</h3>
-                    </div>
-                    <div class="box-body">
-                        <table id="siparisler" class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Sipariş </th>
 
-                                <th>Üye</th>
-                                <th>Sponsor</th>
-
-                                <th>Ödeme</th>
-
-                                <th>Onayla/Detay/Sil</th>
-
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% if pending_orders.all %}
-                                {% for pending_order in pending_orders %}
-                                    <tr>
-                                        <td>{{ forloop.counter }} </td>
-                                        <td>{{ pending_order.id }}</td>
-                                        <td>{{ pending_order.profile }}</td>
-                                        <td>{{ pending_order.profile.sponsor }}</td>
-
-
-
-                                        <td>{{ pending_order.payment_type }}</td>
-
-                                        <td>
-                                            <div class="btn-group">
-                                                <a class="btn btn-success"
-                                                   onclick="orderActive({{ pending_order.pk }})"><i
-                                                        class="fa fa-check"></i> </a>
-
-                                                <a class="btn btn-info"
-                                                   onclick="getPendingOrder({{ pending_order.pk }})"><i
-                                                        class="fa fa-align-left"></i> </a>
-
-                                                <a class="btn btn-danger"
-                                                   data-toggle="modal"
-                                                   onclick=deletePendingOrder({{ pending_order.pk }})><i
-                                                        class="fa fa-trash"></i> </a>
-                                            </div>
-                                        </td>
-
-
-                                    </tr>
-
-                                {% endfor %}
-                            {% endif %}
-                            </tbody>
-                        </table>
-                    </div>
-
-
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Onay Bekleyen Üyeler</h3>
                 </div>
+                <div class="box-body">
+                    <table id="uyeler" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>#</th>
 
-            </div>
-            <div class="col-lg-6">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Onay Bekleyen Üyeler</h3>
-                    </div>
-                    <div class="box-body">
-                        <table id="uyeler" class="table table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>#</th>
-
-                                <th>Sponsor</th>
-                                <th>Ad</th>
-                                <th>Soyad</th>
+                            <th>Sponsor</th>
+                            <th>Ad</th>
+                            <th>Soyad</th>
 
 
-                                <th>Telefon</th>
+                            <th>Telefon</th>
 
 
-                                <th>Onayla/Detay/Sil</th>
+                            <th>Onayla/Detay/Sil</th>
 
-                            </tr>
-                            </thead>
+                        </tr>
+                        </thead>
 
-                            <tbody>
-
-
-                            {% if users.all %}
-                                {% for profile in users %}
-                                    <tr>
-                                        <td>{{ forloop.counter }} </td>
-
-                                        <td><a href="#">{{ profile.sponsor }}</a></td>
-                                        <td>{{ profile.user.first_name }}</td>
-                                        <td>{{ profile.user.last_name }}</td>
+                        <tbody>
 
 
-                                        <td>{{ profile.mobilePhone }}</td>
+                        {% if users.all %}
+                            {% for profile in users %}
+                                <tr>
+                                    <td>{{ forloop.counter }} </td>
+
+                                    <td><a href="#">{{ profile.sponsor }}</a></td>
+                                    <td>{{ profile.user.first_name }}</td>
+                                    <td>{{ profile.user.last_name }}</td>
 
 
-                                        <td>
-                                            <div class="btn-group">
-                                                <a class="btn btn-success"
-                                                   onclick="activeDeactive({{ profile.pk }})"><i
-                                                        class="fa fa-check"></i> </a>
-
-                                                <a class="btn btn-info" onclick="getPendingProfile({{ profile.pk }})"><i
-                                                        class="fa fa-align-left"></i> </a>
-
-                                                <a class="btn btn-danger"
-                                                   data-toggle="modal" onclick=deletePendingProfile({{ profile.pk }})><i
-                                                        class="fa fa-trash"></i> </a>
-                                            </div>
-                                        </td>
+                                    <td>{{ profile.mobilePhone }}</td>
 
 
-                                    </tr>
+                                    <td>
+                                        <div class="btn-group">
+                                            <a class="btn btn-success"
+                                               onclick="activeDeactive({{ profile.pk }})"><i
+                                                    class="fa fa-check"></i> </a>
 
-                                {% endfor %}
-                            {% endif %}
+                                            <a class="btn btn-info" onclick="getPendingProfile({{ profile.pk }})"><i
+                                                    class="fa fa-align-left"></i> </a>
+
+                                            <a class="btn btn-danger"
+                                               data-toggle="modal" onclick=deletePendingProfile({{ profile.pk }})><i
+                                                    class="fa fa-trash"></i> </a>
+                                        </div>
+                                    </td>
 
 
-                            </tbody>
-                        </table>
-                    </div>
+                                </tr>
+
+                            {% endfor %}
+                        {% endif %}
+
+
+                        </tbody>
+                    </table>
                 </div>
-
-
             </div>
+
+
         </div>
+
 
     </section>
 
@@ -420,14 +352,13 @@
                         <div class="col-lg-12 col-xs-12">
 
 
-
-                                <div class="box-body">
-                                    <div id="bar-chart-2" style="height: 300px;"></div>
-                                </div>
-                                <!-- /.box-body-->
- <div class="box-footer text-center">
-                        <a href="kullanici/kullanicilar" class="uppercase">TÜM ÜYELER</a>
-                    </div>
+                            <div class="box-body">
+                                <div id="bar-chart-2" style="height: 300px;"></div>
+                            </div>
+                            <!-- /.box-body-->
+                            <div class="box-footer text-center">
+                                <a href="kullanici/kullanicilar" class="uppercase">TÜM ÜYELER</a>
+                            </div>
                         </div>
 
 
@@ -437,37 +368,36 @@
             </div>
 
 
-            <div class="col-lg-4">
+            <div class="col-lg-8">
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <i class="fa fa-bar-chart-o"></i>
                         <h3 class="box-title">Son Onay Verilen Siparişler</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body">
-                        <ul class="products-list product-list-in-box">
+                    <div class="box-body" style="    padding-left: 30px;    padding-right:100px;">
+                        <ul class=" products-list product-list-in-box">
 
 
                             {% if orders.all %}
                                 {% for order in orders %}
 
-{% for product in order.product.all %}
+                                    {% for product in order.product.all %}
 
 
+                                        <li class="item">
 
-
-                                                <li class="item">
-
-                                        <div class="product-info" style="margin-left: 0">
-                                            <a href="#" class="product-title"> {{ forloop.counter }} - {{ product.name }}
-                                                <span class="label  label-warning pull-right">{{ product.price }} TL</span></a>
-                                            <span class="product-description">
+                                            <div class="product-info" style="margin-left: 0">
+                                                <a href="#" class="product-title"> {{ forloop.counter }}
+                                                    - {{ product.name }}
+                                                    <span  class="label  label-warning pull-right">{{ product.price }} TL</span></a>
+                                                <span class="product-description">
                           {{ order.profile }} - {{ order.creationDate }}
                         </span>
-                                        </div>
-                                    </li>
+                                            </div>
+                                        </li>
 
-                                            {% endfor %}
+                                    {% endfor %}
 
 
 
@@ -486,77 +416,77 @@
                 </div>
             </div>
 
- <!--
-            <div class="col-lg-4">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">Genel Bilgiler</h3>
-                    </div>
-                    <div class="info-box bg-yellow">
-                        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+            <!--
+                       <div class="col-lg-4">
+                           <div class="box box-primary">
+                               <div class="box-header with-border">
+                                   <h3 class="box-title">Genel Bilgiler</h3>
+                               </div>
+                               <div class="info-box bg-yellow">
+                                   <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">Online Üye Sayısı</span>
-                            <span class="info-box-number">145</span>
+                                   <div class="info-box-content">
+                                       <span class="info-box-text">Online Üye Sayısı</span>
+                                       <span class="info-box-number">145</span>
 
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 50%"></div>
-                            </div>
-                            <span class="progress-description">
-                    Geçen aya göre %50 artış
-                  </span>
-                        </div>
+                                       <div class="progress">
+                                           <div class="progress-bar" style="width: 50%"></div>
+                                       </div>
+                                       <span class="progress-description">
+                               Geçen aya göre %50 artış
+                             </span>
+                                   </div>
 
-                    </div>
+                               </div>
 
-                    <div class="info-box bg-green">
-                        <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
+                               <div class="info-box bg-green">
+                                   <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
 
-                        <div class="info-box-content">
-                            <span class="info-box-text">Soy Ağacı Tamamlananlar</span>
-                            <span class="info-box-number">45</span>
+                                   <div class="info-box-content">
+                                       <span class="info-box-text">Soy Ağacı Tamamlananlar</span>
+                                       <span class="info-box-number">45</span>
 
-                            <div class="progress">
-                                <div class="progress-bar" style="width: 20%"></div>
-                            </div>
-                            <span class="progress-description">
-                    Geçen aya göre %20 artış
-                  </span>
-                        </div>
+                                       <div class="progress">
+                                           <div class="progress-bar" style="width: 20%"></div>
+                                       </div>
+                                       <span class="progress-description">
+                               Geçen aya göre %20 artış
+                             </span>
+                                   </div>
 
-                    </div>
+                               </div>
 
-                </div>
-            </div> -->
+                           </div>
+                       </div> -->
 
-         <!--    <div class="col-lg-4">
-                <div class="box box-primary">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">En Aktif Şehirler</h3>
-                    </div>
+            <!--    <div class="col-lg-4">
+                   <div class="box box-primary">
+                       <div class="box-header with-border">
+                           <h3 class="box-title">En Aktif Şehirler</h3>
+                       </div>
 
-                    <div class="box-footer no-padding">
-                        <ul class="nav nav-pills nav-stacked">
-                            <li><a href="#">Ankara
-                                <span class="pull-right text-red"> 2500 Adet Sipariş</span> </a>
-                            </li>
+                       <div class="box-footer no-padding">
+                           <ul class="nav nav-pills nav-stacked">
+                               <li><a href="#">Ankara
+                                   <span class="pull-right text-red"> 2500 Adet Sipariş</span> </a>
+                               </li>
 
-                            <li><a href="#">İstanbul <span class="pull-right text-green"> 1500 Adet Sipariş</span> </a>
-                            </li>
+                               <li><a href="#">İstanbul <span class="pull-right text-green"> 1500 Adet Sipariş</span> </a>
+                               </li>
 
-                            <li><a href="#">İzmir
-                                <span class="pull-right text-yellow"> 500 Adet Sipariş</span></a>
-                            </li>
+                               <li><a href="#">İzmir
+                                   <span class="pull-right text-yellow"> 500 Adet Sipariş</span></a>
+                               </li>
 
-                            <li><a href="#">Diğer
-                                <span class="pull-right text-blue"> 200 Adet Sipariş</span></a>
-                            </li>
+                               <li><a href="#">Diğer
+                                   <span class="pull-right text-blue"> 200 Adet Sipariş</span></a>
+                               </li>
 
-                        </ul>
-                    </div>
+                           </ul>
+                       </div>
 
-                </div>
-            </div> -->
+                   </div>
+               </div> -->
 
 
         </div>
@@ -720,31 +650,31 @@
 
 
         function activeDeactive(user_id, is_true) {
-$(".uye-onay").on("shown.bs.modal", function (e) {
+            $(".uye-onay").on("shown.bs.modal", function (e) {
                 $("#btn-conf-3").click(function () {
 
 
-            $.ajax({
-                url: "{% url 'inoks:kullanici-onayla' %}",
-                type: "post", // or "get"
-                data: {
-                    user_id: user_id,
-                    is_true: is_true
-                },
-                success: function (result) {
+                    $.ajax({
+                        url: "{% url 'inoks:kullanici-onayla' %}",
+                        type: "post", // or "get"
+                        data: {
+                            user_id: user_id,
+                            is_true: is_true
+                        },
+                        success: function (result) {
 
-                    if (result.status == 'Success') {
-                        swal("Başarılı", "Bekleyen Kullanıcı Başarıyla güncellendi.", "success");
-                        window.location.replace("{% url "inoks:admin-dashboard" %}");
+                            if (result.status == 'Success') {
+                                swal("Başarılı", "Bekleyen Kullanıcı Başarıyla güncellendi.", "success");
+                                window.location.replace("{% url "inoks:admin-dashboard" %}");
 
 
-                    } else {
-                        swal("Başarılı", result.messages, "error");
-                    }
-                }
-            });
+                            } else {
+                                swal("Başarılı", result.messages, "error");
+                            }
+                        }
+                    });
                 });
-           }).modal('show');
+            }).modal('show');
             $('#btn-uye').click(function () {
                 $('#uye-onay').modal('hide');
             });
@@ -886,30 +816,30 @@ $(".uye-onay").on("shown.bs.modal", function (e) {
 
 
         function orderActive(user_id, is_true) {
-  $(".siparis-onay").on("shown.bs.modal", function (e) {
+            $(".siparis-onay").on("shown.bs.modal", function (e) {
                 $("#btn-conf-2").click(function () {
 
-            $.ajax({
-                url: "{% url 'inoks:siparis-onayla' %}",
-                type: "post", // or "get"
-                data: {
-                    user_id: user_id,
-                    is_true: is_true
-                },
-                success: function (result) {
+                    $.ajax({
+                        url: "{% url 'inoks:siparis-onayla' %}",
+                        type: "post", // or "get"
+                        data: {
+                            user_id: user_id,
+                            is_true: is_true
+                        },
+                        success: function (result) {
 
-                    if (result.status == 'Success') {
-                        swal("Başarılı", "Sipariş Onaylandı.", "success");
-                        window.location.replace("{% url "inoks:admin-dashboard" %}");
+                            if (result.status == 'Success') {
+                                swal("Başarılı", "Sipariş Onaylandı.", "success");
+                                window.location.replace("{% url "inoks:admin-dashboard" %}");
 
 
-                    } else {
-                        swal("Başarılı", result.messages, "error");
-                    }
-                }
-            });
-          });
-           }).modal('show');
+                            } else {
+                                swal("Başarılı", result.messages, "error");
+                            }
+                        }
+                    });
+                });
+            }).modal('show');
             $('#btn-siparis').click(function () {
                 $('#siparis-onay').modal('hide');
             });
