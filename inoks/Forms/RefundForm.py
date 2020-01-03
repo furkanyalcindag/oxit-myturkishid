@@ -1,11 +1,18 @@
 from django import forms
 from django.forms import ModelForm
 
-from inoks.models import RefundSituations, Refund
+from inoks.models import RefundSituations, Refund, Product
 
 
 class RefundForm(ModelForm):
     refundSituations = forms.ModelChoiceField(queryset=RefundSituations.objects.all(),
+                                              to_field_name='name',
+                                              empty_label="Seçiniz",
+                                              widget=forms.Select(
+                                                  attrs={'class': 'form-control select2 select2-hidden-accessible',
+                                                         'style': 'width: 100%; '}))
+
+    product = forms.ModelChoiceField(queryset=Product.objects.exclude(name__icontains="paket"),
                                               to_field_name='name',
                                               empty_label="Seçiniz",
                                               widget=forms.Select(

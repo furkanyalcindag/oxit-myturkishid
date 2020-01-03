@@ -81,8 +81,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label> {{ refund_form.product.label }}</label>
+                                    <label>Ürünler</label>
+                                    {% if refund_form.product %}
                                     {{ refund_form.product }}
+                                    {% endif %}
                                 </div>
 
 

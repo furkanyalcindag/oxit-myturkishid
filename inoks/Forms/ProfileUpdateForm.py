@@ -15,7 +15,7 @@ class ProfileUpdateForm(ModelForm):
 
         fields = (
             'profileImage', 'address', 'mobilePhone', 'gender', 'tc', 'birthDate', 'job', 'city', 'educationLevel',
-            'sponsor', 'district','iban')
+            'sponsor', 'district', 'iban', 'ibanAdSoyad')
         widgets = {
             'address': forms.Textarea(
                 attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required'}),
@@ -24,12 +24,12 @@ class ProfileUpdateForm(ModelForm):
             'gender': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                           'style': 'width: 100%;', 'required': 'required'}),
             'tc': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'T.C. Kimlik Numarası', 'required': 'required','disabled':'disabled'}),
+                attrs={'class': 'form-control', 'placeholder': 'T.C. Kimlik Numarası', 'required': 'required',
+                       'disabled': 'disabled'}),
 
             'birthDate': forms.DateInput(
                 attrs={'class': 'form-control  pull-right', 'id': 'datepicker', 'autocomplete': 'off',
-                       'onkeydown': 'return false','disabled':'disabled'}),
-
+                       'onkeydown': 'return false', 'disabled': 'disabled'}),
 
             'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%; ', 'required': 'required', "onChange": 'ilceGetir()'}),
@@ -47,6 +47,8 @@ class ProfileUpdateForm(ModelForm):
                 attrs={'class': 'form-control iban', 'placeholder': 'iban',
                        'required': 'required',
                        'maxlength': '11', 'minlength': '11'}),
-            'sponsor': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%; ', 'required': 'required', 'disabled':'disabled'}),
+            'ibanAdSoyad': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Hesap Adı ve Soyadı', 'required': 'required'
+
+                       })
         }

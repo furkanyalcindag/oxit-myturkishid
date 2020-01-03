@@ -9,12 +9,13 @@ from inoks.models.ProfileControlObject import ProfileControlObject
 
 
 def getMenu(request):
-    menus = Menu.objects.all()
+    menus = Menu.objects.all().order_by('name')
+
     return {'menus': menus}
 
 
 def getAdminMenu(request):
-    adminmenus = MenuAdmin.objects.all()
+    adminmenus = MenuAdmin.objects.all().order_by('name')
     return {'adminmenus': adminmenus}
 
 
@@ -23,6 +24,7 @@ def activeUser(request, pk):
     user.isApprove = True
     user.activePassiveDate = datetime.datetime.now()
     user.user.is_active = True
+    user.isActive = True
     user.save()
     user.user.save()
     return user
@@ -31,6 +33,8 @@ def activeUser(request, pk):
 def passiveUser(request, pk):
     user = Profile.objects.get(pk=pk)
     user.user.is_active = False
+    user.isActive = False
+    user.isApprove = False
     user.activePassiveDate = datetime.datetime.now()
     user.save()
     user.user.save()
@@ -40,6 +44,8 @@ def passiveUser(request, pk):
 def reactiveUser(request, pk):
     user = Profile.objects.get(pk=pk)
     user.user.is_active = True
+    user.isActive = True
+    user.isApprove = True
     user.save()
     user.user.save()
     return user

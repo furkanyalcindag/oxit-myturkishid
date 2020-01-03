@@ -169,6 +169,7 @@
                             <tbody>
                             {% if users.all %}
                                 {% for profile in users %}
+                                {% if profile.user.isActive %}
                                     <tr>
                                         <td>{{ forloop.counter }} </td>
                                         <td><a href="#">{{ profile.id }}</a></td>
@@ -179,7 +180,7 @@
                                         <td>{{ profile.city }}</td>
 
                                         <td>
-                                            {% if profile.user.is_active %}
+
 
                                                 <div class="btn-group">
 

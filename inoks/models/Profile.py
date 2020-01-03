@@ -50,12 +50,14 @@ class Profile(models.Model):
     educationLevel = models.CharField(max_length=128, null=False, blank=False, verbose_name="Eğitim Düzeyi",
                                       choices=SCHOOL_CHOICES,
                                       default=ilkokul)
-    sponsor = models.ForeignKey("Profile", on_delete=models.CASCADE, verbose_name='Sponsor', null=True,blank=True, related_name='sp')
+    sponsor = models.ForeignKey("Profile", on_delete=models.CASCADE, verbose_name='Sponsor', null=True, blank=True,
+                                related_name='sp')
     isApprove = models.BooleanField(default=False, null=False, blank=False)
     isActive = models.BooleanField(default=False)
     isContract = models.BooleanField(default=False)
     activePassiveDate = models.DateTimeField(null=True, blank=True)
     iban = models.TextField(blank=True, null=True, verbose_name='iban')
+    ibanAdSoyad = models.TextField(blank=True, null=True, verbose_name='ibanAdSoyad')
 
     def __str__(self):
         return '%d %s %s %s' % (self.id, '-', self.user.first_name, self.user.last_name)

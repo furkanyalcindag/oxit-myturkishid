@@ -52,6 +52,11 @@
 
 
 
+
+
+
+
+
     {% if messages %}
         {% for message in messages %}
 
@@ -325,6 +330,40 @@
 
     </section>
 
+
+
+<script>
+
+     function getProducts(id) {
+
+            var html = '';
+            $.get(" {% url "inoks:getProducts" pk=12121   %}".replace(/12121/, id.toString()))
+                .done(function (response) {
+
+                    var product = response.product[0];
+                    html += ' <div class="box-body box-profile">';
+                    html += ' <img class="profile-user-img img-responsive img-circle" src="' + product.productImage[0].productImage + '" alt="User profile picture">';
+                    html += '<h3 class="profile-username text-center">' + product.name + ' /  ' + product.price + '  ' + 'TL' + '</h3>';
+                    html += '<p class="text-muted text-center">' + product.info + '</p>';
+
+
+                    $(".bodys").html(html);
+
+                });
+
+            $('.bd-example-modal-lg').modal('show');
+
+
+            $(".bd-example-modal-lg").on("hidden.bs.modal", function () {
+                // put your default event here
+                $(".bodys").html("");
+            });
+
+
+        }
+
+
+    </script>
 
 
 

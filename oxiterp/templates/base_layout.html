@@ -74,25 +74,27 @@
 <div class="preloader"></div>
 <!-- Site wrapper -->
 <div class="wrapper">
- {% load app_filter %}
+    {% load app_filter %}
 
     <header class="main-header">
         <!-- Logo -->
-      {% if  user.groups.all.0.name == 'Üye' %}
-        <a href="{% url 'inoks:user-dashboard' %}" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>BVN</b></span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><img width="125px" src="/media/logo.jpeg" alt="User Image" style="margin-bottom: 5px;"> </span>
-        </a>
+        {% if  user.groups.all.0.name == 'Üye' %}
+            <a href="{% url 'inoks:user-dashboard' %}" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>BVN</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><img width="125px" src="/media/logo.jpeg" alt="User Image"
+                                           style="margin-bottom: 5px;"> </span>
+            </a>
 
         {% else %}
-        <a href="{% url 'inoks:admin-dashboard' %}" class="logo">
-            <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>BVN</b></span>
-            <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><img width="125px" src="/media/logo.jpeg" alt="User Image" style="margin-bottom: 5px;"> </span>
-        </a>
+            <a href="{% url 'inoks:admin-dashboard' %}" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>BVN</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><img width="125px" src="/media/logo.jpeg" alt="User Image"
+                                           style="margin-bottom: 5px;"> </span>
+            </a>
         {% endif %}
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -105,12 +107,13 @@
                 <ul class="nav navbar-nav">
 
 
- <li style="margin-top: 20px;color: white"> 150 TL Üzerine Kargo ÜCRETSİZ!</li>
+                    <li style="margin-top: 20px;color: white"> 150 TL Üzerine Kargo ÜCRETSİZ!</li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="/media/{{ user.profile.profileImage }}" class="user-image" alt="OXIT BİLİŞİM"
                                  style=" width: 30px;height: 30px;">
-                            <span class="hidden-xs">{{ user.first_name }} {{ user.last_name }} <i class="fa fa-chevron-down" aria-hidden="true"></i></span>
+                            <span class="hidden-xs">{{ user.first_name }} {{ user.last_name }} <i
+                                    class="fa fa-chevron-down" aria-hidden="true"></i></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -122,7 +125,7 @@
 
                                     <small>
 
-                                    {{ user.email }} <br>
+                                        {{ user.email }} <br>
                                         Katılım Tarihi: {{ user.profile.creationDate }}</small>
                                 </p>
                             </li>
@@ -143,10 +146,12 @@
                             <li class="user-footer">
                                 <div class="pull-left">
                                     <a href="{% url "inoks:kullanici-duzenle" user.profile.pk %}"
-                                       class="btn btn-default btn-flat"> <i class="fa fa-user" aria-hidden="true"></i> Profil Bilgisi</a>
+                                       class="btn btn-default btn-flat"> <i class="fa fa-user" aria-hidden="true"></i>
+                                        Profil Bilgisi</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="{% url 'accounts:logout' %}" class="btn btn-default btn-flat"> <i class="fa fa-sign-out" aria-hidden="true"></i> Çıkış Yap</a>
+                                    <a href="{% url 'accounts:logout' %}" class="btn btn-default btn-flat"> <i
+                                            class="fa fa-sign-out" aria-hidden="true"></i> Çıkış Yap</a>
                                 </div>
                             </li>
                         </ul>
@@ -178,22 +183,32 @@
 
 
                 {% if  user.groups.all.0.name == 'Üye' %}
+                    <li class=" ">
+                                <a href="{% url "inoks:user-dashboard" %}">
+                                    <i class="fa fa-home"></i>
+                                    <span>Anasayfa</span>
+                                    <span class="pull-right-container">
+
+                            </span>
+                                </a></li>
 
                     {% for menu in menus %}
 
 
                         {% if menu.is_parent %}
 
-                            <li class="treeview ">
-                            <a href="#">
-                                <i class=" {{ menu.fa_icon }}"></i>
-                                <span>{{ menu.name }}</span>
-                                <span class="pull-right-container">
+                            {% if menu.name != "Anasayfa" %}
+                                <li class="treeview ">
+                                <a href="#">
+                                    <i class=" {{ menu.fa_icon }}"></i>
+                                    <span>{{ menu.name }}</span>
+                                    <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
-                            </a>
-                        {% endif %}
+                                </a>
 
+                        {% endif %}
+                         {% endif %}
 
                     <ul class="treeview-menu">
 
@@ -221,19 +236,29 @@
 
                 {% else %}
 
+                     <li class=" ">
+                                <a href="{% url "inoks:admin-dashboard" %}">
+                                    <i class="fa fa-home"></i>
+                                    <span>Anasayfa</span>
+                                    <span class="pull-right-container">
+
+                            </span>
+                                </a></li>
                     {% for menu in adminmenus %}
 
 
                         {% if menu.is_parent %}
-
-                            <li class="treeview ">
-                            <a href="#">
-                                <i class=" {{ menu.fa_icon }}"></i>
-                                <span>{{ menu.name }}</span>
-                                <span class="pull-right-container">
+                            {% if menu.name != "Anasayfa" %}
+                                <li class="treeview ">
+                                <a href="#">
+                                    <i class=" {{ menu.fa_icon }}"></i>
+                                    <span>{{ menu.name }}</span>
+                                    <span class="pull-right-container">
                                 <i class="fa fa-angle-left pull-right"></i>
                             </span>
-                            </a>
+                                </a>
+                            {% endif %}
+
                         {% endif %}
 
 
@@ -242,7 +267,7 @@
                         {% for menusub in adminmenus %}
 
 
-
+  {% if menu.name != "Anasayfa" %}
                             {% if menusub.parent.id is menu.id %}
 
                                 <li>
@@ -251,7 +276,7 @@
                                 </li>
 
                             {% endif %}
-
+   {% endif %}
                         {% endfor %}
 
                     </ul>
@@ -281,30 +306,31 @@
 
         {% endblock %}
 
-    <div class="modal fade" id="exampleModalCenter" bindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Banka Bilgileri</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
+        <div class="modal fade" id="exampleModalCenter" bindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Banka Bilgileri</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
 
-          <p> <strong>Iban:</strong> TR33 0011 1000 0000 0090 3944 08</p>
-          <p> <strong>Ünvan:</strong> Baven temizlik sistemleri</p>
-          <p> <strong>Banka:</strong>  QNB finansbank</p>
+                        <p><strong>Iban:</strong> TR33 0011 1000 0000 0090 3944 08</p>
+                        <p><strong>Ünvan:</strong> Baven temizlik sistemleri</p>
+                        <p><strong>Banka:</strong> QNB finansbank</p>
 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
 
-      </div>
-    </div>
-  </div>
-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 

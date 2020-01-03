@@ -242,6 +242,7 @@
                                 <th>Sipariş Tarihi</th>
                                 <th>Ürünler</th>
                                 <th>Tutar</th>
+                                <th>Kargo Bilgi</th>
                                 <th>Güncelle/Detay/Sil</th>
 
 
@@ -276,6 +277,8 @@
                                         </td>
 
                                         <td>{{ order.totalPrice }} TL</td>
+                                        <td> <a href="{% url 'inoks:kargo-bilgi' pk=order.id %}"
+                                               class="btn btn-warning">Kargo Bilgisi </a></td>
                                         <td>
                                             <div class="btn-group">
                                                 <a class="btn btn-info" onclick="showSituationModal({{ order.id }})"><i

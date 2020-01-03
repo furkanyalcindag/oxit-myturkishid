@@ -18,7 +18,7 @@ class ProfileForm(ModelForm):
 
         fields = (
             'profileImage', 'address', 'mobilePhone', 'gender', 'tc', 'birthDate', 'job', 'city', 'educationLevel',
-            'sponsor', 'district', 'isContract','iban')
+            'sponsor', 'district', 'isContract', 'iban', 'ibanAdSoyad')
         widgets = {
             'address': forms.Textarea(
                 attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required'}),
@@ -55,8 +55,12 @@ class ProfileForm(ModelForm):
 
             'iban': forms.TextInput(
                 attrs={'class': 'form-control iban', 'placeholder': 'iban',
-                        'required': 'required',
+                       'required': 'required',
                        }),
+            'ibanAdSoyad': forms.TextInput(
+                attrs={'class': 'form-control', 'placeholder': 'Hesap Adı ve Soyadı', 'required': 'required'
+
+                       })
 
         }
 

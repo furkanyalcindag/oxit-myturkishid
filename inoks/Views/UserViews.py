@@ -58,9 +58,12 @@ def return_add_users(request):
                              birthDate=profile_form.cleaned_data['birthDate'],
                              district=profile_form.cleaned_data['district'],
                              sponsor=profile_form.cleaned_data['sponsor'],
-                             iban=profile_form.cleaned_data['iban'])
+                             iban=profile_form.cleaned_data['iban'],
+                             ibanAdSoyad=profile_form.cleaned_data['ibanAdSoyad'])
             profil.sponsor = profile_form.cleaned_data['sponsor']
             profil.isContract = profile_form.cleaned_data['isContract']
+            profil.isApprove = True
+            profil.isActive = True
             sponsorNumber = Profile.objects.filter(sponsor=profile_form.cleaned_data['sponsor']).count()
             sp_profile = Profile.objects.get(pk=profile_form.cleaned_data['sponsor'].pk)
 
@@ -179,7 +182,7 @@ def return_my_users(request):
     current_user = request.user
     userprofile = Profile.objects.get(user=current_user)
 
-    users = Profile.objects.filter(sponsor_id=userprofile.id)
+    users = Profile.objects.filter(sponsor_id=userprofile.id, isApprove=True)
 
     return render(request, 'kullanici/uyelerim.html', {'users': users})
 
@@ -299,6 +302,6 @@ def return_deactive_users(request):
     if not perm:
         logout(request)
         return redirect('accounts:login')
-    users = Profile.objects.filter(user__is_active=False, isApprove=True)
+    users = Profile.objects.filter(isActive=False)
 
     return render(request, 'kullanici/iptal-edilen-kullanicilar.html', {'users': users})

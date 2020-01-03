@@ -447,6 +447,7 @@ def orders_delete(request, pk):
     else:
         return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
 
+
 @login_required
 def orders_delete_member(request, pk):
     perm = general_methods.control_access(request)
@@ -466,6 +467,7 @@ def orders_delete_member(request, pk):
 
     else:
         return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
+
 
 @api_view()
 def getOrder(request, pk):
@@ -747,4 +749,21 @@ def havale_eft(request, siparis):
     order_products = OrderProduct.objects.filter(order=order)
 
     return render(request, 'odeme/havale-eft-bilgi.html',
-                  {'card': order_products, 'siparis_no': siparis ,"total": order.totalPrice})
+                  {'card': order_products, 'siparis_no': siparis, "total": order.totalPrice})
+
+
+def kargoBilgi(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+
+    order = Order.objects.get(pk=pk)
+    order_products = OrderProduct.objects.filter(order=order)
+
+    return render(request, 'siparisler/kargo-bilgi.html',
+                  {'card': order_products, 'siparis_no': pk, 'order': order, 'total': order.totalPrice,
+                   'userOrder': order.profile})
+
+

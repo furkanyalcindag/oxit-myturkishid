@@ -119,9 +119,14 @@ def register_member(request):
                              birthDate=profile_form.cleaned_data['birthDate'],
                              district=profile_form.cleaned_data['district'],
                              sponsor=profile_form.cleaned_data['sponsor'],
-                             iban=profile_form.cleaned_data['iban'])
+                             iban=profile_form.cleaned_data['iban'],
+                             ibanAdSoyad=profile_form.cleaned_data['ibanAdSoyad'],
+                             )
+
             profil.sponsor = profile_form.cleaned_data['sponsor']
             profil.isContract = profile_form.cleaned_data['isContract']
+            profil.isApprove = True
+            profil.isActive = True
             sponsorNumber = Profile.objects.filter(sponsor=profile_form.cleaned_data['sponsor']).count()
             sp_profile = Profile.objects.get(pk=profile_form.cleaned_data['sponsor'].pk)
             limit = 0

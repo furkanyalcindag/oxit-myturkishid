@@ -16,7 +16,8 @@ urlpatterns = [
     url(r'kullanici-onayla/$', DashboardViews.profile_active_passive, name="kullanici-onayla"),
     url(r'dashboard/admin-dashboard/bekleyen-siparis-sil/(?P<pk>\d+)$', DashboardViews.pending_order_delete,
         name='bekleyen-siparisler-sil'),
-    url(r'dashboard/admin-dashboard/pending-order/(?P<pk>\d+)$', DashboardViews.getPendingOrder, name='getPendingOrder'),
+    url(r'dashboard/admin-dashboard/pending-order/(?P<pk>\d+)$', DashboardViews.getPendingOrder,
+        name='getPendingOrder'),
     url(r'siparis-onayla/$', DashboardViews.pendingOrderActive, name="siparis-onayla"),
     url(r'dashboard/user-dashboard/(?P<pk>\d+)$', DashboardViews.getMyOrder, name='getMyOrder'),
 
@@ -70,6 +71,8 @@ urlpatterns = [
     url(r'siparisler/siparisler/(?P<pk>\d+)$', OrderViews.getOrder, name='getOrder'),
     url(r'siparisler/sepet-siparis-ekle/$', OrderViews.return_add_orders_from_cart, name='kart-siparis-ekle'),
     url(r'siparis-durumu-guncelle/$', OrderViews.siparis_durumu_guncelle, name="siparis-durumu-guncelle"),
+    url(r'kargo-bilgi/(?P<pk>\d+)$', OrderViews.kargoBilgi, name='kargo-bilgi'),
+
 
     # İadeler
     url(r'iadeler/iade-olustur/$', RefundViews.return_add_refund, name='iade-olustur'),
@@ -82,7 +85,6 @@ urlpatterns = [
     url(r'iade-onayla/$', RefundViews.pendingRefundActive, name="iade-onayla"),
     url(r'iade-reddet/$', RefundViews.pendingRefundPassive, name="iade-reddet"),
     url(r'iadeler/bekleyen-iadeler/$', RefundViews.return_pendings_refunds, name='bekleyen-iadeler'),
-
 
     # Raporlar
     url(r'raporlar/rapor-olustur/$', ReportViews.return_create_report, name='rapor-olustur'),
@@ -99,16 +101,14 @@ urlpatterns = [
     url(r'ayarlar/sistem-ayarlari/$', SettingViews.return_system_settings, name='sistem-ayarlari'),
     url(r'sponsor-dogrula/$', SettingViews.sponsor_isexist, name="sponsor-dogrula"),
 
-
     # SoyAgacı
     url(r'soyagaci/soy-agacim/$', TreeViews.return_my_tree, name='soy-agacim'),
     url(r'soyagaci/soy-agaclari/$', TreeViews.return_all_tree, name='soy-agaclari'),
 
-    #api
+    # api
     url(r'ilce-getir/$', CityViews.get_districts, name="ilce-getir"),
     url(r'adres-bilgi/$', APIViews.get_address_info, name="adres-bilgi"),
     url(r'siparis/urun-bilgi-getir/$', APIViews.get_order_products.as_view(), name="siparis-urun-getir"),
-
 
     # odeme
     url(r'odeme-modul/(?P<siparis>\d+)$', OrderViews.odemeYap, name='odeme-yap'),
