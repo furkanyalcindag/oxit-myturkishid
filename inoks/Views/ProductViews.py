@@ -155,7 +155,8 @@ def product_update(request, pk):
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'urunler/urun-ekle.html', {'product_form': product_form, 'durum': durum, 'images': images})
+    return render(request, 'urunler/urun-ekle.html',
+                  {'product_form': product_form, 'durum': durum, 'images': images, 'product': product.pk})
 
 
 @api_view()
@@ -194,9 +195,6 @@ def return_product_list(request):
     return render(request, 'urunler/urun-listesi.html', {'product_list': product_list})
 
 
-
-
-
 @login_required
 def return_products(request):
     perm = general_methods.control_access(request)
@@ -209,6 +207,27 @@ def return_products(request):
 
     return render(request, 'urunler/urunler.html',
                   {'kategoriler': categories, 'urunler': urunler})
+
+
+@login_required
+def product_image_delete(request):
+    if request.POST:
+        try:
+            image_id = request.POST.get('image_id')
+            product_id = request.POST.get('product_id')
+
+            product = Product.objects.get(pk=product_id)
+            image = ProductImage.objects.get(pk=image_id)
+
+            product.productImage.remove(image)
+            product.save()
+            image.delete()
+
+            return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
+
+        except Exception as e:
+
+            return JsonResponse({'status': 'Fail', 'msg': e})
 
 
 @login_required

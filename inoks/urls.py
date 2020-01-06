@@ -44,6 +44,7 @@ urlpatterns = [
     url(r'urunler/urun-kategori-ekle/$', ProductViews.return_add_product_category, name='urun-kategori-ekle'),
     url(r'urunler/urun-listesi/$', ProductViews.return_product_list, name='urun-listesi'),
     url(r'urunler/urun-listesi/sil/(?P<pk>\d+)$', ProductViews.product_delete, name='product-sil'),
+    url(r'urunler/urunler/delete-image/$', ProductViews.product_image_delete, name='imageDelete'),
     url(r'urunler/urun-ekle/duzenle/(?P<pk>\d+)$', ProductViews.product_update, name='urun-duzenle'),
     url(r'urunler/urun-kategori-ekle/sil/(?P<pk>\d+)$', ProductViews.productCategory_delete,
         name='productCategory-sil'),
