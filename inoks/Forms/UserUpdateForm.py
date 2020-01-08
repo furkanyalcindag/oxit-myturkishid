@@ -9,11 +9,17 @@ class UserUpdateForm(ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name')
+        fields = ('first_name', 'last_name', 'email')
         widgets = {
             'first_name': forms.TextInput(
-                attrs={'class': 'form-control ', 'placeholder': 'Adınız', 'value': '', 'required': 'required','readonly':'readonly'}),
+                attrs={'class': 'form-control ', 'placeholder': 'Adınız', 'value': '', 'required': 'required',
+                      }),
             'last_name': forms.TextInput(
-                attrs={'class': 'form-control ', 'placeholder': ' Soyadınız', 'required': 'required','readonly':'readonly'}),
+                attrs={'class': 'form-control ', 'placeholder': ' Soyadınız', 'required': 'required',
+                       }),
+
+            'email': forms.EmailInput(
+                attrs={'class': 'form-control ', 'placeholder': ' Soyadınız', 'required': 'required',
+                       }),
 
         }

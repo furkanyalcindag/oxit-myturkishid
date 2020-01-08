@@ -122,6 +122,8 @@ def users_update(request, pk):
 
             user.first_name = user_form.cleaned_data['first_name']
             user.last_name = user_form.cleaned_data['last_name']
+            user.email = user_form.cleaned_data['email']
+            user.username = user_form.cleaned_data['email']
             user.is_active = True
             user.save()
             profile_form.save()

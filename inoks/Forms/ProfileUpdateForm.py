@@ -51,7 +51,7 @@ class ProfileUpdateForm(ModelForm):
                        'required': 'required',
                        'maxlength': '11', 'minlength': '11'}),
             'ibanAdSoyad': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Hesap Adı ve Soyadı', 'required': 'required'
+                attrs={'class': 'form-control', 'placeholder': 'Hesap Adı ve Soyadı'
 
                        })
         }
