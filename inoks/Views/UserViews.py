@@ -110,10 +110,10 @@ def users_update(request, pk):
         logout(request)
         return redirect('accounts:login')
     current_user = request.user
-    user = User.objects.get(id=current_user.id)
+    user = User.objects.get(id=pk)
 
     user_form = UserUpdateForm(request.POST or None, instance=user)
-    profile = Profile.objects.get(pk=user.profile.pk)
+    profile = Profile.objects.get(user=user)
     profile_form = ProfileUpdateForm(request.POST or None, request.FILES or None, instance=profile)
 
     if request.method == 'POST':
