@@ -36,6 +36,7 @@ urlpatterns = [
     url(r'kullanici/iptal-edilen-kullanicilar/(?P<pk>\d+)$', UserViews.getDeactiveProfile, name='getDeactiveProfile'),
     url(r'kullanici-aktif-et/$', UserViews.profile_reactive, name="kullanici-aktif-et"),
     url(r'kullanici/kullanici-ekle/duzenle/(?P<pk>\d+)$', UserViews.users_update, name='kullanici-duzenle'),
+    url(r'kullanici/kullanici-ekle/kullanici-bilgileri/(?P<pk>\d+)$', UserViews.users_information, name='kullanici-bilgileri-getir'),
     url(r'kullanici/kullanici-bilgi-gonder/(?P<pk>\d+)$', UserViews.send_information, name='kullanici-bilgi-gonder'),
 
     # Urunler

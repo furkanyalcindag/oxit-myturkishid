@@ -1,5 +1,6 @@
-from django.contrib.auth import logout
+from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User, Group, Permission
 from django.core.mail import EmailMultiAlternatives
 from django.http import JsonResponse
@@ -7,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth, messages
 
 # Create your views here.
+from accounts.forms import ResetPassword
 from inoks import urls
 from inoks.Forms.ProfileFormForMember import ProfileForm
 from education.Forms.UserForm import UserForm
@@ -226,3 +228,22 @@ def permission_post(request):
 
     else:
         return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
+
+def change_password(request):
+    if request.method == 'POST':
+        form = ResetPassword(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Şifreniz başarıyla değiştirilmiştir.')
+            if request.user == "Üye":
+                return redirect('inoks:user-dashboard')
+            else:
+                return redirect('inoks:admin-dashboard')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = ResetPassword(request.user)
+    return render(request, 'accounts/change_password.html', {
+        'form': form
+    })

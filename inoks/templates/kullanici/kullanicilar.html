@@ -161,7 +161,7 @@
                                 <th>Telefon</th>
                                 <th>İl</th>
 
-                                <th>Detay/Sil</th>
+                                <th>Duzenle/Sıfırla/Detay/Sil</th>
 
 
                             </tr>
@@ -180,15 +180,16 @@
 
                                         <td>
                                             <div class="btn-group">
-
+ <a class="btn btn-warning" href="{% url 'inoks:kullanici-duzenle' profile.user.id %}"><i
+                                                        class="fa fa-pencil"></i>  </a>
                                                   <a class="btn btn-primary" href="{% url 'inoks:kullanici-bilgi-gonder' profile.user.id %}"><i
-                                                        class="fa fa-lock"></i> Şifre Sıfırla </a>
+                                                        class="fa fa-key"></i>  </a>
                                                 <a class="btn btn-info" onclick="getAllProfile({{ profile.pk }})"><i
-                                                        class="fa fa-align-left"></i> Detay </a>
+                                                        class="fa  fa-list"></i>  </a>
 
                                                 <a class="btn btn-danger"
                                                    onclick="activeDeactive({{ profile.pk }})"><i
-                                                        class="fa fa-align-left"></i> Üyelik İptal Et </a>
+                                                        class=" fa fa-user-times"></i>  </a>
                                             </div>
                                         </td>
 

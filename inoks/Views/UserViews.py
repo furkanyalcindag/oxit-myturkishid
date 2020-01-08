@@ -11,6 +11,7 @@ from rest_framework.decorators import api_view
 from education.Forms.UserForm import UserForm
 from inoks.Forms.ProfileForm import ProfileForm
 from inoks.Forms.ProfileUpdateForm import ProfileUpdateForm
+from inoks.Forms.ProfileUpdateMemberForm import ProfileUpdateMemberForm
 from inoks.Forms.UserUpdateForm import UserUpdateForm
 from inoks.models import Profile
 from inoks.serializers.profile_serializers import ProfileSerializer
@@ -133,7 +134,42 @@ def users_update(request, pk):
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
     return render(request, 'kullanici/kullanici-ekle.html',
-                  {'user_form': user_form, 'profile_form': profile_form})
+                  {'user_form': user_form, 'profile_form': profile_form, 'ilce': profile.district})
+
+
+@login_required
+def users_information(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+    current_user = request.user
+    user = User.objects.get(id=current_user.id)
+
+    user_form = UserUpdateForm(request.POST or None, instance=user)
+    profile = Profile.objects.get(pk=user.profile.pk)
+    profile_form = ProfileUpdateMemberForm(request.POST or None, request.FILES or None, instance=profile)
+
+    if request.method == 'POST':
+
+        if user_form.is_valid() and profile_form.is_valid():
+
+            user.first_name = user_form.cleaned_data['first_name']
+            user.last_name = user_form.cleaned_data['last_name']
+            user.is_active = True
+            user.save()
+            profile_form.save()
+
+            messages.success(request, 'Profil Bilgileriniz Başarıyla Güncellenmiştir.')
+            return redirect('inoks:user-dashboard')
+
+        else:
+
+            messages.warning(request, 'Alanları Kontrol Ediniz')
+
+    return render(request, 'kullanici/kullanici-bilgileri.html',
+                  {'user_form': user_form, 'profile_form': profile_form, 'ilce': profile.district})
 
 
 @login_required

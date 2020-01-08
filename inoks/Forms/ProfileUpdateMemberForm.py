@@ -9,7 +9,7 @@ CHOICES_WITH_BLANK = (
 )
 
 
-class ProfileUpdateForm(ModelForm):
+class ProfileUpdateMemberForm(ModelForm):
     class Meta:
         model = Profile
 
@@ -37,9 +37,10 @@ class ProfileUpdateForm(ModelForm):
             'district': forms.Select(choices=CHOICES_WITH_BLANK,
                                      attrs={'class': 'form-control select2 select2-hidden-accessible',
                                             'style': 'width: 100%; ', 'id': 'ilce_id'}),
+
             'sponsor': forms.Select(choices=CHOICES_WITH_BLANK,
                                     attrs={'class': 'form-control select2 select2-hidden-accessible',
-                                           'style': 'width: 100%;'}),
+                                           'style': 'width: 100%; ', 'disabled': 'disabled'}),
 
             'job': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                        'style': 'width: 100%;', 'required': 'required'}),

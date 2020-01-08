@@ -12,8 +12,8 @@ class UserUpdateForm(ModelForm):
         fields = ('first_name', 'last_name')
         widgets = {
             'first_name': forms.TextInput(
-                attrs={'class': 'form-control ', 'placeholder': 'Adınız', 'value': '', 'required': 'required','disabled':'disabled'}),
+                attrs={'class': 'form-control ', 'placeholder': 'Adınız', 'value': '', 'required': 'required','readonly':'readonly'}),
             'last_name': forms.TextInput(
-                attrs={'class': 'form-control ', 'placeholder': ' Soyadınız', 'required': 'required','disabled':'disabled'}),
+                attrs={'class': 'form-control ', 'placeholder': ' Soyadınız', 'required': 'required','readonly':'readonly'}),
 
         }

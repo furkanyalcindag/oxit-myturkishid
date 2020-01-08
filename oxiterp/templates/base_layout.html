@@ -145,7 +145,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="{% url "inoks:kullanici-duzenle" user.profile.pk %}"
+                                    <a href="{% url "inoks:kullanici-bilgileri-getir" user.profile.pk %}"
                                        class="btn btn-default btn-flat"> <i class="fa fa-user" aria-hidden="true"></i>
                                         Profil Bilgisi</a>
                                 </div>
@@ -165,7 +165,7 @@
     </header>
     <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
-        <section class="sidebar">
+        <li class="sidebar">
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
@@ -184,13 +184,13 @@
 
                 {% if  user.groups.all.0.name == 'Üye' %}
                     <li class=" ">
-                                <a href="{% url "inoks:user-dashboard" %}">
-                                    <i class="fa fa-home"></i>
-                                    <span>Anasayfa</span>
-                                    <span class="pull-right-container">
+                        <a href="{% url "inoks:user-dashboard" %}">
+                            <i class="fa fa-home"></i>
+                            <span>Anasayfa</span>
+                            <span class="pull-right-container">
 
                             </span>
-                                </a></li>
+                        </a></li>
 
                     {% for menu in menus %}
 
@@ -207,8 +207,8 @@
                             </span>
                                 </a>
 
+                            {% endif %}
                         {% endif %}
-                         {% endif %}
 
                     <ul class="treeview-menu">
 
@@ -236,14 +236,14 @@
 
                 {% else %}
 
-                     <li class=" ">
-                                <a href="{% url "inoks:admin-dashboard" %}">
-                                    <i class="fa fa-home"></i>
-                                    <span>Anasayfa</span>
-                                    <span class="pull-right-container">
+                    <li class=" ">
+                        <a href="{% url "inoks:admin-dashboard" %}">
+                            <i class="fa fa-home"></i>
+                            <span>Anasayfa</span>
+                            <span class="pull-right-container">
 
                             </span>
-                                </a></li>
+                        </a></li>
                     {% for menu in adminmenus %}
 
 
@@ -267,16 +267,16 @@
                         {% for menusub in adminmenus %}
 
 
-  {% if menu.name != "Anasayfa" %}
-                            {% if menusub.parent.id is menu.id %}
+                            {% if menu.name != "Anasayfa" %}
+                                {% if menusub.parent.id is menu.id %}
 
-                                <li>
-                                    <a href="{% url menusub.url %}"><i
-                                            class=" {{ menusub.fa_icon }}"></i> {{ menusub.name }}</a>
-                                </li>
+                                    <li>
+                                        <a href="{% url menusub.url %}"><i
+                                                class=" {{ menusub.fa_icon }}"></i> {{ menusub.name }}</a>
+                                    </li>
 
+                                {% endif %}
                             {% endif %}
-   {% endif %}
                         {% endfor %}
 
                     </ul>
@@ -288,11 +288,28 @@
 
                 {% endif %}
 
+                <li class="treeview ">
+                    <a href="#">
+                        <i class="fa fa-user-plus"></i>
+                        <span>Hesap Ayarları</span>
+                        <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="{% url 'accounts:change_password' %}"><i
+                                    class="fa fa-key"></i> Şifre</a>
+                        </li>
+                    </ul>
+                </li>
+
+
             </ul>
 
 
-        </section>
-        <!-- /.sidebar -->
+            </section>
+            <!-- /.sidebar -->
     </aside>
 
     <div class="content-wrapper">
@@ -501,6 +518,7 @@
 
 
 </script>
+
 
 </body>
 </html>

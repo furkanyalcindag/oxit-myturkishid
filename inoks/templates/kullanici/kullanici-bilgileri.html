@@ -379,9 +379,7 @@
                                 </div>
 
 
-                                <div class="box-footer pull-right ">
-                                    <button type="submit" class="btn btn-primary">Kaydet</button>
-                                </div>
+
 
 
                             </div>
@@ -401,9 +399,13 @@
 
 
     </section>
-    {% load staticfiles %}
-    <script src="{% static 'bower_components/select2/dist/js/select2.full.min.js' %}"></script>
+      {% load staticfiles %}
+<script src="{% static 'bower_components/select2/dist/js/select2.full.min.js' %}"></script>
     <script>
+
+
+
+
 
 
         function ilceGetir() {
@@ -413,7 +415,7 @@
             $.ajax({
                 url: "{% url 'inoks:ilce-getir' %}",
                 type: "post", // or "get"
-                async: false,
+                async:false,
                 data: {
                     il_id: il_id,
 
@@ -434,7 +436,7 @@
             });
         }
 
-        $(document).ready(function () {
+   $(document).ready(function () {
             $('.iban').mask('SS00 0000 0000 0000 0000 0000 00', {
                 placeholder: '____ ____ ____ ____ ____ ____ __'
             });
@@ -445,8 +447,8 @@
             $('#ilce_id').val('{{ilce}}').trigger('change'); // Select the option with a value of '1'
 
 
-        });
 
+        });
         function getCookie(name) {
             var cookieValue = null;
             var i = 0;
