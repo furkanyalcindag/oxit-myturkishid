@@ -191,43 +191,43 @@
                     <div class="container">
                         <div class="row">
 
-                            {% if coksatanlar.all %}
+                          <!--      -->
                                 {% for urun in coksatanlar %}
 
                                     <div class="col-md-2 col-sm-6">
                                         <div class="product-grid4">
-                                            <div class="product-image4">
+                                              <div class="product-image4">
                                                 <a href="#">
-                                                    {% if urun.productImage.all %}
+
 
                                                         <img class="pic-1"
-                                                             src="/media/{{ urun.productImage.all.0.productImage }}">
+                                                             src="/media/{{ urun.product.productImage.all.0.productImage }}">
                                                         <img class="pic-2"
-                                                             src="/media/{{ urun.productImage.all.1.productImage }}">
+                                                             src="/media/{{ urun.product.productImage.all.1.productImage }}">
 
-                                                    {% endif %}
+
 
                                                 </a>
-                                                <ul class="social">
-                                                    <!--   <li><a href="#" data-tip="Detayları Görüntüle"><i
+                                             <!--   <ul class="social">
+                                                     <li><a href="#" data-tip="Detayları Görüntüle"><i
                                                                class="fa fa-eye"></i></a></li>
                                                        <li><a href="#" data-tip="Sepete Ekle"><i
-                                                               class="fa fa-shopping-cart"></i></a></li> -->
+                                                               class="fa fa-shopping-cart"></i></a></li>
                                                 </ul>
-
+-->
                                             </div>
                                             <div class="product-content">
                                                 <h3 class="title"><a href="#">
-                                                    <td>{{ urun.name }}</td>
+                                                    <td>{{ urun.product }}</td>
                                                 </a></h3>
                                                 <div class="price">
-                                                    {{ urun.price }} TL + KDV
+                                                    {{ urun.product.price }} TL + KDV
 
                                                 </div>
 
 
                                                 <div class="btn-group" style="display: grid">
-                                                    <a class="btn btn-info" onclick="getProducts({{ urun.id }})">
+                                                    <a class="btn btn-info" onclick="getProducts({{ urun.product.id }})">
                                                         <i class="fa fa-align-left"></i> Detay </a><br>
                                                     <a href="{% url "inoks:siparis-ekle" %}" type="button"
                                                        class="btn btn-warning"><i
@@ -241,7 +241,7 @@
 
 
                                 {% endfor %}
-                            {% endif %}
+
 
 
                         </div>

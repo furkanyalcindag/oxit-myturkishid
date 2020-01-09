@@ -463,7 +463,26 @@
                 </div>
             </div>
 
+            <div class="col-lg-4">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">En Çok Satılan Ürünler</h3>
+                    </div>
 
+                    <div class="box-footer no-padding">
+                        <ul class="nav nav-pills nav-stacked">
+                            {% for urun in coksatan %}
+
+                                <li><a>{{ urun.product }}
+                                    <span class="pull-right text-blue">
+
+                                            {{ urun.count }}     Adet satıldı.</span></a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
 

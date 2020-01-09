@@ -10,7 +10,7 @@ from django.shortcuts import render, redirect
 from rest_framework.decorators import api_view
 
 from inoks import tasks
-from inoks.models import Profile, Product, Order, ProductCategory, City
+from inoks.models import Profile, Product, Order, ProductCategory, City, OrderProduct
 from inoks.serializers.order_serializers import OrderSerializer
 from inoks.serializers.profile_serializers import ProfileSerializer
 from inoks.services import general_methods
@@ -48,14 +48,24 @@ def return_admin_dashboard(request):
     allUser = User.objects.filter(is_active=True).count()
 
     percent = online * 100 / allUser
-    arrayCity =[]
+
+    arrayUrun = []
+    arrayCity = []
     city = Order.objects.values('city').annotate(count=Count('city')).order_by('city')
+
+    products = OrderProduct.objects.values('product').annotate(count=Count('product')).order_by('-count')[:5]
 
     for city in city:
         cityDict = dict()
         cityDict['city'] = City.objects.get(pk=city['city'])
-        cityDict['count'] =city['count']
+        cityDict['count'] = city['count']
         arrayCity.append(cityDict)
+
+    for products in products:
+        urunDict = dict()
+        urunDict['product'] = Product.objects.get(pk=products['product'])
+        urunDict['count'] = products['count']
+        arrayUrun.append(urunDict)
 
     total_order_price = general_methods.monthlOrderTotalAllTime()
     if total_order_price is None:
@@ -66,7 +76,8 @@ def return_admin_dashboard(request):
                    'pending_orders': pending_orders, 'users': users, 'weekly_user': weekly_user,
                    'daily_user': daily_user, 'last_months_user': last_months_user,
                    'last_three_months_user': last_three_months_user, 'yearly_user': yearly_user, 'orders': orders,
-                   'total_price': total_order_price, 'online': online, 'percent': percent, 'city': arrayCity})
+                   'total_price': total_order_price, 'online': online, 'percent': percent, 'city': arrayCity,
+                   'coksatan': arrayUrun})
 
 
 @login_required
@@ -80,10 +91,10 @@ def return_user_dashboard(request):
     userprofile = Profile.objects.get(user=current_user)
     orders = Order.objects.filter(isApprove=True, profile_id=userprofile.id)
     my_orders = orders.count()
-    coksatanlar = Product.objects.filter(category=16)
+
     onerilenler = Product.objects.filter(category=17)
     total_order_price = general_methods.monthlMemberOrderTotalAllTime(userprofile)['total_price']
-
+    arrayUrun = []
     x = 0
     for order in orders:
         x = x + order.product.count()
@@ -91,9 +102,16 @@ def return_user_dashboard(request):
     if total_order_price is None:
         total_order_price = 0
 
+    products = OrderProduct.objects.values('product').annotate(count=Count('product')).order_by('-count')[:3]
+    for products in products:
+        urunDict = dict()
+        urunDict['product'] = Product.objects.get(pk=products['product'])
+        urunDict['count'] = products['count']
+        arrayUrun.append(urunDict)
+
     return render(request, 'dashboard/user-dashboard.html',
-                  {'my_orders': my_orders, 'onerilenler': onerilenler, 'coksatanlar': coksatanlar,
-                   'total_price': total_order_price, 'total_product': x})
+                  {'my_orders': my_orders, 'onerilenler': onerilenler,
+                   'total_price': total_order_price, 'total_product': x, 'coksatanlar': arrayUrun})
 
 
 @api_view()
