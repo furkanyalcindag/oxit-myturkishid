@@ -2824,7 +2824,9 @@
 
                             if (result.status == 'Success') {
                                 swal("Başarılı", "Resim Silindi", "success");
+                                {% if durum == "GUNCELLE" %}
                                 window.location.replace("{% url "inoks:urun-duzenle" product %}");
+                                {% endif %}
 
 
                             } else {

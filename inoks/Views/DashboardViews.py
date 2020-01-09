@@ -2,12 +2,15 @@ import datetime
 
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.db.models import Count
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
+
 from rest_framework.decorators import api_view
 
 from inoks import tasks
-from inoks.models import Profile, Product, Order, ProductCategory
+from inoks.models import Profile, Product, Order, ProductCategory, City
 from inoks.serializers.order_serializers import OrderSerializer
 from inoks.serializers.profile_serializers import ProfileSerializer
 from inoks.services import general_methods
@@ -40,6 +43,20 @@ def return_admin_dashboard(request):
     yearly_user = Profile.objects.filter(creationDate__gte=last_year).count()
     orders = Order.objects.filter(isApprove=True).order_by('-creationDate')[:6]
 
+    d = datetime.datetime.today() - datetime.timedelta(hours=0, minutes=10)
+    online = User.objects.filter(last_login__gt=d).count()
+    allUser = User.objects.filter(is_active=True).count()
+
+    percent = online * 100 / allUser
+    arrayCity =[]
+    city = Order.objects.values('city').annotate(count=Count('city')).order_by('city')
+
+    for city in city:
+        cityDict = dict()
+        cityDict['city'] = City.objects.get(pk=city['city'])
+        cityDict['count'] =city['count']
+        arrayCity.append(cityDict)
+
     total_order_price = general_methods.monthlOrderTotalAllTime()
     if total_order_price is None:
         total_order_price = 0
@@ -49,7 +66,7 @@ def return_admin_dashboard(request):
                    'pending_orders': pending_orders, 'users': users, 'weekly_user': weekly_user,
                    'daily_user': daily_user, 'last_months_user': last_months_user,
                    'last_three_months_user': last_three_months_user, 'yearly_user': yearly_user, 'orders': orders,
-                   'total_price': total_order_price})
+                   'total_price': total_order_price, 'online': online, 'percent': percent, 'city': arrayCity})
 
 
 @login_required
@@ -76,7 +93,7 @@ def return_user_dashboard(request):
 
     return render(request, 'dashboard/user-dashboard.html',
                   {'my_orders': my_orders, 'onerilenler': onerilenler, 'coksatanlar': coksatanlar,
-                   'total_price': total_order_price,'total_product':x})
+                   'total_price': total_order_price, 'total_product': x})
 
 
 @api_view()

@@ -236,10 +236,7 @@ def change_password(request):
             user = form.save()
             update_session_auth_hash(request, user)  # Important!
             messages.success(request, 'Şifreniz başarıyla değiştirilmiştir.')
-            if request.user == "Üye":
-                return redirect('inoks:user-dashboard')
-            else:
-                return redirect('inoks:admin-dashboard')
+            return redirect('accounts:change_password')
         else:
             for error in form.errors.keys():
                 messages.warning(request, form.errors[error])

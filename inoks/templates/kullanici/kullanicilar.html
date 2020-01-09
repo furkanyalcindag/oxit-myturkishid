@@ -141,14 +141,14 @@
                             <h3 class="box-title">Tüm Üyeler</h3>
                         </div>
 
-                     <div class="box-header with-border">
-                                <div class="btn-group">
-                                    <a href="{% url "inoks:kullanici-ekle" %}"
-                                       type="button" class="btn btn-success"><i
-                                            class="fa fa-edit"></i> Üye Ekle
-                                    </a>
-                                </div>
+                        <div class="box-header with-border">
+                            <div class="btn-group">
+                                <a href="{% url "inoks:kullanici-ekle" %}"
+                                   type="button" class="btn btn-success"><i
+                                        class="fa fa-edit"></i> Üye Ekle
+                                </a>
                             </div>
+                        </div>
 
                         <table id="tum" class="table table-bordered table-hover">
                             <thead>
@@ -180,16 +180,18 @@
 
                                         <td>
                                             <div class="btn-group">
- <a class="btn btn-warning" href="{% url 'inoks:kullanici-duzenle' profile.user.id %}"><i
-                                                        class="fa fa-pencil"></i>  </a>
-                                                  <a class="btn btn-primary" href="{% url 'inoks:kullanici-bilgi-gonder' profile.user.id %}"><i
-                                                        class="fa fa-key"></i>  </a>
+                                                <a class="btn btn-warning"
+                                                   href="{% url 'inoks:kullanici-duzenle' profile.user.id %}"><i
+                                                        class="fa fa-pencil"></i> </a>
+                                                <a class="btn btn-primary"
+                                                   href="{% url 'inoks:kullanici-bilgi-gonder' profile.user.id %}"><i
+                                                        class="fa fa-key"></i> </a>
                                                 <a class="btn btn-info" onclick="getAllProfile({{ profile.pk }})"><i
-                                                        class="fa  fa-list"></i>  </a>
+                                                        class="fa  fa-list"></i> </a>
 
                                                 <a class="btn btn-danger"
                                                    onclick="activeDeactive({{ profile.pk }})"><i
-                                                        class=" fa fa-user-times"></i>  </a>
+                                                        class=" fa fa-user-times"></i> </a>
                                             </div>
                                         </td>
 
@@ -235,19 +237,20 @@
 
     <script>
 
-function formatDate(date) {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
 
-    if (month.length < 2)
-        month = '0' + month;
-    if (day.length < 2)
-        day = '0' + day;
+            if (month.length < 2)
+                month = '0' + month;
+            if (day.length < 2)
+                day = '0' + day;
 
-    return [day, month, year].join('.');
-}
+            return [day, month, year].join('.');
+        }
+
         function getAllProfile(id) {
 
             var html = '';
@@ -255,9 +258,8 @@ function formatDate(date) {
                 .done(function (response) {
 
 
-
                     var profile = response.profile[0];
-                    profile.creationDate=formatDate(profile.creationDate);
+                    profile.creationDate = formatDate(profile.creationDate);
                     html += ' <div class="box-body box-profile">';
                     html += ' <img class="profile-user-img img-responsive img-circle" style="width: 100px; height: 100px;" src="' + profile.profileImage + '" alt="User profile picture">';
                     html += '<h3 class="profile-username text-center">' + profile.user.first_name + ' ' + profile.user.last_name + '</h3>';
@@ -295,7 +297,9 @@ function formatDate(date) {
                     html += '<div class="col-md-12" >';
 
                     html += ' <li class="list-group-item">';
-                    html += '<b>Adres</b> <a class="pull-right">' + profile.address + '</a></li></div>'
+                    html += '<b>Adres</b> <a class="pull-right">' + profile.address + '</a></li>';
+                    html += '<li class="list-group-item"><b>IBAN</b> <a class="pull-right">' + profile.iban + '</a></li>';
+                    html += '<li class="list-group-item"><b>Hesap Adı Soyadı</b> <a class="pull-right">' + profile.ibanAdSoyad + '</a></li></li></div>';
 
 
                     '</div></ul>';
@@ -329,30 +333,30 @@ function formatDate(date) {
         function activeDeactive(user_id, is_true) {
 
 
-
-             $(".deneme22").on("shown.bs.modal", function (e) {
+            $(".deneme22").on("shown.bs.modal", function (e) {
                 $("#btn-conf").click(function () {
 
-            $.ajax({
-                url: "{% url 'inoks:kullanici-iptal-et' %}",
-                type: "post", // or "get"
-                data: {
-                    user_id: user_id,
-                    is_true: is_true
-                },
-                success: function (result) {
+                    $.ajax({
+                        url: "{% url 'inoks:kullanici-iptal-et' %}",
+                        type: "post", // or "get"
+                        data: {
+                            user_id: user_id,
+                            is_true: is_true
+                        },
+                        success: function (result) {
 
-                    if (result.status == 'Success') {
-                        swal("Başarılı", "Üye Durumu Başarıyla Güncellendi.", "success");
-                        window.location.replace("{% url "inoks:iptal-edilen-kullanicilar" %}");
+                            if (result.status == 'Success') {
+                                swal("Başarılı", "Üye Durumu Başarıyla Güncellendi.", "success");
+                                window.location.replace("{% url "inoks:iptal-edilen-kullanicilar" %}");
 
 
-                    } else {
-                        swal("Başarılı", result.messages, "error");
-                    }
-                }
-            });
-                });}).modal('show');
+                            } else {
+                                swal("Başarılı", result.messages, "error");
+                            }
+                        }
+                    });
+                });
+            }).modal('show');
             $('#btn-close').click(function () {
                 $('#modal-danger').modal('hide');
             });

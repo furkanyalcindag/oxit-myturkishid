@@ -382,22 +382,22 @@
                             {% if orders.all %}
                                 {% for order in orders %}
 
-                                    {% for product in order.product.all %}
 
 
-                                        <li class="item">
 
-                                            <div class="product-info" style="margin-left: 0">
-                                                <a href="#" class="product-title"> {{ forloop.counter }}
-                                                    - {{ product.name }}
-                                                    <span  class="label  label-warning pull-right">{{ product.price }} TL</span></a>
-                                                <span class="product-description">
+                                    <li class="item">
+
+                                        <div class="product-info" style="margin-left: 0">
+                                            <a href="#" class="product-title"> {{ forloop.counter }}
+                                                Sipariş No: {{ order.id }}
+                                                <span class="label  label-warning pull-right">{{ order.totalPrice }} TL</span></a>
+                                            <span class="product-description">
                           {{ order.profile }} - {{ order.creationDate }}
                         </span>
-                                            </div>
-                                        </li>
+                                        </div>
+                                    </li>
 
-                                    {% endfor %}
+
 
 
 
@@ -416,77 +416,52 @@
                 </div>
             </div>
 
-            <!--
-                       <div class="col-lg-4">
-                           <div class="box box-primary">
-                               <div class="box-header with-border">
-                                   <h3 class="box-title">Genel Bilgiler</h3>
-                               </div>
-                               <div class="info-box bg-yellow">
-                                   <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
 
-                                   <div class="info-box-content">
-                                       <span class="info-box-text">Online Üye Sayısı</span>
-                                       <span class="info-box-number">145</span>
+            <div class="col-lg-4">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Genel Bilgiler</h3>
+                    </div>
+                    <div class="info-box bg-yellow">
+                        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
 
-                                       <div class="progress">
-                                           <div class="progress-bar" style="width: 50%"></div>
-                                       </div>
-                                       <span class="progress-description">
-                               Geçen aya göre %50 artış
+                        <div class="info-box-content">
+                            <span class="info-box-text">Online Üye Sayısı</span>
+                            <span class="info-box-number">{{ online }}</span>
+
+                            <div class="progress">
+                                <div class="progress-bar" style="width: {{ percent }}%"></div>
+                            </div>
+                            <span class="progress-description">
+
                              </span>
-                                   </div>
+                        </div>
 
-                               </div>
+                    </div>
 
-                               <div class="info-box bg-green">
-                                   <span class="info-box-icon"><i class="ion ion-ios-heart-outline"></i></span>
 
-                                   <div class="info-box-content">
-                                       <span class="info-box-text">Soy Ağacı Tamamlananlar</span>
-                                       <span class="info-box-number">45</span>
+                </div>
+            </div>
 
-                                       <div class="progress">
-                                           <div class="progress-bar" style="width: 20%"></div>
-                                       </div>
-                                       <span class="progress-description">
-                               Geçen aya göre %20 artış
-                             </span>
-                                   </div>
+            <div class="col-lg-4">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">En Aktif Şehirler</h3>
+                    </div>
 
-                               </div>
+                    <div class="box-footer no-padding">
+                        <ul class="nav nav-pills nav-stacked">
+                            {% for city in city %}
 
-                           </div>
-                       </div> -->
+                                <li><a>{{ city.city }}
+                                    <span class="pull-right text-blue"><span style="color: red">{{ city.count }}&nbsp;&nbsp;</span>Adet Sipariş</span></a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
 
-            <!--    <div class="col-lg-4">
-                   <div class="box box-primary">
-                       <div class="box-header with-border">
-                           <h3 class="box-title">En Aktif Şehirler</h3>
-                       </div>
-
-                       <div class="box-footer no-padding">
-                           <ul class="nav nav-pills nav-stacked">
-                               <li><a href="#">Ankara
-                                   <span class="pull-right text-red"> 2500 Adet Sipariş</span> </a>
-                               </li>
-
-                               <li><a href="#">İstanbul <span class="pull-right text-green"> 1500 Adet Sipariş</span> </a>
-                               </li>
-
-                               <li><a href="#">İzmir
-                                   <span class="pull-right text-yellow"> 500 Adet Sipariş</span></a>
-                               </li>
-
-                               <li><a href="#">Diğer
-                                   <span class="pull-right text-blue"> 200 Adet Sipariş</span></a>
-                               </li>
-
-                           </ul>
-                       </div>
-
-                   </div>
-               </div> -->
+                </div>
+            </div>
 
 
         </div>
