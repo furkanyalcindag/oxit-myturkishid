@@ -241,7 +241,9 @@ def change_password(request):
             else:
                 return redirect('inoks:admin-dashboard')
         else:
-            messages.error(request, 'Please correct the error below.')
+            for error in form.errors.keys():
+                messages.warning(request, form.errors[error])
+
     else:
         form = ResetPassword(request.user)
     return render(request, 'accounts/change_password.html', {
