@@ -169,8 +169,8 @@
                             <tbody>
                             {% if users.all %}
                                 {% for profile in users %}
-                                {% if profile.user.isActive %}
-                                    <tr>
+
+                                        <tr>
                                         <td>{{ forloop.counter }} </td>
                                         <td><a href="#">{{ profile.id }}</a></td>
                                         <td>{{ profile.user.first_name }}</td>
@@ -181,37 +181,37 @@
 
                                         <td>
 
-
-                                                <div class="btn-group">
-
-
-                                                    <a class="btn btn-info" onclick="getAllProfile({{ profile.pk }})"><i
-                                                            class="fa fa-align-left"></i> Detay </a>
-
-                                                    <a class="btn btn-danger disabled"
-                                                       ><i
-                                                            class="fa fa-align-left"></i> Aktif </a>
-                                                </div>
-
-                                            {% else %}
-
-                                                <div class="btn-group">
+  {% if profile.user.isActive %}
+                                        <div class="btn-group">
 
 
-                                                    <a class="btn btn-info" onclick="getAllProfile({{ profile.pk }})"><i
-                                                            class="fa fa-align-left"></i> Detay </a>
-                                                    <a class="btn btn-danger disabled"><i
-                                                            class="fa fa-align-left"></i> Pasif</a>
-                                                </div>
+                                            <a class="btn btn-info" onclick="getAllProfile({{ profile.pk }})"><i
+                                                    class="fa fa-align-left"></i> Detay </a>
+
+                                            <a class="btn btn-danger disabled"
+                                            ><i
+                                                    class="fa fa-align-left"></i> Aktif </a>
+                                        </div>
+
+                                    {% else %}
+
+                                        <div class="btn-group">
+
+
+                                            <a class="btn btn-info" onclick="getAllProfile({{ profile.pk }})"><i
+                                                    class="fa fa-align-left"></i> Detay </a>
+                                            <a class="btn btn-danger disabled"><i
+                                                    class="fa fa-align-left"></i> Pasif</a>
+                                        </div>
 
 
 
 
-                                            {% endif %}
-                                        </td>
+                                    {% endif %}
+                                </td>
 
 
-                                    </tr>
+                                </tr>
 
                                 {% endfor %}
                             {% endif %}

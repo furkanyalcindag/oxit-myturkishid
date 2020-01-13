@@ -3,6 +3,16 @@ from oxiterp.settings.base import *
 # Override base.py settings here
 
 
+"""DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mutek',
+        'USER': 'postgres',
+        'PASSWORD': 'oxit2016',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
