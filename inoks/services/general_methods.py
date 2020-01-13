@@ -133,6 +133,25 @@ def monthlyMemberOrderTotal(profile):
     return orders_sum
 
 
+def MemberAllOrderTotal(profile):
+    datetime_current = datetime.datetime.today()
+    year = datetime_current.year
+    month = datetime_current.month
+    num_days = calendar.monthrange(year, month)[1]
+
+    datetime_start = datetime.datetime(year, month, 1, 0, 0)
+
+    datetime_end = datetime.datetime(year, month, num_days, 23, 59)
+
+    # scores = Score.objects.filter(creationDate__range=(datetime_start, datetime_end)).order_by('score')[:100]
+    order2 = Order.objects.filter(
+        profile=profile)
+    orders_sum = Order.objects.filter(isApprove=True).filter(
+        profile=profile).aggregate(
+        total_price=Sum('totalPrice'))
+
+    return orders_sum
+
 def monthlyMemberOrderTotalByDate(profile, month, year):
     datetime_current = datetime.datetime.today()
     year = year

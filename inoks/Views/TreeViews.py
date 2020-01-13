@@ -32,7 +32,8 @@ def return_my_tree(request):
 
     x = general_methods.calculate_earning(levelDict, 2)
 
-    total_order = general_methods.monthlyMemberOrderTotal(userprofile)['total_price']
+    #total_order = general_methods.monthlyMemberOrderTotal(userprofile)['total_price']
+    total_order = general_methods.MemberAllOrderTotal(userprofile)['total_price']
 
     if total_order is None:
         total_order = 0
@@ -69,7 +70,8 @@ def return_all_tree(request):
     tree1 = Profile.objects.all()
 
     for prof in tree1:
-        total_order = general_methods.monthlyMemberOrderTotal(prof)['total_price']
+        #total_order = general_methods.monthlyMemberOrderTotal(prof)['total_price']
+        total_order = general_methods.MemberAllOrderTotal(prof)['total_price']
 
         if total_order is None:
             total_order = 0
