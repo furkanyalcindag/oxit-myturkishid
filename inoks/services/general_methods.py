@@ -92,7 +92,8 @@ def rtrnProfileBySponsorID(profile_list):
         if not prof.is_controlled:
             profiles = Profile.objects.filter(sponsor=prof.profile)
             for profile in profiles:
-                total_order = monthlyMemberOrderTotal(profile)['total_price']
+                #total_order = monthlyMemberOrderTotal(profile)['total_price']
+                total_order = MemberAllOrderTotal(profile)['total_price']
                 if total_order is None:
                     total_order = 0
                 total_order = str(float(str(total_order).replace(",", ".")))
