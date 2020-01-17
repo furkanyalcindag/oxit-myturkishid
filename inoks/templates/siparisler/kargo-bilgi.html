@@ -24,13 +24,13 @@
                         {% if order.otherAddress != None and   order.otherAddress != ''%}
                             Adres: {{ order.otherAddress }}<br>
                          {% else %}
-                             Adres: {{ order.address }}
+                             Adres: {{ order.address }}<br>
                         {% endif %}
 
 
 
                         Alıcı Telefon: {{ userOrder.mobilePhone }}<br>
-                        Iban: {{ userOrder.iban }}<br>
+
                         Hesap Adı: {{ userOrder.ibanAdSoyad }}<br>
 
                     </address>
