@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+{% for category in category %}
+
+    <li>{{ category.key }} <a href="{% url 'myturkishid:categoryDesc-save' category.pk %}">Dil Çevirileri</a></li>
+
+
+
+
+{% endfor %}
+
+
+</body>
+</html>

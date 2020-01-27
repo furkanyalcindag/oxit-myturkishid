@@ -237,7 +237,7 @@ def return_add_product_category(request):
     if not perm:
         logout(request)
         return redirect('accounts:login')
-    product_category_form = ProductCategoryForm();
+    product_category_form = ProductCategoryForm()
 
     if request.method == 'POST':
 

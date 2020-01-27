@@ -1,0 +1,109 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+
+
+        {% if message.tags == 'warning' %}
+
+            <div class="alert alert-danger alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-ban"></i> Hata !</h4>
+
+
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+
+
+            </div>
+
+        {% endif %}
+
+
+        {% if message.tags == 'success' %}
+
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4><i class="icon fa fa-check"></i> Başarılı !</h4>
+
+
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+
+
+            </div>
+
+        {% endif %}
+    {% endfor %}
+
+
+{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <form method="post" enctype="multipart/form-data" role="form">
+                <div class="box-body">
+                    {% csrf_token %}
+
+
+                    <div class="form-group">
+                        <label >Dil</label>
+                        {{ form_featureDesc.lang }}
+                    </div>
+                    <div class="form-group">
+                        <label>Özellik</label>
+                        {{ form_featureDesc.name }}
+                    </div>
+
+
+
+                </div>
+                <!-- /.box-body -->
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Ekle</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <div class="row">
+
+
+        <table>
+            <tr>
+                <th>Dil</th>
+                <th>çeviri</th>
+
+
+            </tr>
+
+        {% if feature.all %}
+            {% for feature in feature %}
+
+
+                <tr>
+                    <td>{{feature.lang}}</td>
+                    <td>{{feature.name}}</td>
+
+                </tr>
+
+
+            {% endfor %}
+        {% endif %}
+
+
+        </table>
+
+
+    </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+{% endblock %}

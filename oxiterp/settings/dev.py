@@ -16,10 +16,10 @@ from oxiterp.settings.base import *
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'oxit_inoks',
+        'NAME': 'myturkishid',
         'USER': 'postgres',
-        'PASSWORD': 'oxit2016',
-        'HOST': '185.122.203.112',
+        'PASSWORD': 'asdasvas',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

@@ -5,7 +5,7 @@ from inoks.models.ProductCategory import ProductCategory
 
 
 class Product(models.Model):
-    productImage = models.ManyToManyField(ProductImage, null=True, blank=True, verbose_name='Ürün Resmi')
+    productImage = models.ManyToManyField(ProductImage,  blank=True, verbose_name='Ürün Resmi')
     name = models.TextField(blank=True, null=True, verbose_name='Ürün Adı')
     price = models.DecimalField(max_digits=8, decimal_places=2)
     discountPrice = models.CharField(max_length=120, blank=True, null=True, verbose_name='İndirimli Fiyatı')

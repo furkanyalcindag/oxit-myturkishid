@@ -1,0 +1,12 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+
+{% for type in types %}
+
+    <li>{{ type.key }} <a href="{% url 'myturkishid:featureTypeDesc-save' type.pk %}">Dil Çevirileri</a> </li>
+
+    <li>{{ type.name }} <a href="{% url 'myturkishid:feature-type-save' type.pk  %}"></a> Özellik Ekle </li>
+
+{% endfor %}
+
+{% endblock %}

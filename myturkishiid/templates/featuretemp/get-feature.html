@@ -1,0 +1,14 @@
+{% extends 'base_layout.html' %}
+{% block content %}
+
+
+{% for feature in feature %}
+
+    <li>{{ feature.key }} <a href="{% url 'myturkishid:featureDesc-save' feature.pk %}">Dil Çevirileri</a> </li>
+
+
+
+
+{% endfor %}
+
+{% endblock %}
