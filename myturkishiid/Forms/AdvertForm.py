@@ -20,8 +20,7 @@ class AdvertForm(ModelForm):
             'room',
             'price',
             'buildingAge',
-            'feature',
-            'featureTitle',
+
             'bathroomNumber',
             'floorNumber',
             'category',
@@ -30,7 +29,7 @@ class AdvertForm(ModelForm):
             'heating',
             'balcony',
             'front',
-            'advertTitle',
+
             'city',
             'district'
 
@@ -43,15 +42,13 @@ class AdvertForm(ModelForm):
                 attrs={'class': 'form-control select2 select2-hidden-accessible',
                        'style': 'width: 100%; ', 'id': 'ilce_id'}
             ),
-            'advertTitle': forms.TextInput(
-                attrs={'class': 'form-control ', 'placeholder': 'İlan Başlığı', 'required': 'required',
-                       }),
+
             'address': forms.Textarea(
                 attrs={'class': 'form-control ', 'placeholder': 'Adres', 'rows': '2', 'required': 'required',
                        'style': 'width: 50%;',
                        }),
             'price': forms.NumberInput(
-                attrs={'class': 'form-control ', 'placeholder': 'Fiyat', 'required': 'required'}),
+                attrs={'class': 'form-control ', 'placeholder': 'Fiyat (₺)', 'required': 'required'}),
             'room': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%;'}),
             'balcony': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
@@ -65,9 +62,6 @@ class AdvertForm(ModelForm):
 
             'bathroomNumber': forms.Select(
                 attrs={'class': 'form-control', 'placeholder': 'Banyo Sayısı', 'required': 'required',
-                       }),
-            'featureTitle': forms.Select(
-                attrs={'class': 'form-control', 'placeholder': 'Özellik Başlığı', 'required': 'required',
                        }),
 
             'heating': forms.Select(
@@ -88,7 +82,6 @@ class AdvertForm(ModelForm):
         }
 
     category = forms.ModelMultipleChoiceField(queryset=Category.objects.all())
-    feature = forms.ModelMultipleChoiceField(queryset=Feature.objects.all())
 
     # Overriding __init__ here allows us to provide initial
     # data for 'toppings' field
@@ -106,13 +99,8 @@ class AdvertForm(ModelForm):
             forms.ModelForm.__init__(self, *args, **kwargs)
             initial['category'] = [t.pk for t in kwargs['instance'].category.all()]
             self.fields['category'].initial = initial['category']
-            initial['feature'] = [t.pk for t in kwargs['instance'].category.all()]
-            self.fields['feature'].initial = initial['feature']
 
         forms.ModelForm.__init__(self, *args, **kwargs)
         self.fields['category'].widget.attrs = {'class': 'form-control select2 select2-hidden-accessible',
                                                 'style': 'width: 100%;', 'data-select2-id': '7',
                                                 'data-placeholder': 'Kategori Seçiniz'}
-        self.fields['feature'].widget.attrs = {'class': 'form-control select2 select2-hidden-accessible',
-                                               'style': 'width: 100%;', 'data-select2-id': '7',
-                                               'data-placeholder': 'Özellik Seçiniz'}

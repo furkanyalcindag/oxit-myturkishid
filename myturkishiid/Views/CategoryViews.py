@@ -13,6 +13,7 @@ from myturkishiid.models.Language import Language
 def category_save(request):
     form_category = CategoryForm(request.POST or None)
 
+    category=Category.objects.all()
     if request.method == 'POST':
 
         if form_category.is_valid():
@@ -25,7 +26,7 @@ def category_save(request):
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'categorytemp/category-save.html', {'form_category': form_category})
+    return render(request, 'categorytemp/category-save.html', {'form_category': form_category,'category':category})
 
 
 def categoryDesc_save(request, pk):

@@ -16,11 +16,8 @@ def advert_save(request):
 
         if form_advert.is_valid():
             advert = Advert(
-                # city=form_advert.cleaned_data['city'],
-                # district=form_advert.cleaned_data['district'],
+
                 room=form_advert.cleaned_data['room'],
-                featureTitle=form_advert.cleaned_data['featureTitle'],
-                advertTitle=form_advert.cleaned_data['advertTitle'],
                 address=form_advert.cleaned_data['address'],
                 city=form_advert.cleaned_data['city'],
                 district=form_advert.cleaned_data['district'],
@@ -44,9 +41,9 @@ def advert_save(request):
                 advert.category.add(category)
             advert.save()
 
-            for feature in form_advert.cleaned_data['feature']:
+            """for feature in form_advert.cleaned_data['feature']:
                 advert.feature.add(feature)
-            advert.save()
+            advert.save()"""
 
             messages.success(request, 'ilan Kaydedildi.')
 
@@ -84,4 +81,7 @@ def AdvertDesc_save(request, pk):
                   {'form_advertDesc': form_advertDesc, 'advert': advert, 'lang': lang, 'advertDesc': advertDesc})
 
 
+def get_adverts(request):
+    adverts = Advert.objects.all()
 
+    return render(request, 'adverttemp/get-advert.html', {'adverts': adverts})

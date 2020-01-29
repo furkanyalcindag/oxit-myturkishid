@@ -8,12 +8,12 @@ class AdvertDescForm(ModelForm):
     class Meta:
         model = AdvertDesc
         fields = (
-            'name', 'lang',
+            'advertTitle', 'lang',
 
         )
         widgets = {
 
-            'name': forms.TextInput(attrs={'class': 'form-control ', 'placeholder': 'İlan başlığı',
+            'advertTitle': forms.TextInput(attrs={'class': 'form-control ', 'placeholder': 'İlan başlığı',
                                            'style': 'width: 100%; '}),
 
             'lang': forms.Select(

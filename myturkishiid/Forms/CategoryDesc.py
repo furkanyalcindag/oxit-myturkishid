@@ -13,7 +13,7 @@ class CategoryDescForm(ModelForm):
             'lang': forms.Select(
                 attrs={'class': 'form-control', 'placeholder': 'Dil', 'required': 'required', 'readonly': 'readonly'}),
 
-            'name': forms.Textarea(
-                attrs={'class': 'form-control ', 'rows': '2', 'required': 'required',
+            'name': forms.TextInput(
+                attrs={'class': 'form-control ', 'rows': '2', 'required': 'required','placeholder':'kategori Çeviri'
                        }),
         }

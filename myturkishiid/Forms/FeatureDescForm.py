@@ -14,9 +14,9 @@ class FeatureDescForm(ModelForm):
             'lang': forms.Select(
                 attrs={'class': 'form-control', 'placeholder': 'Dil', 'required': 'required', 'readonly': 'readonly'}),
 
-            'name': forms.Textarea(
+            'name': forms.TextInput(
                 attrs={'class': 'form-control ', 'rows': '2', 'required': 'required',
-                       'placeholder': 'İlan başlığı çeviri'
+                       'placeholder': 'Özellik çeviri'
                        }),
 
         }

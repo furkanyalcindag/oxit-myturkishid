@@ -12,6 +12,5 @@ class FeatureForm(ModelForm):
 
             'key': forms.TextInput(
                 attrs={'class': 'form-control ', 'placeholder': 'Özellik Adı', 'rows': '2', 'required': 'required'}),
-            'featureType': forms.Select(
-                attrs={'class': 'form-control ', 'placeholder': 'Başlık', 'rows': '2', 'required': 'required'})
+
         }

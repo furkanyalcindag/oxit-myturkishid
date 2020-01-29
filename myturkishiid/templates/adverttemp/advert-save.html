@@ -3202,6 +3202,7 @@
                     </div>
                     <div class="container">
                         <form method="post" enctype="multipart/form-data" role="form">
+                        {% csrf_token %}
                             <div class="box-body">
                                  <div class="form-group">
                                     <label> Fotoğraf Ekle</label>
@@ -3228,11 +3229,8 @@
                                         {{ form.advertImage }}
                                     {% endfor %}
                                 </div>
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label> İlan Başlığı</label>
-                                    {{ form_advert.advertTitle }}
-                                </div>
+
+
                                 <div class="form-group">
                                     <label> Adress</label>
                                     {{ form_advert.address }}
@@ -3251,14 +3249,7 @@
                                     <label> Kategori</label>
                                     {{ form_advert.category }}
                                 </div>
-                                 <div class="form-group">
-                                    <label> Özellik Başlığı</label>
-                                    {{ form_advert.featureTitle }}
-                                </div>
-                                <div class="form-group">
-                                    <label> Özellik</label>
-                                    {{ form_advert.feature }}
-                                </div>
+
 
                                 <div class="form-group">
                                     <label> Bina Yaşı</label>

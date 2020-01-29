@@ -10,5 +10,5 @@ class FeatureTypeForm(ModelForm):
         fields = ('key',)
         widgets = {
             'key': forms.TextInput(
-                attrs={'class': 'form-control ', 'placeholder': 'Özellik Adı', 'rows': '2', 'required': 'required'})
+                attrs={'class': 'form-control ', 'placeholder': 'Özellik Tipi Adı', 'required': 'required'})
         }

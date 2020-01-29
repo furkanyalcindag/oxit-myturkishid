@@ -16,10 +16,10 @@ class CategoryForm(ModelForm):
                                             attrs={'class': 'form-control select2 select2-hidden-accessible',
                                                    'style': 'width: 100%; '}))
 
-    widgets = {
+        widgets = {
 
-        'key': forms.TextInput(
-            attrs={'class': 'form-control ', 'rows': '2', 'required': 'required',
-                   }),
+            'key': forms.TextInput(
+                attrs={'class': 'form-control ', 'rows': '2', 'required': 'required',
+                       }),
 
-    }
+        }

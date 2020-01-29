@@ -16,10 +16,8 @@ class Advert(models.Model):
     advertNo = models.CharField(max_length=256, blank=True, null=True, verbose_name='İlan Numarası')
     city = models.ForeignKey('City', on_delete=models.CASCADE, null=False, blank=False, verbose_name='İl')
     district = models.TextField(blank=False, null=False, verbose_name='İlçe')
-    feature = models.ManyToManyField(Feature, blank=True)
-    featureTitle = models.ForeignKey('FeatureType', on_delete=models.CASCADE, null=True, blank=True,
-                                     verbose_name='Özellilk Başlık')
-    advertTitle = models.CharField(max_length=256, blank=True, null=True, verbose_name='İlan Başlığı')
+
+
     category = models.ManyToManyField(Category, verbose_name='İlan Kategorisi', blank=True)
     floorNumber = models.CharField(max_length=256, null=True, blank=True, verbose_name='kat numarası',
                                    choices=FLOOR_CHOICES,
@@ -40,7 +38,7 @@ class Advert(models.Model):
                              default=FRONT
                              )
     isShow = models.BooleanField(default=False)
-    price = models.FloatField(blank=False, null=False, verbose_name='Fiyat')
+    price = models.DecimalField(max_digits=8, decimal_places=2)
     creationDate = models.DateTimeField(auto_now_add=True, verbose_name='Kayıt Tarihi')
     modificationDate = models.DateTimeField(auto_now=True, verbose_name='Güncelleme Tarihi')
     paidDate = models.DateTimeField(null=True, blank=True, verbose_name='Kayıt Tarihi')
