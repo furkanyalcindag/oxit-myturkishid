@@ -7,4 +7,5 @@ from .CategoryDesc import CategoryDesc
 from .FeatureTypeDesc import FeatureTypeDesc
 from .FeatureDesc import FeatureDesc
 from .Currency import Currency
+from .Menu import Menu
 

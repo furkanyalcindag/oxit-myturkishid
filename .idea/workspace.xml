@@ -2,25 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7f3fd45-0ec7-48c5-879b-204c263758eb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/inoks/migrations/0005_auto_20190916_1233.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inoks/tasks.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oxiterp/static/dist/js/balkan.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/Views/DashboardViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/Views/DashboardViews.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/Views/TreeViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/Views/TreeViews.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/models/Profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/models/Profile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/models/ProfileControlObject.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/models/ProfileControlObject.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/services/general_methods.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/services/general_methods.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/templates/soyagaci/soy-agacim.html" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/templates/soyagaci/soy-agacim.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/templates/soyagaci/soy-agaclari.html" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/templates/soyagaci/soy-agaclari.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oxiterp/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/oxiterp/settings/base.py" afterDir="false" />
-    </list>
-    <list id="1a3e1ac9-5d8a-4168-acce-89a160210a06" name="ignored" comment="">
-      <change afterPath="$PROJECT_DIR$/inoks/migrations/0002_auto_20190912_1244.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inoks/migrations/0003_order_totalprice.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/inoks/migrations/0004_auto_20190912_1428.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myturkishiid/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myturkishiid/migrations/0002_auto_20200128_1103.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myturkishiid/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myturkishiid/models/Menu.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myturkishiid/services/general_methods.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/myturkishiid/templates/adverttemp/add-feature-to-advert.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/inoks/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/inoks/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/inoks/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/myturkishiid/Views/AdvertViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/myturkishiid/Views/AdvertViews.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myturkishiid/Views/FeatureViews.py" beforeDir="false" afterPath="$PROJECT_DIR$/myturkishiid/Views/FeatureViews.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myturkishiid/models/Advert.py" beforeDir="false" afterPath="$PROJECT_DIR$/myturkishiid/models/Advert.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myturkishiid/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/myturkishiid/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myturkishiid/templates/adverttemp/get-advert.html" beforeDir="false" afterPath="$PROJECT_DIR$/myturkishiid/templates/adverttemp/get-advert.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myturkishiid/templates/featuretemp/add-feature-to-feature-type.html" beforeDir="false" afterPath="$PROJECT_DIR$/myturkishiid/templates/featuretemp/add-feature-to-feature-type.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myturkishiid/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/myturkishiid/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oxiterp/settings/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/oxiterp/settings/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oxiterp/settings/dev.py" beforeDir="false" afterPath="$PROJECT_DIR$/oxiterp/settings/dev.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oxiterp/templates/base_layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/oxiterp/templates/base_layout.html" afterDir="false" />
     </list>
+    <list id="1a3e1ac9-5d8a-4168-acce-89a160210a06" name="ignored" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,34 +39,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inoks/Forms/ProductForm.py">
+        <entry file="file://$PROJECT_DIR$/myturkishiid/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="40" column="85" selection-start-line="40" selection-start-column="85" selection-end-line="40" selection-end-column="85" />
+            <state relative-caret-position="254">
+              <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
               <folding>
-                <element signature="e#0#24#0" expanded="true" />
+                <element signature="e#9#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inoks/Views/TreeViews.py">
+        <entry file="file://$PROJECT_DIR$/myturkishiid/Views/AdvertViews.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-              <folding>
-                <element signature="e#0#57#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inoks/Views/OrderViews.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-75">
-              <caret line="68" column="46" selection-start-line="68" selection-start-column="46" selection-end-line="68" selection-end-column="46" />
+            <state relative-caret-position="452">
+              <caret line="116" column="50" lean-forward="true" selection-start-line="116" selection-start-column="50" selection-end-line="116" selection-end-column="50" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -73,34 +62,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inoks/Forms/ProductCategoryForm.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#24#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/inoks/services/general_methods.py">
+        <entry file="file://$PROJECT_DIR$/myturkishiid/templates/adverttemp/add-feature-to-advert.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="166" lean-forward="true" selection-end-line="217" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="375">
+              <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inoks/models/earningPayments.py">
+        <entry file="file://$PROJECT_DIR$/myturkishiid/models/Advert.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="91" selection-start-line="12" selection-start-column="91" selection-end-line="12" selection-end-column="91" />
+            <state relative-caret-position="426">
+              <caret line="47" column="71" selection-start-line="47" selection-start-column="71" selection-end-line="47" selection-end-column="71" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -109,43 +84,45 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inoks/tasks.py">
+        <entry file="file://$PROJECT_DIR$/inoks/models/Product.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="135">
+              <caret line="9" column="63" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="63" />
               <folding>
-                <element signature="e#0#38#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/inoks/Views/DashboardViews.py">
+        <entry file="file://$PROJECT_DIR$/myturkishiid/models/Feature.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
+            <state>
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#0#28#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file:///usr/local/lib/python3.7/site-packages/background_task/__init__.py">
+        <entry file="file://$PROJECT_DIR$/myturkishiid/templates/adverttemp/get-advert.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+            <state relative-caret-position="296">
+              <caret line="184" column="95" selection-start-line="184" selection-start-column="95" selection-end-line="184" selection-end-column="95" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/oxiterp/settings/base.py">
+        <entry file="file://$PROJECT_DIR$/myturkishiid/Views/FeatureViews.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="41" column="18" lean-forward="true" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+            <state relative-caret-position="339">
+              <caret line="192" selection-start-line="192" selection-end-line="192" />
+              <folding>
+                <element signature="e#0#35#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -207,37 +184,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/inoks/templates/siparisler/siparisler.html" />
-        <option value="$PROJECT_DIR$/inoks/models/MenuAdmin.py" />
-        <option value="$PROJECT_DIR$/inoks/templates/kullanici/uyelerim.html" />
-        <option value="$PROJECT_DIR$/inoks/models/Menu.py" />
-        <option value="$PROJECT_DIR$/accounts/views.py" />
-        <option value="$PROJECT_DIR$/oxiterp/settings.py" />
-        <option value="$PROJECT_DIR$/oxiterp/settings/prod.py" />
-        <option value="$PROJECT_DIR$/oxiterp/wsgi.py" />
-        <option value="$PROJECT_DIR$/oxiterp/settings/dev.py" />
-        <option value="$PROJECT_DIR$/inoks/templates/dashboard/user-dashboard.html" />
-        <option value="$PROJECT_DIR$/inoks/templates/ayarlar/profil-ayarlari.html" />
-        <option value="$PROJECT_DIR$/manage.py" />
-        <option value="$PROJECT_DIR$/inoks/Forms/UserUpdateForm.py" />
-        <option value="$PROJECT_DIR$/inoks/Forms/ProfileUpdateForm.py" />
-        <option value="$PROJECT_DIR$/inoks/Forms/ProfileForm.py" />
-        <option value="$PROJECT_DIR$/inoks/Forms/UserForm.py" />
-        <option value="$PROJECT_DIR$/inoks/Views/UserViews.py" />
-        <option value="$PROJECT_DIR$/inoks/templates/kullanici/kullanici-ekle.html" />
-        <option value="$PROJECT_DIR$/inoks/templates/kullanici/iptal-edilen-kullanicilar.html" />
-        <option value="$PROJECT_DIR$/inoks/templates/kullanici/kullanicilar.html" />
-        <option value="$PROJECT_DIR$/inoks/templates/kullanici/bekleyen-kullanicilar.html" />
-        <option value="$PROJECT_DIR$/oxiterp/templates/base_layout.html" />
-        <option value="$PROJECT_DIR$/inoks/models/OrderObject.py" />
-        <option value="$PROJECT_DIR$/inoks/Forms/OrderForm.py" />
-        <option value="$PROJECT_DIR$/inoks/templates/siparisler/siparis-ekle.html" />
-        <option value="$PROJECT_DIR$/inoks/models/Order_Product.py" />
-        <option value="$PROJECT_DIR$/inoks/migrations/f.py" />
-        <option value="$PROJECT_DIR$/inoks/models/OrderProduct.py" />
-        <option value="$PROJECT_DIR$/inoks/models/__init__.py" />
-        <option value="$PROJECT_DIR$/inoks/migrations/0002_auto_20190912_1135.py" />
-        <option value="$PROJECT_DIR$/inoks/models/Order.py" />
         <option value="$PROJECT_DIR$/inoks/Views/OrderViews.py" />
         <option value="$PROJECT_DIR$/inoks/templates/siparisler/siparislerim.html" />
         <option value="$PROJECT_DIR$/inoks/models/ProductImage.py" />
@@ -255,16 +201,48 @@
         <option value="$PROJECT_DIR$/inoks/templates/soyagaci/soy-agacim.html" />
         <option value="$PROJECT_DIR$/inoks/Views/TreeViews.py" />
         <option value="$PROJECT_DIR$/inoks/services/general_methods.py" />
-        <option value="$PROJECT_DIR$/oxiterp/settings/base.py" />
         <option value="$PROJECT_DIR$/inoks/tasks.py" />
         <option value="$PROJECT_DIR$/inoks/Views/DashboardViews.py" />
+        <option value="$PROJECT_DIR$/oxiterp/settings/dev.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/models/AdvertDesc.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/Forms/AdvertDescForm.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/adverttemp/advert-save.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/Forms/AdvertForm.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/adverttemp/advertDesc-save.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/Forms/FeatureTypeForm.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/featuretemp/featureTypeDesc-save.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/Forms/FeatureForm.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/featuretemp/feature-save.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/featuretemp/FeatureDesc-save.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/Forms/FeatureDescForm.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/Views/CategoryViews.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/Forms/CategoryForm.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/categorytemp/category-save.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/categorytemp/categoryDesc-save.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/Forms/CategoryDesc.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/featuretemp/feature-save-type.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/featuretemp/add-type-to-feature.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/featuretemp/feature-types.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/Views/FeatureViews.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/featuretemp/add-feature-to-feature-type.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/models/__init__.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/models/Menu.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/services/general_methods.py" />
+        <option value="$PROJECT_DIR$/oxiterp/settings/base.py" />
+        <option value="$PROJECT_DIR$/oxiterp/templates/base_layout.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/models/Advert.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/adverttemp/get-advert.html" />
+        <option value="$PROJECT_DIR$/myturkishiid/Views/AdvertViews.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/urls.py" />
+        <option value="$PROJECT_DIR$/myturkishiid/templates/adverttemp/add-feature-to-advert.html" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1440" />
     <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="810" />
+    <option name="width" value="1920" />
+    <option name="height" value="1001" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -277,33 +255,71 @@
         <subPane>
           <expand>
             <path>
-              <item name="oxit-inoks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oxit-inoks" type="462c0819:PsiDirectoryNode" />
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oxit-inoks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oxit-inoks" type="462c0819:PsiDirectoryNode" />
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
               <item name="inoks" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oxit-inoks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oxit-inoks" type="462c0819:PsiDirectoryNode" />
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
               <item name="inoks" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
+              <item name="myturkishiid" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
+              <item name="myturkishiid" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
+              <item name="myturkishiid" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
+              <item name="myturkishiid" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="adverttemp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
+              <item name="myturkishiid" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="featuretemp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
+              <item name="myturkishiid" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oxit-inoks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oxit-inoks" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="oxit-inoks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oxit-inoks" type="462c0819:PsiDirectoryNode" />
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
               <item name="oxiterp" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="oxit-inoks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="oxit-inoks" type="462c0819:PsiDirectoryNode" />
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
+              <item name="oxiterp" type="462c0819:PsiDirectoryNode" />
+              <item name="settings" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="oxit-myturkishid" type="b2602c69:ProjectViewProjectNode" />
+              <item name="oxit-myturkishid" type="462c0819:PsiDirectoryNode" />
               <item name="oxiterp" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -323,15 +339,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hakkı\Desktop\oxit projeler\oxitDent-master\inoks\templates\iadeler" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/myturkishiid/templates/adverttemp" />
       <recent name="$PROJECT_DIR$/inoks/models" />
       <recent name="$PROJECT_DIR$/inoks/Forms" />
       <recent name="$PROJECT_DIR$/media" />
       <recent name="$PROJECT_DIR$/oxiterp" />
-      <recent name="C:\Users\Hakkı\Desktop\oxit projeler\oxitDent-master\media\profile" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Hakkı\Desktop\oxit projeler\oxitDent-master\inoks\templates\iadeler" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -496,6 +512,7 @@
       <workItem from="1568097480598" duration="17587000" />
       <workItem from="1568136291069" duration="26709000" />
       <workItem from="1568356743311" duration="32569000" />
+      <workItem from="1580195850182" duration="22543000" />
     </task>
     <task id="LOCAL-00001" summary="aasasasa">
       <created>1566145297658</created>
@@ -567,7 +584,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568366495805</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="soyagacım yapıldı">
+      <created>1580279606938</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1580279606939</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -588,7 +612,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="505237000" />
+    <option name="totallyTimeSpent" value="527780000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -600,15 +624,16 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="810" extended-state="0" />
+    <frame x="1440" y="23" width="1920" height="1001" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4992928" visible="true" weight="0.2911302" />
-      <window_info id="Structure" order="1" sideWeight="0.5007072" side_tool="true" weight="0.21380697" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4973913" visible="true" weight="0.25825346" />
+      <window_info id="Structure" order="1" sideWeight="0.5026087" side_tool="true" weight="0.25878593" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32956153" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.23620933" />
-      <window_info anchor="bottom" x="6" y="648" width="1492" height="150" id="Debug" order="3" sideWeight="0.49731904" visible="true" weight="0.36908078" />
+      <window_info active="true" anchor="bottom" x="6" y="648" width="1492" height="150" id="Debug" order="3" sideWeight="0.49731904" visible="true" weight="0.36853686" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49932975" weight="0.25487465" />
@@ -618,7 +643,7 @@
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.36629528" />
       <window_info anchor="bottom" id="Docker" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="bottom" id="manage.py@src2" order="13" sideWeight="0.49731904" weight="0.37325907" />
+      <window_info anchor="bottom" id="manage.py@src2" order="13" sideWeight="0.49731904" weight="0.29372936" />
       <window_info anchor="bottom" id="Messages" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -689,11 +714,6 @@
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/inoks/Views/OrderViews.py</url>
-          <line>30</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/inoks/Views/TreeViews.py</url>
           <line>57</line>
           <option name="timeStamp" value="42" />
@@ -739,6 +759,11 @@ user_form.cleaned_data['username']</expression-string>
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>request.POST.getlist('check_list[]')</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>float(levelDict['1'][0].total_order)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -778,431 +803,21 @@ user_form.cleaned_data['username']</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>levelDict[7]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/inoks/templates/kullanici/kullanici-ekle.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="11" column="41" lean-forward="true" selection-start-line="11" selection-start-column="41" selection-end-line="11" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/templates/kullanici/iptal-edilen-kullanicilar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="244" column="82" selection-start-line="244" selection-start-column="82" selection-end-line="244" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/templates/kullanici/kullanicilar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="245" column="82" selection-start-line="245" selection-start-column="82" selection-end-line="245" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/templates/kullanici/bekleyen-kullanicilar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="392" column="61" selection-start-line="392" selection-start-column="61" selection-end-line="392" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.7/site-packages/django/forms/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="1238" selection-start-line="1238" selection-end-line="1238" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/models/OrderObject.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Forms/OrderUpdateForm.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/migrations/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/models.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oxiterp/settings/dev.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="23" lean-forward="true" selection-start-line="11" selection-start-column="23" selection-end-line="11" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/migrations/f.py" />
-    <entry file="file://$PROJECT_DIR$/inoks/migrations/0001_initial.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="553">
-          <caret line="133" column="23" selection-start-line="133" selection-start-column="18" selection-end-line="133" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.7/site-packages/django/core/management/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="424" selection-start-line="424" selection-end-line="424" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/models/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="28" lean-forward="true" selection-start-column="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/migrations/0002_auto_20190912_1135.py" />
-    <entry file="file://$PROJECT_DIR$/inoks/models/OrderProduct.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="57" lean-forward="true" selection-start-line="8" selection-start-column="57" selection-end-line="8" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/templates/siparisler/siparislerim.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="171" column="55" selection-start-line="171" selection-start-column="55" selection-end-line="171" selection-end-column="55" />
-          <folding>
-            <element signature="e#8186#8208#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.7/site-packages/django/db/models/fields/related.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="1128" selection-start-line="1128" selection-end-line="1128" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/models/ProductCategory.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/models/Product.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="55" selection-start-line="7" selection-start-column="55" selection-end-line="7" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Views/ProductViews.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1815">
-          <caret line="133" column="115" selection-start-line="133" selection-start-column="115" selection-end-line="133" selection-end-column="115" />
-          <folding>
-            <element signature="e#0#57#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/templates/urunler/urunler.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2430">
-          <caret line="162" column="117" selection-start-line="162" selection-start-column="117" selection-end-line="162" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Forms/ImageForm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="8" column="33" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/models/ProductImage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Forms/RefundForm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/templates/urunler/urun-ekle.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="3114" selection-start-line="3114" selection-end-line="3114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Forms/ProfileForm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/templates/soyagaci/soy-agaclari.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="52" column="120" selection-start-line="52" selection-start-column="120" selection-end-line="52" selection-end-column="120" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oxiterp/templates/base_layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="53" column="85" selection-start-line="53" selection-start-column="85" selection-end-line="53" selection-end-column="85" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oxiterp/static/dist/js/balkan.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="53">
-          <caret line="2200" column="1158" selection-start-line="2200" selection-start-column="1158" selection-end-line="2200" selection-end-column="1158" />
-          <folding>
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#path#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#path#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="e#100#106#0" expanded="true" />
-            <element signature="e#106#112#0" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#hr#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#hr#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#hr#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#hr#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#hr#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#hr#2;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#stop#0;n#linearGradient#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#stop#1;n#linearGradient#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#stop#0;n#linearGradient#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#stop#1;n#linearGradient#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#path#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#path#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#path#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#path#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#path#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#path#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#path#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#text#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#g#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="e#87#93#1" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#4;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#5;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#6;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#7;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#7;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#8;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#8;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/models/ProfileControlObject.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="38" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/models/Order.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="5" lean-forward="true" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Forms/UserForm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="30" column="22" lean-forward="true" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/models/Profile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="50" column="133" lean-forward="true" selection-start-line="50" selection-start-column="133" selection-end-line="50" selection-end-column="133" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/templates/soyagaci/soy-agacim.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="45" column="103" selection-start-line="45" selection-start-column="103" selection-end-line="45" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="1" selection-start-line="2" selection-start-column="1" selection-end-line="2" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Views/UserViews.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.7/site-packages/django/contrib/auth/decorators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.7/site-packages/django/core/handlers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="125" selection-start-line="125" selection-end-line="125" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Forms/OrderForm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/inoks/templates/siparisler/siparis-ekle.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2254">
           <caret line="235" column="13" selection-start-line="235" selection-start-column="13" selection-end-line="235" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/background_task/__init__.py" />
+    <entry file="file://$PROJECT_DIR$/inoks/Views/TreeViews.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
@@ -1215,25 +830,25 @@ user_form.cleaned_data['username']</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Forms/ProductForm.py">
+    <entry file="file://$PROJECT_DIR$/oxiterp/settings/dev.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="40" column="85" selection-start-line="40" selection-start-column="85" selection-end-line="40" selection-end-column="85" />
+        <state relative-caret-position="217">
+          <caret line="18" column="35" selection-start-line="18" selection-start-column="35" selection-end-line="18" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inoks/Views/DashboardViews.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="147" selection-start-line="147" selection-end-line="147" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Views/OrderViews.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-75">
-          <caret line="68" column="46" selection-start-line="68" selection-start-column="46" selection-end-line="68" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/inoks/tasks.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/inoks/models/earningPayments.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1245,57 +860,358 @@ user_form.cleaned_data['username']</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/oxiterp/settings/base.py">
+    <entry file="file://$PROJECT_DIR$/myturkishiid/models/AdvertImage.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/models/AdvertDesc.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="41" column="18" lean-forward="true" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+        <state relative-caret-position="135">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file:///usr/local/lib/python3.7/site-packages/background_task/__init__.py">
+    <entry file="file://$PROJECT_DIR$/myturkishiid/Forms/AdvertDescForm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/tasks.py">
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/adverttemp/advert-save.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-379">
+          <caret line="3251" selection-start-line="3251" selection-end-line="3251" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/Forms/AdvertForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="167">
+          <caret line="50" column="73" selection-start-line="50" selection-start-column="73" selection-end-line="50" selection-end-column="73" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inoks/Forms/ProductForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-95">
+          <caret line="28" column="48" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inoks/templates/urunler/urun-listesi.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2805">
+          <caret line="40" column="21" selection-start-line="40" selection-start-column="21" selection-end-line="40" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/Forms/FeatureTypeForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="84" selection-start-line="12" selection-start-column="84" selection-end-line="12" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/Forms/FeatureForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/featuretemp/featureType-save.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="47" column="29" selection-end-line="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/featuretemp/featureTypeDesc-save.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="137" column="48" lean-forward="true" selection-end-line="177" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/models/Category.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/Views/CategoryViews.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="15" column="17" lean-forward="true" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/categorytemp/category-save.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="148" lean-forward="true" selection-start-line="148" selection-end-line="148" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/adverttemp/advertDesc-save.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/categorytemp/categoryDesc-save.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="136" column="70" selection-start-line="136" selection-start-column="70" selection-end-line="136" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/Forms/CategoryDesc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Views/DashboardViews.py">
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/featuretemp/feature-save.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="147" lean-forward="true" selection-start-line="147" selection-end-line="147" />
+        <state relative-caret-position="167">
+          <caret line="142" lean-forward="true" selection-start-line="142" selection-end-line="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/Forms/FeatureDescForm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="46" selection-start-line="18" selection-start-column="46" selection-end-line="18" selection-end-column="46" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/inoks/Views/TreeViews.py">
+    <entry file="file://$PROJECT_DIR$/myturkishiid/Forms/CategoryForm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        <state relative-caret-position="330">
+          <caret line="22" column="26" lean-forward="true" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
           <folding>
-            <element signature="e#0#57#0" expanded="true" />
+            <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/featuretemp/FeatureDesc-save.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="102" column="42" lean-forward="true" selection-start-line="102" selection-start-column="42" selection-end-line="102" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/categorytemp/get-category.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="6" selection-start-line="21" selection-start-column="6" selection-end-line="21" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inoks/Views/OrderViews.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-380">
+          <caret line="451" column="37" selection-start-line="451" selection-start-column="37" selection-end-line="451" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.7/site-packages/django/http/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="224" column="8" selection-start-line="224" selection-start-column="8" selection-end-line="224" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inoks/Views/ProductViews.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="84" column="76" selection-start-line="84" selection-start-column="76" selection-end-line="84" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/featuretemp/feature-types.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="143" column="114" selection-start-line="143" selection-start-column="114" selection-end-line="143" selection-end-column="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/featuretemp/add-feature-to-feature-type.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="194" column="56" selection-start-line="194" selection-start-column="56" selection-end-line="194" selection-end-column="56" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#0;n#section#1;n#div#0;n#section#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inoks/models/Menu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" lean-forward="true" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oxiterp/settings/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="92" column="29" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oxiterp/templates/base_layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="238" selection-start-line="238" selection-end-line="238" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/models/FeatureType.py">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/inoks/services/general_methods.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="166" lean-forward="true" selection-end-line="217" />
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/services/general_methods.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/models/Menu.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="65" selection-start-line="6" selection-start-column="65" selection-end-line="6" selection-end-column="65" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/models/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/inoks/models/Product.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="63" selection-start-line="9" selection-start-column="63" selection-end-line="9" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/models/Advert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="47" column="71" selection-start-line="47" selection-start-column="71" selection-end-line="47" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/adverttemp/get-advert.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="296">
+          <caret line="184" column="95" selection-start-line="184" selection-start-column="95" selection-end-line="184" selection-end-column="95" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/models/Feature.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/Views/FeatureViews.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="339">
+          <caret line="192" selection-start-line="192" selection-end-line="192" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/Views/AdvertViews.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="116" column="50" lean-forward="true" selection-start-line="116" selection-start-column="50" selection-end-line="116" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="254">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+          <folding>
+            <element signature="e#9#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myturkishiid/templates/adverttemp/add-feature-to-advert.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
         </state>
       </provider>
     </entry>

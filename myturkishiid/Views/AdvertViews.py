@@ -1,10 +1,11 @@
 from django.contrib import messages
+from django.db.models import Q
 from django.shortcuts import redirect, render
 
 from myturkishiid.Forms.AdvertDescForm import AdvertDescForm
 from myturkishiid.Forms.AdvertForm import AdvertForm
 from myturkishiid.Forms.CategoryForm import CategoryForm
-from myturkishiid.models import Advert, AdvertDesc
+from myturkishiid.models import Advert, AdvertDesc, FeatureType, Feature
 from myturkishiid.models.AdvertImage import AdvertImage
 from myturkishiid.models.Language import Language
 
@@ -85,3 +86,33 @@ def get_adverts(request):
     adverts = Advert.objects.all()
 
     return render(request, 'adverttemp/get-advert.html', {'adverts': adverts})
+
+
+def add_feature_to_advert(request, advert_id):
+    advert = Advert.objects.get(pk=advert_id)
+
+    exist_features = Feature.objects.filter(id__in=advert.features.all().values('pk'))
+
+    features = Feature.objects.filter(~Q(id__in=advert.features.all().values('pk')))
+
+    if request.method == 'POST':
+        for check in request.POST.getlist('check_list[]'):
+            feature = Feature.objects.get(pk=int(check))
+            advert.features.add(feature)
+            advert.save()
+
+        messages.success(request, 'özellikler eklendi.')
+
+        return redirect('myturkishid:add-features-to-advert', advert_id)
+
+    return render(request, 'adverttemp/add-feature-to-advert.html',
+                  {'advert': advert, 'exist_features': exist_features, 'features': features})
+
+
+def delete_feature_from_advert(request, feature_id, advert_id):
+    feature = Feature.objects.get(pk=feature_id)
+    advert = Advert.objects.get(pk=advert_id)
+    advert.features.remove(feature)
+    advert.save()
+    messages.success(request, 'Özellik ilandan başarıyla çıkarıldı.')
+    return redirect('myturkishid:add-features-to-feature-type', x.pk)

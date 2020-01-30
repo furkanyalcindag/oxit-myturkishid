@@ -175,6 +175,26 @@ def add_feature_to_advert(request, advert_id, featuretype_id):
 def add_feature_to_feature_type(request, featuretype_id):
     exist_features = Feature.objects.filter(featureType_id=featuretype_id)
     features = Feature.objects.filter(~Q(featureType_id=featuretype_id))
+    feature_type = FeatureType.objects.get(id=featuretype_id)
+
+    if request.method == 'POST':
+        for check in request.POST.getlist('check_list[]'):
+            feature = Feature.objects.get(pk=int(check))
+            feature.featureType = feature_type
+            feature.save()
+
+        messages.success(request, 'özellikler eklendi.')
+
+        return redirect('myturkishid:add-features-to-feature-type', featuretype_id)
 
     return render(request, 'featuretemp/add-feature-to-feature-type.html',
-                  {'features': features, 'exist_features': exist_features})
+                  {'features': features, 'exist_features': exist_features,'type':feature_type})
+
+
+def delete_feature_from_feature_type(request,feature_id):
+    feature=Feature.objects.get(pk=feature_id)
+    x = feature.featureType
+    feature.featureType=None
+    feature.save()
+    messages.success(request, 'özellikler çıkarıldı.')
+    return redirect('myturkishid:add-features-to-feature-type', x.pk)

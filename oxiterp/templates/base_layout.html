@@ -182,7 +182,7 @@
             <ul class="sidebar-menu" data-widget="tree">
 
 
-                {% if  user.groups.all.0.name == 'Üye' %}
+
                     <li class=" ">
                         <a href="{% url "inoks:user-dashboard" %}">
                             <i class="fa fa-home"></i>
@@ -234,59 +234,9 @@
 
 
 
-                {% else %}
-
-                    <li class=" ">
-                        <a href="{% url "inoks:admin-dashboard" %}">
-                            <i class="fa fa-home"></i>
-                            <span>Anasayfa</span>
-                            <span class="pull-right-container">
-
-                            </span>
-                        </a></li>
-                    {% for menu in adminmenus %}
-
-
-                        {% if menu.is_parent %}
-                            {% if menu.name != "Anasayfa" %}
-                                <li class="treeview ">
-                                <a href="#">
-                                    <i class=" {{ menu.fa_icon }}"></i>
-                                    <span>{{ menu.name }}</span>
-                                    <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                                </a>
-                            {% endif %}
-
-                        {% endif %}
-
-
-                    <ul class="treeview-menu">
-
-                        {% for menusub in adminmenus %}
-
-
-                            {% if menu.name != "Anasayfa" %}
-                                {% if menusub.parent.id is menu.id %}
-
-                                    <li>
-                                        <a href="{% url menusub.url %}"><i
-                                                class=" {{ menusub.fa_icon }}"></i> {{ menusub.name }}</a>
-                                    </li>
-
-                                {% endif %}
-                            {% endif %}
-                        {% endfor %}
-
-                    </ul>
-                    </li>
-                    {% endfor %}
 
 
 
-
-                {% endif %}
 
                 <li class="treeview ">
                     <a href="#">

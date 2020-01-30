@@ -45,6 +45,7 @@ class Advert(models.Model):
     fieldNet = models.FloatField(null=True, blank=True, verbose_name='Alan Net')
     fieldBrut = models.FloatField(null=True, blank=True, verbose_name='Alan Brüt')
     buildingAge = models.CharField(max_length=256, null=True, blank=True, verbose_name='Bina Yaşı')
+    features = models.ManyToManyField(Feature,verbose_name='Özellikler')
 
     """def __str__(self):complex
         return '%d ' % self.id
