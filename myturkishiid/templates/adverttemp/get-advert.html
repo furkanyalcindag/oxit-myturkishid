@@ -155,10 +155,11 @@
                             <tr>
                                 <th>No</th>
                                 <th>Fotoğraf</th>
-
+                                <th>İlan Numarası</th>
+                                <th>İlan Adresi</th>
                                 <th>Fiyatı</th>
-
-                                <th>Detay/Güncelleme/Silme</th>
+                                <th>İlan Oluşturma Tarihi</th>
+                                <th>Ekle/Çeviri/Silme</th>
 
 
                             </tr>
@@ -174,10 +175,14 @@
 
                                         <td>{{ forloop.counter }} </td>
                                         <td><img src="/media/{{ advert.advertImage.all.0.advertImage }}"
-                                                 width="40px"
-                                                 height="40px"/>
+                                                 width="60px"
+                                                 height="50px"/>
                                         </td>
+                                        <td>{{ advert.advertNo }}</td>
+                                        <td>{{ advert.address }}</td>
                                         <td>{{ advert.price|intcomma }}₺</td>
+                                        <td>{{ advert.creationDate }}</td>
+
 
                                         <td>
 
@@ -187,7 +192,7 @@
 
                                             <a class="button btn btn-info"
                                                href="{% url 'myturkishid:advertDesc-save' advert.pk %}">Çeviri Ekle
-                                                ekle</a>
+                                            </a>
 
 
                                         </td>
@@ -211,6 +216,7 @@
                                                  width="40px"
                                                  height="40px"/>
                                         </td>
+
                                         <td>{{ product_lists.name }}</td>
                                         <td>{{ product_lists.price }} TL</td>
 

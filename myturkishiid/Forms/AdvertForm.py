@@ -29,7 +29,7 @@ class AdvertForm(ModelForm):
             'heating',
             'balcony',
             'front',
-
+            'advertNo',
             'city',
             'district'
 
@@ -49,6 +49,8 @@ class AdvertForm(ModelForm):
                        }),
             'price': forms.NumberInput(
                 attrs={'class': 'form-control ', 'placeholder': 'Fiyat (₺)', 'required': 'required'}),
+            'advertNo': forms.NumberInput(
+                attrs={'class': 'form-control ', 'placeholder': 'İlan Numarası', 'required': 'required'}),
             'room': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%;'}),
             'balcony': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
