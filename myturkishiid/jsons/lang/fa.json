@@ -1,0 +1,16 @@
+[
+  {
+    "advertTitle": "عنوان تبلیغı",
+    "creationDate": "تاریخ اعلام",
+    "category": "دسته",
+    "room": "تعداد اتاق",
+    "city": "استان",
+    "district": "شهرستان",
+    "price": "قیمت",
+    "advertImage": "عکس",
+    "search": "متوسط",
+    "min_price": "حداقل",
+    "max_price": "بیشترین",
+    "saleHome": "آپارتمان برای فروش"
+  }
+]

@@ -1,7 +1,7 @@
 # ADVERT
 from django.conf.urls import url
 
-from myturkishiid.Views import AdvertViews, FeatureViews, CategoryViews, CityViews
+from myturkishiid.Views import AdvertViews, FeatureViews, CategoryViews, CityViews, HomeViews
 
 app_name = 'myturkishid'
 
@@ -36,5 +36,13 @@ urlpatterns = [
     url(r'get-category/$', CategoryViews.get_category, name='get-category'),
 
     url(r'ilce-getir/$', CityViews.get_districts, name="advert-ilce-getir"),
+
+    # home
+    url(r'home/$', HomeViews.index, name='home'),
+
+
+
+    #cookie
+    url(r'set-lang/(?P<pk>\d+)$', HomeViews.setcookie, name='set-lang'),
 
 ]

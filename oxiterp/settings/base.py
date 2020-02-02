@@ -41,12 +41,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'mathfilters',
+    'django_filters',
+    'widget_tweaks',
+
     # own
     'myturkishiid',
     'rest_framework',
     'accounts',
     'education',
     'inoks',
+
 
 ]
 
@@ -58,7 +62,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
         # 'rest_framework.permissions.IsAuthenticated',
         # 'rest_framework.permissions.IsAdminUser',
-     ),
+    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100,
     'DEFAULT_FILTER_BACKENDS': (
@@ -92,6 +96,7 @@ TEMPLATES = [
                 'django.template.context_processors.i18n',
                 'myturkishiid.services.general_methods.getMenu',
                 'inoks.services.general_methods.getAdminMenu',
+                'myturkishiid.services.general_methods.languages',
 
                 # "education.services.general_methods.append_privileges",
             ],
@@ -170,7 +175,6 @@ EMAIL_HOST_USER = 'ik@oxityazilim.com'
 EMAIL_HOST_PASSWORD = 'oxit2016'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True"""
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'mail.baven.net'

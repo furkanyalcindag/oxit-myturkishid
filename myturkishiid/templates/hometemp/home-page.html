@@ -1,0 +1,162 @@
+{% extends 'base_layout_top_bar.html' %}
+
+{% block content %}
+
+
+    {% load humanize %}
+
+    {% load widget_tweaks %}
+
+    {% load app_filter_myturkishid %}
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="box">
+                    <div class="box-header">
+
+                    </div>
+                    <form method="get">
+                        <div class="box-body">
+
+                            <div class="">
+                                <h4 style="margin-top: 0"></h4>
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        {{ 'city'|get_item_by_lang:lang.id }}
+                                        {% render_field filter.form.city class="form-control" %}
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                        {{ 'room'|get_item_by_lang:lang.id }}
+                                        {% render_field filter.form.room class="form-control" %}
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        {{ 'min_price'|get_item_by_lang:lang.id }} ₺
+                                        {% render_field filter.form.price__gt class="form-control" %}
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                            {{ 'max_price'|get_item_by_lang:lang.id }} ₺
+                                        {% render_field filter.form.price__lt class="form-control" %}
+                                    </div>
+
+                                </div>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-search"></span> {{ 'search'|get_item_by_lang:lang.id }}
+                                </button>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+            <div class="col-xs-9">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">   {{ 'saleHome'|get_item_by_lang:lang.id }}</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row">
+                                <div class="col-sm-6"></div>
+                                <div class="col-sm-6"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+                                           aria-describedby="example2_info">
+                                        <thead>
+                                        <tr role="row">
+                                            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-sort="ascending"
+                                                aria-label="Fotoğraf: activate to sort column descending">
+                                                {{ 'advertImage'|get_item_by_lang:lang.id }}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Kategori: activate to sort column ascending">
+                                                {{ 'category'|get_item_by_lang:lang.id }}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1"
+                                                aria-label="İlan Başlığı: activate to sort column ascending">
+                                                {{ 'advertTitle'|get_item_by_lang:lang.id }}
+
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1"
+                                                aria-label="m<sup>2</sup>: activate to sort column ascending">
+                                                m<sup>2</sup>
+
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Oda: activate to sort column ascending">
+                                                {{ 'room'|get_item_by_lang:lang.id }}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="Fiyat: activate to sort column ascending">
+                                                {{ 'price'|get_item_by_lang:lang.id }}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="İlan Tarihi: activate to sort column ascending">
+                                                {{ 'creationDate'|get_item_by_lang:lang.id }}
+                                            </th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                                colspan="1" aria-label="İl/İlçe: activate to sort column ascending">
+                                                {{ 'city'|get_item_by_lang:lang.id }}
+                                                / {{ 'district'|get_item_by_lang:lang.id }}
+
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        {% for advert in adverts %}
+
+
+                                            <tr role="row" class="odd">
+                                                <td class="sorting_1"><img width="60px" height="50px"
+                                                                           src="/media/{{ advert.advert.advertImage.all.0.advertImage }}">
+                                                </td>
+                                                <td>{{ advert.category }}</td>
+                                                <td>{{ advert.desc.advertTitle }} </td>
+                                                <td>{{ advert.advert.fieldBrut|intcomma }} </td>
+                                                <td>{{ advert.advert.room }} </td>
+                                                <td>{{ advert.advert.price|intcomma }} ₺</td>
+                                                <td>{{ advert.advert.creationDate }} </td>
+                                                <td>{{ advert.advert.city.name }} / {{ advert.advert.district }}  </td>
+
+                                            </tr>
+
+
+
+                                        {% endfor %}
+
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+
+
+
+
+{% endblock %}

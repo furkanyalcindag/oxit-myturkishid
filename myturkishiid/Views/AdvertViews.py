@@ -85,6 +85,7 @@ def AdvertDesc_save(request, pk):
 def get_adverts(request):
     adverts = Advert.objects.all()
 
+
     return render(request, 'adverttemp/get-advert.html', {'adverts': adverts})
 
 
@@ -115,4 +116,5 @@ def delete_feature_from_advert(request, feature_id, advert_id):
     advert.features.remove(feature)
     advert.save()
     messages.success(request, 'Özellik ilandan başarıyla çıkarıldı.')
-    return redirect('myturkishid:add-features-to-feature-type', x.pk)
+    return redirect('myturkishid:add-features-to-advert', advert.pk)
+

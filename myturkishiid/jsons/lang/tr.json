@@ -1,0 +1,17 @@
+[
+  {
+    "advertTitle": "İlan Başlığı",
+    "category": "Kategori",
+    "room": "Oda Sayısı",
+    "city": "İl",
+    "district": "İlçe",
+    "price": "Fiyat",
+    "creationDate": "İlan Tarihi",
+    "advertImage": "Fotoğraf",
+    "search": "Ara",
+    "min_price": "Min TL",
+    "max_price": "Max TL",
+    "saleHome": "Satılık Daireler"
+
+  }
+]
