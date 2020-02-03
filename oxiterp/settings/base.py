@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'django_filters',
     'widget_tweaks',
+    'watermarker',
 
     # own
     'myturkishiid',

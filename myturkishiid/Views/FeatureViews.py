@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import render, redirect
 
@@ -13,7 +14,7 @@ from myturkishiid.models import FeatureType, Feature, FeatureDesc, FeatureTypeDe
 
 from myturkishiid.models.Language import Language
 
-
+@login_required
 def feature_save(request):
     form_feature = FeatureForm(request.POST)
     features = Feature.objects.all()
@@ -33,7 +34,7 @@ def feature_save(request):
 
     return render(request, 'featuretemp/feature-save.html', {'form_feature': form_feature, 'features': features})
 
-
+@login_required
 def featureType_save(request):
     form_featureType = FeatureTypeForm(request.POST)
 
@@ -53,13 +54,13 @@ def featureType_save(request):
 
     return render(request, 'featuretemp/featureType-save.html', {'form_featureType': form_featureType})
 
-
+@login_required
 def get_feature(request):
     feature = Feature.objects.all()
 
     return render(request, 'featuretemp/get-feature.html', {'feature': feature})
 
-
+@login_required
 def featureDesc_save(request, pk):
     form_featureDesc = FeatureDescForm(request.POST)
     feature = Feature.objects.get(pk=pk)
@@ -84,7 +85,7 @@ def featureDesc_save(request, pk):
                   {'form_featureDesc': form_featureDesc, 'featureDesc': featureDesc, 'lang': lang, 'feature': feature,
                    })
 
-
+@login_required
 def feature_type(request):
     feature_types = FeatureType.objects.all()
 
@@ -107,7 +108,7 @@ def feature_type(request):
     return render(request, 'featuretemp/feature-types.html',
                   {'types': feature_types, 'form_featureType': form_featureType})
 
-
+@login_required
 def featureTypeDesc_save(request, pk):
     form_featureTypeDesc = FeatureTypeDescForm(request.POST)
     featureType = FeatureType.objects.get(pk=pk)
@@ -132,7 +133,7 @@ def featureTypeDesc_save(request, pk):
     return render(request, 'featuretemp/featureTypeDesc-save.html',
                   {'form': form_featureTypeDesc, 'featureType': featureType, 'lang': lang, 'descs': featureTypeDesc})
 
-
+@login_required
 def featureType_feature_save(request, pk, ):
     featureForm = FeatureSaveForm(request.POST)
     featureType = FeatureType.objects.filter(pk=pk)
@@ -157,21 +158,21 @@ def featureType_feature_save(request, pk, ):
 
     return render(request, 'featuretemp/add-type-to-feature.html', {'featureForm': featureForm, })
 
-
+@login_required
 def get_featureType_advert(request, pk):
     advert = Advert.objects.get(pk=pk)
     featureTypes = FeatureType.objects.all()
 
     return render(request, 'featuretemp/add-type-to-feature.html', {'advert': advert, 'featureTypes': featureTypes})
 
-
+@login_required
 def add_feature_to_advert(request, advert_id, featuretype_id):
     advert = Advert.objects.get(pk=advert_id)
     exist_features = advert.feature.filter(featuretype_id=featuretype_id)
     features = Feature.objects.filter(featureType_id=featuretype_id)
     return render(request, '', {'features': features})
 
-
+@login_required
 def add_feature_to_feature_type(request, featuretype_id):
     exist_features = Feature.objects.filter(featureType_id=featuretype_id)
     features = Feature.objects.filter(~Q(featureType_id=featuretype_id))
@@ -190,7 +191,7 @@ def add_feature_to_feature_type(request, featuretype_id):
     return render(request, 'featuretemp/add-feature-to-feature-type.html',
                   {'features': features, 'exist_features': exist_features,'type':feature_type})
 
-
+@login_required
 def delete_feature_from_feature_type(request,feature_id):
     feature=Feature.objects.get(pk=feature_id)
     x = feature.featureType

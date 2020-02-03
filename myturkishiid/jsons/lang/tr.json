@@ -11,7 +11,18 @@
     "search": "Ara",
     "min_price": "Min TL",
     "max_price": "Max TL",
-    "saleHome": "Satılık Daireler"
+    "saleHome": "Satılık Daireler",
+    "description": "Açıklama",
+    "advert_no":"İlan No",
+    "advert_date": "İlan Tarihi",
+    "building_age": "Bina Yaşı",
+    "warming": "Isıtma",
+    "count_bath": "Banyo Sayısı",
+    "balcony": "Balkon Sayısı",
+    "sceene": "Cephe",
+    "floor": "Bulunduğu Kat",
+    "advert_details": "İlan Detayları",
+    "all_adverts" : "Tüm İlanlar"
 
   }
 ]

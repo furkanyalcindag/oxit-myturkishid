@@ -1,0 +1,434 @@
+{% extends 'base_layout_top_bar.html' %}
+
+{% block content %}
+
+    {% load humanize %}
+
+    {% load widget_tweaks %}
+
+    {% load app_filter_myturkishid %}
+
+    {% load watermark %}
+
+    <style>
+
+        #carousel-custom {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        #carousel-custom .carousel-indicators {
+            margin: 10px 0 0;
+            overflow: auto;
+            position: static;
+            text-align: left;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        #carousel-custom .carousel-indicators li {
+            background-color: transparent;
+            -webkit-border-radius: 0;
+            border-radius: 0;
+            display: inline-block;
+            height: auto;
+            margin: 0 !important;
+            width: auto;
+        }
+
+        #carousel-custom .carousel-indicators li img {
+            display: block;
+            opacity: 0.5;
+        }
+
+        #carousel-custom .carousel-indicators li.active img {
+            opacity: 1;
+        }
+
+        #carousel-custom .carousel-indicators li:hover img {
+            opacity: 0.75;
+        }
+
+        #carousel-custom .carousel-outer {
+            position: relative;
+        }
+
+        .carousel-control.left {
+            background-image: none;
+            width: 54px;
+            height: 54px;
+            top: 50%;
+            left: 20px;
+            margin-top: -27px;
+            line-height: 54px;
+            border: 2px solid #fff;
+            opacity: 1;
+            text-shadow: none;
+            -webkit-transition: all 0.2s ease-in-out 0s;
+            -o-transition: all 0.2s ease-in-out 0s;
+            transition: all 0.2s ease-in-out 0s;
+        }
+
+        .carousel-control.right {
+            background-image: none;
+            width: 54px;
+            height: 54px;
+            top: 50%;
+            right: 20px;
+            margin-top: -27px;
+            line-height: 54px;
+            border: 2px solid #fff;
+            opacity: 1;
+            text-shadow: none;
+            -webkit-transition: all 0.2s ease-in-out 0s;
+            -o-transition: all 0.2s ease-in-out 0s;
+            transition: all 0.2s ease-in-out 0s;
+        }
+
+
+        .watermarked {
+            position: relative;
+        }
+
+        .watermarked:after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            background-image: url("/media/logo.png");
+            background-size: 200px 100px;
+            background-position: 175px 175px;
+            background-repeat: no-repeat;
+            opacity: 0.3;
+            transform: rotate(45deg);
+
+        }
+
+
+    </style>
+
+    <div class="modal modal-danger fade in aktif" tabindex="-1" role="dialog" id="modal-danger"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title">Uyarı</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Ürün fotoğrafını silmek istediğinizden emin misiniz?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf"
+                            data-dismiss="modal">Evet
+                    </button>
+                    <button type="button" class="btn btn-outline" id="btn-aktif">Hayır</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+
+
+
+
+    {% if messages %}
+        {% for message in messages %}
+
+
+            {% if message.tags == 'warning' %}
+
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata !</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+
+            {% endif %}
+
+
+            {% if message.tags == 'success' %}
+
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Başarılı !</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+
+    {% endif %}
+    <section class="content">
+
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+
+
+            <section class="content">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-7">
+
+                            <div id="carousel-custom" class="carousel slide" data-ride="carousel">
+                                <!-- Wrapper for slides -->
+                                <div class="carousel-inner" role="listbox">
+
+                                    {% for image in advert.advert.advertImage.all %}
+
+                                        {% if forloop.counter == 1 %}
+
+
+                                            <div class="item active watermarked">
+                                                <img width="600px" height="400px" src="/media/{{ image.advertImage }}"
+                                                     alt="myturkishid"
+                                                     class="img-responsive">
+                                            </div>
+
+
+                                        {% else %}
+
+
+                                            <div class="item watermarked">
+                                                <img width="600px" height="400px" src="/media/{{ image.advertImage }}"
+                                                     alt="myturkishid"
+                                                     class="img-responsive">
+                                            </div>
+
+
+
+                                        {% endif %}
+
+                                    {% endfor %}
+
+
+                                </div>
+
+                                <!-- Controls -->
+                                <a class="left carousel-control" href="#carousel-custom" role="button"
+                                   data-slide="prev">
+                                    <i style="left: 10px;" class="fa fa-chevron-left"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#carousel-custom" role="button"
+                                   data-slide="next">
+                                    <i style="left: 10px;" class="fa fa-chevron-right"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
+
+
+                                <!-- Indicators -->
+                                <ol class="carousel-indicators visible-sm-block hidden-xs-block visible-md-block visible-lg-block">
+
+                                    {% for image in advert.advert.advertImage.all %}
+
+                                        {% if forloop.counter0 == 0 %}
+
+
+
+
+                                            <li data-target="#carousel-custom" data-slide-to="0" class="active">
+                                                <img src="/media/{{ image.advertImage }}"
+                                                     alt="myturkishid"
+                                                     style="max-height:50px" class="img-responsive">
+                                            </li>
+
+
+                                        {% else %}
+
+
+                                            <li data-target="#carousel-custom" data-slide-to="{{ forloop.counter0 }}">
+                                                <img src="/media/{{ image.advertImage }}"
+                                                     alt="myturkishid"
+                                                     style="max-height:50px" class="img-responsive">
+                                            </li>
+
+
+                                        {% endif %}
+
+                                    {% endfor %}
+
+
+                                </ol>
+                            </div>
+
+
+                            <br>
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <strong>   {{ 'description'|get_item_by_lang:lang.id }}</strong>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body">
+
+
+                                    <p class="text-black">
+                                        {{ advert.desc.advertDescription }}
+                                    </p>
+
+                                    <hr>
+
+
+                                    {% for key, values in advert.features.items %}
+
+                                        <strong> {{ key }}</strong><br><br>
+
+                                        {% for key,values in values.items %}
+
+
+
+                                            <button type="button" class="btn btn-default ">{{ values }}</button>
+                                        {% endfor %}
+
+
+                                        <hr>
+
+
+                                    {% endfor %}
+
+
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+
+
+                            <!-- /.box -->
+                        </div>
+                        <!-- /.col -->
+
+                        <div class="col-md-5">
+
+                            <!-- Profile Image -->
+                            <div class="box box-primary">
+                                <div class="box-body box-profile">
+
+
+                                    <h3 class="profile-username text-center">{{ advert.advert.price|intcomma }}₺</h3>
+
+                                    <p class="text-muted text-center">{{ advert.advert.city }}
+                                        / {{ advert.advert.district }}</p>
+
+                                    <ul class="list-group list-group-unbordered">
+                                        <li class="list-group-item">
+                                            <b>{{ 'advert_no'|get_item_by_lang:lang.id }}:</b> <a
+                                                class="pull-right">{{ advert.advert.pk }}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>{{ 'advert_date'|get_item_by_lang:lang.id }}:</b> <a
+                                                class="pull-right">{{ advert.advert.creationDate }}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>m² (Brüt):</b> <a class="pull-right">240</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>m² (Net):</b> <a class="pull-right">200</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>{{ 'room'|get_item_by_lang:lang.id }}:</b> <a
+                                                class="pull-right">{{ advert.advert.room }}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>{{ 'building_age'|get_item_by_lang:lang.id }}:</b> <a
+                                                class="pull-right">{{ advert.advert.buildingAge }}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>{{ 'floor'|get_item_by_lang:lang.id }}:</b> <a
+                                                class="pull-right">{{ advert.advert.floorNumber }}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>{{ 'warming'|get_item_by_lang:lang.id }}:</b> <a
+                                                class="pull-right">{{ advert.advert.heating }}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>{{ 'count_bath'|get_item_by_lang:lang.id }}:</b> <a
+                                                class="pull-right">{{ advert.advert.bathroomNumber }}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>{{ 'balcony'|get_item_by_lang:lang.id }}:</b> <a
+                                                class="pull-right">{{ advert.advert.balcony }}</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>{{ 'sceene'|get_item_by_lang:lang.id }}:</b> <a
+                                                class="pull-right">{{ advert.advert.front }}</a>
+                                        </li>
+
+                                    </ul>
+                                    <div class="col-md-4">
+                                        <a href="#" class="btn btn-primary btn-block"><b> <i class="fa fa-phone"></i>
+                                            05075446680</b></a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="#" class="btn btn-primary btn-block"><b><i class="fa fa-whatsapp"></i>
+                                            Whatsap</b></a>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <a href="#" class="btn btn-primary btn-block"><b><i class="fa fa-telegram"></i>
+                                            Telegram</b></a>
+                                    </div>
+
+
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                    <!-- /.col -->
+
+                    <!-- /.row -->
+                </div>
+            </section>
+
+
+        </div>
+
+    </section>
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

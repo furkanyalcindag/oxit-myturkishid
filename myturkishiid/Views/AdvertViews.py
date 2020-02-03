@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.shortcuts import redirect, render
 
@@ -9,7 +10,7 @@ from myturkishiid.models import Advert, AdvertDesc, FeatureType, Feature
 from myturkishiid.models.AdvertImage import AdvertImage
 from myturkishiid.models.Language import Language
 
-
+@login_required
 def advert_save(request):
     form_advert = AdvertForm(request.POST or None)
 
@@ -58,6 +59,7 @@ def advert_save(request):
     return render(request, 'adverttemp/advert-save.html', {'form_advert': form_advert})
 
 
+@login_required
 def AdvertDesc_save(request, pk):
     form_advertDesc = AdvertDescForm(request.POST)
     advert = Advert.objects.get(pk=pk)
@@ -82,6 +84,7 @@ def AdvertDesc_save(request, pk):
                   {'form_advertDesc': form_advertDesc, 'advert': advert, 'lang': lang, 'advertDesc': advertDesc})
 
 
+@login_required
 def get_adverts(request):
     adverts = Advert.objects.all()
 
@@ -89,6 +92,7 @@ def get_adverts(request):
     return render(request, 'adverttemp/get-advert.html', {'adverts': adverts})
 
 
+@login_required
 def add_feature_to_advert(request, advert_id):
     advert = Advert.objects.get(pk=advert_id)
 
@@ -110,6 +114,7 @@ def add_feature_to_advert(request, advert_id):
                   {'advert': advert, 'exist_features': exist_features, 'features': features})
 
 
+@login_required
 def delete_feature_from_advert(request, feature_id, advert_id):
     feature = Feature.objects.get(pk=feature_id)
     advert = Advert.objects.get(pk=advert_id)
@@ -117,4 +122,9 @@ def delete_feature_from_advert(request, feature_id, advert_id):
     advert.save()
     messages.success(request, 'Özellik ilandan başarıyla çıkarıldı.')
     return redirect('myturkishid:add-features-to-advert', advert.pk)
+
+
+
+
+
 

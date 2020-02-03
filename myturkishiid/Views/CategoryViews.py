@@ -1,5 +1,6 @@
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from myturkishiid.Forms.CategoryDesc import CategoryDescForm
@@ -9,7 +10,7 @@ from myturkishiid.models import Category
 from myturkishiid.models import CategoryDesc
 from myturkishiid.models.Language import Language
 
-
+@login_required
 def category_save(request):
     form_category = CategoryForm(request.POST or None)
 
@@ -28,7 +29,7 @@ def category_save(request):
 
     return render(request, 'categorytemp/category-save.html', {'form_category': form_category,'category':category})
 
-
+@login_required
 def categoryDesc_save(request, pk):
     form_categoryDesc = CategoryDescForm(request.POST)
     category = Category.objects.get(pk=pk)
@@ -52,7 +53,7 @@ def categoryDesc_save(request, pk):
     return render(request, 'categorytemp/categoryDesc-save.html',
                   {'form_category': form_categoryDesc, 'category': category, 'lang': lang, 'catDescs': categoryDesc})
 
-
+@login_required
 def get_category(request):
     category = Category.objects.all()
 

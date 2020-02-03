@@ -37,11 +37,9 @@ def login(request):
             # correct username and password login the user
             auth.login(request, user)
 
-            if user.groups.all()[0].name == 'Admin':
-                return redirect('inoks:admin-dashboard')
+            if user.is_superuser:
+                return redirect('myturkishid:get-advert')
 
-            elif user.groups.all()[0].name == 'Üye':
-                return redirect('inoks:user-dashboard')
 
             else:
                 return redirect('accounts:logout')
@@ -228,6 +226,7 @@ def permission_post(request):
 
     else:
         return JsonResponse({'status': 'Fail', 'msg': 'Not a valid request'})
+
 
 def change_password(request):
     if request.method == 'POST':

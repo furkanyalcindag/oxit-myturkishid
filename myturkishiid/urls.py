@@ -39,10 +39,9 @@ urlpatterns = [
 
     # home
     url(r'home/$', HomeViews.index, name='home'),
+    url(r'home/advert-detail/(?P<pk>\d+)$', HomeViews.get_advert, name='advert-detail'),
 
-
-
-    #cookie
+    # cookie
     url(r'set-lang/(?P<pk>\d+)$', HomeViews.setcookie, name='set-lang'),
 
 ]

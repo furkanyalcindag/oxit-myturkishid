@@ -11,6 +11,18 @@
     "search": "متوسط",
     "min_price": "حداقل",
     "max_price": "بیشترین",
-    "saleHome": "آپارتمان برای فروش"
+    "saleHome": "آپارتمان برای فروش",
+    "description": "بیانیه",
+    "advert_no": "شماره آگهی",
+    "advert_date": "تاریخ تبلیغات",
+    "building_age": "عصر ساختمان",
+    "warming": "پوشاک",
+    "count_bath": "تعداد حمام ها",
+    "balcony": "شماره بالکن",
+    "sceene": "جلو",
+    "floor": "برابر",
+    "advert_details": "جزئیات آگهی",
+    "all_adverts" : "همه طبقه بندی شده"
+
   }
 ]

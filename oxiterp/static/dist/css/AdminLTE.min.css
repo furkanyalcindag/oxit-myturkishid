@@ -1761,7 +1761,7 @@ a:focus {
 }
 
 .box.box-primary {
-    border-top-color: #249991
+    border-top-color: #000000;
 }
 
 .box.box-info {

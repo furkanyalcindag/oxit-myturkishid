@@ -109,6 +109,7 @@
                                                 / {{ 'district'|get_item_by_lang:lang.id }}
 
                                             </th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -127,6 +128,9 @@
                                                 <td>{{ advert.advert.price|intcomma }} ₺</td>
                                                 <td>{{ advert.advert.creationDate }} </td>
                                                 <td>{{ advert.advert.city.name }} / {{ advert.advert.district }}  </td>
+                                           <td> <a class="button btn btn-info"
+                                               href="{% url 'myturkishid:advert-detail' advert.advert.pk %}">  {{ 'advert_details'|get_item_by_lang:lang.id }}
+                                            </a></td>
 
                                             </tr>
 
