@@ -105,8 +105,8 @@
                                         {{ form_advertDesc.advertTitle }}
                                     </div>
 
-                                      <div class="form-group">
-                                        <label>İlan başlığı</label>
+                                    <div class="form-group">
+                                        <label>Açıklama</label>
                                         {{ form_advertDesc.advertDescription }}
                                     </div>
 
@@ -124,6 +124,8 @@
                                     <tr>
                                         <th>Dil</th>
                                         <th>Çeviri</th>
+                                        <th>Açıklama</th>
+                                        <th>Sil</th>
 
 
                                     </tr>
@@ -139,13 +141,26 @@
                                             <tr>
                                                 <td>{{ advertDesc.lang }}</td>
                                                 <td>{{ advertDesc.advertTitle }}</td>
+                                                <td>{{ advertDesc.advertDescription }}</td>
+                                                <td>
+                                                    <a href="{% url "myturkishid:advertDesc-update" advertDesc.pk %}"
+                                                       type="button" class="btn btn-warning"><i
+                                                            class="fa fa-edit"></i> Güncelle
+                                                    </a>
+                                                    <a href="{% url "myturkishid:delete-advertDesc" advertDesc.advert_id advertDesc.pk %}"
+                                                       type="button" class="btn btn-danger"><i
+                                                            class="fa fa-edit"></i> Sil
+                                                    </a>
+
+
+                                                </td>
 
                                             </tr>
 
 
                                         {% endfor %}
                                     {% endif %}
-                                </tbody>
+                                    </tbody>
 
 
                                 </table>

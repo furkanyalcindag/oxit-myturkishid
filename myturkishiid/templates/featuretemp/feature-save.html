@@ -1,33 +1,7 @@
 {% extends 'base_layout.html' %}
 
+
 {% block content %}
-
-    <div class="modal modal-danger fade in aktif" tabindex="-1" role="dialog" id="modal-danger"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Uyarı</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Ürün fotoğrafını silmek istediğinizden emin misiniz?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline pull-left btn-ok" id="btn-conf"
-                            data-dismiss="modal">Evet
-                    </button>
-                    <button type="button" class="btn btn-outline" id="btn-aktif">Hayır</button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-
-
-
 
 
     {% if messages %}
@@ -98,16 +72,15 @@
                                     {% csrf_token %}
 
                                     <div class="form-group">
-                                        <label>Key</label>
+                                        <label>Özellik</label>
                                         {{ form_feature.key }}
                                     </div>
 
 
                                 </div>
                                 <!-- /.box-body -->
-
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary">EKLE</button>
+                                    <button type="submit" class="btn btn-primary">Ekle</button>
                                 </div>
                             </form>
 
@@ -120,7 +93,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Özellik</th>
-                                        <th>Çeviri</th>
+                                        <th>Çeviri / Sil</th>
 
 
                                     </tr>
@@ -128,7 +101,9 @@
 
                                     <tbody>
 
-                                    {% if features.all %}
+
+
+                                     {% if features.all %}
                                         {% for feature in features %}
 
                                             <tr>
@@ -137,7 +112,10 @@
                                                 <td><a
                                                         class="button btn btn-info"
                                                         href="{% url 'myturkishid:featureDesc-save' feature.pk %}">Dil
-                                                    Çevirileri</a></td>
+                                                    Çevirileri</a>
+                                                <a
+                                                        class="button btn btn-danger"
+                                                        href="{% url 'myturkishid:feature-delete' feature.pk %}">Sil</a></td>
 
                                             </tr>
 
@@ -176,5 +154,8 @@
 
 
 {% endblock %}
+
+
+
 
 

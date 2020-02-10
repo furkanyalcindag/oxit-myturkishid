@@ -1,14 +1,18 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.forms import modelformset_factory
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
+from myturkishiid.Forms import ImageForm
 from myturkishiid.Forms.AdvertDescForm import AdvertDescForm
 from myturkishiid.Forms.AdvertForm import AdvertForm
 from myturkishiid.Forms.CategoryForm import CategoryForm
 from myturkishiid.models import Advert, AdvertDesc, FeatureType, Feature
 from myturkishiid.models.AdvertImage import AdvertImage
 from myturkishiid.models.Language import Language
+
 
 @login_required
 def advert_save(request):
@@ -72,7 +76,7 @@ def AdvertDesc_save(request, pk):
             form = form_advertDesc.save(commit=False)
             form.advert = advert
             form.save()
-            messages.success(request, 'Kategori Kaydedildi.')
+            messages.success(request, 'Başarıyla Kaydedildi.')
 
             return redirect('myturkishid:advertDesc-save', pk)
 
@@ -85,9 +89,40 @@ def AdvertDesc_save(request, pk):
 
 
 @login_required
+def delete_advertDesc(request, advert_id, advertDesc_id):
+     # advert = Advert.objects.get(pk=advert_id)
+    advertDesc = AdvertDesc.objects.get(pk=advertDesc_id)
+    advertDesc.delete()
+    advertDesc.advert.save()
+    messages.success(request, 'Çeviri Başarıyla Silindi')
+    return redirect('myturkishid:advertDesc-save', advert_id)
+
+@login_required
+def advertDesc_update(request, pk):
+    advertdesc = AdvertDesc.objects.get(pk=pk)
+    advertDesc_form = AdvertDescForm(request.POST or None, instance=advertdesc)
+
+    if request.method == 'POST':
+        if advertDesc_form.is_valid():
+
+            advertDesc_form.save()
+
+            messages.success(request, 'Başarıyla Güncellendi')
+
+            return redirect('myturkishid:advertDesc-save', advertdesc.advert.pk)
+
+        else:
+
+            messages.warning(request, 'Alanları Kontrol Ediniz')
+
+    return render(request, 'adverttemp/advertDesc-update.html',
+                  {'advertDesc': advertDesc_form})
+
+
+
+@login_required
 def get_adverts(request):
     adverts = Advert.objects.all()
-
 
     return render(request, 'adverttemp/get-advert.html', {'adverts': adverts})
 
@@ -124,7 +159,58 @@ def delete_feature_from_advert(request, feature_id, advert_id):
     return redirect('myturkishid:add-features-to-advert', advert.pk)
 
 
+@login_required
+def advert_update(request, pk):
+    advert = Advert.objects.get(id=pk)
+    advert_form = AdvertForm(request.POST or None, instance=advert)
+    durum = 'GUNCELLE'
+    images = advert.advertImage.all()
+
+    if request.method == 'POST':
+        if advert_form.is_valid():
+
+            advert.category.clear()
+            for category in advert_form.cleaned_data['category']:
+                advert.category.add(category)
+
+            advert.save()
+
+            for f in request.FILES.getlist('input2[]'):
+                advertImages = AdvertImage(advertImage=f)
+                advertImages.save()
+                advert.advertImage.add(advertImages)
+
+            advert.save()
+
+            messages.success(request, 'Başarıyla Güncellendi')
+
+            return redirect('myturkishid:advert-detail', advert.pk)
+
+        else:
+
+            messages.warning(request, 'Alanları Kontrol Ediniz')
+
+    return render(request, 'adverttemp/advert-update.html',
+                  {'form_advert': advert_form, 'images': images, 'advert': advert.pk, 'durum': durum,
+                   'ilce': advert.district})
 
 
+@login_required
+def advert_image_delete(request):
+    if request.POST:
+        try:
+            image_id = request.POST.get('image_id')
+            advert_id = request.POST.get('advert_id')
 
+            advert = Advert.objects.get(pk=advert_id)
+            image = AdvertImage.objects.get(pk=image_id)
 
+            advert.advertImage.remove(image)
+            advert.save()
+            image.delete()
+
+            return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
+
+        except Exception as e:
+
+            return JsonResponse({'status': 'Fail', 'msg': e})

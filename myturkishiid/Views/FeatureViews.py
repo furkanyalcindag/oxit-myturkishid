@@ -14,6 +14,7 @@ from myturkishiid.models import FeatureType, Feature, FeatureDesc, FeatureTypeDe
 
 from myturkishiid.models.Language import Language
 
+
 @login_required
 def feature_save(request):
     form_feature = FeatureForm(request.POST)
@@ -33,6 +34,7 @@ def feature_save(request):
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
     return render(request, 'featuretemp/feature-save.html', {'form_feature': form_feature, 'features': features})
+
 
 @login_required
 def featureType_save(request):
@@ -54,11 +56,13 @@ def featureType_save(request):
 
     return render(request, 'featuretemp/featureType-save.html', {'form_featureType': form_featureType})
 
+
 @login_required
 def get_feature(request):
     feature = Feature.objects.all()
 
     return render(request, 'featuretemp/get-feature.html', {'feature': feature})
+
 
 @login_required
 def featureDesc_save(request, pk):
@@ -85,6 +89,7 @@ def featureDesc_save(request, pk):
                   {'form_featureDesc': form_featureDesc, 'featureDesc': featureDesc, 'lang': lang, 'feature': feature,
                    })
 
+
 @login_required
 def feature_type(request):
     feature_types = FeatureType.objects.all()
@@ -107,6 +112,7 @@ def feature_type(request):
 
     return render(request, 'featuretemp/feature-types.html',
                   {'types': feature_types, 'form_featureType': form_featureType})
+
 
 @login_required
 def featureTypeDesc_save(request, pk):
@@ -133,6 +139,7 @@ def featureTypeDesc_save(request, pk):
     return render(request, 'featuretemp/featureTypeDesc-save.html',
                   {'form': form_featureTypeDesc, 'featureType': featureType, 'lang': lang, 'descs': featureTypeDesc})
 
+
 @login_required
 def featureType_feature_save(request, pk, ):
     featureForm = FeatureSaveForm(request.POST)
@@ -158,6 +165,7 @@ def featureType_feature_save(request, pk, ):
 
     return render(request, 'featuretemp/add-type-to-feature.html', {'featureForm': featureForm, })
 
+
 @login_required
 def get_featureType_advert(request, pk):
     advert = Advert.objects.get(pk=pk)
@@ -165,12 +173,14 @@ def get_featureType_advert(request, pk):
 
     return render(request, 'featuretemp/add-type-to-feature.html', {'advert': advert, 'featureTypes': featureTypes})
 
+
 @login_required
 def add_feature_to_advert(request, advert_id, featuretype_id):
     advert = Advert.objects.get(pk=advert_id)
     exist_features = advert.feature.filter(featuretype_id=featuretype_id)
     features = Feature.objects.filter(featureType_id=featuretype_id)
     return render(request, '', {'features': features})
+
 
 @login_required
 def add_feature_to_feature_type(request, featuretype_id):
@@ -189,13 +199,66 @@ def add_feature_to_feature_type(request, featuretype_id):
         return redirect('myturkishid:add-features-to-feature-type', featuretype_id)
 
     return render(request, 'featuretemp/add-feature-to-feature-type.html',
-                  {'features': features, 'exist_features': exist_features,'type':feature_type})
+                  {'features': features, 'exist_features': exist_features, 'type': feature_type})
+
 
 @login_required
-def delete_feature_from_feature_type(request,feature_id):
-    feature=Feature.objects.get(pk=feature_id)
+def delete_feature_from_feature_type(request, feature_id):
+    feature = Feature.objects.get(pk=feature_id)
     x = feature.featureType
-    feature.featureType=None
+    feature.featureType = None
     feature.save()
     messages.success(request, 'özellikler çıkarıldı.')
     return redirect('myturkishid:add-features-to-feature-type', x.pk)
+
+
+@login_required
+def featureType_desc_update(request, pk):
+    featureType_desc = FeatureTypeDesc.objects.get(pk=pk)
+    featureType_desc_form = FeatureTypeDescForm(request.POST or None, instance=featureType_desc)
+
+    if request.method == 'POST':
+        if featureType_desc_form.is_valid():
+
+            featureType_desc_form.save()
+
+            messages.success(request, 'Başarıyla Güncellendi')
+
+            return redirect('myturkishid:featureTypeDesc-save', featureType_desc.featureType.pk)
+
+        else:
+
+            messages.warning(request, 'Alanları Kontrol Ediniz')
+
+    return render(request, 'featuretemp/featureTypeDesc-save.html',
+                  {'form': featureType_desc_form})
+
+
+
+@login_required
+def feature_desc_update(request, pk):
+    feature_desc = FeatureDesc.objects.get(pk=pk)
+    feature_desc_form = FeatureDescForm(request.POST or None, instance=feature_desc)
+
+    if request.method == 'POST':
+        if feature_desc_form.is_valid():
+
+            feature_desc_form.save()
+
+            messages.success(request, 'Başarıyla Güncellendi')
+
+            return redirect('myturkishid:featureDesc-save', feature_desc.feature.pk)
+
+        else:
+
+            messages.warning(request, 'Alanları Kontrol Ediniz')
+
+    return render(request, 'featuretemp/featureDesc-save.html',
+                  {'form_featureDesc': feature_desc_form})
+
+def feature_delete(request,feature_id):
+        feature = Feature.objects.get(pk=feature_id)
+        feature.delete()
+        messages.success(request, 'Özellik Silindi')
+        return redirect('myturkishid:feature-save')
+

@@ -147,6 +147,7 @@
                                    type="button" class="btn btn-success"><i
                                         class="fa fa-edit"></i> İlan Ekle
                                 </a>
+
                             </div>
                         </div>
 
@@ -159,7 +160,8 @@
                                 <th>İlan Adresi</th>
                                 <th>Fiyatı</th>
                                 <th>İlan Oluşturma Tarihi</th>
-                                <th>Ekle/Çeviri/Silme</th>
+                                <th>İlan Güncelleme Tarihi</th>
+                                <th>Ekle/Çeviri/Detay/Güncelleme</th>
 
 
                             </tr>
@@ -178,10 +180,11 @@
                                                  width="60px"
                                                  height="50px"/>
                                         </td>
-                                        <td>{{ advert.pk}}</td>
+                                        <td>{{ advert.pk }}</td>
                                         <td>{{ advert.address }}</td>
                                         <td>{{ advert.price|intcomma }}₺</td>
                                         <td>{{ advert.creationDate }}</td>
+                                        <td>{{ advert.modificationDate }}</td>
 
 
                                         <td>
@@ -195,6 +198,10 @@
                                             </a>
                                             <a class="button btn btn-info"
                                                href="{% url 'myturkishid:advert-detail' advert.pk %}">İlan Detayları
+                                            </a>
+                                            <a href="{% url "myturkishid:advert-update" advert.pk %}"
+                                               type="button" class="btn btn-warning"><i
+                                                    class="fa fa-edit"></i> Güncelle
                                             </a>
 
 

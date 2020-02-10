@@ -89,7 +89,7 @@
 
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Özellikler</h3>
+                            <h3 class="box-title">Kategoriler</h3>
                         </div>
                         <div class="container">
 
@@ -124,7 +124,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Kategori</th>
-                                        <th>Çeviri</th>
+                                        <th>Çeviri/Sil</th>
 
 
                                     </tr>
@@ -138,10 +138,15 @@
                                             <tr>
                                                 <td>{{ forloop.counter }}</td>
                                                 <td>{{ category.key }} </td>
-                                                <td><a
+                                                <td>
+                                                    <a
                                                         class="button btn btn-info"
                                                         href="{% url 'myturkishid:categoryDesc-save' category.pk %}">Dil
-                                                    Çevirileri</a></td>
+                                                    Çevirileri</a>
+
+                                                 <a
+                                                        class="button btn btn-danger"
+                                                        href="{% url 'myturkishid:category-delete' category.pk %}">Sil</a></td>
 
                                             </tr>
 

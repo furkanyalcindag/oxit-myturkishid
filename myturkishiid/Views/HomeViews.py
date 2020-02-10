@@ -16,7 +16,7 @@ def index(request):
     filter = AdvertFilter(request.GET, queryset=adverts)
 
     if not ('lang' in request.COOKIES):
-        lang = Language.objects.get(code='tr')
+        lang = Language.objects.get(code='fa')
     else:
         lang = Language.objects.get(id=request.COOKIES['lang'])
 
@@ -32,17 +32,20 @@ def index(request):
 
 def setcookie(request, pk):
     response = redirect('myturkishid:home')
-    response.set_cookie(key='lang', value=pk, expires=60*60*60*60*60)
+    response.set_cookie(key='lang', value=pk, expires=60 * 60 * 60 * 60 * 60)
 
     return response
 
 
 def get_advert(request, pk):
     if not ('lang' in request.COOKIES):
-        lang = Language.objects.get(code='tr')
+        lang = Language.objects.get(code='fa')
     else:
         lang = Language.objects.get(id=request.COOKIES['lang'])
+
     advert = Advert.objects.get(pk=pk)
+    advert.viewCount = advert.viewCount + 1
+    advert.save()
     category = advert.category.all()[0]
     category = category.categorydesc_set.filter(lang=lang)[0]
 
@@ -51,6 +54,7 @@ def get_advert(request, pk):
     last_dict = dict()
 
     for type in FeatureType.objects.all():
+
         feature_dict = dict()
         feature_dict.clear()
         for feature in advert.features.all():
@@ -63,4 +67,4 @@ def get_advert(request, pk):
 
     advertObject = AdvertObjectHome(advert=advert, desc=advertDesc, category=category, features=last_dict)
 
-    return render(request, 'adverttemp/advert-detail.html', {'advert': advertObject})
+    return render(request, 'adverttemp/advert-detail.html', {'advert': advertObject, 'lang': lang})

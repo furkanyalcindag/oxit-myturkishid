@@ -21,7 +21,7 @@ class AdvertDescForm(ModelForm):
                        'required': 'required', 'style': 'width: 100%; '
                        }),
 
-            'advertDescription': forms.Textarea(attrs={'class': 'form-control ', 'placeholder': 'İlan başlığı',
+            'advertDescription': forms.Textarea(attrs={'class': 'form-control ', 'placeholder': 'Açıklama',
                                                   'style': 'width: 100%; '}),
 
         }

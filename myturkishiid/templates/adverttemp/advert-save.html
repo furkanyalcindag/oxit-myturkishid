@@ -3200,6 +3200,29 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">İlan Ekle</h3>
                         </div>
+                        {% if durum == "GUNCELLE" %}
+                            <div class="timeline-item">
+
+
+                                </h3>
+
+                                <div class="timeline-body">
+                                    {% if advertImages.all %}
+                                        <div class="row">
+                                            {% for image in advertImages.all %}
+
+                                                <div class="col-md-3" style="border: #00000052;border-style: double;">
+                                                    <img src="/media/{{ image }}" width="150" height="150"
+                                                         alt="..." class="margin">
+
+                                                </div>
+                                            {% endfor %}</div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        {% endif %}
+
                         <div class="container">
                             <form method="post" enctype="multipart/form-data" role="form">
                                 {% csrf_token %}
@@ -3249,16 +3272,12 @@
                                         <label> Kategori</label>
                                         {{ form_advert.category }}
                                     </div>
-                                    <div class="form-group">
-                                        <label> İlan Numarası</label>
-                                        {{ form_advert.advertNo}}
-                                    </div>
 
                                     <div class="form-group">
                                         <label> Bina Yaşı</label>
                                         {{ form_advert.buildingAge }}
                                     </div>
-                                 <div class="form-group">
+                                    <div class="form-group">
                                         <label> Bulunduğu Kat</label>
                                         {{ form_advert.floorNumber }}
                                     </div>
