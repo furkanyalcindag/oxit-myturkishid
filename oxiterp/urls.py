@@ -31,10 +31,10 @@ urlpatterns = [
     # url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
     # path('', include('accounts.urls')),
     # path('accounts/', include('django.contrib.auth.urls'))
-    path('', include('accounts.urls')),
+    path('manager/', include('accounts.urls')),
     # path('egitim/', include('education.urls')),
     path('baven/', include('inoks.urls')),
-    path('myturkish/', include('myturkishiid.urls')),
+    path('', include('myturkishiid.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -1,5 +1,6 @@
 # ADVERT
 from django.conf.urls import url
+from django.urls import path
 
 from myturkishiid.Views import AdvertViews, FeatureViews, CategoryViews, CityViews, HomeViews
 
@@ -50,7 +51,8 @@ urlpatterns = [
     url(r'ilce-getir/$', CityViews.get_districts, name="advert-ilce-getir"),
 
     # home
-    url(r'home/$', HomeViews.index, name='home'),
+   # url(r'/', HomeViews.index, name='home'),
+    path('', HomeViews.index, name='home'),
     url(r'home/advert-detail/(?P<pk>\d+)$', HomeViews.get_advert, name='advert-detail'),
 
     # cookie

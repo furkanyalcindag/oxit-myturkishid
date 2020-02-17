@@ -26,7 +26,7 @@ def index(request):
 
 def login(request):
     if request.user.is_authenticated is True:
-        return redirect('inoks:admin-dashboard')
+        return redirect('myturkishid:get-advert')
 
     if request.method == 'POST':
         username = request.POST.get('username')
