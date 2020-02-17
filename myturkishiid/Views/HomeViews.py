@@ -19,13 +19,22 @@ def index(request):
         lang = Language.objects.get(code='fa')
     else:
         lang = Language.objects.get(id=request.COOKIES['lang'])
+    if not filter.qs is None:
 
-    for advert in filter.qs:
-        advertDesc = advert.advertdesc_set.filter(lang=lang)[0]
-        category = advert.category.all()[0]
-        category = category.categorydesc_set.filter(lang=lang)[0]
-        advertObject = AdvertObject(advert=advert, desc=advertDesc, category=category)
-        advertsObjects.append(advertObject)
+        for advert in filter.qs:
+            advertDesc = advert.advertdesc_set.filter(lang=lang)[0]
+            category = advert.category.all()[0]
+            category = category.categorydesc_set.filter(lang=lang)[0]
+            advertObject = AdvertObject(advert=advert, desc=advertDesc, category=category)
+            advertsObjects.append(advertObject)
+    else:
+        for advert in adverts:
+            advertDesc = advert.advertdesc_set.filter(lang=lang)[0]
+            category = advert.category.all()[0]
+            category = category.categorydesc_set.filter(lang=lang)[0]
+            advertObject = AdvertObject(advert=advert, desc=advertDesc, category=category)
+            advertsObjects.append(advertObject)
+
 
     return render(request, 'hometemp/home-page.html', {'adverts': advertsObjects, 'lang': lang, 'filter': filter})
 
