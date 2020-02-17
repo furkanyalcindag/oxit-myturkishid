@@ -122,6 +122,7 @@
                                         <th>#</th>
                                         <th>Dil</th>
                                         <th>Çeviri</th>
+                                        <th>Düzenle</th>
 
 
                                     </tr>
@@ -134,9 +135,14 @@
                                         {% for catDesc in catDescs %}
 
 
-                                            <tr><td>{{ forloop.counter }}<</td>
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
                                                 <td>{{ catDesc.lang }}</td>
                                                 <td>{{ catDesc.name }}</td>
+                                                <td><a href="{% url "myturkishid:categoryDesc-update" catDesc.pk %}"
+                                                       type="button" class="btn btn-warning"><i
+                                                        class="fa fa-edit"></i> Güncelle
+                                                </a></td>
 
                                             </tr>
 

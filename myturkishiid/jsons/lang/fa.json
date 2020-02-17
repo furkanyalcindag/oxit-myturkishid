@@ -22,7 +22,30 @@
     "sceene": "جلو",
     "floor": "برابر",
     "advert_details": "جزئیات آگهی",
-    "all_adverts" : "همه طبقه بندی شده"
+    "all_adverts": "همه طبقه بندی شده",
+    "view": "نمایش ها",
+    "KUZEY": "شمال",
+    "GÜNEY": "جنوبی",
+    "DOĞU": "شرق",
+    "BATI": "غرب",
+    "KUZEYBATI": "شمال غرب",
+    "KUZEYDOĞU": "شمال شرق",
+    "GÜNEYBATI": "جنوب غربی",
+    "GÜNEYDOĞU": "جنوب شرقی",
+    "YOK": "همیشه",
+    "SOBA": "اجاق گاز را",
+    "DOĞALGAZ SOBASI":"اجاق گاز طبیعی",
+    "KAT KALORİFERİ": "حرارت مرکزی",
+    "MERKEZİ": "حرارت مرکزی",
+    "MERKEZİ(PAY ÖLÇER)":"کنتور سهم مرکزی"
+
+
+
+
+
+
+
+
 
   }
 ]

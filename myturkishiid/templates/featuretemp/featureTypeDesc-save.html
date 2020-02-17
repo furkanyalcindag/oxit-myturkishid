@@ -124,6 +124,7 @@
                                         <th>#</th>
                                         <th>Dil</th>
                                         <th>Çeviri</th>
+                                        <th>Düzenle</th>
 
 
                                     </tr>
@@ -139,6 +140,10 @@
                                                 <td>{{ forloop.counter }}</td>
                                                 <td>{{ desc.lang }}</td>
                                                 <td>{{ desc.name }}</td>
+                                                <td><a href="{% url "myturkishid:feature-type-desc-update" desc.pk %}"
+                                                       type="button" class="btn btn-warning"><i
+                                                        class="fa fa-edit"></i> Güncelle
+                                                </a></td>
 
                                             </tr>
 

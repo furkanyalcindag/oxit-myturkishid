@@ -13,7 +13,7 @@
     "max_price": "Max TL",
     "saleHome": "Satılık Daireler",
     "description": "Açıklama",
-    "advert_no":"İlan No",
+    "advert_no": "İlan No",
     "advert_date": "İlan Tarihi",
     "building_age": "Bina Yaşı",
     "warming": "Isıtma",
@@ -22,7 +22,23 @@
     "sceene": "Cephe",
     "floor": "Bulunduğu Kat",
     "advert_details": "İlan Detayları",
-    "all_adverts" : "Tüm İlanlar"
+    "all_adverts": "Tüm İlanlar",
+    "view": "Görüntülenme Sayısı",
+    "KUZEY": "KUZEY",
+    "GÜNEY": "GÜNEY",
+    "DOĞU": "DOĞU",
+    "BATI": "BATI",
+    "KUZEYBATI": "KUZEYBATI",
+    "KUZEYDOĞU": "KUZEYDOĞU",
+    "GÜNEYBATI": "GÜNEYBATI",
+    "GÜNEYDOĞU": "GÜNEYDOĞU",
+    "YOK": "YOK",
+    "SOBA": "SOBA",
+    "DOĞALGAZ SOBASI": "DOĞALGAZ SOBASI",
+    "KAT KALORİFERİ": "KAT KALORİFERİ",
+    "MERKEZİ": "MERKEZİ",
+    "MERKEZİ(PAY ÖLÇER)": "MERKEZİ(PAY ÖLÇER)"
+
 
   }
 ]

@@ -17,7 +17,6 @@ class Advert(models.Model):
     city = models.ForeignKey('City', on_delete=models.CASCADE, null=False, blank=False, verbose_name='İl')
     district = models.TextField(blank=False, null=False, verbose_name='İlçe')
 
-
     category = models.ManyToManyField(Category, verbose_name='İlan Kategorisi', blank=True)
     floorNumber = models.CharField(max_length=256, null=True, blank=True, verbose_name='kat numarası',
                                    choices=FLOOR_CHOICES,
@@ -45,7 +44,8 @@ class Advert(models.Model):
     fieldNet = models.FloatField(null=True, blank=True, verbose_name='Alan Net')
     fieldBrut = models.FloatField(null=True, blank=True, verbose_name='Alan Brüt')
     buildingAge = models.CharField(max_length=256, null=True, blank=True, verbose_name='Bina Yaşı')
-    features = models.ManyToManyField(Feature,verbose_name='Özellikler')
+    features = models.ManyToManyField(Feature, verbose_name='Özellikler')
+    viewCount = models.IntegerField()
 
     """def __str__(self):complex
         return '%d ' % self.id

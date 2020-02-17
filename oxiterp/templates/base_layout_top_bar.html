@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>My Turkish ID </title>
-    <meta name="description" content="BAVEN"/>
+    <meta name="description" content="MY TURKISH ID"/>
 
-    <meta name="keywords" content="BAVEN"/>
+    <meta name="keywords"
+          content="T. C. تابعیت ، به دست آوردن تابعیت ترکیه با تولد ، اخذ تابعیت ترکیه ، از دست دادن تابعیت ترکیه ، چند شهروندی ، فرم های شهروندی ، سند معادل نام ، برنامه کارت آبی ، تضاد شهروندی ، اجازه کار ، انواع برنامه ، انواع مجوز ، معیارهای ارزیابی مجوز غیر قابل اعمال توسط خارجی، خارجی مشاغل ممنوعه، اقامت اطلاعات عمومی، نوع اجازه اقامت، اسناد اقامت مورد نیاز برای ارتباطات، درباره ما، اطلاعیه ها، ترکیه"/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -75,18 +76,18 @@
 <!-- Site wrapper -->
 <div class="wrapper">
     {% load app_filter %}
-  {% load app_filter_myturkishid %}
+    {% load app_filter_myturkishid %}
 
     <header class="main-header">
         <nav class="navbar navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
 
-                    <a href="{% url 'inoks:user-dashboard' %}" class="logo">
+                    <a href="{% url 'myturkishid:home' %}" class="logo">
                         <!-- mini logo for sidebar mini 50x50 pixels -->
 
                         <!-- logo for regular state and mobile devices -->
-                        <span class="logo-lg"><img width="125px" src="/media/logo.png" alt="User Image"
+                        <span class="logo-lg"><img width="125px" alt="User Image"
                                                    style="margin-bottom: 5px;"> </span>
                     </a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -96,13 +97,15 @@
                 </div>
 
 
-<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="{% url 'myturkishid:home' %}">  {{ 'all_adverts'|get_item_by_lang:lang.id }} <span class="sr-only">(current)</span></a></li>
+                <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a
+                                href="{% url 'myturkishid:home' %}">  {{ 'all_adverts'|get_item_by_lang:lang.id }} <span
+                                class="sr-only">(current)</span></a></li>
 
-          </ul>
+                    </ul>
 
-        </div>
+                </div>
 
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -167,17 +170,12 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Banka Bilgileri</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-
-                        <p><strong>Iban:</strong> TR33 0011 1000 0000 0090 3944 08</p>
-                        <p><strong>Ünvan:</strong> Baven temizlik sistemleri</p>
-                        <p><strong>Banka:</strong> QNB finansbank</p>
-
+                   <div class="modal-body">
 
                     </div>
                     <div class="modal-footer">
@@ -256,15 +254,109 @@
 
 <script>
     $(function () {
-        $('#example1').DataTable()
-        $('#example2').DataTable({
-            'paging': true,
-            'lengthChange': false,
-            'searching': false,
-            'ordering': true,
-            'info': true,
-            'autoWidth': false
-        })
+        //$('#example1').DataTable()
+        debugger;
+        if (document.cookie.split(";")[1] === null) {
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false,
+                "language": {
+                    "lengthMenu": "نمایش _MENU_ رکورد در هر صفحه",
+                    "zeroRecords": "هیچ چیز یافت نشد - ببخشید",
+                    "info": "نمایش _PAGES_ صفحه _PAGE_  ",
+                    "infoEmpty": "هیچ سابقه ای در دسترس نیست",
+                    "infoFiltered": "( از _MAX_ رکورد کل فیلتر شده است )",
+                    "emptyTable": "داده ای در جدول وجود ندارد",
+
+                    "paginate": {
+                        "first": "اولین",
+                        "last": "آخر",
+                        "next": "بعد",
+                        "previous": "قبلی"
+                    },
+                }
+            })
+        }
+        else if (document.cookie.match('(^|;) ?' + 'lang' + '=([^;]*)(;|$)')[2]==='2'){
+
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false,
+                "language": {
+                    "lengthMenu": "نمایش _MENU_ رکورد در هر صفحه",
+                    "zeroRecords": "هیچ چیز یافت نشد - ببخشید",
+                    "info": "نمایش _PAGES_ صفحه _PAGE_  ",
+                    "infoEmpty": "هیچ سابقه ای در دسترس نیست",
+                    "infoFiltered": "( از _MAX_ رکورد کل فیلتر شده است )",
+                    "emptyTable": "داده ای در جدول وجود ندارد",
+
+                    "paginate": {
+                        "first": "اولین",
+                        "last": "آخر",
+                        "next": "بعد",
+                        "previous": "قبلی"
+                    },
+                }
+            })
+
+
+
+
+
+        }
+
+        else if(document.cookie ===''){
+
+
+                  $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false,
+                "language": {
+                    "lengthMenu": "نمایش _MENU_ رکورد در هر صفحه",
+                    "zeroRecords": "هیچ چیز یافت نشد - ببخشید",
+                    "info": "نمایش _PAGES_ صفحه _PAGE_  ",
+                    "infoEmpty": "هیچ سابقه ای در دسترس نیست",
+                    "infoFiltered": "( از _MAX_ رکورد کل فیلتر شده است )",
+                    "emptyTable": "داده ای در جدول وجود ندارد",
+
+                    "paginate": {
+                        "first": "اولین",
+                        "last": "آخر",
+                        "next": "بعد",
+                        "previous": "قبلی"
+                    },
+                }
+            })
+
+
+
+        }
+
+
+        else {
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': false,
+                'searching': false,
+                'ordering': true,
+                'info': true,
+                'autoWidth': false,
+
+            })
+        }
+
     })
 </script>
 

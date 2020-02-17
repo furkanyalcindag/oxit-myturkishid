@@ -41,12 +41,17 @@ ROOM_CHOICES = (
 )
 
 # KAT NUMARASI
-FLOOR = 'ZEMİN'
-FLOOR1 = '1'
-FLOOR2 = '2'
-FLOOR3 = '3'
-FLOOR4 = '4'
-FLOOR5 = '5'
+FLOOR1 = '-1'
+FLOOR2 = '-2'
+FLOOR3 = '-3'
+FLOOR4 = '-4'
+FLOOR5 = '-5'
+FLOOR = '0'
+FLOOR19 = '1'
+FLOOR20 = '2'
+FLOOR21 = '3'
+FLOOR22 = '4'
+FLOOR23 = '5'
 FLOOR6 = '6'
 FLOOR7 = '7'
 FLOOR8 = '8'
@@ -59,10 +64,15 @@ FLOOR14 = '14'
 FLOOR15 = '15'
 FLOOR16 = '16'
 FLOOR17 = '17'
-FLOOR18 = '17 ÜZERİ'
+FLOOR18 = '17+'
 
 FLOOR_CHOICES = (
-    (FLOOR, 'ZEMİN'),
+    (FLOOR18, '-1'),
+    (FLOOR19, '-2'),
+    (FLOOR20, '-3'),
+    (FLOOR21, '-4'),
+    (FLOOR22, '-5'),
+    (FLOOR, '0'),
     (FLOOR1, '1'),
     (FLOOR2, '2'),
     (FLOOR3, '3'),
@@ -79,11 +89,12 @@ FLOOR_CHOICES = (
     (FLOOR14, '14'),
     (FLOOR15, '15'),
     (FLOOR16, '16'),
-    (FLOOR17, '17'),
-    (FLOOR18, '17 ÜZERİ'),
+    (FLOOR17, '17+'),
+
 )
 # BANYO SAYISI
-BATHROOM = 'YOK'
+
+BATHROOM = '-'
 BATHROOM2 = '1'
 BATHROOM3 = '2'
 BATHROOM4 = '3'
@@ -91,7 +102,7 @@ BATHROOM5 = '4'
 BATHROOM6 = '5'
 
 BATHROOM_CHOICES = (
-    (BATHROOM, 'YOK'),
+    (BATHROOM, '-'),
     (BATHROOM2, '1'),
     (BATHROOM3, '2'),
     (BATHROOM4, '3'),
@@ -101,14 +112,14 @@ BATHROOM_CHOICES = (
 # BALKON SAYISI
 BALKONY = '1'
 BALKONY1 = '2'
-BALKONY2 = '2 ÜZERİ'
-BALKONY3 = 'YOK'
+BALKONY2 = '3+'
+BALKONY3 = '-'
 
 BALKONY_CHOICES = (
-    (BALKONY, 'YOK'),
+    (BALKONY, '-'),
     (BALKONY1, '1'),
-    (BALKONY2, '2 Üzeri'),
-    (BALKONY3, '2 Üzeri'),
+    (BALKONY2, '2'),
+    (BALKONY3, '3+'),
 )
 
 # ISITMA TÜRÜ

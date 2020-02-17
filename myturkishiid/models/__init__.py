@@ -8,4 +8,8 @@ from .FeatureTypeDesc import FeatureTypeDesc
 from .FeatureDesc import FeatureDesc
 from .Currency import Currency
 from .Menu import Menu
+from .City import City
+from .AdvertImage import AdvertImage
+from .Language import Language
+from .AdvertObject import AdvertObject
 

@@ -20,7 +20,6 @@ class AdvertForm(ModelForm):
             'room',
             'price',
             'buildingAge',
-
             'bathroomNumber',
             'floorNumber',
             'category',
@@ -38,7 +37,7 @@ class AdvertForm(ModelForm):
             'city': forms.Select(attrs={'class': 'form-control select2 select2-hidden-accessible',
                                         'style': 'width: 100%; ', 'required': 'required', "onChange": 'ilceGetir()'}),
 
-            'district': forms.Select(
+            'district': forms.Select(choices=CHOICES_WITH_BLANK,
                 attrs={'class': 'form-control select2 select2-hidden-accessible',
                        'style': 'width: 100%; ', 'id': 'ilce_id'}
             ),
