@@ -45,7 +45,7 @@ class Advert(models.Model):
     fieldBrut = models.FloatField(null=True, blank=True, verbose_name='Alan Brüt')
     buildingAge = models.CharField(max_length=256, null=True, blank=True, verbose_name='Bina Yaşı')
     features = models.ManyToManyField(Feature, verbose_name='Özellikler')
-    viewCount = models.IntegerField()
+    viewCount = models.IntegerField(null=True, default=0)
 
     """def __str__(self):complex
         return '%d ' % self.id
