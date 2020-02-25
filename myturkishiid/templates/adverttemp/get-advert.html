@@ -189,20 +189,16 @@
 
                                         <td>
 
-                                            <a class="button btn btn-info"
-                                               href="{% url 'myturkishid:add-features-to-advert' advert.pk %}">Özellik
-                                                ekle</a>
+                                            <a title="Özellik Ekle" class="button btn" style="background-color: #000000"
+                                               href="{% url 'myturkishid:add-features-to-advert' advert.pk %}"><i style="color: white;" class="fa fa-list fa-2x"></i></a>
 
-                                            <a class="button btn btn-info"
-                                               href="{% url 'myturkishid:advertDesc-save' advert.pk %}">Çeviri Ekle
+                                            <a title="Çeviri Ekle" class="button btn" style="background-color: #000000"
+                                               href="{% url 'myturkishid:advertDesc-save' advert.pk %}"><i style="color: white" class="fa fa-language fa-2x"></i>
                                             </a>
-                                            <a class="button btn btn-info"
-                                               href="{% url 'myturkishid:advert-detail' advert.pk %}">İlan Detayları
+                                            <a title="Güncelle" class="button btn " style="background-color: #000000"
+                                               href="{% url 'myturkishid:advert-update' advert.pk %}"><i style="color: white" class="fa  fa-arrow-right fa-2x"></i>
                                             </a>
-                                            <a href="{% url "myturkishid:advert-update" advert.pk %}"
-                                               type="button" class="btn btn-warning"><i
-                                                    class="fa fa-edit"></i> Güncelle
-                                            </a>
+
 
 
                                         </td>

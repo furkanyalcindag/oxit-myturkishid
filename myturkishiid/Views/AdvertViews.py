@@ -184,7 +184,7 @@ def advert_update(request, pk):
 
             messages.success(request, 'Başarıyla Güncellendi')
 
-            return redirect('myturkishid:advert-detail', advert.pk)
+            return redirect('myturkishid:get-advert')
 
         else:
 

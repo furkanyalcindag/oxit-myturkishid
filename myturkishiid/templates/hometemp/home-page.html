@@ -2,7 +2,6 @@
 
 {% block content %}
 
-
     {% load humanize %}
 
     {% load widget_tweaks %}
@@ -128,9 +127,14 @@
                                                 <td>{{ advert.advert.price|intcomma }} ₺</td>
                                                 <td>{{ advert.advert.creationDate }} </td>
                                                 <td>{{ advert.advert.city.name }} / {{ advert.advert.district }}  </td>
-                                           <td> <a class="button btn btn-info"
-                                               href="{% url 'myturkishid:advert-detail' advert.advert.pk %}">  {{ 'advert_details'|get_item_by_lang:lang.id }}
-                                            </a></td>
+                                           <td>
+
+                                            <a title="{{ 'advert_details'|get_item_by_lang:lang.id }}" class="button btn " style="background-color: #000000"
+                                               href="{% url 'myturkishid:advert-detail' advert.advert.pk %}"><i style="color: white" class="fa  fa-arrow-right fa-2x"></i>
+                                            </a>
+
+
+                                           </td>
 
                                             </tr>
 
@@ -159,7 +163,13 @@
         <!-- /.row -->
     </section>
 
+<script>
 
+
+
+
+
+</script>
 
 
 

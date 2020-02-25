@@ -20,21 +20,23 @@ def index(request):
     else:
         lang = Language.objects.get(id=request.COOKIES['lang'])
     if not filter.qs is None:
-
+        advertDesc = None
         for advert in filter.qs:
-            advertDesc = advert.advertdesc_set.filter(lang=lang)[0]
             category = advert.category.all()[0]
-            category = category.categorydesc_set.filter(lang=lang)[0]
-            advertObject = AdvertObject(advert=advert, desc=advertDesc, category=category)
-            advertsObjects.append(advertObject)
+            if advert.advertdesc_set.filter(lang=lang) and category.categorydesc_set.filter(lang=lang):
+                advertDesc = advert.advertdesc_set.filter(lang=lang)[0]
+                category = category.categorydesc_set.filter(lang=lang)[0]
+                advertObject = AdvertObject(advert=advert, desc=advertDesc, category=category)
+                advertsObjects.append(advertObject)
+
     else:
         for advert in adverts:
-            advertDesc = advert.advertdesc_set.filter(lang=lang)[0]
             category = advert.category.all()[0]
-            category = category.categorydesc_set.filter(lang=lang)[0]
-            advertObject = AdvertObject(advert=advert, desc=advertDesc, category=category)
-            advertsObjects.append(advertObject)
-
+            if advert.advertdesc_set.filter(lang=lang) and category.categorydesc_set.filter(lang=lang):
+                advertDesc = advert.advertdesc_set.filter(lang=lang)[0]
+                category = category.categorydesc_set.filter(lang=lang)[0]
+                advertObject = AdvertObject(advert=advert, desc=advertDesc, category=category)
+                advertsObjects.append(advertObject)
 
     return render(request, 'hometemp/home-page.html', {'adverts': advertsObjects, 'lang': lang, 'filter': filter})
 
@@ -76,4 +78,4 @@ def get_advert(request, pk):
 
     advertObject = AdvertObjectHome(advert=advert, desc=advertDesc, category=category, features=last_dict)
 
-    return render(request, 'adverttemp/advert-detail.html', {'advert': advertObject, 'lang': lang})
+    return render(request, 'hometemp/advert-detail_home.html', {'advert': advertObject, 'lang': lang})

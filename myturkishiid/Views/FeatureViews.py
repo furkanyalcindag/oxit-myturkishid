@@ -247,13 +247,13 @@ def feature_desc_update(request, pk):
 
             messages.success(request, 'Başarıyla Güncellendi')
 
-            return redirect('myturkishid:featureDesc-save', feature_desc.feature.pk)
+            return redirect('myturkishid:FeatureDesc-save', feature_desc.feature.pk)
 
         else:
 
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
-    return render(request, 'featuretemp/featureDesc-save.html',
+    return render(request, 'featuretemp/FeatureDesc-save.html',
                   {'form_featureDesc': feature_desc_form})
 
 def feature_delete(request,feature_id):
