@@ -247,7 +247,7 @@ def feature_desc_update(request, pk):
 
             messages.success(request, 'Başarıyla Güncellendi')
 
-            return redirect('myturkishid:FeatureDesc-save', feature_desc.feature.pk)
+            return redirect('myturkishid:featureDesc-save', feature_desc.feature.pk)
 
         else:
 
