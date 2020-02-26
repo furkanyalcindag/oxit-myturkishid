@@ -38,6 +38,7 @@ def index(request):
                 advertObject = AdvertObject(advert=advert, desc=advertDesc, category=category)
                 advertsObjects.append(advertObject)
 
+
     return render(request, 'hometemp/home-page.html', {'adverts': advertsObjects, 'lang': lang, 'filter': filter})
 
 

@@ -9,7 +9,7 @@ from myturkishiid.Forms import ImageForm
 from myturkishiid.Forms.AdvertDescForm import AdvertDescForm
 from myturkishiid.Forms.AdvertForm import AdvertForm
 from myturkishiid.Forms.CategoryForm import CategoryForm
-from myturkishiid.models import Advert, AdvertDesc, FeatureType, Feature
+from myturkishiid.models import Advert, AdvertDesc, FeatureType, Feature, AdvertObject
 from myturkishiid.models.AdvertImage import AdvertImage
 from myturkishiid.models.Language import Language
 
@@ -90,12 +90,13 @@ def AdvertDesc_save(request, pk):
 
 @login_required
 def delete_advertDesc(request, advert_id, advertDesc_id):
-     # advert = Advert.objects.get(pk=advert_id)
+    # advert = Advert.objects.get(pk=advert_id)
     advertDesc = AdvertDesc.objects.get(pk=advertDesc_id)
     advertDesc.delete()
     advertDesc.advert.save()
     messages.success(request, 'Çeviri Başarıyla Silindi')
     return redirect('myturkishid:advertDesc-save', advert_id)
+
 
 @login_required
 def advertDesc_update(request, pk):
@@ -119,12 +120,20 @@ def advertDesc_update(request, pk):
                   {'advertDesc': advertDesc_form})
 
 
-
 @login_required
 def get_adverts(request):
-    adverts = Advert.objects.all()
+    adverts = Advert.objects.all().order_by('-id')
+    objects = []
+    lang = Language.objects.get(code='tr')
 
-    return render(request, 'adverttemp/get-advert.html', {'adverts': adverts})
+    for advert in adverts:
+        if advert.advertdesc_set.filter(lang=lang).count() == 0:
+            advertDesc = None
+        else:
+            advertDesc = advert.advertdesc_set.filter(lang=lang)[0]
+        advertObject = AdvertObject(advert=advert, desc=advertDesc, category=None)
+        objects.append(advertObject)
+    return render(request, 'adverttemp/get-advert.html', {'adverts': objects})
 
 
 @login_required
@@ -208,6 +217,22 @@ def advert_image_delete(request):
             advert.advertImage.remove(image)
             advert.save()
             image.delete()
+
+            return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
+
+        except Exception as e:
+
+            return JsonResponse({'status': 'Fail', 'msg': e})
+
+
+@login_required
+def advert_delete(request):
+    if request.POST:
+        try:
+
+            advert_id = request.POST.get('advert_id')
+            advert = Advert.objects.get(pk=advert_id)
+            advert.delete()
 
             return JsonResponse({'status': 'Success', 'messages': 'save successfully'})
 

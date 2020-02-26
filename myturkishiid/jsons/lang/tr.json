@@ -1,6 +1,7 @@
 [
   {
     "advertTitle": "İlan Başlığı",
+    "advertNo": "İlan Numarası",
     "category": "Kategori",
     "room": "Oda Sayısı",
     "city": "İl",

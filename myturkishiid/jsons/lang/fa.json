@@ -1,6 +1,7 @@
 [
   {
     "advertTitle": "عنوان تبلیغı",
+    "advertNo": "شماره آگهی",
     "creationDate": "تاریخ اعلام",
     "category": "دسته",
     "room": "تعداد اتاق",
@@ -34,18 +35,9 @@
     "GÜNEYDOĞU": "جنوب شرقی",
     "YOK": "همیشه",
     "SOBA": "اجاق گاز را",
-    "DOĞALGAZ SOBASI":"اجاق گاز طبیعی",
+    "DOĞALGAZ SOBASI": "اجاق گاز طبیعی",
     "KAT KALORİFERİ": "حرارت مرکزی",
     "MERKEZİ": "حرارت مرکزی",
-    "MERKEZİ(PAY ÖLÇER)":"کنتور سهم مرکزی"
-
-
-
-
-
-
-
-
-
+    "MERKEZİ(PAY ÖLÇER)": "کنتور سهم مرکزی"
   }
 ]

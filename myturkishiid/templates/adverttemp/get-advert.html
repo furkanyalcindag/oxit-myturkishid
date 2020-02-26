@@ -155,13 +155,13 @@
                             <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Fotoğraf</th>
                                 <th>İlan Numarası</th>
+                                <th>Fotoğraf</th>
+                                <th>İlan Başlığı</th>
                                 <th>İlan Adresi</th>
                                 <th>Fiyatı</th>
                                 <th>İlan Oluşturma Tarihi</th>
-                                <th>İlan Güncelleme Tarihi</th>
-                                <th>Ekle/Çeviri/Detay/Güncelleme</th>
+                                <th>Ekle/Çeviri/Güncelleme</th>
 
 
                             </tr>
@@ -170,48 +170,54 @@
                             <tbody>
                             {% load humanize %}
 
-                            {% if adverts.all %}
-
-                                {% for advert in adverts %}
-                                    <tr>
-
-                                        <td>{{ forloop.counter }} </td>
-                                        <td><img src="/media/{{ advert.advertImage.all.0.advertImage }}"
-                                                 width="60px"
-                                                 height="50px"/>
-                                        </td>
-                                        <td>{{ advert.pk }}</td>
-                                        <td>{{ advert.address }}</td>
-                                        <td>{{ advert.price|intcomma }}₺</td>
-                                        <td>{{ advert.creationDate }}</td>
-                                        <td>{{ advert.modificationDate }}</td>
 
 
-                                        <td>
+                            {% for advert in adverts %}
+                                <tr>
 
-                                            <a title="Özellik Ekle" class="button btn" style="background-color: #000000"
-                                               href="{% url 'myturkishid:add-features-to-advert' advert.pk %}"><i style="color: white;" class="fa fa-list fa-2x"></i></a>
+                                    <td>{{ forloop.counter }} </td>
+                                    <td>{{ advert.advert.pk }}</td>
+                                    <td><img src="/media/{{ advert.advert.advertImage.all.0.advertImage }}"
+                                             width="60px"
+                                             height="50px"/>
+                                    </td>
 
-                                            <a title="Çeviri Ekle" class="button btn" style="background-color: #000000"
-                                               href="{% url 'myturkishid:advertDesc-save' advert.pk %}"><i style="color: white" class="fa fa-language fa-2x"></i>
-                                            </a>
-                                            <a title="Güncelle" class="button btn " style="background-color: #000000"
-                                               href="{% url 'myturkishid:advert-update' advert.pk %}"><i style="color: white" class="fa  fa-arrow-right fa-2x"></i>
-                                            </a>
-
-
-
-                                        </td>
-
-
-                                    </tr>
+                                    <td><a style="color: black" href="">{{ advert.desc.advertTitle }}</a></td>
+                                    <td>{{ advert.advert.address }}</td>
+                                    <td>{{ advert.advert.price|intcomma }}₺</td>
+                                    <td>{{ advert.advert.creationDate }}</td>
 
 
+                                    <td>
+
+                                        <a title="Özellik Ekle" class="button btn" style="background-color: #000000"
+                                           href="{% url 'myturkishid:add-features-to-advert' advert.advert.pk %}"><i
+                                                style="color: white;" class="fa fa-list "></i></a>
+
+                                        <a title="Çeviri Ekle" class="button btn" style="background-color: #000000"
+                                           href="{% url 'myturkishid:advertDesc-save' advert.advert.pk %}"><i
+                                                style="color: white" class="fa fa-language "></i>
+                                        </a>
+                                        <a title="Güncelle" class="button btn " style="background-color: #000000"
+                                           href="{% url 'myturkishid:advert-update' advert.advert.pk %}"><i
+                                                style="color: white" class="fa  fa-arrow-right "></i>
+                                        </a>
+                                        <a  onclick="advert_delete({{ advert.advert.pk }})" title="İlanı Sil" class="button btn " style="background-color: #000000"><i
+                                                style="color: white" class="fa fa-trash-o "></i>
+                                        </a>
+
+
+                                    </td>
+
+
+                                </tr>
 
 
 
-                                {% endfor %}
-                            {% endif %}
+
+
+                            {% endfor %}
+
 
 
                             {% if product_list.all %}
@@ -297,6 +303,76 @@
 
 
     <script>
+
+
+        function getCookie(name) {
+        var cookieValue = null;
+        var i = 0;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (i; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        crossDomain: false, // obviates need for sameOrigin test
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+
+        function advert_delete(advert_id) {
+            debugger;
+            $("#modal-danger").on("shown.bs.modal", function (e) {
+                $("#btn-conf").click(function () {
+                    $.ajax({
+                        url: "{% url 'myturkishid:delete-advert' %}",
+                        type: "post", // or "get"
+                        data: {
+                            advert_id: advert_id,
+
+                        },
+                        success: function (result) {
+
+                            if (result.status === 'Success') {
+                                swal("Başarılı", "İlan Silindi", "success");
+
+                                    window.location.replace("{% url "myturkishid:get-advert" %}");
+
+
+
+                            } else {
+                                swal("Başarılı", result.messages, "error");
+                            }
+                        }
+                    });
+
+                });
+            }).modal('show');
+            $('#btn-close').click(function () {
+                $('#modal-danger').modal('hide');
+            });
+
+        }
+
         function deleteProduct(id) {
             // $('#modal-danger').modal('show');
             console.log(id);

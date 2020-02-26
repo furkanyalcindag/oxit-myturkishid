@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'advert-delete-titleDesc/(?P<advert_id>\d+)/(?P<advertDesc_id>\d+)$', AdvertViews.delete_advertDesc,
         name='delete-advertDesc'),
     url(r'advertDesc-update/(?P<pk>\d+)$', AdvertViews.advertDesc_update, name='advertDesc-update'),
+    url(r'advert-delete/$', AdvertViews.advert_delete, name='delete-advert'),
 
     # feaute url
     url(r'feature-save/$', FeatureViews.feature_save, name='feature-save'),
@@ -51,7 +52,7 @@ urlpatterns = [
     url(r'ilce-getir/$', CityViews.get_districts, name="advert-ilce-getir"),
 
     # home
-   # url(r'/', HomeViews.index, name='home'),
+    # url(r'/', HomeViews.index, name='home'),
     path('', HomeViews.index, name='home'),
     url(r'home/advert-detail/(?P<pk>\d+)$', HomeViews.get_advert, name='advert-detail'),
 
