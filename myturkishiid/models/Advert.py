@@ -8,7 +8,7 @@ from myturkishiid.models.Category import Category
 from myturkishiid.models import FeatureType
 
 from myturkishiid.models.Enums import FLOOR_CHOICES, FLOOR, BATHROOM_CHOICES, BATHROOM, ROOM_CHOICES, ROOM1, \
-    BALKONY_CHOICES, BALKONY1, HEATING_CHOICES, HEATING, FRONT_CHOICES, FRONT
+    BALKONY_CHOICES, BALKONY1, HEATING_CHOICES, HEATING, FRONT_CHOICES, FRONT, BUILDINGAGE_CHOISES, BUILDINGAGE
 
 
 class Advert(models.Model):
@@ -43,7 +43,8 @@ class Advert(models.Model):
     paidDate = models.DateTimeField(null=True, blank=True, verbose_name='Kayıt Tarihi')
     fieldNet = models.FloatField(null=True, blank=True, verbose_name='Alan Net')
     fieldBrut = models.FloatField(null=True, blank=True, verbose_name='Alan Brüt')
-    buildingAge = models.CharField(max_length=256, null=True, blank=True, verbose_name='Bina Yaşı')
+    buildingAge = models.CharField(max_length=256, null=True, blank=True, verbose_name='Bina Yaşı',
+                                   choices=BUILDINGAGE_CHOISES)
     features = models.ManyToManyField(Feature, verbose_name='Özellikler')
     viewCount = models.IntegerField(null=True, default=0)
 

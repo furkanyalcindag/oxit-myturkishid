@@ -70,15 +70,15 @@ class AdvertForm(ModelForm):
                        'placeholder': 'Isıtma Tipi',
                        'required': 'required',
                        }),
-            'buildingAge': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Bina Yaşı',
+            'buildingAge': forms.Select(
+                attrs={'class': 'form-control select2 select2-hidden-accessible', 'placeholder': 'Bina Yaşı','style': 'width:100%',
                        'required': 'required',
                        }),
             'fieldNet': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Net Alan', 'required': 'required',
+                attrs={'class': 'form-control', 'placeholder': 'Net Alan (m²)', 'required': 'required',
                        }),
             'fieldBrut': forms.TextInput(
-                attrs={'class': 'form-control', 'placeholder': 'Brüt Alan', 'required': 'required',
+                attrs={'class': 'form-control', 'placeholder': 'Brüt Alan (m²)', 'required': 'required',
                        }),
         }
 

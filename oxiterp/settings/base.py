@@ -86,7 +86,7 @@ ROOT_URLCONF = 'oxiterp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'oxiterp/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'oxiterp/templates'),os.path.join(BASE_DIR, 'accounts/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -178,12 +178,12 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True"""
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.baven.net'
-EMAIL_PORT = '587'
-EMAIL_HOST_USER = 'info@baven.net'
-EMAIL_HOST_PASSWORD = 'SEhy15X0'
-EMAIL_USE_TLS = True
-EMAIL_USE_SSL = False
+EMAIL_HOST = 'smtp.yandex.com.tr'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = 'invest@myturkishid.com'
+EMAIL_HOST_PASSWORD = 'Myturkishid2020'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 
 STATIC_ROOT = ''
 

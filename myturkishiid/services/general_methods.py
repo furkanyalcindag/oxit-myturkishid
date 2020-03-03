@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw
+from django.contrib.auth.models import User, Permission
 
 from myturkishiid.models import Menu
 from myturkishiid.models.Language import Language
@@ -33,3 +34,46 @@ def add_text_overlay(image, text):
     image_with_text_overlay = Image.alpha_composite(rgba_image, text_overlay)
 
     return image_with_text_overlay
+
+
+def existMail(mail):
+    users = User.objects.filter(email=mail)
+    if len(users) == 0:
+        return False
+    else:
+        return True
+
+
+def show_urls(urllist, depth=0):
+    urls = []
+
+    # show_urls(urls.urlpatterns)
+    for entry in urllist:
+
+        urls.append(entry)
+        perm = Permission(name=entry.name, codename=entry.pattern.regex.pattern, content_type_id=11)
+
+        if Permission.objects.filter(name=entry.name).count() == 0:
+            perm.save()
+        if hasattr(entry, 'url_patterns'):
+            show_urls(entry.url_patterns, depth + 1)
+
+    return urls
+
+
+def control_access(request):
+    group = request.user.groups.all()[0]
+
+    permissions = group.permissions.all()
+
+    is_exist = False
+
+    for perm in permissions:
+
+        if request.resolver_match.url_name == perm.name:
+            is_exist = True
+
+    if group.name == "Admin":
+        is_exist = True
+
+    return is_exist

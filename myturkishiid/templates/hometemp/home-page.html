@@ -12,37 +12,36 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="box">
-                    <div class="box-header">
 
-                    </div>
                     <form method="get">
+                        <div class="box-header">
+                            <h3 class="box-title">   {{ 'filtreleme'|get_item_by_lang:lang.id }}</h3>
+                        </div>
                         <div class="box-body">
 
-                            <div class="">
-                                <h4 style="margin-top: 0"></h4>
-                                <div class="row">
-                                    <div class="form-group col-sm-12">
-                                        {{ 'city'|get_item_by_lang:lang.id }}
-                                        {% render_field filter.form.city class="form-control" %}
-                                    </div>
-                                    <div class="form-group col-sm-12">
-                                        {{ 'room'|get_item_by_lang:lang.id }}
-                                        {% render_field filter.form.room class="form-control" %}
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        {{ 'min_price'|get_item_by_lang:lang.id }} ₺
-                                        {% render_field filter.form.price__gt class="form-control" %}
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        {{ 'max_price'|get_item_by_lang:lang.id }} ₺
-                                        {% render_field filter.form.price__lt class="form-control" %}
-                                    </div>
+                            <div class="row">
 
+                                <div class="form-group col-sm-12">
+                                    {{ 'city'|get_item_by_lang:lang.id }}
+                                    {% render_field filter.form.city class="form-control" %}
                                 </div>
-                                <button type="submit" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-search"></span> {{ 'search'|get_item_by_lang:lang.id }}
-                                </button>
+                                <div class="form-group col-sm-12">
+                                    {{ 'room'|get_item_by_lang:lang.id }}
+                                    {% render_field filter.form.room class="form-control" %}
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    {{ 'min_price'|get_item_by_lang:lang.id }} ₺
+                                    {% render_field filter.form.price__gt class="form-control" %}
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    {{ 'max_price'|get_item_by_lang:lang.id }} ₺
+                                    {% render_field filter.form.price__lt class="form-control" %}
+                                </div>
+
                             </div>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-search"></span> {{ 'search'|get_item_by_lang:lang.id }}
+                            </button>
 
 
                         </div>

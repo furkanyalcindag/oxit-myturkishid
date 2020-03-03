@@ -1,6 +1,7 @@
 [
   {
     "advertTitle": "İlan Başlığı",
+    "filtreleme": "Filtrele",
     "advertNo": "İlan Numarası",
     "category": "Kategori",
     "room": "Oda Sayısı",
@@ -38,7 +39,8 @@
     "DOĞALGAZ SOBASI": "DOĞALGAZ SOBASI",
     "KAT KALORİFERİ": "KAT KALORİFERİ",
     "MERKEZİ": "MERKEZİ",
-    "MERKEZİ(PAY ÖLÇER)": "MERKEZİ(PAY ÖLÇER)"
+    "MERKEZİ(PAY ÖLÇER)": "MERKEZİ(PAY ÖLÇER)",
+    "BAGIMSIZ KOMBI": "BAĞIMSIZ KOMBİ"
 
 
   }

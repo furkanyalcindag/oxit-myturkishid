@@ -9,11 +9,11 @@ from django.contrib import auth, messages
 
 # Create your views here.
 from accounts.forms import ResetPassword
-from inoks import urls
+from myturkishiid import urls
 from inoks.Forms.ProfileFormForMember import ProfileForm
 from education.Forms.UserForm import UserForm
 from inoks.models import Profile
-from inoks.services import general_methods
+from myturkishiid.services import general_methods
 
 
 def index(request):
@@ -37,7 +37,7 @@ def login(request):
             # correct username and password login the user
             auth.login(request, user)
 
-            if user.is_superuser:
+            if user.is_superuser or user.groups.all()[0].name == 'Üye':
                 return redirect('myturkishid:get-advert')
 
 
@@ -62,9 +62,9 @@ def forgot(request):
             # form.cleaned_data['password'] = make_password(form.cleaned_data['password'])
             user = obj.save()
             html_content = ''
-            subject, from_email, to = 'BAVEN Kullanıcı Bilgileri', 'info@baven.net', obj.email
+            subject, from_email, to = 'BAVEN Kullanıcı Bilgileri', 'invest@myturkishid.com', obj.email
             text_content = 'Aşağıda ki bilgileri kullanarak sisteme giriş yapabilirsiniz.'
-            html_content = '<p> <strong>Site adresi:</strong> <a href="http://185.122.203.112/"></a>baven.net</p>'
+            html_content = '<p> <strong>Site adresi:</strong> <a href="http://estate.myturkishid.ir/manager/">estate.myturkishid.ir</a></p>'
             html_content = html_content + '<p><strong>Kullanıcı Adı:</strong>' + obj.username + '</p>'
             html_content = html_content + '<p><strong>Şifre:</strong>' + password + '</p>'
             msg = EmailMultiAlternatives(subject, text_content, from_email, [to])
@@ -171,7 +171,6 @@ def register_member(request):
 
 def groups(request):
     group = Group.objects.all()
-
     return render(request, 'permission/groups.html', {'groups': group})
 
 

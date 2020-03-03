@@ -145,11 +145,7 @@
                             </li> -->
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href=""
-                                       class="btn btn-default btn-flat"> <i class="fa fa-user" aria-hidden="true"></i>
-                                        Profil Bilgisi</a>
-                                </div>
+
                                 <div class="pull-right">
                                     <a href="{% url 'accounts:logout' %}" class="btn btn-default btn-flat"> <i
                                             class="fa fa-sign-out" aria-hidden="true"></i> Çıkış Yap</a>
@@ -181,6 +177,7 @@
 
                             </span>
                     </a></li>
+
 
                 {% for menu in menus %}
 
@@ -221,13 +218,6 @@
                 </li>
                 {% endfor %}
 
-
-
-
-
-
-
-
                 <li class="treeview ">
                     <a href="#">
                         <i class="fa fa-user-plus"></i>
@@ -247,12 +237,50 @@
                 </li>
 
 
+                {% if user.is_superuser %}
+                    <li class="treeview ">
+
+                        <a href="#">
+                            <i class="fa fa-user-plus"></i>
+                            <span>Üye İşlemleri</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="{% url "myturkishid:kullanici-ekle" %}">
+                                    <i class="fa fa-user"></i>
+                                    <span>Üye Ekle</span>
+
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url "myturkishid:uyelerim" %}">
+                                    <i class="fa fa-user"></i>
+                                    <span>Üyelerim</span>
+
+                                </a>
+                            </li>
+                        </ul>
+
+
+                    </li>
+                {% endif %}
+                <li>
+
+
+                </li>
+
+
             </ul>
 
 
             </section>
             <!-- /.sidebar -->
+
         </li>
+
     </aside>
 
     <div class="content-wrapper">
@@ -266,7 +294,7 @@
 
         {% endblock %}
 
-     <div class="modal fade" id="exampleModalCenter" bindex="-1" role="dialog"
+        <div class="modal fade" id="exampleModalCenter" bindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -277,8 +305,6 @@
                         </button>
                     </div>
                     <div class="modal-body">
-
-
 
 
                     </div>

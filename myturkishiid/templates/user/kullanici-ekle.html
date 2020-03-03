@@ -1,0 +1,168 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"></script>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'warning' %}
+
+                <div class="alert alert-danger alert-dismissible" style="margin-top:10px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-ban"></i> Hata !</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+
+            {% endif %}
+
+
+            {% if message.tags == 'success' %}
+
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-check"></i> Başarılı !</h4>
+
+
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li class="{{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+
+
+                </div>
+
+            {% endif %}
+        {% endfor %}
+
+
+    {% endif %}
+
+
+
+
+    <section class="content">
+
+
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+
+            <section class="col-lg-12 ">
+
+                <div class="box-body">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Üye Ekle</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        <form method="post" enctype="multipart/form-data" role="form">
+                            <div class="box-body">
+                                {% csrf_token %}
+
+                                <div class="container">
+
+
+                                    <div class="form-group">
+                                        <label> Ad </label>
+                                        {{ user_form.first_name }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label> Soyad</label>
+                                        {{ user_form.last_name }}
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label> {{ user_form.email.label }}</label>
+                                        {{ user_form.email }}
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label> {{ profile_form.mobilePhone.label }}</label>
+                                        {{ profile_form.mobilePhone }}
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="box-footer pull-right ">
+                                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                                </div>
+
+
+                            </div>
+                            <!-- /.box-body -->
+
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+
+
+        </div>
+        <!-- /.row (main row) -->
+
+
+    </section>
+    {% load staticfiles %}
+    <script src="{% static 'bower_components/select2/dist/js/select2.full.min.js' %}"></script>
+    <script>
+
+
+        function getCookie(name) {
+            var cookieValue = null;
+            var i = 0;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (i; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        var csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            crossDomain: false, // obviates need for sameOrigin test
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+    </script>
+
+
+
+
+{% endblock %}
+
+
+<script>
+
+
+</script>

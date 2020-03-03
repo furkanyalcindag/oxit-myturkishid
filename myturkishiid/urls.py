@@ -2,7 +2,7 @@
 from django.conf.urls import url
 from django.urls import path
 
-from myturkishiid.Views import AdvertViews, FeatureViews, CategoryViews, CityViews, HomeViews
+from myturkishiid.Views import AdvertViews, FeatureViews, CategoryViews, CityViews, HomeViews, UserViews
 
 app_name = 'myturkishid'
 
@@ -58,5 +58,12 @@ urlpatterns = [
 
     # cookie
     url(r'set-lang/(?P<pk>\d+)$', HomeViews.setcookie, name='set-lang'),
+
+    # Kullanıcı
+
+    url(r'add-user/$', UserViews.return_add_users, name='kullanici-ekle'),
+    url(r'users/$', UserViews.return_my_users, name='uyelerim'),
+    url(r'user-update/(?P<pk>\d+)$', UserViews.users_update, name='uye-guncelle'),
+    url(r'user-delete/(?P<pk>\d+)$', UserViews.user_delete, name='uye-sil'),
 
 ]

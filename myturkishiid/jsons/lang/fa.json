@@ -1,6 +1,7 @@
 [
   {
     "advertTitle": "عنوان تبلیغı",
+    "filtreleme": "فیلتر",
     "advertNo": "شماره آگهی",
     "creationDate": "تاریخ اعلام",
     "category": "دسته",
@@ -38,6 +39,7 @@
     "DOĞALGAZ SOBASI": "اجاق گاز طبیعی",
     "KAT KALORİFERİ": "حرارت مرکزی",
     "MERKEZİ": "حرارت مرکزی",
-    "MERKEZİ(PAY ÖLÇER)": "کنتور سهم مرکزی"
+    "MERKEZİ(PAY ÖLÇER)": "کنتور سهم مرکزی",
+    "BAGIMSIZ KOMBI": "کمبی"
   }
 ]

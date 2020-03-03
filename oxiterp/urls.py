@@ -33,7 +33,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('manager/', include('accounts.urls')),
     # path('egitim/', include('education.urls')),
-    path('baven/', include('inoks.urls')),
+    path('myturkish/', include('inoks.urls')),
     path('', include('myturkishiid.urls')),
 ]
 
