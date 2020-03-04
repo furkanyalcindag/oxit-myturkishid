@@ -1,6 +1,6 @@
 from django.db import models
 
-from inoks.models.Cityy import City
+from myturkishiid.models.City import City
 from myturkishiid.models.AdvertImage import AdvertImage
 from myturkishiid.models.District import District
 from myturkishiid.models.Feature import Feature
@@ -14,7 +14,7 @@ from myturkishiid.models.Enums import FLOOR_CHOICES, FLOOR, BATHROOM_CHOICES, BA
 class Advert(models.Model):
     advertImage = models.ManyToManyField('AdvertImage', blank=True, verbose_name='Ürün Resmi')
     advertNo = models.CharField(max_length=256, blank=True, null=True, verbose_name='İlan Numarası')
-    city = models.ForeignKey('City', on_delete=models.CASCADE, null=False, blank=False, verbose_name='İl')
+    city = models.ForeignKey(City, on_delete=models.CASCADE, null=False, blank=False, verbose_name='İl')
     district = models.TextField(blank=False, null=False, verbose_name='İlçe')
 
     category = models.ManyToManyField(Category, verbose_name='İlan Kategorisi', blank=True)

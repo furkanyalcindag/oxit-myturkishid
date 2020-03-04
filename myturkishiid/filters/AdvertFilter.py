@@ -6,7 +6,7 @@ from myturkishiid.models.Enums import ROOM_CHOICES
 
 
 class AdvertFilter(django_filters.FilterSet):
-    #price = django_filters.NumericRangeFilter()
+    # price = django_filters.NumericRangeFilter()
 
     price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt')
     price__lt = django_filters.NumberFilter(field_name='price', lookup_expr='lt')
@@ -15,4 +15,4 @@ class AdvertFilter(django_filters.FilterSet):
 
     class Meta:
         model = Advert
-        fields =['room','city',]
+        fields = ['room', 'city', ]

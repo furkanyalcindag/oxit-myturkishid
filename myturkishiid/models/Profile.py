@@ -3,7 +3,7 @@ from django.db import models
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="+")
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     profileImage = models.ImageField(upload_to='profile/', null=True, blank=True, default='profile/user.png',
                                      verbose_name='Profil Resmi')
     mobilePhone = models.CharField(max_length=10, null=False, blank=False, verbose_name='Telefon Numarası')

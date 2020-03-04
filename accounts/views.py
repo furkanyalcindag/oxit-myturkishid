@@ -10,9 +10,9 @@ from django.contrib import auth, messages
 # Create your views here.
 from accounts.forms import ResetPassword
 from myturkishiid import urls
-from inoks.Forms.ProfileFormForMember import ProfileForm
+#from inoks.Forms.ProfileFormForMember import ProfileForm
 from education.Forms.UserForm import UserForm
-from inoks.models import Profile
+
 from myturkishiid.services import general_methods
 
 
@@ -85,7 +85,7 @@ def pagelogout(request):
     return redirect('accounts:login')
 
 
-def register_member(request):
+"""def register_member(request):
     user_form = UserForm()
     profile_form = ProfileForm()
 
@@ -167,7 +167,7 @@ def register_member(request):
             messages.warning(request, 'Alanları Kontrol Ediniz')
 
     return render(request, 'registration/register.html', {'user_form': user_form, 'profile_form': profile_form})
-
+"""
 
 def groups(request):
     group = Group.objects.all()

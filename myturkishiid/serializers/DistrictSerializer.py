@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from inoks.models import District
+from myturkishiid.models.District import District
 
 
 class DistrictSerializer(serializers.ModelSerializer):

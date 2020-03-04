@@ -247,7 +247,7 @@
                                             <div class="btn-group">
                                                 <a class="btn btn-info" onclick="getProduct({{ product_lists.id }})"><i
                                                         class="fa fa-align-left"></i>Detay</a>
-                                                <a href="{% url "inoks:urun-duzenle" product_lists.pk %}" type="button"
+                                                <a href="" type="button"
                                                    class="btn btn-warning"><i
                                                         class="fa fa-edit"></i>Güncelle
                                                 </a>
@@ -380,7 +380,7 @@
             $("#modal-danger").on("shown.bs.modal", function (e) {
                 $("#btn-conf").click(function () {
                     $.ajax({
-                        url: "{% url "inoks:product-sil" pk=212121223232323232 %}".replace(/212121223232323232/, id.toString()),
+                        url: "".replace(/212121223232323232/, id.toString()),
                         type: "POST",
                         data: {
                             'csrfmiddlewaretoken': "{{  csrf_token  }}",
@@ -394,7 +394,7 @@
                             $('#modal-success').on("shown.bs.modal", function (e) {
                                 $(".btn-ok").click(function () {
 
-                                    window.location.replace("{% url "inoks:urun-listesi" %}");
+                                    window.location.replace("");
 
                                 });
 
@@ -420,7 +420,7 @@
         function getProduct(id) {
 
             var html = '';
-            $.get(" {% url "inoks:getProduct" pk=12121   %}".replace(/12121/, id.toString()))
+            $.get(" ".replace(/12121/, id.toString()))
                 .done(function (response) {
 
                     var product = response.product[0];

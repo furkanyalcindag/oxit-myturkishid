@@ -46,12 +46,12 @@ INSTALLED_APPS = [
     'watermarker',
 
     # own
-    'myturkishiid',
+
     'rest_framework',
     'accounts',
     'education',
-    'inoks',
 
+    'myturkishiid',
 
 ]
 
@@ -86,7 +86,7 @@ ROOT_URLCONF = 'oxiterp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'oxiterp/templates'),os.path.join(BASE_DIR, 'accounts/templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'oxiterp/templates'), os.path.join(BASE_DIR, 'accounts/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -96,7 +96,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
                 'myturkishiid.services.general_methods.getMenu',
-                'inoks.services.general_methods.getAdminMenu',
+
                 'myturkishiid.services.general_methods.languages',
 
                 # "education.services.general_methods.append_privileges",

@@ -175,7 +175,7 @@
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                   <div class="modal-body">
+                    <div class="modal-body">
 
                     </div>
                     <div class="modal-footer">
@@ -193,7 +193,7 @@
         <div class="pull-right hidden-xs">
             <b>Versiyon</b> 1.0.0
         </div>
-        <strong>Copyright &copy; 2020 <a target="new_blank" href="#">My Turkish ID</a></strong> All rights
+        <strong>Copyright &copy; 2020 <a target="new_blank" href="#">Oxit Bilişim Teknolojileri</a></strong> All rights
         reserved. Made by <a href="https://www.oxit.com.tr">OXIT</a>
     </footer>
 
@@ -281,8 +281,7 @@
                     },
                 }
             })
-        }
-        else if (document.cookie.match('(^|;) ?' + 'lang' + '=([^;]*)(;|$)')[2]==='2'){
+        } else if (document.cookie.match('(^|;) ?' + 'lang' + '=([^;]*)(;|$)')[2] === '2') {
 
             $('#example2').DataTable({
                 'paging': true,
@@ -310,22 +309,17 @@
             })
 
 
+        } else if (document.cookie === '') {
 
 
-
-        }
-
-        else if(document.cookie ===''){
-
-
-                  $('#example2').DataTable({
+            $('#example2').DataTable({
                 'paging': true,
                 'lengthChange': false,
                 'searching': false,
                 'ordering': true,
                 'info': true,
                 'autoWidth': false,
-                      "scrollX": true,
+                "scrollX": true,
                 "language": {
                     "lengthMenu": "نمایش _MENU_ رکورد در هر صفحه",
                     "zeroRecords": "هیچ چیز یافت نشد - ببخشید",
@@ -344,11 +338,7 @@
             })
 
 
-
-        }
-
-
-        else {
+        } else {
             $('#example2').DataTable({
                 'paging': true,
                 'lengthChange': false,

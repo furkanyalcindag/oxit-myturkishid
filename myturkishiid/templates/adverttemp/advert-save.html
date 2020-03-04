@@ -2815,7 +2815,7 @@
             $("#modal-danger").on("shown.bs.modal", function (e) {
                 $("#btn-conf").click(function () {
                     $.ajax({
-                        url: "{% url 'inoks:imageDelete' %}",
+                        url: "",
                         type: "post", // or "get"
                         data: {
                             product_id: product_id,
@@ -2826,7 +2826,7 @@
                             if (result.status == 'Success') {
                                 swal("Başarılı", "Resim Silindi", "success");
                                 {% if durum == "GUNCELLE" %}
-                                    window.location.replace("{% url "inoks:urun-duzenle" product %}");
+                                    window.location.replace("");
                                 {% endif %}
 
 
