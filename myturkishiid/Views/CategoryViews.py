@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
@@ -8,10 +9,16 @@ from myturkishiid.models import Category
 
 from myturkishiid.models import CategoryDesc
 from myturkishiid.models.Language import Language
+from myturkishiid.services import general_methods
 
 
 @login_required
 def category_save(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     form_category = CategoryForm(request.POST or None)
 
     category = Category.objects.all()
@@ -32,6 +39,11 @@ def category_save(request):
 
 @login_required
 def categoryDesc_save(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     form_categoryDesc = CategoryDescForm(request.POST)
     category = Category.objects.get(pk=pk)
     categoryDesc = CategoryDesc.objects.filter(category=category)
@@ -61,15 +73,26 @@ def get_category(request):
 
     return render(request, 'categorytemp/get-category.html', {'category': category})
 
+
 def category_delete(request, category_id):
-        category = Category.objects.get(pk=category_id)
-        category.delete()
-        messages.success(request, 'Kategori Silindi')
-        return redirect('myturkishid:category-save')
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
+    category = Category.objects.get(pk=category_id)
+    category.delete()
+    messages.success(request, 'Kategori Silindi')
+    return redirect('myturkishid:category-save')
 
 
 @login_required
 def categoryDesc_update(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     category_desc = CategoryDesc.objects.get(pk=pk)
     categoryDesc_form = CategoryDescForm(request.POST or None, instance=category_desc)
 
@@ -88,4 +111,3 @@ def categoryDesc_update(request, pk):
 
     return render(request, 'categorytemp/categoryDesc-save.html',
                   {'form_category': categoryDesc_form})
-

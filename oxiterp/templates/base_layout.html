@@ -237,7 +237,7 @@
                 </li>
 
 
-                {% if user.is_superuser %}
+                {% if user.groups.all.0.name == 'Admin' %}
                     <li class="treeview ">
 
                         <a href="#">

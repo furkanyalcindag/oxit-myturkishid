@@ -11,7 +11,6 @@ urlpatterns = [
     # advert url
     url(r'advert-save/$', AdvertViews.advert_save, name='advert-save'),
     url(r'get-adverts/$', AdvertViews.get_adverts, name='get-advert'),
-    url(r'get-advert-feature/(?P<pk>\d+)$', FeatureViews.get_featureType_advert, name='get-advert-featureType'),
     url(r'add-features-to-advert/(?P<advert_id>\d+)$', AdvertViews.add_feature_to_advert,
         name='add-features-to-advert'),
     url(r'advertDesc-save/(?P<pk>\d+)$', AdvertViews.AdvertDesc_save, name='advertDesc-save'),

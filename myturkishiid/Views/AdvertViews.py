@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.forms import modelformset_factory
@@ -12,10 +13,16 @@ from myturkishiid.Forms.CategoryForm import CategoryForm
 from myturkishiid.models import Advert, AdvertDesc, FeatureType, Feature, AdvertObject
 from myturkishiid.models.AdvertImage import AdvertImage
 from myturkishiid.models.Language import Language
+from myturkishiid.services import general_methods
 
 
 @login_required
 def advert_save(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     form_advert = AdvertForm(request.POST or None)
 
     if request.method == 'POST':
@@ -65,6 +72,11 @@ def advert_save(request):
 
 @login_required
 def AdvertDesc_save(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     form_advertDesc = AdvertDescForm(request.POST)
     advert = Advert.objects.get(pk=pk)
     advertDesc = AdvertDesc.objects.filter(advert=advert)
@@ -90,6 +102,11 @@ def AdvertDesc_save(request, pk):
 
 @login_required
 def delete_advertDesc(request, advert_id, advertDesc_id):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     # advert = Advert.objects.get(pk=advert_id)
     advertDesc = AdvertDesc.objects.get(pk=advertDesc_id)
     advertDesc.delete()
@@ -100,6 +117,11 @@ def delete_advertDesc(request, advert_id, advertDesc_id):
 
 @login_required
 def advertDesc_update(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     advertdesc = AdvertDesc.objects.get(pk=pk)
     advertDesc_form = AdvertDescForm(request.POST or None, instance=advertdesc)
 
@@ -122,6 +144,11 @@ def advertDesc_update(request, pk):
 
 @login_required
 def get_adverts(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     adverts = Advert.objects.all().order_by('-id')
     objects = []
     lang = Language.objects.get(code='tr')
@@ -138,6 +165,11 @@ def get_adverts(request):
 
 @login_required
 def add_feature_to_advert(request, advert_id):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     advert = Advert.objects.get(pk=advert_id)
 
     exist_features = Feature.objects.filter(id__in=advert.features.all().values('pk'))
@@ -160,6 +192,11 @@ def add_feature_to_advert(request, advert_id):
 
 @login_required
 def delete_feature_from_advert(request, feature_id, advert_id):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     feature = Feature.objects.get(pk=feature_id)
     advert = Advert.objects.get(pk=advert_id)
     advert.features.remove(feature)
@@ -170,6 +207,11 @@ def delete_feature_from_advert(request, feature_id, advert_id):
 
 @login_required
 def advert_update(request, pk):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     advert = Advert.objects.get(id=pk)
     advert_form = AdvertForm(request.POST or None, instance=advert)
     durum = 'GUNCELLE'
@@ -206,6 +248,11 @@ def advert_update(request, pk):
 
 @login_required
 def advert_image_delete(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     if request.POST:
         try:
             image_id = request.POST.get('image_id')
@@ -227,6 +274,11 @@ def advert_image_delete(request):
 
 @login_required
 def advert_delete(request):
+    perm = general_methods.control_access(request)
+
+    if not perm:
+        logout(request)
+        return redirect('accounts:login')
     if request.POST:
         try:
 
