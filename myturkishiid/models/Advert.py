@@ -37,7 +37,7 @@ class Advert(models.Model):
                              default=FRONT
                              )
     isShow = models.BooleanField(default=False)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    price = models.DecimalField(max_digits=12, decimal_places=2)
     creationDate = models.DateTimeField(auto_now_add=True, verbose_name='Kayıt Tarihi')
     modificationDate = models.DateTimeField(auto_now=True, verbose_name='Güncelleme Tarihi')
     paidDate = models.DateTimeField(null=True, blank=True, verbose_name='Kayıt Tarihi')
